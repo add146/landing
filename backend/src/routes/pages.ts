@@ -28,7 +28,7 @@ pages.get('/', async (c) => {
 
     const { results } = await c.env.DB
         .prepare(`
-            SELECT id, website_id, title, slug, page_type, is_published, sort_order, created_at
+            SELECT id, website_id, title, slug, page_type, is_published, sort_order, created_at, content_json, content_html
             FROM pages
             WHERE website_id = ?
             ORDER BY sort_order ASC, created_at DESC
@@ -67,8 +67,8 @@ pages.post('/', zValidator('json', createPageSchema), async (c) => {
         .prepare(`
             INSERT INTO pages (
                 id, website_id, title, slug, page_type, seo_title, seo_description,
-                seo_keywords, og_image, twitter_card, sort_order, is_published, created_at
-            ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 0, 0, ?)
+                seo_keywords, og_image, twitter_card, content_json, content_html, sort_order, is_published, created_at
+            ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 0, 0, ?)
         `)
         .bind(
             pageId,
@@ -81,6 +81,8 @@ pages.post('/', zValidator('json', createPageSchema), async (c) => {
             data.seo_keywords || null,
             data.og_image || null,
             data.twitter_card || null,
+            data.content_json || null,
+            data.content_html || null,
             now
         )
         .run();
@@ -164,6 +166,8 @@ pages.patch('/:id', zValidator('json', updatePageSchema), async (c) => {
     if (data.seo_keywords !== undefined) { updates.push('seo_keywords = ?'); values.push(data.seo_keywords); }
     if (data.og_image !== undefined) { updates.push('og_image = ?'); values.push(data.og_image); }
     if (data.twitter_card !== undefined) { updates.push('twitter_card = ?'); values.push(data.twitter_card); }
+    if (data.content_json !== undefined) { updates.push('content_json = ?'); values.push(data.content_json); }
+    if (data.content_html !== undefined) { updates.push('content_html = ?'); values.push(data.content_html); }
 
     values.push(id);
 

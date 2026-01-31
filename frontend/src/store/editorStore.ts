@@ -36,6 +36,8 @@ interface Page {
     seo_keywords?: string;
     og_image?: string;
     twitter_card?: string;
+    content_json?: string; // GrapesJS JSON Project Data
+    content_html?: string; // GrapesJS HTML Output
 }
 
 interface EditorState {

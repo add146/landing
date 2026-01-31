@@ -44,6 +44,8 @@ CREATE TABLE pages (
   seo_keywords TEXT,
   og_image TEXT,
   twitter_card TEXT, -- JSON
+  content_json TEXT, -- GrapesJS JSON
+  content_html TEXT, -- GrapesJS HTML
   sort_order INTEGER DEFAULT 0,
   is_published INTEGER DEFAULT 0,
   created_at DATETIME DEFAULT CURRENT_TIMESTAMP,

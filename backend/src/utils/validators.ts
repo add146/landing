@@ -32,6 +32,8 @@ export const createPageSchema = z.object({
     seo_keywords: z.string().max(255).optional().nullable(),
     og_image: z.string().url().optional().nullable(),
     twitter_card: z.string().optional().nullable(), // JSON string
+    content_json: z.string().optional().nullable(), // GrapesJS JSON
+    content_html: z.string().optional().nullable(), // GrapesJS HTML
 });
 
 export const updatePageSchema = createPageSchema.partial().omit({ website_id: true });
