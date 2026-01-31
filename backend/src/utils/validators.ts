@@ -86,3 +86,26 @@ export const uploadMediaSchema = z.object({
     size: z.number().int().max(5 * 1024 * 1024, 'File too large (max 5MB)'),
     website_id: z.string().optional().nullable(),
 });
+
+// vCard Schemas
+export const createVCardSchema = z.object({
+    name: z.string().min(1, 'Name is required').max(100),
+    job_title: z.string().max(100).optional().nullable(),
+    company: z.string().max(100).optional().nullable(),
+    email: z.string().email('Invalid email').optional().nullable(),
+    phone: z.string().max(20).optional().nullable(),
+    whatsapp: z.string().max(20).optional().nullable(),
+    website: z.string().url('Invalid URL').optional().nullable(),
+    address: z.string().max(200).optional().nullable(),
+    bio: z.string().max(500).optional().nullable(),
+    photo_url: z.string().url('Invalid URL').optional().nullable(),
+    social_links: z.string().optional().nullable(), // JSON string
+    template_id: z.string().max(50).default('modern'),
+    slug: z.string()
+        .min(1, 'Slug is required')
+        .max(100)
+        .regex(/^[a-z0-9-]+$/, 'Slug must be lowercase alphanumeric with hyphens'),
+    theme_color: z.string().regex(/^#[0-9A-F]{6}$/i, 'Invalid hex color').default('#6366F1'),
+});
+
+export const updateVCardSchema = createVCardSchema.partial().omit({ slug: true });

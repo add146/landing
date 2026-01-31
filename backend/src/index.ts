@@ -7,6 +7,7 @@ import pages from './routes/pages';
 import sections from './routes/sections';
 import elements from './routes/elements';
 import media from './routes/media';
+import vcards from './routes/vcards';
 
 const app = new Hono<{ Bindings: Env }>();
 
@@ -49,6 +50,7 @@ app.route('/api/pages', pages);
 app.route('/api/sections', sections);
 app.route('/api/elements', elements);
 app.route('/api/media', media);
+app.route('/api/vcards', vcards);
 
 // 404 handler
 app.notFound((c) => {
