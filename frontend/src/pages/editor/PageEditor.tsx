@@ -3,7 +3,6 @@ import { useParams, useNavigate, Link } from 'react-router-dom';
 import {
     ChevronLeft,
     Eye,
-    Share2,
     Save,
     Monitor,
     Tablet,
@@ -13,6 +12,8 @@ import { useEditorStore } from '../../store/editorStore';
 import Canvas from '../../components/editor/Canvas';
 import LeftToolbar from '../../components/editor/LeftToolbar';
 import SettingsPanel from '../../components/editor/SettingsPanel';
+import PreviewModal from '../../components/editor/PreviewModal';
+import PublishWorkflow from '../../components/editor/PublishWorkflow';
 
 export default function PageEditor() {
     const { pageId } = useParams<{ pageId: string }>();
@@ -27,6 +28,8 @@ export default function PageEditor() {
 
     const [loading, setLoading] = useState(true);
     const [showPreview, setShowPreview] = useState(false);
+    const [isPublished, setIsPublished] = useState(false);
+    const [websiteSlug, setWebsiteSlug] = useState('');
 
     useEffect(() => {
         if (pageId) {
@@ -39,6 +42,24 @@ export default function PageEditor() {
                 });
         }
     }, [pageId]);
+
+    // Load website slug and publish status
+    useEffect(() => {
+        if (currentPage) {
+            setIsPublished(!!currentPage.is_published);
+
+            // Fetch website details to get slug
+            import('../../api/client').then(({ default: client }) => {
+                client.get(`/api/websites/${currentPage.website_id}`)
+                    .then(response => {
+                        setWebsiteSlug(response.data.website.slug);
+                    })
+                    .catch(error => {
+                        console.error('Failed to load website:', error);
+                    });
+            });
+        }
+    }, [currentPage]);
 
     if (loading) {
         return (
@@ -118,18 +139,20 @@ export default function PageEditor() {
                         </div>
                     )}
                     <button
-                        onClick={() => setShowPreview(!showPreview)}
+                        onClick={() => setShowPreview(true)}
                         className="flex items-center px-3 py-2 text-gray-700 hover:bg-gray-100 rounded-lg transition-colors"
                     >
                         <Eye className="w-4 h-4 mr-2" />
                         Preview
                     </button>
-                    <button
-                        className="flex items-center px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
-                    >
-                        <Share2 className="w-4 h-4 mr-2" />
-                        Publish
-                    </button>
+                    <PublishWorkflow
+                        pageId={currentPage.id}
+                        pageTitle={currentPage.title}
+                        pageSlug={currentPage.slug}
+                        websiteSlug={websiteSlug}
+                        isPublished={isPublished}
+                        onPublishChange={setIsPublished}
+                    />
                 </div>
             </header>
 
@@ -150,6 +173,11 @@ export default function PageEditor() {
                     <SettingsPanel />
                 </aside>
             </div>
+
+            {/* Preview Modal */}
+            {showPreview && (
+                <PreviewModal onClose={() => setShowPreview(false)} />
+            )}
         </div>
     );
 }
