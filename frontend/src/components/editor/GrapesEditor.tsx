@@ -5,6 +5,7 @@ import grapesjs from 'grapesjs';
 import webpagePlugin from 'grapesjs-preset-webpage';
 import 'grapesjs/dist/css/grapes.min.css';
 import { useEditorStore } from '../../store/editorStore';
+import { addCustomBlocks } from './customBlocks';
 import { Loader2 } from 'lucide-react';
 
 export default function GrapesEditor() {
@@ -77,6 +78,17 @@ export default function GrapesEditor() {
                 options={{
                     height: '100vh',
                     storageManager: false, // We handle saving manually
+
+                    // Inject Tailwind CSS into the canvas
+                    canvas: {
+                        styles: [
+                            'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css'
+                        ],
+                        scripts: [
+                            'https://cdn.tailwindcss.com'
+                        ]
+                    },
+
                     deviceManager: {
                         devices: [
                             {
@@ -110,7 +122,11 @@ export default function GrapesEditor() {
                         }
                     }
                 }}
-                onEditor={onEditor}
+                onEditor={(editor) => {
+                    onEditor(editor);
+                    // Add our custom blocks
+                    addCustomBlocks(editor as any);
+                }}
             >
             </GjsEditor>
         </div>
