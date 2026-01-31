@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Website Settings - SaaS Builder</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,typography"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet"/>
+<script>
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        primary: "#6366F1", // Indigo-500 from the prompt description
+                        "primary-hover": "#4F46E5",
+                        danger: "#EF4444", // Red-500
+                        "danger-hover": "#DC2626",
+                        "background-light": "#F9FAFB", // Gray-50
+                        "background-dark": "#0F172A", // Slate-900
+                        "card-light": "#FFFFFF",
+                        "card-dark": "#1E293B", // Slate-800
+                        "border-light": "#E2E8F0", // Slate-200
+                        "border-dark": "#334155", // Slate-700
+                        "text-light-primary": "#1E293B", // Slate-800
+                        "text-dark-primary": "#F8FAFC", // Slate-50
+                        "text-light-secondary": "#64748B", // Slate-500
+                        "text-dark-secondary": "#94A3B8", // Slate-400
+                    },
+                    fontFamily: {
+                        sans: ["Inter", "sans-serif"],
+                    },
+                    borderRadius: {
+                        DEFAULT: "0.5rem",
+                    },
+                },
+            },
+        };
+    </script>
+<style>::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 4px;
+        }
+        .dark ::-webkit-scrollbar-thumb {
+            background: #475569;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #94a3b8;
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-text-light-primary dark:text-text-dark-primary min-h-screen flex flex-col font-sans transition-colors duration-200">
+<nav class="bg-card-light dark:bg-card-dark border-b border-border-light dark:border-border-dark px-6 py-3 flex items-center justify-between sticky top-0 z-10">
+<div class="flex items-center gap-4">
+<div class="flex items-center gap-2">
+<div class="w-8 h-8 rounded bg-primary flex items-center justify-center text-white font-bold text-xl">L</div>
+<span class="font-bold text-lg hidden sm:block">LandingBuilder</span>
+</div>
+<div class="h-6 w-px bg-border-light dark:bg-border-dark mx-2"></div>
+<div class="flex items-center text-sm text-text-light-secondary dark:text-text-dark-secondary">
+<span class="hover:text-primary cursor-pointer">Websites</span>
+<span class="material-icons-round text-base mx-1">chevron_right</span>
+<span class="font-medium text-text-light-primary dark:text-text-dark-primary">My Startup Landing</span>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<button class="p-2 rounded-full hover:bg-gray-100 dark:hover:bg-slate-700 text-text-light-secondary dark:text-text-dark-secondary transition-colors" onclick="document.documentElement.classList.toggle('dark')">
+<span class="material-icons-round">dark_mode</span>
+</button>
+<div class="w-8 h-8 rounded-full bg-gradient-to-tr from-primary to-purple-500 overflow-hidden border-2 border-white dark:border-slate-700">
+<img alt="User Avatar" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCLl8KXJQoClwVYRxJlbyLuWoQtyD3nai8becb0g4c4RANk3W4-RxKabHZo_W7xJNfn3imfFaAP30__lpMsKl_enfHrIbt5SvH94uAIZC-WaGiEWqPNBls6u8RcKR2eQQWQpTgBQu6IJs_F1eBox__OjoiEQjxELp8hmuGMUl-OR6J_RgsNsOYNozF6SfXdWEnao54aLJDh1NdXD5sc6QoJexW3TJxpz-YBrHa6peqHH2PyY5KhL-btiGvXyjoPJz2-8p1KvLuhn-k"/>
+</div>
+</div>
+</nav>
+<div class="flex flex-1">
+<aside class="w-64 border-r border-border-light dark:border-border-dark bg-card-light dark:bg-card-dark hidden md:flex flex-col pt-6 pb-4">
+<div class="px-4 mb-6">
+<div class="text-xs font-semibold text-text-light-secondary dark:text-text-dark-secondary uppercase tracking-wider mb-2">Editor</div>
+<ul class="space-y-1">
+<li>
+<a class="flex items-center gap-3 px-3 py-2 rounded-md text-text-light-secondary dark:text-text-dark-secondary hover:bg-gray-100 dark:hover:bg-slate-700 transition-colors" href="#">
+<span class="material-icons-round text-xl">grid_view</span>
+<span class="text-sm font-medium">Pages</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-3 px-3 py-2 rounded-md text-text-light-secondary dark:text-text-dark-secondary hover:bg-gray-100 dark:hover:bg-slate-700 transition-colors" href="#">
+<span class="material-icons-round text-xl">brush</span>
+<span class="text-sm font-medium">Design System</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-3 px-3 py-2 rounded-md text-text-light-secondary dark:text-text-dark-secondary hover:bg-gray-100 dark:hover:bg-slate-700 transition-colors" href="#">
+<span class="material-icons-round text-xl">folder</span>
+<span class="text-sm font-medium">Media Library</span>
+</a>
+</li>
+</ul>
+</div>
+<div class="px-4 mb-6">
+<div class="text-xs font-semibold text-text-light-secondary dark:text-text-dark-secondary uppercase tracking-wider mb-2">Configuration</div>
+<ul class="space-y-1">
+<li>
+<a class="flex items-center gap-3 px-3 py-2 rounded-md bg-primary/10 text-primary font-medium" href="#">
+<span class="material-icons-round text-xl">settings</span>
+<span class="text-sm">Settings</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-3 px-3 py-2 rounded-md text-text-light-secondary dark:text-text-dark-secondary hover:bg-gray-100 dark:hover:bg-slate-700 transition-colors" href="#">
+<span class="material-icons-round text-xl">analytics</span>
+<span class="text-sm font-medium">Analytics</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-3 px-3 py-2 rounded-md text-text-light-secondary dark:text-text-dark-secondary hover:bg-gray-100 dark:hover:bg-slate-700 transition-colors" href="#">
+<span class="material-icons-round text-xl">group</span>
+<span class="text-sm font-medium">Team Access</span>
+</a>
+</li>
+</ul>
+</div>
+<div class="mt-auto px-6 pt-6 border-t border-border-light dark:border-border-dark">
+<div class="flex items-center justify-between">
+<span class="text-xs text-text-light-secondary dark:text-text-dark-secondary">Storage Used</span>
+<span class="text-xs font-bold text-primary">75%</span>
+</div>
+<div class="w-full bg-gray-200 dark:bg-slate-700 rounded-full h-1.5 mt-2">
+<div class="bg-primary h-1.5 rounded-full" style="width: 75%"></div>
+</div>
+</div>
+</aside>
+<main class="flex-1 p-6 md:p-8 lg:px-12 overflow-y-auto">
+<div class="mb-8">
+<h1 class="text-2xl md:text-3xl font-bold text-text-light-primary dark:text-text-dark-primary">Website Settings</h1>
+<p class="text-text-light-secondary dark:text-text-dark-secondary mt-2">Manage your website's general configuration, domains, and SEO preferences.</p>
+</div>
+<div class="border-b border-border-light dark:border-border-dark mb-8 overflow-x-auto">
+<nav aria-label="Tabs" class="-mb-px flex space-x-8">
+<a class="border-primary text-primary whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm flex items-center gap-2" href="#">
+<span class="material-icons-round text-lg">tune</span>
+                        General
+                    </a>
+<a class="border-transparent text-text-light-secondary dark:text-text-dark-secondary hover:text-text-light-primary dark:hover:text-text-dark-primary hover:border-gray-300 dark:hover:border-slate-500 whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm flex items-center gap-2 transition-colors" href="#">
+<span class="material-icons-round text-lg">dns</span>
+                        Domain
+                    </a>
+<a class="border-transparent text-text-light-secondary dark:text-text-dark-secondary hover:text-text-light-primary dark:hover:text-text-dark-primary hover:border-gray-300 dark:hover:border-slate-500 whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm flex items-center gap-2 transition-colors" href="#">
+<span class="material-icons-round text-lg">search</span>
+                        SEO
+                    </a>
+<a class="border-transparent text-text-light-secondary dark:text-text-dark-secondary hover:text-text-light-primary dark:hover:text-text-dark-primary hover:border-gray-300 dark:hover:border-slate-500 whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm flex items-center gap-2 transition-colors" href="#">
+<span class="material-icons-round text-lg">code</span>
+                        Custom Code
+                    </a>
+</nav>
+</div>
+<div class="max-w-4xl space-y-8">
+<div class="bg-card-light dark:bg-card-dark rounded-lg shadow-sm border border-border-light dark:border-border-dark p-6 md:p-8">
+<div class="flex items-center justify-between mb-6">
+<div>
+<h2 class="text-lg font-semibold text-text-light-primary dark:text-text-dark-primary">General Information</h2>
+<p class="text-sm text-text-light-secondary dark:text-text-dark-secondary">Update your site name and identity.</p>
+</div>
+</div>
+<div class="grid gap-6">
+<div class="col-span-1">
+<label class="block text-sm font-medium text-text-light-primary dark:text-text-dark-primary mb-2" for="site-name">Site Name</label>
+<input class="block w-full rounded-md border-border-light dark:border-border-dark bg-gray-50 dark:bg-slate-900 text-text-light-primary dark:text-text-dark-primary shadow-sm focus:border-primary focus:ring-primary sm:text-sm py-2.5 px-3" id="site-name" name="site-name" placeholder="My Startup Landing" type="text" value="My Startup Landing"/>
+<p class="mt-1 text-xs text-text-light-secondary dark:text-text-dark-secondary">Used for internal reference and defaults for page titles.</p>
+</div>
+<div class="col-span-1">
+<label class="block text-sm font-medium text-text-light-primary dark:text-text-dark-primary mb-2" for="language">Site Language</label>
+<select class="block w-full rounded-md border-border-light dark:border-border-dark bg-gray-50 dark:bg-slate-900 text-text-light-primary dark:text-text-dark-primary shadow-sm focus:border-primary focus:ring-primary sm:text-sm py-2.5 px-3" id="language" name="language">
+<option>English (US)</option>
+<option>Spanish</option>
+<option>French</option>
+<option>German</option>
+<option>Indonesian</option>
+</select>
+</div>
+<div class="col-span-1">
+<label class="block text-sm font-medium text-text-light-primary dark:text-text-dark-primary mb-2">Favicon</label>
+<div class="flex items-start gap-6">
+<div class="shrink-0 h-20 w-20 rounded-lg border-2 border-dashed border-border-light dark:border-border-dark flex items-center justify-center bg-gray-50 dark:bg-slate-900 overflow-hidden">
+<span class="material-icons-round text-3xl text-gray-400 dark:text-slate-600">image</span>
+</div>
+<div class="flex-1">
+<div class="flex justify-center rounded-lg border border-dashed border-border-light dark:border-border-dark px-6 py-8 hover:bg-gray-50 dark:hover:bg-slate-800/50 transition-colors cursor-pointer group">
+<div class="text-center">
+<span class="material-icons-round mx-auto h-12 w-12 text-gray-300 dark:text-slate-600 group-hover:text-primary transition-colors text-4xl mb-2">cloud_upload</span>
+<div class="mt-2 flex text-sm text-text-light-secondary dark:text-text-dark-secondary justify-center">
+<label class="relative cursor-pointer rounded-md font-medium text-primary hover:text-primary-hover focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-primary" for="file-upload">
+<span>Upload a file</span>
+<input class="sr-only" id="file-upload" name="file-upload" type="file"/>
+</label>
+<p class="pl-1">or drag and drop</p>
+</div>
+<p class="text-xs text-text-light-secondary dark:text-text-dark-secondary mt-1">PNG, ICO, JPG up to 1MB</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="mt-8 flex justify-end">
+<button class="bg-primary hover:bg-primary-hover text-white font-medium py-2 px-6 rounded-md shadow-sm transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary" type="button">
+                            Save Changes
+                        </button>
+</div>
+</div>
+<div class="bg-card-light dark:bg-card-dark rounded-lg shadow-sm border border-danger/30 overflow-hidden">
+<div class="p-6 md:p-8">
+<h2 class="text-lg font-semibold text-danger mb-1 flex items-center gap-2">
+<span class="material-icons-round">warning</span>
+                             Danger Zone
+                        </h2>
+<p class="text-sm text-text-light-secondary dark:text-text-dark-secondary mb-6">
+                            Once you delete a website, there is no going back. Please be certain.
+                        </p>
+<div class="flex items-center justify-between flex-wrap gap-4 p-4 bg-danger/5 dark:bg-danger/10 rounded-md border border-danger/10">
+<div>
+<h3 class="text-sm font-medium text-text-light-primary dark:text-text-dark-primary">Delete this website</h3>
+<p class="text-xs text-text-light-secondary dark:text-text-dark-secondary mt-1">All pages, media, and data associated will be permanently removed.</p>
+</div>
+<button class="bg-white dark:bg-transparent border border-danger text-danger hover:bg-danger hover:text-white font-medium py-2 px-4 rounded-md text-sm transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-danger" type="button">
+                                Delete Website
+                            </button>
+</div>
+</div>
+</div>
+</div>
+</main>
+</div>
+
+</body></html>

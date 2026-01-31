@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Subscription &amp; Usage</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#4043f2",
+                        "background-light": "#f6f6f8",
+                        "background-dark": "#101022",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+</head>
+<body>
+<div class="relative flex h-auto min-h-screen w-full flex-col bg-background-light dark:bg-background-dark group/design-root overflow-x-hidden font-display">
+<div class="layout-container flex h-full grow flex-col">
+<!-- Top Navigation -->
+<header class="flex items-center justify-between whitespace-nowrap border-b border-solid border-[#e7e7f3] dark:border-slate-800 bg-white dark:bg-[#1e1e2e] px-10 py-3 z-10">
+<div class="flex items-center gap-4 text-[#0d0d1c] dark:text-white">
+<div class="size-8 flex items-center justify-center bg-primary/10 rounded-lg text-primary">
+<span class="material-symbols-outlined">layers</span>
+</div>
+<h2 class="text-[#0d0d1c] dark:text-white text-lg font-bold leading-tight tracking-[-0.015em]">LandingBuilder</h2>
+</div>
+<div class="flex flex-1 justify-end gap-8">
+<div class="hidden md:flex items-center gap-9">
+<a class="text-[#0d0d1c] dark:text-slate-300 text-sm font-medium leading-normal hover:text-primary transition-colors" href="#">Dashboard</a>
+<a class="text-[#0d0d1c] dark:text-slate-300 text-sm font-medium leading-normal hover:text-primary transition-colors" href="#">Projects</a>
+<a class="text-[#0d0d1c] dark:text-slate-300 text-sm font-medium leading-normal hover:text-primary transition-colors" href="#">Templates</a>
+<a class="text-[#0d0d1c] dark:text-slate-300 text-sm font-medium leading-normal hover:text-primary transition-colors" href="#">Settings</a>
+</div>
+<button class="flex max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 bg-[#e7e7f3] dark:bg-slate-700 text-[#0d0d1c] dark:text-white gap-2 text-sm font-bold leading-normal tracking-[0.015em] min-w-0 px-2.5 hover:bg-[#dcdcEA] transition-colors">
+<span class="material-symbols-outlined text-[20px]">notifications</span>
+</button>
+<div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-10 border border-slate-200 dark:border-slate-700" data-alt="User profile avatar showing a smiling person" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuBmvUpwzjyhn-7j0UOCTScs5Ehd9tLx25FW_WlehETvHYqRQe7kGnnRSVgbVI26Yu8TdNLKunHD_KTV6xzKrDiBcPFmuJ70WfpNr6Yy5Ufpf1ruA-AP6h8cb6FxxMJbfleXQaxGtcV1FX9Mt_vIfeVHg0G1aQLBqM9IiahSJT_Cf7y9hVf_0rIOsC8EFqj2yqDxfd6Ke8kJeLlLY3jCxIC5htBm4mi7T76yNV8nkVGWbmepNpfQthjW-Are_lEyd_aIVnEm4tRRHS0");'></div>
+</div>
+</header>
+<!-- Main Content Area -->
+<div class="px-4 md:px-10 lg:px-40 flex flex-1 justify-center py-8">
+<div class="layout-content-container flex flex-col max-w-[1024px] flex-1 gap-6">
+<!-- Breadcrumbs -->
+<div class="flex flex-wrap gap-2 px-1">
+<a class="text-[#4b4c9b] dark:text-slate-400 text-sm font-medium leading-normal hover:underline" href="#">Settings</a>
+<span class="text-[#4b4c9b] dark:text-slate-500 text-sm font-medium leading-normal">/</span>
+<span class="text-[#0d0d1c] dark:text-white text-sm font-medium leading-normal">Billing</span>
+</div>
+<!-- Page Heading -->
+<div class="flex flex-wrap justify-between gap-4 items-end">
+<div class="flex min-w-72 flex-col gap-2">
+<h1 class="text-[#0d0d1c] dark:text-white text-3xl md:text-4xl font-black leading-tight tracking-[-0.033em]">Subscription &amp; Usage</h1>
+<p class="text-[#4b4c9b] dark:text-slate-400 text-base font-normal leading-normal">Manage your current plan, billing details, and resource limits.</p>
+</div>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mt-4">
+<!-- Left Column: Current Plan & Upgrade (Spans 2 columns) -->
+<div class="lg:col-span-2 flex flex-col gap-6">
+<!-- Active Plan Card -->
+<div class="bg-white dark:bg-[#1e1e2e] rounded-xl shadow-sm border border-[#e7e7f3] dark:border-slate-800 overflow-hidden flex flex-col h-full">
+<div class="bg-cover bg-center h-48 w-full relative group" data-alt="Abstract smooth gradient background with blue and purple waves representing flow and technology" style='background-image: linear-gradient(135deg, rgba(64, 67, 242, 0.9) 0%, rgba(16, 16, 34, 0.8) 100%), url("https://lh3.googleusercontent.com/aida-public/AB6AXuATUSuV78eWhJui5LbfHE6e7fC3JVKMn4gxKObbbrSIR4kzNWrHzl3UbOAtQq_V3Id45ZBLixVziIyhwd_MX2UY5nCPPLXbM6OajU8tCmtS4h11PuyJK2aYNiM2Rxs9YpMbW1qwPoB5nfFbGW8PDZXVjaUHSuWtQBwqiOXzvAGBmBCe-HZRbzpiU2QDxxUs0X2C7aPjI37ldARMYp0C0-5VlPEc_l2B5VZjt5KCNZZzUyrAATU5PM610iTyfgAP4zwWudtTLuFZKZk");'>
+<div class="absolute inset-0 p-6 flex flex-col justify-between">
+<div class="flex justify-between items-start">
+<div class="bg-white/20 backdrop-blur-md px-3 py-1 rounded-full border border-white/30 text-white text-xs font-bold tracking-wide uppercase">
+                                                Active Now
+                                            </div>
+</div>
+<div class="flex flex-col gap-1">
+<p class="text-white/80 text-sm font-medium tracking-wide uppercase">Current Plan</p>
+<div class="flex items-end gap-3 flex-wrap">
+<h3 class="text-white text-4xl font-black tracking-tight">Pro Plan</h3>
+<span class="text-white/90 text-xl font-medium mb-1">$29.00 / month</span>
+</div>
+</div>
+</div>
+</div>
+<div class="p-6 flex flex-col sm:flex-row items-center justify-between gap-4 bg-white dark:bg-[#1e1e2e]">
+<div class="flex items-center gap-3 text-[#4b4c9b] dark:text-slate-400 text-sm">
+<span class="material-symbols-outlined">verified</span>
+<span>Everything in Basic, plus AI features</span>
+</div>
+<button class="flex w-full sm:w-auto cursor-pointer items-center justify-center overflow-hidden rounded-lg h-11 px-6 bg-primary hover:bg-primary/90 transition-colors text-white text-sm font-bold leading-normal tracking-[0.015em] shadow-lg shadow-primary/20">
+<span class="material-symbols-outlined text-[18px] mr-2">arrow_upward</span>
+                                        Upgrade Plan
+                                    </button>
+</div>
+</div>
+<!-- Usage Stats Section -->
+<div class="bg-white dark:bg-[#1e1e2e] rounded-xl shadow-sm border border-[#e7e7f3] dark:border-slate-800 p-6">
+<div class="flex items-center gap-2 mb-6 border-b border-[#e7e7f3] dark:border-slate-700 pb-4">
+<span class="material-symbols-outlined text-primary">bar_chart</span>
+<h3 class="text-[#0d0d1c] dark:text-white text-lg font-bold">Resource Usage</h3>
+</div>
+<div class="flex flex-col gap-8">
+<!-- Websites Progress -->
+<div class="flex flex-col gap-2">
+<div class="flex justify-between items-end">
+<div class="flex gap-2 items-center">
+<span class="material-symbols-outlined text-slate-400 text-[20px]">web</span>
+<p class="text-[#0d0d1c] dark:text-white text-base font-medium">Websites Created</p>
+</div>
+<p class="text-[#0d0d1c] dark:text-white text-sm font-bold bg-[#f6f6f8] dark:bg-slate-700 px-2 py-1 rounded">3 / 10</p>
+</div>
+<div class="w-full bg-[#f6f6f8] dark:bg-slate-700 rounded-full h-3">
+<div class="bg-primary h-3 rounded-full transition-all duration-500 ease-out" style="width: 30%;"></div>
+</div>
+<p class="text-[#4b4c9b] dark:text-slate-400 text-xs text-right">7 remaining</p>
+</div>
+<!-- AI Credits Progress -->
+<div class="flex flex-col gap-2">
+<div class="flex justify-between items-end">
+<div class="flex gap-2 items-center">
+<span class="material-symbols-outlined text-slate-400 text-[20px]">smart_toy</span>
+<p class="text-[#0d0d1c] dark:text-white text-base font-medium">AI Credits</p>
+</div>
+<p class="text-[#0d0d1c] dark:text-white text-sm font-bold bg-[#f6f6f8] dark:bg-slate-700 px-2 py-1 rounded">450 / 1000</p>
+</div>
+<div class="w-full bg-[#f6f6f8] dark:bg-slate-700 rounded-full h-3">
+<div class="bg-gradient-to-r from-primary to-purple-500 h-3 rounded-full transition-all duration-500 ease-out" style="width: 45%;"></div>
+</div>
+<p class="text-[#4b4c9b] dark:text-slate-400 text-xs text-right">Resets in 14 days</p>
+</div>
+<!-- vCards (Unlimited) -->
+<div class="flex flex-col gap-2">
+<div class="flex justify-between items-center">
+<div class="flex gap-2 items-center">
+<span class="material-symbols-outlined text-slate-400 text-[20px]">contact_page</span>
+<p class="text-[#0d0d1c] dark:text-white text-base font-medium">vCards</p>
+</div>
+<div class="flex items-center gap-2 text-green-600 bg-green-50 dark:bg-green-900/20 dark:text-green-400 px-3 py-1 rounded-full border border-green-100 dark:border-green-900">
+<span class="text-sm font-bold">5 / Unlimited</span>
+<span class="material-symbols-outlined text-[16px]">all_inclusive</span>
+</div>
+</div>
+<!-- Visual representation for unlimited -->
+<div class="w-full bg-[#f6f6f8] dark:bg-slate-700 rounded-full h-1.5 mt-2 overflow-hidden">
+<div class="w-full h-full bg-slate-300 dark:bg-slate-600 opacity-30"></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Right Column: Billing Details (Spans 1 column) -->
+<div class="lg:col-span-1 flex flex-col gap-6">
+<!-- Next Billing Info Box -->
+<div class="bg-white dark:bg-[#1e1e2e] rounded-xl shadow-sm border border-[#e7e7f3] dark:border-slate-800 p-6 flex flex-col gap-5 h-full">
+<div class="flex items-center gap-2 border-b border-[#e7e7f3] dark:border-slate-700 pb-4">
+<span class="material-symbols-outlined text-primary">receipt_long</span>
+<h3 class="text-[#0d0d1c] dark:text-white text-lg font-bold">Billing Details</h3>
+</div>
+<div class="flex flex-col gap-6">
+<!-- Date Item -->
+<div class="flex flex-col gap-1">
+<p class="text-[#4b4c9b] dark:text-slate-400 text-sm font-medium uppercase tracking-wider">Next Billing Date</p>
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[#0d0d1c] dark:text-white">calendar_month</span>
+<p class="text-[#0d0d1c] dark:text-white text-xl font-bold">Oct 24, 2023</p>
+</div>
+</div>
+<!-- Amount Item -->
+<div class="flex flex-col gap-1">
+<p class="text-[#4b4c9b] dark:text-slate-400 text-sm font-medium uppercase tracking-wider">Estimated Amount</p>
+<p class="text-[#0d0d1c] dark:text-white text-xl font-bold">$29.00</p>
+</div>
+<div class="h-px bg-[#e7e7f3] dark:bg-slate-700 w-full"></div>
+<!-- Payment Method -->
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-3">
+<div class="bg-slate-100 dark:bg-slate-700 p-2 rounded flex items-center justify-center">
+<span class="material-symbols-outlined text-slate-600 dark:text-slate-300">credit_card</span>
+</div>
+<div class="flex flex-col">
+<p class="text-[#0d0d1c] dark:text-white text-sm font-bold">Visa ending in 4242</p>
+<p class="text-[#4b4c9b] dark:text-slate-400 text-xs">Expires 12/25</p>
+</div>
+</div>
+<button class="text-primary hover:text-primary/80 text-sm font-medium">Edit</button>
+</div>
+<!-- Auto-renew Toggle -->
+<div class="bg-[#f8f8fc] dark:bg-slate-800/50 p-4 rounded-lg flex items-center justify-between border border-[#e7e7f3] dark:border-slate-700">
+<div class="flex flex-col">
+<span class="text-[#0d0d1c] dark:text-white text-sm font-bold">Auto-renew</span>
+<span class="text-[#4b4c9b] dark:text-slate-400 text-xs">Plan renews automatically</span>
+</div>
+<!-- Toggle Switch -->
+<label class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only peer" type="checkbox" value=""/>
+<div class="w-11 h-6 bg-slate-200 peer-focus:outline-none peer-focus:ring-2 peer-focus:ring-primary/50 dark:peer-focus:ring-primary/30 rounded-full peer dark:bg-slate-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-primary"></div>
+</label>
+</div>
+<button class="w-full py-2 text-[#4b4c9b] dark:text-slate-400 hover:text-[#0d0d1c] dark:hover:text-white text-sm font-medium transition-colors mt-auto">
+                                        Cancel Subscription
+                                    </button>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</body></html>

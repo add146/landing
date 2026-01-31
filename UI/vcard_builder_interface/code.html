@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>vCard Builder</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#6264f4",
+                        "background-light": "#f6f6f8",
+                        "background-dark": "#101022",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem", 
+                        "lg": "0.5rem", 
+                        "xl": "0.75rem", 
+                        "2xl": "1rem",
+                        "3xl": "1.5rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-white overflow-x-hidden min-h-screen flex flex-col">
+<header class="sticky top-0 z-50 flex items-center justify-between whitespace-nowrap border-b border-solid border-slate-200 dark:border-slate-800 bg-white dark:bg-background-dark px-6 py-3 shadow-sm">
+<div class="flex items-center gap-4 text-slate-900 dark:text-white">
+<a class="flex items-center gap-2 text-slate-500 hover:text-primary transition-colors" href="#">
+<span class="material-symbols-outlined text-2xl">arrow_back</span>
+</a>
+<div class="h-6 w-px bg-slate-200 dark:bg-slate-700 mx-1"></div>
+<div class="flex items-center gap-2">
+<div class="size-8 bg-primary/10 rounded-lg flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-xl">badge</span>
+</div>
+<h2 class="text-lg font-bold leading-tight tracking-tight">vCard Builder</h2>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<span class="text-xs text-slate-400 font-medium hidden md:block">Last saved 2 mins ago</span>
+<div class="flex gap-2">
+<button class="flex min-w-[100px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-9 px-4 bg-slate-100 dark:bg-slate-800 text-slate-900 dark:text-white text-sm font-bold leading-normal hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors">
+<span class="truncate">Save Draft</span>
+</button>
+<button class="flex min-w-[100px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-9 px-4 bg-primary text-white text-sm font-bold leading-normal hover:bg-primary/90 transition-colors shadow-lg shadow-primary/20">
+<span class="truncate">Publish</span>
+</button>
+</div>
+</div>
+</header>
+<main class="flex flex-col lg:flex-row flex-1 overflow-hidden">
+<div class="w-full lg:w-7/12 xl:w-1/2 h-full overflow-y-auto bg-white dark:bg-background-dark border-r border-slate-200 dark:border-slate-800 custom-scrollbar">
+<div class="max-w-2xl mx-auto p-6 md:p-10 pb-20">
+<div class="flex flex-col gap-2 mb-8">
+<div class="flex items-center gap-2">
+<span class="px-2 py-1 rounded bg-green-100 text-green-700 text-xs font-bold uppercase tracking-wider">Active</span>
+</div>
+<h1 class="text-3xl font-bold text-slate-900 dark:text-white tracking-tight">Edit vCard: Jane Doe</h1>
+<p class="text-slate-500 dark:text-slate-400 text-sm">Update your professional details and customize your card design. Changes auto-save.</p>
+</div>
+<div class="flex flex-col gap-4">
+<details class="group flex flex-col rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50/50 dark:bg-slate-800/30 open:bg-white dark:open:bg-background-dark open:shadow-sm transition-all" open="">
+<summary class="flex cursor-pointer items-center justify-between gap-6 p-4">
+<div class="flex items-center gap-3">
+<div class="flex items-center justify-center w-8 h-8 rounded-full bg-blue-100 text-blue-600 dark:bg-blue-900/30 dark:text-blue-400">
+<span class="material-symbols-outlined text-lg">person</span>
+</div>
+<p class="text-slate-900 dark:text-white text-base font-semibold">Profile &amp; Branding</p>
+</div>
+<span class="material-symbols-outlined text-slate-400 transition-transform group-open:rotate-180">expand_more</span>
+</summary>
+<div class="px-4 pb-6 pt-2 flex flex-col gap-6 border-t border-slate-100 dark:border-slate-800">
+<div class="flex items-center gap-6">
+<div class="relative group cursor-pointer shrink-0">
+<div class="w-24 h-24 rounded-full overflow-hidden border-2 border-slate-200 dark:border-slate-700 bg-slate-100">
+<img alt="Profile" class="w-full h-full object-cover" data-alt="Professional headshot of a woman" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB9BSpMrkKiJFpWfLMcf9SZ2MaObIi4kuHMjczRhN49AAxegGoK0gb1RbqL4OC06sHBcEmPXVHb90OJnzMsQmvJBnjvdfaUegjQlz5Shj-8F1BRIi2nq1xExNolFuLG4F6yPo6CGd3EpN5SJn9vQ5OEm5d_NvrdySBSaX9_X5T51GdyMWZgn0YfTOGYdUf4bFdWELlGPxUxUx8sCTIWJMbrGQYzSeSIr2p1gQjwcKLEU2cndhQVpOTZ_uA9KXpCOIsyygDxoBqJlvI"/>
+</div>
+<div class="absolute inset-0 bg-black/40 rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+<span class="material-symbols-outlined text-white">edit</span>
+</div>
+</div>
+<div class="flex flex-col gap-2">
+<h4 class="text-sm font-medium text-slate-900 dark:text-white">Profile Photo</h4>
+<p class="text-xs text-slate-500">Recommended 400x400px. JPG or PNG.</p>
+<div class="flex gap-2 mt-1">
+<button class="px-3 py-1.5 text-xs font-medium bg-white border border-slate-300 rounded-lg text-slate-700 hover:bg-slate-50 dark:bg-slate-800 dark:border-slate-600 dark:text-slate-200 dark:hover:bg-slate-700">Change</button>
+<button class="px-3 py-1.5 text-xs font-medium text-red-600 hover:text-red-700 dark:text-red-400">Remove</button>
+</div>
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+<label class="flex flex-col gap-1.5">
+<span class="text-sm font-medium text-slate-700 dark:text-slate-300">First Name</span>
+<input class="form-input w-full rounded-lg border-slate-300 bg-white dark:bg-slate-900 dark:border-slate-700 text-slate-900 dark:text-white focus:border-primary focus:ring-primary" type="text" value="Jane"/>
+</label>
+<label class="flex flex-col gap-1.5">
+<span class="text-sm font-medium text-slate-700 dark:text-slate-300">Last Name</span>
+<input class="form-input w-full rounded-lg border-slate-300 bg-white dark:bg-slate-900 dark:border-slate-700 text-slate-900 dark:text-white focus:border-primary focus:ring-primary" type="text" value="Doe"/>
+</label>
+<label class="flex flex-col gap-1.5">
+<span class="text-sm font-medium text-slate-700 dark:text-slate-300">Job Title</span>
+<input class="form-input w-full rounded-lg border-slate-300 bg-white dark:bg-slate-900 dark:border-slate-700 text-slate-900 dark:text-white focus:border-primary focus:ring-primary" type="text" value="Product Designer"/>
+</label>
+<label class="flex flex-col gap-1.5">
+<span class="text-sm font-medium text-slate-700 dark:text-slate-300">Company</span>
+<input class="form-input w-full rounded-lg border-slate-300 bg-white dark:bg-slate-900 dark:border-slate-700 text-slate-900 dark:text-white focus:border-primary focus:ring-primary" type="text" value="Acme Studio"/>
+</label>
+</div>
+<label class="flex flex-col gap-1.5 relative">
+<div class="flex justify-between items-center">
+<span class="text-sm font-medium text-slate-700 dark:text-slate-300">Professional Bio</span>
+<button class="flex items-center gap-1 text-xs font-semibold text-primary bg-primary/10 px-2 py-1 rounded-md hover:bg-primary/20 transition-colors">
+<span class="material-symbols-outlined text-[14px]">auto_awesome</span>
+                                        AI Write
+                                    </button>
+</div>
+<textarea class="form-textarea w-full rounded-lg border-slate-300 bg-white dark:bg-slate-900 dark:border-slate-700 text-slate-900 dark:text-white focus:border-primary focus:ring-primary resize-none text-sm leading-relaxed" rows="4">Experienced product designer with a passion for user-centric interfaces. Helping brands scale through better design systems.</textarea>
+</label>
+</div>
+</details>
+<details class="group flex flex-col rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50/50 dark:bg-slate-800/30 open:bg-white dark:open:bg-background-dark open:shadow-sm transition-all" open="">
+<summary class="flex cursor-pointer items-center justify-between gap-6 p-4">
+<div class="flex items-center gap-3">
+<div class="flex items-center justify-center w-8 h-8 rounded-full bg-green-100 text-green-600 dark:bg-green-900/30 dark:text-green-400">
+<span class="material-symbols-outlined text-lg">call</span>
+</div>
+<p class="text-slate-900 dark:text-white text-base font-semibold">Contact Information</p>
+</div>
+<span class="material-symbols-outlined text-slate-400 transition-transform group-open:rotate-180">expand_more</span>
+</summary>
+<div class="px-4 pb-6 pt-2 flex flex-col gap-4 border-t border-slate-100 dark:border-slate-800">
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+<div class="relative col-span-1 md:col-span-2">
+<label class="text-xs font-medium text-slate-500 mb-1 block">Email Address</label>
+<div class="relative">
+<span class="material-symbols-outlined absolute left-3 top-3 text-slate-400 text-[20px]">mail</span>
+<input class="pl-10 form-input w-full rounded-lg border-slate-300 bg-white dark:bg-slate-900 dark:border-slate-700 text-slate-900 dark:text-white focus:border-primary focus:ring-primary" type="email" value="jane@acmestudio.com"/>
+</div>
+</div>
+<div class="relative">
+<label class="text-xs font-medium text-slate-500 mb-1 block">Phone Number</label>
+<div class="relative">
+<span class="material-symbols-outlined absolute left-3 top-3 text-slate-400 text-[20px]">phone_iphone</span>
+<input class="pl-10 form-input w-full rounded-lg border-slate-300 bg-white dark:bg-slate-900 dark:border-slate-700 text-slate-900 dark:text-white focus:border-primary focus:ring-primary" type="tel" value="+1 (555) 000-1234"/>
+</div>
+</div>
+<div class="relative">
+<label class="text-xs font-medium text-slate-500 mb-1 block">WhatsApp</label>
+<div class="relative">
+<span class="material-symbols-outlined absolute left-3 top-3 text-slate-400 text-[20px]">chat</span>
+<input class="pl-10 form-input w-full rounded-lg border-slate-300 bg-white dark:bg-slate-900 dark:border-slate-700 text-slate-900 dark:text-white focus:border-primary focus:ring-primary" placeholder="+1 (555)..." type="tel"/>
+</div>
+</div>
+<div class="relative col-span-1 md:col-span-2">
+<label class="text-xs font-medium text-slate-500 mb-1 block">Website</label>
+<div class="relative">
+<span class="material-symbols-outlined absolute left-3 top-3 text-slate-400 text-[20px]">language</span>
+<input class="pl-10 form-input w-full rounded-lg border-slate-300 bg-white dark:bg-slate-900 dark:border-slate-700 text-slate-900 dark:text-white focus:border-primary focus:ring-primary" type="url" value="https://janedoe.design"/>
+</div>
+</div>
+<div class="relative col-span-1 md:col-span-2">
+<label class="text-xs font-medium text-slate-500 mb-1 block">Address</label>
+<div class="relative">
+<span class="material-symbols-outlined absolute left-3 top-3 text-slate-400 text-[20px]">location_on</span>
+<input class="pl-10 form-input w-full rounded-lg border-slate-300 bg-white dark:bg-slate-900 dark:border-slate-700 text-slate-900 dark:text-white focus:border-primary focus:ring-primary" type="text" value="San Francisco, CA"/>
+</div>
+</div>
+</div>
+</div>
+</details>
+<details class="group flex flex-col rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50/50 dark:bg-slate-800/30 open:bg-white dark:open:bg-background-dark open:shadow-sm transition-all">
+<summary class="flex cursor-pointer items-center justify-between gap-6 p-4">
+<div class="flex items-center gap-3">
+<div class="flex items-center justify-center w-8 h-8 rounded-full bg-purple-100 text-purple-600 dark:bg-purple-900/30 dark:text-purple-400">
+<span class="material-symbols-outlined text-lg">share</span>
+</div>
+<p class="text-slate-900 dark:text-white text-base font-semibold">Social Links</p>
+</div>
+<span class="material-symbols-outlined text-slate-400 transition-transform group-open:rotate-180">expand_more</span>
+</summary>
+<div class="px-4 pb-6 pt-2 flex flex-col gap-4 border-t border-slate-100 dark:border-slate-800">
+<div class="flex flex-col gap-3">
+<div class="flex items-center gap-3 p-3 bg-slate-50 dark:bg-slate-800/50 rounded-lg border border-slate-200 dark:border-slate-700 group/item">
+<span class="material-symbols-outlined text-slate-400 cursor-grab">drag_indicator</span>
+<div class="size-8 rounded bg-[#0077b5] flex items-center justify-center text-white shrink-0">
+<svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"></path></svg>
+</div>
+<input class="flex-1 bg-transparent border-0 p-0 text-sm focus:ring-0 text-slate-900 dark:text-white placeholder:text-slate-400" placeholder="LinkedIn URL" type="text" value="linkedin.com/in/janedoe"/>
+<button class="text-slate-400 hover:text-red-500 opacity-0 group-hover/item:opacity-100 transition-opacity">
+<span class="material-symbols-outlined text-xl">delete</span>
+</button>
+</div>
+</div>
+<div class="flex gap-2">
+<button class="flex-1 py-2 px-3 rounded-lg border border-slate-200 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-800 flex items-center justify-center gap-2 transition-colors">
+<svg class="w-4 h-4 text-[#0077b5]" fill="currentColor" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"></path></svg>
+<span class="text-xs font-medium">Add LinkedIn</span>
+</button>
+<button class="flex-1 py-2 px-3 rounded-lg border border-slate-200 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-800 flex items-center justify-center gap-2 transition-colors">
+<svg class="w-4 h-4 text-[#E1306C]" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"></path></svg>
+<span class="text-xs font-medium">Add Instagram</span>
+</button>
+</div>
+<button class="mt-2 w-full flex items-center justify-center gap-2 py-2.5 rounded-lg border border-dashed border-primary/40 bg-primary/5 text-primary text-sm font-medium hover:bg-primary/10 transition-colors">
+<span class="material-symbols-outlined text-lg">add_circle</span>
+                                Add Other Social Link
+                            </button>
+</div>
+</details>
+<details class="group flex flex-col rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50/50 dark:bg-slate-800/30 open:bg-white dark:open:bg-background-dark open:shadow-sm transition-all" open="">
+<summary class="flex cursor-pointer items-center justify-between gap-6 p-4">
+<div class="flex items-center gap-3">
+<div class="flex items-center justify-center w-8 h-8 rounded-full bg-orange-100 text-orange-600 dark:bg-orange-900/30 dark:text-orange-400">
+<span class="material-symbols-outlined text-lg">palette</span>
+</div>
+<p class="text-slate-900 dark:text-white text-base font-semibold">Design Settings</p>
+</div>
+<span class="material-symbols-outlined text-slate-400 transition-transform group-open:rotate-180">expand_more</span>
+</summary>
+<div class="px-4 pb-6 pt-2 flex flex-col gap-6 border-t border-slate-100 dark:border-slate-800">
+<div class="flex flex-col gap-3">
+<span class="text-sm font-medium text-slate-700 dark:text-slate-300">Card Template</span>
+<div class="grid grid-cols-3 gap-3">
+<label class="cursor-pointer">
+<input checked="" class="peer sr-only" name="template" type="radio"/>
+<div class="aspect-[3/4] rounded-lg border-2 border-slate-200 dark:border-slate-700 peer-checked:border-primary peer-checked:bg-primary/5 hover:border-primary/50 flex flex-col items-center justify-center gap-2 p-2 transition-all">
+<div class="w-full h-1/3 bg-slate-200 dark:bg-slate-700 rounded-t-sm"></div>
+<div class="w-8 h-8 rounded-full bg-slate-300 dark:bg-slate-600 -mt-6 ring-2 ring-white"></div>
+<div class="w-3/4 h-2 bg-slate-200 dark:bg-slate-700 rounded-full"></div>
+<div class="w-1/2 h-2 bg-slate-100 dark:bg-slate-800 rounded-full"></div>
+</div>
+<span class="block text-center text-xs mt-1 text-slate-600 font-medium">Classic</span>
+</label>
+<label class="cursor-pointer">
+<input class="peer sr-only" name="template" type="radio"/>
+<div class="aspect-[3/4] rounded-lg border-2 border-slate-200 dark:border-slate-700 peer-checked:border-primary peer-checked:bg-primary/5 hover:border-primary/50 flex flex-col items-center justify-center gap-2 p-2 transition-all">
+<div class="w-10 h-10 rounded-full bg-slate-300 dark:bg-slate-600"></div>
+<div class="w-3/4 h-2 bg-slate-200 dark:bg-slate-700 rounded-full"></div>
+<div class="w-full h-px bg-slate-200 my-1"></div>
+<div class="w-1/2 h-2 bg-slate-100 dark:bg-slate-800 rounded-full"></div>
+</div>
+<span class="block text-center text-xs mt-1 text-slate-600">Minimal</span>
+</label>
+<label class="cursor-pointer">
+<input class="peer sr-only" name="template" type="radio"/>
+<div class="aspect-[3/4] rounded-lg border-2 border-slate-200 dark:border-slate-700 peer-checked:border-primary peer-checked:bg-primary/5 hover:border-primary/50 flex flex-col justify-end gap-2 p-2 relative overflow-hidden transition-all">
+<div class="absolute inset-0 bg-gradient-to-br from-slate-200 to-slate-300 opacity-50"></div>
+<div class="w-1/2 h-2 bg-slate-400 rounded-full relative z-10"></div>
+<div class="w-3/4 h-2 bg-slate-300 rounded-full relative z-10"></div>
+</div>
+<span class="block text-center text-xs mt-1 text-slate-600">Glass</span>
+</label>
+</div>
+</div>
+<div class="flex flex-col gap-3">
+<span class="text-sm font-medium text-slate-700 dark:text-slate-300">Accent Color</span>
+<div class="flex flex-wrap gap-3">
+<button class="w-8 h-8 rounded-full bg-[#6264f4] ring-2 ring-offset-2 ring-offset-white dark:ring-offset-slate-900 ring-[#6264f4]"></button>
+<button class="w-8 h-8 rounded-full bg-emerald-500 hover:scale-110 transition-transform"></button>
+<button class="w-8 h-8 rounded-full bg-blue-500 hover:scale-110 transition-transform"></button>
+<button class="w-8 h-8 rounded-full bg-rose-500 hover:scale-110 transition-transform"></button>
+<button class="w-8 h-8 rounded-full bg-slate-900 dark:bg-white hover:scale-110 transition-transform border border-slate-200"></button>
+<button class="w-8 h-8 rounded-full bg-transparent border border-dashed border-slate-400 flex items-center justify-center text-slate-400 hover:border-primary hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-lg">add</span>
+</button>
+</div>
+</div>
+</div>
+</details>
+</div>
+<div class="mt-8 pt-6 border-t border-slate-200 dark:border-slate-700 flex items-center justify-between gap-4">
+<button class="flex-1 py-3 px-4 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-700 dark:text-white font-semibold hover:bg-slate-50 dark:hover:bg-slate-700 transition-colors flex items-center justify-center gap-2 shadow-sm">
+<span class="material-symbols-outlined">visibility</span>
+                        Preview
+                    </button>
+<button class="flex-1 py-3 px-4 rounded-xl bg-primary text-white font-bold hover:bg-primary/90 transition-colors flex items-center justify-center gap-2 shadow-lg shadow-primary/20">
+<span class="material-symbols-outlined">save</span>
+                        Save vCard
+                    </button>
+</div>
+</div>
+</div>
+<div class="hidden lg:flex lg:w-5/12 xl:w-1/2 bg-slate-100 dark:bg-[#0c0c1e] items-center justify-center relative overflow-hidden">
+<div class="absolute top-0 left-0 w-full h-full opacity-5 pointer-events-none" style="background-image: radial-gradient(#6264f4 1px, transparent 1px); background-size: 24px 24px;"></div>
+<div class="flex flex-col items-center gap-6 z-10 sticky top-10 transform scale-90 xl:scale-100 transition-transform duration-300">
+<div class="flex items-center gap-2 mb-2">
+<span class="px-3 py-1 bg-white dark:bg-slate-800 rounded-full text-xs font-semibold shadow-sm text-slate-600 dark:text-slate-300 border border-slate-200 dark:border-slate-700 flex items-center gap-2">
+<div class="w-2 h-2 rounded-full bg-green-500 animate-pulse"></div> Live Preview
+                    </span>
+</div>
+<div class="w-[340px] h-[680px] bg-slate-900 rounded-[3rem] shadow-2xl p-3 relative ring-8 ring-slate-900/5 dark:ring-black/20">
+<div class="absolute top-0 left-1/2 -translate-x-1/2 w-32 h-6 bg-slate-900 rounded-b-xl z-20"></div>
+<div class="w-full h-full bg-white rounded-[2.25rem] overflow-hidden flex flex-col relative">
+<div class="h-32 bg-cover bg-center" data-alt="Gradient purple background banner" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBNlI4eU_8O28o_L9g70Lbso-VDEVrMqFUkzvDXra4BCrikECMsCOS_D9japt6whLXvGltRtwBFZsLG04ouI1DhCu9n3TgI3lg6gA4g77pL-iXgDu4g3QHtpnuOCT3l50v7SN7rd57OIk7UWY2A_BTe6GTC-PSugv2njNVYYNHuaJekPUEgKknubsJeoY9-_C50YOJLOiSNIyQUxu8GuqjveJgsDQcT5AobHikOkynkmaPFeGw6pPbOfl7bAg9wztyG-Ka-eNqyGBY');"></div>
+<div class="px-6 relative flex flex-col items-center -mt-12 flex-1 overflow-y-auto no-scrollbar pb-8">
+<div class="w-24 h-24 rounded-full border-4 border-white shadow-lg overflow-hidden bg-white mb-3">
+<img class="w-full h-full object-cover" data-alt="User profile picture" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAM3k6m_jxNZVFk532iVVVSfKZLSa2_yFo9CMF33rQgpilfGuSlAnP7-7tF639el-7fFAKzXX7-YtB5GLNaY9EKIeuHlMgzFb1mVhAlI1-pf6PcIu44SB7SB_UT43A3ecgmv5GO3kwoIb1Ar2qXNIEH5kL_lLthfoZTHi6n4T070md9yLnwtPmNR0-bU4Y37S-MD38fIWZKUfrPqLC2qPssGNsUDxELjbxJHR1rEU7jn3ZvFUW4_Gh0zTMsdqykXgJrfWbQoaNXwdw"/>
+</div>
+<div class="text-center mb-6">
+<h2 class="text-2xl font-bold text-slate-900">Jane Doe</h2>
+<p class="text-slate-500 font-medium text-sm mt-1">Product Designer</p>
+<p class="text-slate-400 text-xs mt-0.5">Acme Studio</p>
+</div>
+<div class="flex items-center justify-center gap-4 mb-6">
+<a class="w-12 h-12 rounded-full bg-green-500 text-white flex items-center justify-center shadow-lg shadow-green-200 hover:scale-110 transition-transform" href="tel:555">
+<span class="material-symbols-outlined">call</span>
+</a>
+<a class="w-12 h-12 rounded-full bg-blue-500 text-white flex items-center justify-center shadow-lg shadow-blue-200 hover:scale-110 transition-transform" href="mailto:jane@acmestudio.com">
+<span class="material-symbols-outlined">mail</span>
+</a>
+<a class="w-12 h-12 rounded-full bg-primary text-white flex items-center justify-center shadow-lg shadow-primary/20 hover:scale-110 transition-transform" href="#">
+<span class="material-symbols-outlined">chat</span>
+</a>
+</div>
+<p class="text-center text-slate-600 text-sm leading-relaxed mb-6">
+                                Experienced product designer with a passion for user-centric interfaces. Helping brands scale through better design.
+                            </p>
+<div class="flex flex-col w-full gap-3 mb-8">
+<button class="w-full bg-primary text-white font-bold py-3.5 rounded-full shadow-lg shadow-primary/30 active:scale-95 transition-transform flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-[20px]">person_add</span>
+                                    Save Contact
+                                </button>
+<button class="w-full bg-white border border-slate-200 text-slate-700 font-semibold py-3.5 rounded-full hover:bg-slate-50 transition-colors flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-[20px]">send</span>
+                                    Share vCard
+                                </button>
+</div>
+<div class="flex gap-4 mb-8">
+<a class="w-10 h-10 rounded-full bg-slate-100 flex items-center justify-center text-slate-600 hover:bg-primary hover:text-white transition-all" href="#">
+<svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"></path></svg>
+</a>
+<a class="w-10 h-10 rounded-full bg-slate-100 flex items-center justify-center text-slate-600 hover:bg-primary hover:text-white transition-all" href="#">
+<svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M24 4.557c-.883.392-1.832.656-2.828.775 1.017-.609 1.798-1.574 2.165-2.724-.951.564-2.005.974-3.127 1.195-.897-.957-2.178-1.555-3.594-1.555-3.179 0-5.515 2.966-4.797 6.045-4.091-.205-7.719-2.165-10.148-5.144-1.29 2.213-.669 5.108 1.523 6.574-.806-.026-1.566-.247-2.229-.616-.054 2.281 1.581 4.415 3.949 4.89-.693.188-1.452.232-2.224.084.626 1.956 2.444 3.379 4.6 3.419-2.07 1.623-4.678 2.348-7.29 2.04 2.179 1.397 4.768 2.212 7.548 2.212 9.142 0 14.307-7.721 13.995-14.646.962-.695 1.797-1.562 2.457-2.549z"></path></svg>
+</a>
+<a class="w-10 h-10 rounded-full bg-slate-100 flex items-center justify-center text-slate-600 hover:bg-primary hover:text-white transition-all" href="#">
+<span class="material-symbols-outlined text-lg">language</span>
+</a>
+</div>
+<div class="w-full flex flex-col gap-3">
+<a class="flex items-center gap-4 p-3 rounded-xl bg-slate-50 hover:bg-slate-100 transition-colors" href="mailto:jane@acme.com">
+<div class="w-10 h-10 rounded-full bg-white flex items-center justify-center shadow-sm text-primary">
+<span class="material-symbols-outlined text-xl">mail</span>
+</div>
+<div class="flex flex-col">
+<span class="text-xs text-slate-400 font-medium uppercase">Email</span>
+<span class="text-sm font-semibold text-slate-800">jane@acmestudio.com</span>
+</div>
+</a>
+<a class="flex items-center gap-4 p-3 rounded-xl bg-slate-50 hover:bg-slate-100 transition-colors" href="tel:555">
+<div class="w-10 h-10 rounded-full bg-white flex items-center justify-center shadow-sm text-primary">
+<span class="material-symbols-outlined text-xl">call</span>
+</div>
+<div class="flex flex-col">
+<span class="text-xs text-slate-400 font-medium uppercase">Mobile</span>
+<span class="text-sm font-semibold text-slate-800">+1 (555) 000-1234</span>
+</div>
+</a>
+<div class="flex items-center gap-4 p-3 rounded-xl bg-slate-50">
+<div class="w-10 h-10 rounded-full bg-white flex items-center justify-center shadow-sm text-primary">
+<span class="material-symbols-outlined text-xl">location_on</span>
+</div>
+<div class="flex flex-col">
+<span class="text-xs text-slate-400 font-medium uppercase">Location</span>
+<span class="text-sm font-semibold text-slate-800">San Francisco, CA</span>
+</div>
+</div>
+</div>
+<div class="mt-8 mb-2 flex items-center justify-center gap-1 opacity-50">
+<span class="material-symbols-outlined text-sm">bolt</span>
+<span class="text-[10px] font-semibold tracking-wider uppercase">Powered by vCardBuilder</span>
+</div>
+</div>
+</div>
+</div>
+<div class="flex flex-wrap items-center justify-center gap-4 w-full px-6">
+<button class="flex-1 flex items-center justify-center gap-2 px-4 py-2.5 bg-white dark:bg-slate-800 rounded-xl text-sm font-medium text-slate-700 dark:text-slate-300 shadow-sm hover:bg-slate-50 dark:hover:bg-slate-700 border border-slate-200 dark:border-slate-700 transition-colors">
+<span class="material-symbols-outlined text-lg">content_copy</span>
+                        Copy Link
+                    </button>
+<button class="flex-1 flex items-center justify-center gap-2 px-4 py-2.5 bg-white dark:bg-slate-800 rounded-xl text-sm font-medium text-slate-700 dark:text-slate-300 shadow-sm hover:bg-slate-50 dark:hover:bg-slate-700 border border-slate-200 dark:border-slate-700 transition-colors">
+<span class="material-symbols-outlined text-lg">download</span>
+                        Download VCF
+                    </button>
+<button class="flex-none flex items-center justify-center w-10 h-10 bg-white dark:bg-slate-800 rounded-xl text-slate-700 dark:text-slate-300 shadow-sm hover:bg-slate-50 dark:hover:bg-slate-700 border border-slate-200 dark:border-slate-700 transition-colors">
+<span class="material-symbols-outlined text-lg">qr_code_2</span>
+</button>
+</div>
+</div>
+</div>
+</main>
+<style>
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 6px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background-color: rgba(156, 163, 175, 0.5);
+            border-radius: 20px;
+        }
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+
+</body></html>

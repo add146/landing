@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Reset Password - PageBuilder</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#6264f4",
+                        "background-light": "#f6f6f8",
+                        "background-dark": "#101022",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.5rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-white transition-colors duration-200">
+<!-- Navbar -->
+<header class="w-full border-b border-slate-200 dark:border-slate-800 bg-white dark:bg-[#15152a]">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+<div class="flex h-16 items-center justify-between">
+<!-- Logo -->
+<div class="flex items-center gap-2">
+<div class="flex items-center justify-center size-8 rounded bg-primary text-white">
+<span class="material-symbols-outlined" style="font-size: 20px;">layers</span>
+</div>
+<span class="text-lg font-bold tracking-tight text-slate-900 dark:text-white">PageBuilder</span>
+</div>
+<!-- Right Actions -->
+<div class="flex items-center gap-4">
+<p class="text-sm font-medium text-slate-500 dark:text-slate-400 hidden sm:block">Remember your password?</p>
+<a class="inline-flex items-center justify-center rounded-lg border border-transparent bg-primary/10 px-4 py-2 text-sm font-semibold text-primary hover:bg-primary/20 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 dark:focus:ring-offset-slate-900 transition-colors" href="#">
+                        Log In
+                    </a>
+</div>
+</div>
+</div>
+</header>
+<!-- Main Content -->
+<main class="flex min-h-[calc(100vh-64px)] flex-col items-center justify-center p-4 sm:p-6 lg:p-8">
+<!-- Centered Card -->
+<div class="w-full max-w-md space-y-8">
+<!-- Header Section -->
+<div class="text-center">
+<div class="mx-auto flex size-12 items-center justify-center rounded-full bg-primary/10 text-primary mb-4">
+<span class="material-symbols-outlined" style="font-size: 24px;">lock_reset</span>
+</div>
+<h1 class="text-3xl font-bold tracking-tight text-slate-900 dark:text-white">Reset password</h1>
+<p class="mt-2 text-sm text-slate-600 dark:text-slate-400">
+                    Please choose a new password for your account. Ensure it's strong and secure.
+                </p>
+</div>
+<!-- Form Card -->
+<div class="bg-white dark:bg-[#1a1a2e] shadow-xl ring-1 ring-slate-900/5 sm:rounded-xl md:p-8 p-6">
+<form action="#" class="space-y-6" method="POST">
+<!-- New Password Field -->
+<div>
+<label class="block text-sm font-medium leading-6 text-slate-900 dark:text-white" for="new-password">New Password</label>
+<div class="relative mt-2 rounded-lg shadow-sm">
+<input class="block w-full rounded-lg border-0 py-3 pl-4 pr-10 text-slate-900 dark:text-white shadow-sm ring-1 ring-inset ring-slate-300 dark:ring-slate-700 placeholder:text-slate-400 focus:ring-2 focus:ring-inset focus:ring-primary bg-white dark:bg-[#15152a] sm:text-sm sm:leading-6" id="new-password" name="new-password" placeholder="Enter new password" type="password"/>
+<div class="absolute inset-y-0 right-0 flex items-center pr-3">
+<button class="text-slate-400 hover:text-slate-500 focus:outline-none cursor-pointer" type="button">
+<span class="material-symbols-outlined" style="font-size: 20px;">visibility_off</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Password Strength Meter (Modified Component) -->
+<div class="space-y-2">
+<div class="flex justify-between items-center">
+<span class="text-xs font-medium text-slate-700 dark:text-slate-300">Password Strength</span>
+<span class="text-xs font-medium text-yellow-600 dark:text-yellow-500">Fair</span>
+</div>
+<div class="flex gap-1 h-1.5 w-full">
+<div class="h-full w-1/4 rounded-full bg-yellow-500"></div>
+<div class="h-full w-1/4 rounded-full bg-yellow-500"></div>
+<div class="h-full w-1/4 rounded-full bg-slate-200 dark:bg-slate-700"></div>
+<div class="h-full w-1/4 rounded-full bg-slate-200 dark:bg-slate-700"></div>
+</div>
+<ul class="text-xs text-slate-500 dark:text-slate-400 list-disc list-inside space-y-1 pt-1">
+<li class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-green-500" style="font-size: 14px;">check_circle</span>
+                                At least 8 characters
+                            </li>
+<li class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-slate-300 dark:text-slate-600" style="font-size: 14px;">radio_button_unchecked</span>
+                                Contains a number or symbol
+                            </li>
+</ul>
+</div>
+<!-- Confirm Password Field -->
+<div>
+<label class="block text-sm font-medium leading-6 text-slate-900 dark:text-white" for="confirm-password">Confirm New Password</label>
+<div class="relative mt-2 rounded-lg shadow-sm">
+<input class="block w-full rounded-lg border-0 py-3 pl-4 pr-10 text-slate-900 dark:text-white shadow-sm ring-1 ring-inset ring-slate-300 dark:ring-slate-700 placeholder:text-slate-400 focus:ring-2 focus:ring-inset focus:ring-primary bg-white dark:bg-[#15152a] sm:text-sm sm:leading-6" id="confirm-password" name="confirm-password" placeholder="Confirm new password" type="password"/>
+<div class="absolute inset-y-0 right-0 flex items-center pr-3">
+<button class="text-slate-400 hover:text-slate-500 focus:outline-none cursor-pointer" type="button">
+<span class="material-symbols-outlined" style="font-size: 20px;">visibility_off</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Submit Button -->
+<div>
+<button class="flex w-full justify-center rounded-lg bg-primary px-3 py-3 text-sm font-bold leading-6 text-white shadow-sm hover:bg-primary/90 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary transition-colors" type="submit">
+                            Update Password
+                        </button>
+</div>
+</form>
+</div>
+<!-- Footer Link -->
+<div class="text-center">
+<a class="inline-flex items-center gap-2 text-sm font-medium text-slate-600 dark:text-slate-400 hover:text-primary dark:hover:text-primary transition-colors group" href="#">
+<span class="material-symbols-outlined group-hover:-translate-x-1 transition-transform" style="font-size: 18px;">arrow_back</span>
+                    Back to log in
+                </a>
+</div>
+</div>
+</main>
+</body></html>

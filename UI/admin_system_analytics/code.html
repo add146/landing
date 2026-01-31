@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Admin System Analytics</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        "bg-primary": "#FFFFFF",
+                        "bg-secondary": "#F8FAFC",
+                        "text-primary": "#0F172A",
+                        "text-secondary": "#64748B",
+                        "border-color": "#E2E8F0",
+                        "primary-accent": "#6366F1",
+                        "secondary-accent": "#EC4899",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+        body { font-family: 'Inter', sans-serif; }.scrollbar-hide::-webkit-scrollbar {
+            display: none;
+        }.scrollbar-hide {
+            -ms-overflow-style: none;scrollbar-width: none;}
+    </style>
+</head>
+<body class="bg-bg-primary text-text-primary h-screen flex overflow-hidden">
+<aside class="w-64 bg-bg-secondary border-r border-border-color flex-col hidden md:flex h-full">
+<div class="h-16 flex items-center px-6 border-b border-border-color">
+<div class="flex gap-3 items-center">
+<div class="h-8 w-8 bg-primary-accent rounded-lg flex items-center justify-center text-white font-bold">L</div>
+<h1 class="text-base font-bold leading-normal text-text-primary">LandingAdmin</h1>
+</div>
+</div>
+<div class="flex flex-col gap-1 p-4 flex-1 overflow-y-auto">
+<div class="px-2 py-2">
+<p class="text-xs font-semibold text-text-secondary uppercase tracking-wider mb-2">Main</p>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg bg-primary-accent/10 text-primary-accent group" href="#">
+<span class="material-symbols-outlined text-primary-accent group-hover:text-primary-accent transition-colors">analytics</span>
+<span class="text-sm font-medium">Analytics</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-text-secondary hover:bg-white hover:shadow-sm border border-transparent hover:border-border-color transition-all mt-1" href="#">
+<span class="material-symbols-outlined">group</span>
+<span class="text-sm font-medium">Users</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-text-secondary hover:bg-white hover:shadow-sm border border-transparent hover:border-border-color transition-all mt-1" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="text-sm font-medium">Templates</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-text-secondary hover:bg-white hover:shadow-sm border border-transparent hover:border-border-color transition-all mt-1" href="#">
+<span class="material-symbols-outlined">credit_card</span>
+<span class="text-sm font-medium">Billing</span>
+</a>
+</div>
+<div class="px-2 py-2 mt-4">
+<p class="text-xs font-semibold text-text-secondary uppercase tracking-wider mb-2">System</p>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-text-secondary hover:bg-white hover:shadow-sm border border-transparent hover:border-border-color transition-all" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span class="text-sm font-medium">Settings</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-text-secondary hover:bg-white hover:shadow-sm border border-transparent hover:border-border-color transition-all mt-1" href="#">
+<span class="material-symbols-outlined">shield</span>
+<span class="text-sm font-medium">Security</span>
+</a>
+</div>
+</div>
+<div class="p-4 border-t border-border-color bg-bg-secondary">
+<div class="flex items-center gap-3 bg-white p-2 rounded-lg border border-border-color shadow-sm">
+<div class="h-9 w-9 rounded-full bg-cover bg-center" data-alt="User avatar" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDUYxklsu_32fLrvujian9fYwL_ZebkbZ9xKm3QwIp_-VIjqx8eTiMV0dcOeeHIvPJ2zRuHP67ggFkGDDZhgYKhE9d8_kqPW07BqBygidO2Q-GHWKoVHAeU9mORZxQZ-7Rj99tI5-Bwx3GnFFkQ9wTtf-Fs3rEk279i8BqDAnEcWkqHWeG04zUIMpPtDqySk9Hj-KKn6vOSCjyeweDh5kcD8IB3L8jOvHfLQEAyF-LOHYTXd9E_xEVrQWLdmWjTlmxC56lHZeQ-Kt4');"></div>
+<div class="flex flex-col">
+<span class="text-sm font-medium text-text-primary">Admin User</span>
+<span class="text-xs text-text-secondary">admin@landing.co</span>
+</div>
+</div>
+</div>
+</aside>
+<main class="flex-1 flex flex-col h-full overflow-hidden relative bg-bg-primary">
+<header class="h-16 flex items-center justify-between px-6 md:px-10 bg-bg-primary border-b border-border-color shrink-0 z-10">
+<h2 class="text-lg font-bold text-text-primary">System Analytics</h2>
+<div class="flex items-center gap-4">
+<div class="hidden sm:flex items-center bg-bg-secondary rounded-lg border border-border-color px-3 py-2 gap-2 hover:border-primary-accent/30 transition-colors">
+<span class="material-symbols-outlined text-text-secondary text-[20px]">calendar_month</span>
+<select class="bg-transparent border-none text-sm font-medium text-text-primary focus:ring-0 p-0 pr-6 cursor-pointer outline-none">
+<option>Last 30 Days</option>
+<option>Last 7 Days</option>
+<option>This Year</option>
+</select>
+</div>
+<button class="relative p-2 text-text-secondary hover:bg-bg-secondary rounded-full transition-colors border border-transparent hover:border-border-color">
+<span class="material-symbols-outlined">notifications</span>
+<span class="absolute top-2 right-2 h-2 w-2 bg-secondary-accent rounded-full border-2 border-white"></span>
+</button>
+</div>
+</header>
+<div class="flex-1 overflow-y-auto p-6 md:p-10 scrollbar-hide bg-bg-primary">
+<div class="max-w-7xl mx-auto space-y-6">
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+<div class="bg-bg-secondary rounded-xl p-6 border border-border-color shadow-sm hover:shadow-md transition-shadow">
+<div class="flex items-center justify-between mb-4">
+<h3 class="text-text-secondary text-sm font-medium">Total Users</h3>
+<div class="h-8 w-8 rounded-lg bg-white border border-border-color flex items-center justify-center text-primary-accent shadow-sm">
+<span class="material-symbols-outlined text-[20px]">group</span>
+</div>
+</div>
+<div class="flex items-baseline gap-2">
+<span class="text-3xl font-bold text-text-primary">12,450</span>
+<span class="text-emerald-500 text-sm font-medium flex items-center">
+<span class="material-symbols-outlined text-[16px]">trending_up</span>
+                                12%
+                            </span>
+</div>
+<p class="text-xs text-text-secondary mt-2">Vs last month</p>
+</div>
+<div class="bg-bg-secondary rounded-xl p-6 border border-border-color shadow-sm hover:shadow-md transition-shadow">
+<div class="flex items-center justify-between mb-4">
+<h3 class="text-text-secondary text-sm font-medium">Active Sites</h3>
+<div class="h-8 w-8 rounded-lg bg-white border border-border-color flex items-center justify-center text-secondary-accent shadow-sm">
+<span class="material-symbols-outlined text-[20px]">language</span>
+</div>
+</div>
+<div class="flex items-baseline gap-2">
+<span class="text-3xl font-bold text-text-primary">8,320</span>
+<span class="text-emerald-500 text-sm font-medium flex items-center">
+<span class="material-symbols-outlined text-[16px]">trending_up</span>
+                                5%
+                            </span>
+</div>
+<p class="text-xs text-text-secondary mt-2">Vs last month</p>
+</div>
+<div class="bg-bg-secondary rounded-xl p-6 border border-border-color shadow-sm hover:shadow-md transition-shadow">
+<div class="flex items-center justify-between mb-4">
+<h3 class="text-text-secondary text-sm font-medium">Monthly Revenue</h3>
+<div class="h-8 w-8 rounded-lg bg-white border border-border-color flex items-center justify-center text-indigo-500 shadow-sm">
+<span class="material-symbols-outlined text-[20px]">payments</span>
+</div>
+</div>
+<div class="flex items-baseline gap-2">
+<span class="text-3xl font-bold text-text-primary">$45,200</span>
+<span class="text-emerald-500 text-sm font-medium flex items-center">
+<span class="material-symbols-outlined text-[16px]">trending_up</span>
+                                8%
+                            </span>
+</div>
+<p class="text-xs text-text-secondary mt-2">Vs last month</p>
+</div>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+<div class="lg:col-span-2 bg-bg-secondary rounded-xl border border-border-color shadow-sm p-6">
+<div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
+<div>
+<h3 class="text-lg font-bold text-text-primary">User Growth vs Publications</h3>
+<p class="text-sm text-text-secondary">Compare new signups with published websites</p>
+</div>
+<div class="flex gap-2">
+<div class="flex items-center gap-2 px-3 py-1 bg-white border border-border-color rounded-full text-xs font-medium shadow-sm">
+<span class="w-2 h-2 rounded-full bg-primary-accent"></span>
+<span class="text-text-primary">Users</span>
+</div>
+<div class="flex items-center gap-2 px-3 py-1 bg-white border border-border-color rounded-full text-xs font-medium shadow-sm">
+<span class="w-2 h-2 rounded-full bg-secondary-accent"></span>
+<span class="text-text-primary">Sites</span>
+</div>
+</div>
+</div>
+<div class="w-full h-[320px] relative">
+<div class="absolute inset-0 flex flex-col justify-between text-xs text-text-secondary pointer-events-none">
+<div class="w-full border-b border-dashed border-border-color flex items-end pb-1"><span>2000</span></div>
+<div class="w-full border-b border-dashed border-border-color flex items-end pb-1"><span>1500</span></div>
+<div class="w-full border-b border-dashed border-border-color flex items-end pb-1"><span>1000</span></div>
+<div class="w-full border-b border-dashed border-border-color flex items-end pb-1"><span>500</span></div>
+<div class="w-full border-b border-dashed border-border-color flex items-end pb-1"><span>0</span></div>
+</div>
+<svg class="absolute inset-0 h-full w-full" preserveAspectRatio="none" viewBox="0 0 100 100">
+<defs>
+<linearGradient id="gradientPrimary" x1="0" x2="0" y1="0" y2="1">
+<stop offset="0%" stop-color="#6366F1" stop-opacity="0.2"></stop>
+<stop offset="100%" stop-color="#6366F1" stop-opacity="0"></stop>
+</linearGradient>
+</defs>
+<path d="M0,80 C10,75 20,60 30,50 C40,40 50,55 60,40 C70,25 80,30 90,15 L100,10 L100,100 L0,100 Z" fill="url(#gradientPrimary)" stroke="none"></path>
+<path d="M0,80 C10,75 20,60 30,50 C40,40 50,55 60,40 C70,25 80,30 90,15 L100,10" fill="none" stroke="#6366F1" stroke-width="0.8" vector-effect="non-scaling-stroke"></path>
+<path d="M0,90 C15,85 25,75 40,70 C55,65 65,55 80,50 C90,45 95,40 100,35" fill="none" stroke="#EC4899" stroke-dasharray="2 1" stroke-width="0.8" vector-effect="non-scaling-stroke"></path>
+</svg>
+</div>
+<div class="flex justify-between text-xs text-text-secondary mt-2 px-2">
+<span>Jan 01</span>
+<span>Jan 07</span>
+<span>Jan 14</span>
+<span>Jan 21</span>
+<span>Jan 28</span>
+</div>
+</div>
+<div class="bg-bg-secondary rounded-xl border border-border-color shadow-sm p-6 flex flex-col">
+<h3 class="text-lg font-bold text-text-primary mb-4">Popular Templates</h3>
+<div class="flex flex-col gap-4 flex-1">
+<div class="group flex flex-col gap-1">
+<div class="flex justify-between text-sm">
+<span class="font-medium text-text-primary">SaaS Startup Pro</span>
+<span class="text-text-secondary">1,200</span>
+</div>
+<div class="h-2 w-full bg-white border border-border-color rounded-full overflow-hidden">
+<div class="h-full bg-primary-accent w-[85%] rounded-full"></div>
+</div>
+</div>
+<div class="group flex flex-col gap-1">
+<div class="flex justify-between text-sm">
+<span class="font-medium text-text-primary">Portfolio Minimal</span>
+<span class="text-text-secondary">980</span>
+</div>
+<div class="h-2 w-full bg-white border border-border-color rounded-full overflow-hidden">
+<div class="h-full bg-secondary-accent w-[65%] rounded-full"></div>
+</div>
+</div>
+<div class="group flex flex-col gap-1">
+<div class="flex justify-between text-sm">
+<span class="font-medium text-text-primary">E-book Launch</span>
+<span class="text-text-secondary">850</span>
+</div>
+<div class="h-2 w-full bg-white border border-border-color rounded-full overflow-hidden">
+<div class="h-full bg-indigo-400 w-[55%] rounded-full"></div>
+</div>
+</div>
+<div class="group flex flex-col gap-1">
+<div class="flex justify-between text-sm">
+<span class="font-medium text-text-primary">Agency Dark</span>
+<span class="text-text-secondary">620</span>
+</div>
+<div class="h-2 w-full bg-white border border-border-color rounded-full overflow-hidden">
+<div class="h-full bg-blue-400 w-[40%] rounded-full"></div>
+</div>
+</div>
+<div class="group flex flex-col gap-1">
+<div class="flex justify-between text-sm">
+<span class="font-medium text-text-primary">App Landing</span>
+<span class="text-text-secondary">430</span>
+</div>
+<div class="h-2 w-full bg-white border border-border-color rounded-full overflow-hidden">
+<div class="h-full bg-cyan-400 w-[30%] rounded-full"></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-6 pb-6">
+<div class="bg-bg-secondary rounded-xl border border-border-color shadow-sm p-6">
+<div class="flex items-center justify-between mb-6">
+<div>
+<h3 class="text-lg font-bold text-text-primary">AI Tokens Usage</h3>
+<p class="text-sm text-text-secondary">Daily generation consumption</p>
+</div>
+<div class="bg-primary-accent/10 text-primary-accent px-3 py-1 rounded-lg text-xs font-bold">
+                                +24%
+                            </div>
+</div>
+<div class="h-48 flex items-end justify-between gap-2">
+<div class="w-full bg-primary-accent/30 hover:bg-primary-accent/50 transition-colors rounded-t-sm h-[40%] relative group cursor-pointer">
+<div class="absolute -top-8 left-1/2 -translate-x-1/2 bg-text-primary text-white text-[10px] px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">400k</div>
+</div>
+<div class="w-full bg-primary-accent/40 hover:bg-primary-accent/60 transition-colors rounded-t-sm h-[60%] relative group cursor-pointer">
+<div class="absolute -top-8 left-1/2 -translate-x-1/2 bg-text-primary text-white text-[10px] px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">600k</div>
+</div>
+<div class="w-full bg-primary-accent/50 hover:bg-primary-accent/70 transition-colors rounded-t-sm h-[35%] relative group cursor-pointer">
+<div class="absolute -top-8 left-1/2 -translate-x-1/2 bg-text-primary text-white text-[10px] px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">350k</div>
+</div>
+<div class="w-full bg-primary-accent/60 hover:bg-primary-accent/80 transition-colors rounded-t-sm h-[75%] relative group cursor-pointer">
+<div class="absolute -top-8 left-1/2 -translate-x-1/2 bg-text-primary text-white text-[10px] px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">750k</div>
+</div>
+<div class="w-full bg-primary-accent/70 hover:bg-primary-accent/90 transition-colors rounded-t-sm h-[50%] relative group cursor-pointer">
+<div class="absolute -top-8 left-1/2 -translate-x-1/2 bg-text-primary text-white text-[10px] px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">500k</div>
+</div>
+<div class="w-full bg-primary-accent hover:bg-primary-accent/90 transition-colors rounded-t-sm h-[90%] relative group cursor-pointer">
+<div class="absolute -top-8 left-1/2 -translate-x-1/2 bg-text-primary text-white text-[10px] px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">1.2M</div>
+</div>
+<div class="w-full bg-primary-accent/50 hover:bg-primary-accent/70 transition-colors rounded-t-sm h-[45%] relative group cursor-pointer">
+<div class="absolute -top-8 left-1/2 -translate-x-1/2 bg-text-primary text-white text-[10px] px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">450k</div>
+</div>
+</div>
+<div class="flex justify-between text-xs text-text-secondary mt-2 px-1">
+<span>Mon</span>
+<span>Tue</span>
+<span>Wed</span>
+<span>Thu</span>
+<span>Fri</span>
+<span>Sat</span>
+<span>Sun</span>
+</div>
+</div>
+<div class="bg-bg-secondary rounded-xl border border-border-color shadow-sm p-6">
+<div class="flex items-center justify-between mb-4">
+<h3 class="text-lg font-bold text-text-primary">Recent Signups</h3>
+<button class="text-primary-accent text-sm font-medium hover:text-primary-accent/80">View All</button>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left text-sm text-text-secondary">
+<thead class="text-xs uppercase bg-white border-b border-border-color text-text-secondary">
+<tr>
+<th class="px-4 py-3 rounded-tl-lg" scope="col">User</th>
+<th class="px-4 py-3" scope="col">Plan</th>
+<th class="px-4 py-3 text-right rounded-tr-lg" scope="col">Date</th>
+</tr>
+</thead>
+<tbody>
+<tr class="border-b border-border-color last:border-0 hover:bg-white transition-colors">
+<td class="px-4 py-3 font-medium text-text-primary flex items-center gap-3">
+<div class="h-8 w-8 rounded-full bg-white border border-border-color flex items-center justify-center text-xs font-bold text-text-secondary">JD</div>
+                                            John Doe
+                                        </td>
+<td class="px-4 py-3"><span class="bg-green-100 text-green-700 border border-green-200 text-xs font-medium px-2.5 py-0.5 rounded">Pro</span></td>
+<td class="px-4 py-3 text-right">Just now</td>
+</tr>
+<tr class="border-b border-border-color last:border-0 hover:bg-white transition-colors">
+<td class="px-4 py-3 font-medium text-text-primary flex items-center gap-3">
+<div class="h-8 w-8 rounded-full bg-white border border-border-color flex items-center justify-center text-xs font-bold text-text-secondary">AS</div>
+                                            Alice Smith
+                                        </td>
+<td class="px-4 py-3"><span class="bg-gray-100 text-gray-700 border border-gray-200 text-xs font-medium px-2.5 py-0.5 rounded">Free</span></td>
+<td class="px-4 py-3 text-right">2 mins ago</td>
+</tr>
+<tr class="border-b border-border-color last:border-0 hover:bg-white transition-colors">
+<td class="px-4 py-3 font-medium text-text-primary flex items-center gap-3">
+<div class="h-8 w-8 rounded-full bg-white border border-border-color flex items-center justify-center text-xs font-bold text-text-secondary">RJ</div>
+                                            Robert Johnson
+                                        </td>
+<td class="px-4 py-3"><span class="bg-purple-100 text-purple-700 border border-purple-200 text-xs font-medium px-2.5 py-0.5 rounded">Enterprise</span></td>
+<td class="px-4 py-3 text-right">1 hour ago</td>
+</tr>
+<tr class="border-b border-border-color last:border-0 hover:bg-white transition-colors">
+<td class="px-4 py-3 font-medium text-text-primary flex items-center gap-3">
+<div class="h-8 w-8 rounded-full bg-white border border-border-color flex items-center justify-center text-xs font-bold text-text-secondary">MK</div>
+                                            Mia Kunis
+                                        </td>
+<td class="px-4 py-3"><span class="bg-green-100 text-green-700 border border-green-200 text-xs font-medium px-2.5 py-0.5 rounded">Pro</span></td>
+<td class="px-4 py-3 text-right">3 hours ago</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+
+</body></html>

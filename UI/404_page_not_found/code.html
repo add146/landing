@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>404 Page Not Found - Landing Page Builder</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#6366F1",
+                        "bg-primary": "#FFFFFF",
+                        "text-primary": "#0F172A",
+                        "text-secondary": "#64748B",
+                        "border-custom": "#E2E8F0",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" },
+                },
+            },
+        }
+    </script>
+</head>
+<body class="bg-bg-primary font-display text-text-primary min-h-screen flex flex-col overflow-x-hidden selection:bg-primary selection:text-white">
+<header class="w-full border-b border-border-custom bg-bg-primary px-6 md:px-10 py-4 z-20">
+<div class="flex items-center justify-between max-w-7xl mx-auto">
+<div class="flex items-center gap-3 text-text-primary cursor-pointer hover:opacity-80 transition-opacity">
+<div class="size-8 text-primary">
+<svg class="w-full h-full" fill="none" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+<path d="M44 11.2727C44 14.0109 39.8386 16.3957 33.69 17.6364C39.8386 18.877 44 21.2618 44 24C44 26.7382 39.8386 29.123 33.69 30.3636C39.8386 31.6043 44 33.9891 44 36.7273C44 40.7439 35.0457 44 24 44C12.9543 44 4 40.7439 4 36.7273C4 33.9891 8.16144 31.6043 14.31 30.3636C8.16144 29.123 4 26.7382 4 24C4 21.2618 8.16144 18.877 14.31 17.6364C8.16144 16.3957 4 14.0109 4 11.2727C4 7.25611 12.9543 4 24 4C35.0457 4 44 7.25611 44 11.2727Z" fill="currentColor"></path>
+</svg>
+</div>
+<h2 class="text-lg font-bold leading-tight tracking-[-0.015em]">Landing Page Builder</h2>
+</div>
+</div>
+</header>
+<main class="flex-grow flex flex-col items-center justify-center p-4 relative w-full">
+<div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-primary/10 rounded-full blur-[100px] -z-10 pointer-events-none"></div>
+<div class="layout-content-container flex flex-col max-w-[960px] w-full items-center text-center">
+<div class="w-full flex justify-center pb-8">
+<div class="relative flex items-center justify-center">
+<h1 class="text-[120px] md:text-[180px] font-black leading-none tracking-tighter text-transparent bg-clip-text bg-gradient-to-br from-slate-200 to-slate-400 select-none opacity-40 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 scale-150 blur-sm">404</h1>
+<div class="relative z-10 w-64 h-64 md:w-80 md:h-80 bg-contain bg-center bg-no-repeat animate-pulse" data-alt="Abstract 3D illustration of a disconnected plug or wire representing a broken link in blue tones" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuDcP92sko4XcWnrwIkEteBPv-1H7A2wohpP-4YvomAwsBkrRO3A_z6-XcdhXCWYcSdPqKCeOWROfyXk3HbZPue2yuWXoDt46H9Kc4zNOtTQ5AShKqoy39bvqhkTZaVpvO6y-zYNcqH4_UtyT9Sdn0wzUb0mLpPZJyf3WCtlaU9uGpjfsX0uyiWt3ZCOXnlFxbR35zuzeHjwbjozVPZyzCoCVk7aymEVYE3vnsd0a8ZQUX4GFr8zxRn5UciA2QPqbfBL058lxjf3Uws");'>
+</div>
+</div>
+</div>
+<h1 class="text-text-primary tracking-tight text-3xl md:text-5xl font-bold leading-tight px-4 pb-4">
+                Oops! Page not found
+            </h1>
+<div class="max-w-[500px] mx-auto">
+<p class="text-text-secondary text-base md:text-lg font-normal leading-relaxed pb-8 px-4">
+                    It looks like the link you followed is broken or the page has been removed. Don't worry, let's get you back on track.
+                </p>
+</div>
+<div class="flex flex-col sm:flex-row gap-4 w-full justify-center px-4 max-w-[480px]">
+<button class="group flex flex-1 min-w-[140px] cursor-pointer items-center justify-center rounded-lg h-12 px-6 bg-primary hover:bg-primary/90 transition-all duration-200 text-white text-base font-bold leading-normal tracking-[0.015em] shadow-lg shadow-primary/20">
+<span class="material-symbols-outlined mr-2 text-[20px] group-hover:-translate-x-1 transition-transform">arrow_back</span>
+<span class="truncate">Go Back to Home</span>
+</button>
+<button class="group flex flex-1 min-w-[140px] cursor-pointer items-center justify-center rounded-lg h-12 px-6 bg-transparent border border-border-custom hover:bg-slate-50 transition-all duration-200 text-text-primary text-base font-bold leading-normal tracking-[0.015em]">
+<span class="truncate">Contact Support</span>
+<span class="material-symbols-outlined ml-2 text-[20px] text-primary group-hover:translate-x-1 transition-transform">support_agent</span>
+</button>
+</div>
+</div>
+</main>
+<footer class="w-full py-6 text-center">
+<p class="text-text-secondary text-sm">
+            © 2024 Landing Page Builder. All rights reserved.
+        </p>
+</footer>
+</body></html>

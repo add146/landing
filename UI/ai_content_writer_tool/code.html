@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>AI Content Writer Tool - Light Theme</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script>
+    tailwind.config = {
+        theme: {
+            extend: {
+                colors: {
+                    "primary": "#6366F1",
+                    "panel-bg": "#FFFFFF",
+                    "surface-bg": "#F8FAFC", 
+                    "input-bg": "#FFFFFF",
+                    "border-color": "#E2E8F0",
+                    "text-heading": "#0F172A",
+                    "text-body": "#64748B",
+                    "text-muted": "#94A3B8",
+                },
+                fontFamily: {
+                    "display": ["Inter", "sans-serif"]
+                },
+                borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+                boxShadow: {
+                    'glow': '0 0 20px rgba(99, 102, 241, 0.15)',
+                    'soft': '0 10px 40px -10px rgba(0,0,0,0.08)'
+                }
+            },
+        },
+    }
+</script>
+<style>.custom-scrollbar::-webkit-scrollbar {
+        width: 6px;
+    }
+    .custom-scrollbar::-webkit-scrollbar-track {
+        background: rgba(0, 0, 0, 0.05);
+    }
+    .custom-scrollbar::-webkit-scrollbar-thumb {
+        background: rgba(0, 0, 0, 0.2);
+        border-radius: 3px;
+    }
+    .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+        background: rgba(0, 0, 0, 0.3);
+    }
+</style>
+</head>
+<body class="bg-slate-50 font-display antialiased overflow-hidden h-screen w-screen flex flex-col text-slate-600">
+<div class="absolute inset-0 z-0 flex flex-col opacity-100 pointer-events-none select-none overflow-hidden bg-slate-50">
+<header class="h-14 border-b border-slate-200 flex items-center px-6 justify-between bg-white">
+<div class="flex items-center gap-4">
+<div class="w-8 h-8 rounded bg-primary/20"></div>
+<div class="w-24 h-4 rounded bg-slate-100"></div>
+</div>
+<div class="flex gap-3">
+<div class="w-20 h-8 rounded bg-slate-100"></div>
+<div class="w-20 h-8 rounded bg-primary/10 border border-primary/20"></div>
+</div>
+</header>
+<div class="flex flex-1 overflow-hidden">
+<aside class="w-16 border-r border-slate-200 flex flex-col items-center py-4 gap-6 bg-white">
+<div class="w-8 h-8 rounded bg-slate-100"></div>
+<div class="w-8 h-8 rounded bg-slate-100"></div>
+<div class="w-8 h-8 rounded bg-slate-100"></div>
+<div class="w-8 h-8 rounded bg-slate-100"></div>
+</aside>
+<main class="flex-1 bg-slate-50 p-8 overflow-y-auto">
+<div class="max-w-4xl mx-auto space-y-8 opacity-50 blur-[1px]">
+<div class="h-96 rounded-xl border-2 border-dashed border-slate-200 bg-white flex items-center justify-center relative">
+<div class="text-center space-y-4 max-w-lg p-6">
+<div class="h-10 w-3/4 bg-slate-100 mx-auto rounded"></div>
+<div class="h-4 w-full bg-slate-50 rounded"></div>
+<div class="h-4 w-2/3 bg-slate-50 mx-auto rounded"></div>
+<div class="h-10 w-32 bg-primary/10 mx-auto rounded mt-6"></div>
+</div>
+</div>
+<div class="grid grid-cols-3 gap-6">
+<div class="h-64 rounded-xl border border-slate-200 bg-white"></div>
+<div class="h-64 rounded-xl border border-slate-200 bg-white"></div>
+<div class="h-64 rounded-xl border border-slate-200 bg-white"></div>
+</div>
+</div>
+</main>
+</div>
+</div>
+<div class="relative z-10 flex h-full w-full items-center justify-center p-4">
+<div class="w-full max-w-[640px] flex flex-col bg-panel-bg rounded-xl shadow-soft shadow-slate-300 border border-border-color overflow-hidden animate-fade-in-up ring-1 ring-black/5">
+<div class="flex items-center justify-between px-6 py-4 border-b border-border-color bg-panel-bg">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-[22px]">auto_awesome</span>
+<h2 class="text-text-heading text-lg font-bold leading-tight tracking-[-0.015em]">AI Writer</h2>
+</div>
+<div class="flex items-center gap-2">
+<button class="text-slate-400 hover:text-slate-600 transition-colors p-1 rounded-md hover:bg-slate-100">
+<span class="material-symbols-outlined text-[20px]">remove</span>
+</button>
+<button class="text-slate-400 hover:text-slate-600 transition-colors p-1 rounded-md hover:bg-slate-100">
+<span class="material-symbols-outlined text-[20px]">close</span>
+</button>
+</div>
+</div>
+<div class="flex-1 overflow-y-auto custom-scrollbar p-6 bg-surface-bg">
+<div class="group relative rounded-lg border border-transparent hover:border-border-color/80 hover:bg-white hover:shadow-sm transition-all p-4 -mx-4">
+<p class="text-text-body text-[17px] font-normal leading-relaxed">
+                    Boost your sales with our proven marketing strategies designed to convert visitors into loyal customers. Our platform offers intuitive tools that streamline your workflow, allowing you to focus on what truly matters: growing your business. Experience seamless integration and data-driven insights today.
+                </p>
+<div class="absolute right-2 top-2 opacity-0 group-hover:opacity-100 transition-opacity">
+<button class="p-1.5 rounded-md bg-white border border-border-color text-slate-400 hover:text-primary shadow-sm">
+<span class="material-symbols-outlined text-[16px]">edit</span>
+</button>
+</div>
+</div>
+<div class="mt-6">
+<p class="text-xs font-semibold text-text-muted uppercase tracking-wider mb-3 ml-1">Refine Result</p>
+<div class="flex flex-wrap gap-2">
+<button class="flex items-center gap-2 h-8 px-4 rounded-full bg-white hover:bg-slate-50 border border-slate-200 hover:border-primary/40 transition-all group shadow-sm">
+<span class="material-symbols-outlined text-slate-400 group-hover:text-primary text-[18px]">refresh</span>
+<span class="text-slate-600 group-hover:text-slate-800 text-sm font-medium">Rewrite</span>
+</button>
+<button class="flex items-center gap-2 h-8 px-4 rounded-full bg-white hover:bg-slate-50 border border-slate-200 hover:border-primary/40 transition-all group shadow-sm">
+<span class="material-symbols-outlined text-slate-400 group-hover:text-primary text-[18px]">short_text</span>
+<span class="text-slate-600 group-hover:text-slate-800 text-sm font-medium">Summarize</span>
+</button>
+<button class="flex items-center gap-2 h-8 px-4 rounded-full bg-white hover:bg-slate-50 border border-slate-200 hover:border-primary/40 transition-all group shadow-sm">
+<span class="material-symbols-outlined text-slate-400 group-hover:text-primary text-[18px]">menu_open</span>
+<span class="text-slate-600 group-hover:text-slate-800 text-sm font-medium">Make it longer</span>
+</button>
+<button class="flex items-center gap-2 h-8 px-4 rounded-full bg-white hover:bg-slate-50 border border-slate-200 hover:border-primary/40 transition-all group shadow-sm">
+<span class="material-symbols-outlined text-slate-400 group-hover:text-primary text-[18px]">translate</span>
+<span class="text-slate-600 group-hover:text-slate-800 text-sm font-medium">Translate</span>
+</button>
+</div>
+</div>
+</div>
+<div class="border-t border-border-color bg-panel-bg p-6 space-y-4">
+<div class="flex gap-4">
+<div class="relative w-1/3 min-w-[160px]">
+<label class="block text-xs font-medium text-slate-500 mb-1.5 ml-1">Tone of voice</label>
+<div class="relative">
+<select class="appearance-none w-full bg-input-bg border border-border-color text-text-heading text-sm rounded-lg pl-3 pr-10 py-2.5 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-shadow cursor-pointer shadow-sm">
+<option>Professional</option>
+<option>Friendly</option>
+<option>Persuasive</option>
+<option>Witty</option>
+</select>
+<div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-slate-400">
+<span class="material-symbols-outlined text-[20px]">expand_more</span>
+</div>
+</div>
+</div>
+<div class="relative w-1/3 min-w-[160px]">
+<label class="block text-xs font-medium text-slate-500 mb-1.5 ml-1">Language</label>
+<div class="relative">
+<select class="appearance-none w-full bg-input-bg border border-border-color text-text-heading text-sm rounded-lg pl-3 pr-10 py-2.5 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-shadow cursor-pointer shadow-sm">
+<option>English (US)</option>
+<option>Spanish</option>
+<option>French</option>
+</select>
+<div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-slate-400">
+<span class="material-symbols-outlined text-[20px]">expand_more</span>
+</div>
+</div>
+</div>
+</div>
+<div class="relative group">
+<div class="absolute -inset-0.5 bg-gradient-to-r from-primary/50 to-indigo-400/50 rounded-lg blur opacity-20 group-hover:opacity-40 transition duration-500"></div>
+<div class="relative flex items-center bg-input-bg rounded-lg border border-border-color focus-within:border-primary focus-within:ring-2 focus-within:ring-primary/20 transition-all shadow-sm">
+<span class="material-symbols-outlined text-primary ml-4 text-[22px]">magic_button</span>
+<input class="w-full bg-transparent border-none text-text-heading placeholder-slate-400 focus:ring-0 px-3 py-3.5 text-base" placeholder="What do you want to write about?" type="text" value="Write a paragraph about increasing sales conversion."/>
+<button class="mr-2 p-2 rounded-md bg-primary hover:bg-indigo-600 text-white transition-colors flex items-center justify-center shadow-md shadow-primary/20">
+<span class="material-symbols-outlined text-[20px] -ml-0.5 mt-0.5">arrow_upward</span>
+</button>
+</div>
+</div>
+<div class="flex items-center justify-between pt-2">
+<button class="text-sm font-medium text-slate-500 hover:text-text-heading transition-colors px-2 py-1">
+                    Discard
+                </button>
+<button class="flex cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 px-5 bg-primary hover:bg-indigo-600 text-white gap-2 text-sm font-bold leading-normal tracking-[0.015em] shadow-lg shadow-primary/25 transition-all active:scale-95">
+<span class="material-symbols-outlined text-[20px]">check</span>
+<span class="truncate">Insert into Page</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+<div class="fixed bottom-8 right-8 z-20 bg-white border border-slate-200 rounded-full px-4 py-2 flex items-center gap-2 shadow-xl shadow-slate-200/50">
+<div class="w-2 h-2 rounded-full bg-green-500 animate-pulse"></div>
+<span class="text-xs text-slate-700 font-medium">AI Ready</span>
+</div>
+
+</body></html>

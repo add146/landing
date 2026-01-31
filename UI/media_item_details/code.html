@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Media Item Details</title>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#6264f4",
+                        "background-light": "#f6f6f8",
+                        "background-dark": "#101022",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+        /* Custom transparency checkerboard pattern */
+        .bg-checkerboard {
+            background-image: 
+                linear-gradient(45deg, #e5e7eb 25%, transparent 25%), 
+                linear-gradient(-45deg, #e5e7eb 25%, transparent 25%), 
+                linear-gradient(45deg, transparent 75%, #e5e7eb 75%), 
+                linear-gradient(-45deg, transparent 75%, #e5e7eb 75%);
+            background-size: 20px 20px;
+            background-position: 0 0, 0 10px, 10px -10px, -10px 0px;
+        }
+        .dark .bg-checkerboard {
+            background-image: 
+                linear-gradient(45deg, #1f2937 25%, transparent 25%), 
+                linear-gradient(-45deg, #1f2937 25%, transparent 25%), 
+                linear-gradient(45deg, transparent 75%, #1f2937 75%), 
+                linear-gradient(-45deg, transparent 75%, #1f2937 75%);
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-white min-h-screen flex items-center justify-center p-4 lg:p-8">
+<!-- Modal / Panel Container -->
+<div class="relative w-full max-w-[1280px] bg-white dark:bg-[#1a1a2e] rounded-xl shadow-2xl overflow-hidden flex flex-col lg:flex-row h-auto lg:h-[85vh]">
+<!-- Left Column: Image Preview -->
+<div class="relative flex-1 bg-gray-50 dark:bg-[#151525] flex flex-col min-h-[400px] lg:min-h-0">
+<!-- Toolbar Overlay (Zoom/Pan placeholders) -->
+<div class="absolute top-4 left-4 z-10 flex gap-2">
+<button class="flex items-center justify-center w-8 h-8 rounded bg-white/80 dark:bg-black/50 hover:bg-white dark:hover:bg-black/70 shadow-sm backdrop-blur-sm transition-colors group">
+<span class="material-symbols-outlined text-[20px] text-gray-700 dark:text-gray-200">add</span>
+</button>
+<button class="flex items-center justify-center w-8 h-8 rounded bg-white/80 dark:bg-black/50 hover:bg-white dark:hover:bg-black/70 shadow-sm backdrop-blur-sm transition-colors group">
+<span class="material-symbols-outlined text-[20px] text-gray-700 dark:text-gray-200">remove</span>
+</button>
+</div>
+<!-- Image Container -->
+<div class="flex-1 w-full h-full flex items-center justify-center p-8 lg:p-12 overflow-hidden bg-checkerboard">
+<!-- Using an actual img tag for better accessibility and object-fit control compared to background-image -->
+<img alt="Team working together on laptops in a modern office environment" class="max-w-full max-h-full object-contain shadow-lg rounded-lg" data-alt="Team working together on laptops in a modern office environment" src="https://lh3.googleusercontent.com/aida-public/AB6AXuByHgTzi8oqypISRNo95xuv7jrbbIKBozNe7iLC_wBdbafHTYWKXhNvhw8GksjgBL794aT2aSfJL6LOYH-vViWjWio-23P85ZcBpzMNkSOlvcpxcpbljVRfD1lONRReALAiBC-EEjfvc3P1jPncxhlGr8jh1WgVDDPXsgz2BCaYcslFxsHFilvPoLguexSDoN0ofbsJf9PM9bG1ee6Tq7f8BXvhUb2MYvYu5Lk762_VXBhzWu0u8WocXMVNeNyhiu87mh2gMkf2FmA"/>
+</div>
+<div class="absolute bottom-4 left-0 w-full text-center pointer-events-none">
+<span class="inline-block bg-black/60 backdrop-blur-md text-white text-xs px-3 py-1 rounded-full">
+                    100%
+                </span>
+</div>
+</div>
+<!-- Right Column: Metadata & Form -->
+<div class="w-full lg:w-[480px] xl:w-[520px] flex flex-col border-l border-gray-200 dark:border-gray-800 bg-white dark:bg-[#1a1a2e]">
+<!-- Header -->
+<div class="flex items-center justify-between px-6 py-5 border-b border-gray-100 dark:border-gray-800">
+<h3 class="text-[#0d0d1c] dark:text-white tracking-tight text-xl font-bold leading-tight">Image Details</h3>
+<button class="text-gray-400 hover:text-gray-600 dark:hover:text-gray-200 transition-colors">
+<span class="material-symbols-outlined">close</span>
+</button>
+</div>
+<!-- Scrollable Content -->
+<div class="flex-1 overflow-y-auto custom-scrollbar">
+<!-- Metadata Grid -->
+<div class="px-6 py-6 border-b border-gray-100 dark:border-gray-800">
+<h4 class="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-4">Properties</h4>
+<div class="grid grid-cols-2 gap-y-4 gap-x-4">
+<div class="flex flex-col gap-1">
+<p class="text-[#4b4c9b] dark:text-gray-400 text-xs font-normal">File Name</p>
+<p class="text-[#0d0d1c] dark:text-gray-200 text-sm font-medium truncate" title="hero-campaign-v2.jpg">hero-campaign-v2.jpg</p>
+</div>
+<div class="flex flex-col gap-1">
+<p class="text-[#4b4c9b] dark:text-gray-400 text-xs font-normal">Type</p>
+<p class="text-[#0d0d1c] dark:text-gray-200 text-sm font-medium">JPEG</p>
+</div>
+<div class="flex flex-col gap-1">
+<p class="text-[#4b4c9b] dark:text-gray-400 text-xs font-normal">Size</p>
+<p class="text-[#0d0d1c] dark:text-gray-200 text-sm font-medium">1.2 MB</p>
+</div>
+<div class="flex flex-col gap-1">
+<p class="text-[#4b4c9b] dark:text-gray-400 text-xs font-normal">Dimensions</p>
+<p class="text-[#0d0d1c] dark:text-gray-200 text-sm font-medium">1200 x 800 px</p>
+</div>
+<div class="flex flex-col gap-1 col-span-2">
+<p class="text-[#4b4c9b] dark:text-gray-400 text-xs font-normal">Uploaded</p>
+<p class="text-[#0d0d1c] dark:text-gray-200 text-sm font-medium">Oct 24, 2023</p>
+</div>
+</div>
+</div>
+<!-- Editable Form -->
+<div class="px-6 py-6">
+<h4 class="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-4">SEO &amp; Content</h4>
+<div class="space-y-5">
+<label class="flex flex-col w-full">
+<p class="text-[#0d0d1c] dark:text-gray-200 text-sm font-medium leading-normal pb-2">Title</p>
+<input class="flex w-full rounded-lg border border-[#cfcfe8] dark:border-gray-700 bg-[#f8f8fc] dark:bg-gray-800/50 text-[#0d0d1c] dark:text-white focus:outline-0 focus:ring-2 focus:ring-primary/20 focus:border-primary h-11 px-4 text-sm font-normal leading-normal placeholder:text-[#4b4c9b] transition-all" type="text" value="Marketing Campaign Hero V2"/>
+</label>
+<label class="flex flex-col w-full">
+<div class="flex items-center justify-between pb-2">
+<p class="text-[#0d0d1c] dark:text-gray-200 text-sm font-medium leading-normal">Alt Text</p>
+<span class="text-[10px] text-gray-400 bg-gray-100 dark:bg-gray-800 px-2 py-0.5 rounded">Recommended for SEO</span>
+</div>
+<textarea class="flex w-full resize-none rounded-lg border border-[#cfcfe8] dark:border-gray-700 bg-[#f8f8fc] dark:bg-gray-800/50 text-[#0d0d1c] dark:text-white focus:outline-0 focus:ring-2 focus:ring-primary/20 focus:border-primary min-h-[120px] px-4 py-3 text-sm font-normal leading-normal placeholder:text-[#4b4c9b] transition-all">Smiling team working on laptops in a modern office.</textarea>
+<p class="text-xs text-gray-400 mt-2">Describe the image content for accessibility and search engines.</p>
+</label>
+</div>
+</div>
+</div>
+<!-- Action Bar -->
+<div class="p-6 border-t border-gray-200 dark:border-gray-800 bg-gray-50 dark:bg-[#151525]">
+<div class="flex flex-col gap-3">
+<div class="flex gap-3 w-full">
+<button class="flex-1 flex items-center justify-center gap-2 h-10 px-4 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-700 dark:text-white text-sm font-medium hover:bg-gray-50 dark:hover:bg-gray-700 focus:ring-2 focus:ring-gray-200 dark:focus:ring-gray-700 transition-all">
+<span class="material-symbols-outlined text-[18px]">link</span>
+                            Copy URL
+                        </button>
+<button class="flex-1 flex items-center justify-center gap-2 h-10 px-4 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-700 dark:text-white text-sm font-medium hover:bg-gray-50 dark:hover:bg-gray-700 focus:ring-2 focus:ring-gray-200 dark:focus:ring-gray-700 transition-all">
+<span class="material-symbols-outlined text-[18px]">edit</span>
+                            Edit Image
+                        </button>
+</div>
+<div class="flex items-center justify-between pt-2">
+<button class="flex items-center gap-2 h-10 px-4 rounded-lg text-red-600 hover:bg-red-50 dark:hover:bg-red-900/20 text-sm font-medium transition-all group">
+<span class="material-symbols-outlined text-[18px] group-hover:scale-110 transition-transform">delete</span>
+                            Delete Asset
+                        </button>
+<button class="flex items-center justify-center gap-2 h-10 px-6 rounded-lg bg-primary text-white text-sm font-medium hover:bg-primary/90 shadow-md shadow-primary/20 focus:ring-4 focus:ring-primary/30 transition-all">
+                            Save Changes
+                        </button>
+</div>
+</div>
+</div>
+</div>
+</div>
+</body></html>

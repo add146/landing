@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Secure Subscription Checkout</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#4043f2",
+                        "primary-hover": "#3235b8",
+                        "text-secondary": "#64748B",},
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "2xl": "1rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style type="text/tailwindcss">
+        :root {
+            --bg-primary: #FFFFFF;
+            --bg-secondary: #F8FAFC;
+            --border: #E2E8F0;
+            --text-primary: #0F172A;
+        }
+    </style>
+</head>
+<body class="bg-[var(--bg-primary)] text-[var(--text-primary)] font-display antialiased overflow-x-hidden selection:bg-primary selection:text-white">
+<div class="relative flex min-h-screen flex-col items-center justify-center p-4 md:p-8">
+<div class="mb-8 text-center max-w-2xl">
+<h1 class="text-3xl md:text-4xl font-bold tracking-tight mb-2 text-[var(--text-primary)]">Complete your subscription</h1>
+<p class="text-text-secondary text-base font-normal">Secure checkout for the Pro Builder Plan. Upgrade your experience today.</p>
+</div>
+<div class="w-full max-w-[1080px] bg-white rounded-2xl shadow-xl overflow-hidden border border-[var(--border)] flex flex-col lg:flex-row">
+<div class="w-full lg:w-5/12 bg-[var(--bg-secondary)] p-6 md:p-10 border-b lg:border-b-0 lg:border-r border-[var(--border)] flex flex-col gap-6">
+<h2 class="text-xl font-bold text-[var(--text-primary)] flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">shopping_cart</span>
+                    Order Summary
+                </h2>
+<div class="flex flex-col sm:flex-row gap-4 bg-white p-4 rounded-xl border border-[var(--border)] shadow-sm">
+<div class="w-full sm:w-24 h-24 shrink-0 rounded-lg bg-cover bg-center" data-alt="Abstract 3D geometric purple gradient shapes representing plan tier" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuD5k2NKAyqZLBGVihWXErzS2uh24QgcTTb-kiEVSKIkQOiU2yTrsHaheosEEyX6jMHr5-ilZHVcp9dvJyHSx7aIESjTeV9G6bVvU0yBjCHS9XSfmXS59nZW7g8Us7BDs-bpnKJDbG7XBgur1RoVoRiN1PMlSGlyvN4JPOVX6pMs6syLZAYdBeatHrAwzlPtSAljJKknOeHsj30ofIodiowPLuqaqu3PAA1gUJmAmxeTV-_c1r39mA5BH536qQJ69uONk1B0PU9HDdI");'>
+</div>
+<div class="flex flex-col justify-center flex-1">
+<p class="text-lg font-bold text-[var(--text-primary)]">Pro Builder Plan</p>
+<p class="text-text-secondary text-sm">Billed monthly • Cancel anytime</p>
+<div class="mt-2 flex items-center gap-2 text-xs font-medium text-primary bg-primary/10 px-2 py-1 rounded w-fit">
+<span>SAVE 20% WITH YEARLY</span>
+</div>
+</div>
+</div>
+<div class="flex flex-col gap-3 pt-2">
+<div class="flex justify-between items-center text-sm">
+<span class="text-text-secondary">Subtotal</span>
+<span class="font-medium text-[var(--text-primary)]">$49.00</span>
+</div>
+<div class="flex justify-between items-center text-sm">
+<span class="text-text-secondary">Tax (10%)</span>
+<span class="font-medium text-[var(--text-primary)]">$4.90</span>
+</div>
+<div class="flex justify-between items-center text-sm">
+<span class="text-text-secondary">Platform Fee</span>
+<span class="font-medium text-[var(--text-primary)]">$0.00</span>
+</div>
+<div class="h-px w-full bg-[var(--border)] my-2"></div>
+<div class="flex justify-between items-end">
+<div class="flex flex-col">
+<span class="text-sm text-text-secondary">Total due today</span>
+<span class="text-3xl font-bold text-[var(--text-primary)] tracking-tight">$53.90</span>
+</div>
+<span class="text-xs text-text-secondary mb-1">USD</span>
+</div>
+</div>
+<div class="mt-auto pt-6 flex flex-col gap-3">
+<div class="flex items-center gap-2 text-xs text-text-secondary">
+<span class="material-symbols-outlined text-base">verified_user</span>
+<span>30-day money-back guarantee</span>
+</div>
+<div class="flex items-center gap-2 text-xs text-text-secondary">
+<span class="material-symbols-outlined text-base">support_agent</span>
+<span>24/7 Priority Support included</span>
+</div>
+</div>
+</div>
+<div class="w-full lg:w-7/12 p-6 md:p-10 flex flex-col bg-white">
+<div class="flex items-center justify-between mb-6">
+<h2 class="text-xl font-bold text-[var(--text-primary)]">Payment Details</h2>
+<div class="flex gap-2">
+<div class="h-6 w-10 bg-slate-100 rounded flex items-center justify-center text-[10px] font-bold text-slate-500 border border-slate-200">VISA</div>
+<div class="h-6 w-10 bg-slate-100 rounded flex items-center justify-center text-[10px] font-bold text-slate-500 border border-slate-200">MC</div>
+<div class="h-6 w-10 bg-slate-100 rounded flex items-center justify-center text-[10px] font-bold text-slate-500 border border-slate-200">AMEX</div>
+</div>
+</div>
+<form class="flex flex-col gap-5 flex-1" onsubmit="event.preventDefault();">
+<div class="grid grid-cols-2 gap-3 mb-2">
+<button class="flex items-center justify-center gap-2 py-3 px-4 rounded-lg border-2 border-primary bg-primary/5 text-primary font-semibold transition-all" type="button">
+<span class="material-symbols-outlined text-xl">credit_card</span>
+                            Card
+                        </button>
+<button class="flex items-center justify-center gap-2 py-3 px-4 rounded-lg border border-[var(--border)] bg-white text-text-secondary hover:bg-slate-50 transition-all" type="button">
+<span class="material-symbols-outlined text-xl">account_balance_wallet</span>
+                            PayPal
+                        </button>
+</div>
+<div class="flex flex-col gap-1.5">
+<label class="text-sm font-medium text-slate-700" for="cardName">Name on Card</label>
+<div class="relative">
+<input class="w-full rounded-lg bg-white border border-[var(--border)] px-4 py-3 text-sm text-[var(--text-primary)] placeholder-slate-400 focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-colors" id="cardName" placeholder="e.g. John Doe" type="text"/>
+<span class="material-symbols-outlined absolute right-3 top-3 text-slate-400 text-xl pointer-events-none">person</span>
+</div>
+</div>
+<div class="flex flex-col gap-1.5">
+<label class="text-sm font-medium text-slate-700" for="cardNumber">Card Number</label>
+<div class="relative">
+<input class="w-full rounded-lg bg-white border border-[var(--border)] px-4 py-3 pl-11 text-sm text-[var(--text-primary)] placeholder-slate-400 focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-colors" id="cardNumber" placeholder="0000 0000 0000 0000" type="text"/>
+<span class="material-symbols-outlined absolute left-3 top-3 text-slate-400 text-xl pointer-events-none">credit_card</span>
+<span class="material-symbols-outlined absolute right-3 top-3 text-green-500 text-xl pointer-events-none opacity-0">check_circle</span>
+</div>
+</div>
+<div class="grid grid-cols-2 gap-4">
+<div class="flex flex-col gap-1.5">
+<label class="text-sm font-medium text-slate-700" for="expiry">Expiration Date</label>
+<div class="relative">
+<input class="w-full rounded-lg bg-white border border-[var(--border)] px-4 py-3 text-sm text-[var(--text-primary)] placeholder-slate-400 focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-colors" id="expiry" placeholder="MM / YY" type="text"/>
+</div>
+</div>
+<div class="flex flex-col gap-1.5">
+<div class="flex justify-between">
+<label class="text-sm font-medium text-slate-700" for="cvc">CVC</label>
+<span class="text-xs text-text-secondary cursor-help flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">help</span> What's this?
+                                </span>
+</div>
+<div class="relative">
+<input class="w-full rounded-lg bg-white border border-[var(--border)] px-4 py-3 text-sm text-[var(--text-primary)] placeholder-slate-400 focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-colors" id="cvc" placeholder="123" type="text"/>
+<span class="material-symbols-outlined absolute right-3 top-3 text-slate-400 text-xl pointer-events-none">lock</span>
+</div>
+</div>
+</div>
+<div class="flex items-start gap-3 mt-1">
+<div class="relative flex items-center">
+<input class="h-4 w-4 rounded border-slate-300 bg-white text-primary focus:ring-primary" id="saveCard" type="checkbox"/>
+</div>
+<label class="text-sm text-text-secondary leading-tight" for="saveCard">
+                            Securely save my information for 1-click checkout next time.
+                        </label>
+</div>
+<button class="group mt-4 w-full rounded-xl bg-primary hover:bg-primary-hover text-white font-bold text-lg py-4 shadow-lg shadow-primary/25 transition-all active:scale-[0.99] flex items-center justify-center gap-2" type="submit">
+<span class="material-symbols-outlined group-hover:animate-pulse">lock</span>
+                        Pay $53.90
+                    </button>
+<div class="mt-4 flex flex-col items-center gap-2 text-center">
+<div class="flex items-center gap-2 text-xs text-text-secondary">
+<span class="material-symbols-outlined text-[16px] text-green-500">lock_open</span>
+<span>Payments are processed securely by Stripe. 256-bit SSL Encrypted.</span>
+</div>
+</div>
+</form>
+</div>
+</div>
+<div class="mt-8 flex gap-6 text-sm text-text-secondary">
+<a class="hover:text-primary transition-colors" href="#">Terms of Service</a>
+<a class="hover:text-primary transition-colors" href="#">Privacy Policy</a>
+</div>
+</div>
+
+</body></html>

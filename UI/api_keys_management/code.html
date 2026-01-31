@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>API Keys Management - Landing Page Builder</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#6366F1", // Updated to match request #6366F1
+                        "bg-primary": "#FFFFFF",
+                        "bg-secondary": "#F8FAFC",
+                        "text-primary": "#0F172A",
+                        "text-secondary": "#64748B",
+                        "border-subtle": "#E2E8F0",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"],
+                        "mono": ["ui-monospace", "SFMono-Regular", "Menlo", "Monaco", "Consolas", "Liberation Mono", "Courier New", "monospace"],
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+</head>
+<body class="bg-bg-primary text-text-primary font-display overflow-hidden">
+<div class="flex h-screen w-full overflow-hidden">
+<aside class="hidden lg:flex w-72 flex-col border-r border-border-subtle bg-bg-secondary h-full">
+<div class="flex h-full flex-col justify-between p-4">
+<div class="flex flex-col gap-4">
+<div class="flex items-center gap-3 px-2 py-2">
+<div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-10 border border-border-subtle" data-alt="Company logo abstract geometric shape" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuD7bPJuVUNQADTmfy7y4EIZ5Jf6Bw1KZebFvVwRparijpQpMebG8OoSSqzV_bcc7qtfAJqNJSPKi3OCxsrSjpBPNib97dOmUXO20a6Yacl2KZ8Yh2fs92SCItq3WCZK6uyk9Fw2JZi3wTXM_i233iwqewsv8Su3Y4IFQgAefXuwp3kzDmxCavHEJ-GmGJLMbRsGygnOPtb6RjsAcFq9kuwQm9fk0jQSinSdhhP226NQIqWhgvKI-5I5REJ_DJq72SjDqi6oGmj9pRs");'></div>
+<div class="flex flex-col">
+<h1 class="text-text-primary text-base font-medium leading-normal">Acme Corp</h1>
+<p class="text-text-secondary text-xs font-normal leading-normal">Pro Plan</p>
+</div>
+<span class="material-symbols-outlined text-text-secondary ml-auto cursor-pointer hover:text-text-primary">expand_more</span>
+</div>
+<div class="h-px bg-border-subtle w-full my-1"></div>
+<div class="flex flex-col gap-2">
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg text-text-secondary hover:bg-white hover:shadow-sm hover:text-text-primary transition-all" href="#">
+<span class="material-symbols-outlined">person</span>
+<p class="text-sm font-medium leading-normal">Profile</p>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg text-text-secondary hover:bg-white hover:shadow-sm hover:text-text-primary transition-all" href="#">
+<span class="material-symbols-outlined">credit_card</span>
+<p class="text-sm font-medium leading-normal">Billing</p>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg text-text-secondary hover:bg-white hover:shadow-sm hover:text-text-primary transition-all" href="#">
+<span class="material-symbols-outlined">group</span>
+<p class="text-sm font-medium leading-normal">Team</p>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg bg-white shadow-sm text-primary" href="#">
+<span class="material-symbols-outlined fill-1">vpn_key</span>
+<p class="text-sm font-medium leading-normal text-text-primary">API Keys</p>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg text-text-secondary hover:bg-white hover:shadow-sm hover:text-text-primary transition-all" href="#">
+<span class="material-symbols-outlined">notifications</span>
+<p class="text-sm font-medium leading-normal">Notifications</p>
+</a>
+</div>
+</div>
+<div class="flex flex-col gap-2">
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg text-text-secondary hover:bg-white hover:shadow-sm hover:text-text-primary transition-all" href="#">
+<span class="material-symbols-outlined">help</span>
+<p class="text-sm font-medium leading-normal">Support</p>
+</a>
+</div>
+</div>
+</aside>
+<main class="flex flex-1 flex-col h-full overflow-hidden bg-bg-primary relative">
+<header class="flex items-center justify-between whitespace-nowrap border-b border-solid border-border-subtle px-8 py-4 bg-bg-primary shrink-0">
+<div class="flex items-center gap-4 text-text-primary lg:hidden">
+<span class="material-symbols-outlined cursor-pointer">menu</span>
+</div>
+<div class="flex items-center gap-2 text-text-primary">
+<div class="size-6 text-primary">
+<svg fill="none" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+<path d="M44 11.2727C44 14.0109 39.8386 16.3957 33.69 17.6364C39.8386 18.877 44 21.2618 44 24C44 26.7382 39.8386 29.123 33.69 30.3636C39.8386 31.6043 44 33.9891 44 36.7273C44 40.7439 35.0457 44 24 44C12.9543 44 4 40.7439 4 36.7273C4 33.9891 8.16144 31.6043 14.31 30.3636C8.16144 29.123 4 26.7382 4 24C4 21.2618 8.16144 18.877 14.31 17.6364C8.16144 16.3957 4 14.0109 4 11.2727C4 7.25611 12.9543 4 24 4C35.0457 4 44 7.25611 44 11.2727Z" fill="currentColor"></path>
+</svg>
+</div>
+<span class="text-text-secondary hidden sm:block">/</span>
+<span class="text-sm font-medium text-text-secondary hidden sm:block">Settings</span>
+<span class="text-text-secondary hidden sm:block">/</span>
+<span class="text-sm font-medium text-text-primary">API Keys</span>
+</div>
+<div class="flex flex-1 justify-end gap-6 items-center">
+<div class="hidden md:flex items-center gap-6">
+<a class="text-text-secondary hover:text-primary text-sm font-medium leading-normal transition-colors" href="#">Documentation</a>
+<a class="text-text-secondary hover:text-primary text-sm font-medium leading-normal transition-colors" href="#">API Reference</a>
+</div>
+<div class="h-6 w-px bg-border-subtle hidden md:block"></div>
+<div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-9 border border-border-subtle cursor-pointer ring-2 ring-transparent hover:ring-border-subtle transition-all" data-alt="User profile picture placeholder" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuA-j_I3_oADjAyxNZg7Sxz04w0s_W9A_oc61YxVt4Cc46__LiY2Uz-GlXwj0_yfLSi_xL3z8aqtlea7j0VYNiFgkqcNSl15VV7K1vT0LkxvcOnCo2uD1B8ezPy-WgM6ujv8FC_zx4pKP1sdlDNxJsA3Mfu6-CwArnhHTjsVDJmPH8WCltpltY4QfMPyf7Oh0CmKSCoh6ddM-84jMq1Lbx4rH1vXtQp9mdg42CJ7vY0uEJyQ6zJqPAi-fW0hR4hBV0cWpe4ViSjE858");'></div>
+</div>
+</header>
+<div class="flex-1 overflow-y-auto px-4 py-8 md:px-12 lg:px-20 scrollbar-hide">
+<div class="mx-auto max-w-[1080px] flex flex-col gap-10 pb-20">
+<div class="flex flex-wrap items-end justify-between gap-6">
+<div class="flex flex-col gap-2 max-w-2xl">
+<h1 class="text-text-primary text-3xl font-bold leading-tight tracking-tight">API Keys Management</h1>
+<p class="text-text-secondary text-base font-normal leading-relaxed">
+                            Manage your secret keys for programmatic access to the Landing Page Builder.
+                            Keep these keys secret and rotate them periodically.
+                        </p>
+</div>
+<button class="flex items-center gap-2 cursor-pointer justify-center overflow-hidden rounded-lg h-10 px-5 bg-primary hover:bg-indigo-600 transition-all text-white text-sm font-bold leading-normal shadow-md shadow-indigo-100">
+<span class="material-symbols-outlined text-[20px]">add</span>
+<span class="truncate">Generate New Key</span>
+</button>
+</div>
+<div class="@container">
+<div class="flex items-center gap-4 mb-4">
+<div class="relative flex-1 max-w-xs">
+<span class="material-symbols-outlined absolute left-3 top-2.5 text-text-secondary text-[20px]">search</span>
+<input class="w-full bg-white border border-border-subtle rounded-lg py-2 pl-10 pr-4 text-sm text-text-primary placeholder-text-secondary focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all shadow-sm" placeholder="Search keys..." type="text"/>
+</div>
+</div>
+<div class="flex overflow-hidden rounded-xl border border-border-subtle bg-white shadow-sm">
+<table class="flex-1 w-full text-left border-collapse">
+<thead>
+<tr class="bg-bg-secondary border-b border-border-subtle">
+<th class="px-6 py-4 text-text-secondary text-xs font-semibold uppercase tracking-wider">Key Name</th>
+<th class="px-6 py-4 text-text-secondary text-xs font-semibold uppercase tracking-wider hidden sm:table-cell">Key Prefix</th>
+<th class="px-6 py-4 text-text-secondary text-xs font-semibold uppercase tracking-wider hidden md:table-cell">Created</th>
+<th class="px-6 py-4 text-text-secondary text-xs font-semibold uppercase tracking-wider hidden lg:table-cell">Last Used</th>
+<th class="px-6 py-4 text-text-secondary text-xs font-semibold uppercase tracking-wider text-right">Action</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-border-subtle">
+<tr class="hover:bg-gray-50 transition-colors group">
+<td class="px-6 py-4">
+<div class="flex items-center gap-3">
+<div class="bg-primary/10 p-2 rounded-lg text-primary">
+<span class="material-symbols-outlined text-[20px]">terminal</span>
+</div>
+<div class="flex flex-col">
+<span class="text-text-primary text-sm font-medium">Staging Environment</span>
+<span class="text-text-secondary text-xs sm:hidden">lp_test_839...</span>
+</div>
+</div>
+</td>
+<td class="px-6 py-4 hidden sm:table-cell">
+<div class="flex items-center gap-2">
+<code class="text-text-secondary text-xs font-mono bg-slate-100 px-2 py-1 rounded border border-border-subtle">lp_test_839...</code>
+<button class="text-text-secondary hover:text-primary opacity-0 group-hover:opacity-100 transition-opacity" title="Copy Prefix">
+<span class="material-symbols-outlined text-[16px]">content_copy</span>
+</button>
+</div>
+</td>
+<td class="px-6 py-4 hidden md:table-cell">
+<span class="text-text-secondary text-sm">Oct 24, 2023</span>
+</td>
+<td class="px-6 py-4 hidden lg:table-cell">
+<div class="flex items-center gap-2">
+<span class="relative flex h-2 w-2">
+<span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+<span class="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+</span>
+<span class="text-text-primary text-sm">Active now</span>
+</div>
+</td>
+<td class="px-6 py-4 text-right">
+<button class="text-red-600 hover:text-red-700 hover:bg-red-50 px-3 py-1.5 rounded-lg text-sm font-medium transition-colors border border-transparent hover:border-red-200">
+                                        Revoke
+                                    </button>
+</td>
+</tr>
+<tr class="hover:bg-gray-50 transition-colors group">
+<td class="px-6 py-4">
+<div class="flex items-center gap-3">
+<div class="bg-slate-100 p-2 rounded-lg text-slate-600">
+<span class="material-symbols-outlined text-[20px]">dataset</span>
+</div>
+<div class="flex flex-col">
+<span class="text-text-primary text-sm font-medium">Production Read-Only</span>
+<span class="text-text-secondary text-xs sm:hidden">lp_live_r72...</span>
+</div>
+</div>
+</td>
+<td class="px-6 py-4 hidden sm:table-cell">
+<div class="flex items-center gap-2">
+<code class="text-text-secondary text-xs font-mono bg-slate-100 px-2 py-1 rounded border border-border-subtle">lp_live_r72...</code>
+<button class="text-text-secondary hover:text-primary opacity-0 group-hover:opacity-100 transition-opacity" title="Copy Prefix">
+<span class="material-symbols-outlined text-[16px]">content_copy</span>
+</button>
+</div>
+</td>
+<td class="px-6 py-4 hidden md:table-cell">
+<span class="text-text-secondary text-sm">Sep 12, 2023</span>
+</td>
+<td class="px-6 py-4 hidden lg:table-cell">
+<span class="text-text-secondary text-sm">2 days ago</span>
+</td>
+<td class="px-6 py-4 text-right">
+<button class="text-red-600 hover:text-red-700 hover:bg-red-50 px-3 py-1.5 rounded-lg text-sm font-medium transition-colors border border-transparent hover:border-red-200">
+                                        Revoke
+                                    </button>
+</td>
+</tr>
+<tr class="hover:bg-gray-50 transition-colors group">
+<td class="px-6 py-4">
+<div class="flex items-center gap-3">
+<div class="bg-slate-100 p-2 rounded-lg text-slate-600">
+<span class="material-symbols-outlined text-[20px]">settings_ethernet</span>
+</div>
+<div class="flex flex-col">
+<span class="text-text-primary text-sm font-medium">CI/CD Pipeline</span>
+<span class="text-text-secondary text-xs sm:hidden">lp_live_w91...</span>
+</div>
+</div>
+</td>
+<td class="px-6 py-4 hidden sm:table-cell">
+<div class="flex items-center gap-2">
+<code class="text-text-secondary text-xs font-mono bg-slate-100 px-2 py-1 rounded border border-border-subtle">lp_live_w91...</code>
+<button class="text-text-secondary hover:text-primary opacity-0 group-hover:opacity-100 transition-opacity" title="Copy Prefix">
+<span class="material-symbols-outlined text-[16px]">content_copy</span>
+</button>
+</div>
+</td>
+<td class="px-6 py-4 hidden md:table-cell">
+<span class="text-text-secondary text-sm">Aug 05, 2023</span>
+</td>
+<td class="px-6 py-4 hidden lg:table-cell">
+<span class="text-text-secondary text-sm">1 week ago</span>
+</td>
+<td class="px-6 py-4 text-right">
+<button class="text-red-600 hover:text-red-700 hover:bg-red-50 px-3 py-1.5 rounded-lg text-sm font-medium transition-colors border border-transparent hover:border-red-200">
+                                        Revoke
+                                    </button>
+</td>
+</tr>
+<tr class="hover:bg-gray-50 transition-colors group">
+<td class="px-6 py-4">
+<div class="flex items-center gap-3">
+<div class="bg-slate-100 p-2 rounded-lg text-slate-600">
+<span class="material-symbols-outlined text-[20px]">history</span>
+</div>
+<div class="flex flex-col">
+<span class="text-text-primary text-sm font-medium">Legacy V1 Key</span>
+<span class="text-text-secondary text-xs sm:hidden">lp_test_old...</span>
+</div>
+</div>
+</td>
+<td class="px-6 py-4 hidden sm:table-cell">
+<div class="flex items-center gap-2">
+<code class="text-text-secondary text-xs font-mono bg-slate-100 px-2 py-1 rounded border border-border-subtle">lp_test_old...</code>
+<button class="text-text-secondary hover:text-primary opacity-0 group-hover:opacity-100 transition-opacity" title="Copy Prefix">
+<span class="material-symbols-outlined text-[16px]">content_copy</span>
+</button>
+</div>
+</td>
+<td class="px-6 py-4 hidden md:table-cell">
+<span class="text-text-secondary text-sm">Jan 15, 2023</span>
+</td>
+<td class="px-6 py-4 hidden lg:table-cell">
+<span class="text-text-secondary text-sm">Never</span>
+</td>
+<td class="px-6 py-4 text-right">
+<button class="text-red-600 hover:text-red-700 hover:bg-red-50 px-3 py-1.5 rounded-lg text-sm font-medium transition-colors border border-transparent hover:border-red-200">
+                                        Revoke
+                                    </button>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="bg-bg-secondary px-6 py-3 border-t border-border-subtle flex items-center justify-between">
+<span class="text-xs text-text-secondary">Showing 4 of 4 keys</span>
+<div class="flex gap-2">
+<button class="text-text-secondary hover:text-text-primary disabled:opacity-50" disabled="">
+<span class="material-symbols-outlined text-[20px]">chevron_left</span>
+</button>
+<button class="text-text-secondary hover:text-text-primary disabled:opacity-50" disabled="">
+<span class="material-symbols-outlined text-[20px]">chevron_right</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6 pt-6 border-t border-border-subtle">
+<div class="flex gap-4 rounded-xl border border-border-subtle bg-bg-secondary p-5 flex-col hover:border-primary/30 hover:shadow-sm transition-all">
+<div class="bg-white border border-border-subtle w-fit p-2 rounded-lg text-primary">
+<span class="material-symbols-outlined">cached</span>
+</div>
+<div class="flex flex-col gap-2">
+<h2 class="text-text-primary text-base font-bold leading-tight">Rotate Keys Regularly</h2>
+<p class="text-text-secondary text-sm font-normal leading-relaxed">Refresh your keys every 90 days to minimize risk. Old keys can be compromised without notice.</p>
+</div>
+</div>
+<div class="flex gap-4 rounded-xl border border-border-subtle bg-bg-secondary p-5 flex-col hover:border-primary/30 hover:shadow-sm transition-all">
+<div class="bg-white border border-border-subtle w-fit p-2 rounded-lg text-primary">
+<span class="material-symbols-outlined">code</span>
+</div>
+<div class="flex flex-col gap-2">
+<h2 class="text-text-primary text-base font-bold leading-tight">Use Environment Variables</h2>
+<p class="text-text-secondary text-sm font-normal leading-relaxed">Never hardcode keys in your frontend code. Use .env files to keep them separate from your codebase.</p>
+</div>
+</div>
+<div class="flex gap-4 rounded-xl border border-border-subtle bg-bg-secondary p-5 flex-col hover:border-primary/30 hover:shadow-sm transition-all">
+<div class="bg-white border border-border-subtle w-fit p-2 rounded-lg text-primary">
+<span class="material-symbols-outlined">admin_panel_settings</span>
+</div>
+<div class="flex flex-col gap-2">
+<h2 class="text-text-primary text-base font-bold leading-tight">Limit Key Scopes</h2>
+<p class="text-text-secondary text-sm font-normal leading-relaxed">Create separate keys for different services and environments (Staging vs Production).</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+</div>
+
+</body></html>

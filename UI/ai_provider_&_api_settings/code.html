@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>AI Provider &amp; API Settings</title>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#6264f4",
+                        "primary-dark": "#4f51c9",
+                        "background-light": "#f6f6f8",
+                        "background-dark": "#101022",
+                        "surface-light": "#ffffff",
+                        "surface-dark": "#1a1a2e",
+                        "border-light": "#e2e2e8",
+                        "border-dark": "#2a2a40",
+                        "text-main-light": "#0d0d1c",
+                        "text-main-dark": "#ffffff",
+                        "text-sec-light": "#4b4c9b",
+                        "text-sec-dark": "#a0a0b0",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-text-main-light dark:text-text-main-dark font-display antialiased transition-colors duration-200">
+<div class="flex h-screen w-full overflow-hidden">
+<!-- Side Navigation -->
+<aside class="hidden w-64 flex-col border-r border-border-light dark:border-border-dark bg-surface-light dark:bg-surface-dark lg:flex transition-colors duration-200">
+<div class="flex flex-col gap-4 p-4 h-full">
+<!-- User Profile / Brand -->
+<div class="flex gap-3 mb-4 items-center">
+<div class="bg-center bg-no-repeat bg-cover rounded-full size-10 bg-gradient-to-br from-primary to-purple-600 shrink-0" data-alt="User profile avatar gradient" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuAnBrFQpYsR-gWR6q5cZd7_zH5I4n73ORi_Y27YO064_n36YJdai6Btcax81rRV1lRDYLP3A-mmlXcPqB164-kM12BjIA5LxAMPEciyNmn7poh9tox4Lw2igtozSMnoRBobbt9WAEZMkb9SwMmvnTsKRVQ9OMkAq6yXNkqfe6cT_pCktMjP-OxHBy5ET7upL7k11Tex0lggFzIUR7TzgH6p_uvAoMotj88pqofScbWLSh2WhlRsKR8oKxGn4p5WQkJNlA6yzrZi860");'></div>
+<div class="flex flex-col overflow-hidden">
+<h1 class="text-text-main-light dark:text-text-main-dark text-sm font-bold leading-normal truncate">Admin Console</h1>
+<p class="text-text-sec-light dark:text-text-sec-dark text-xs font-normal leading-normal truncate">Landing Page Builder</p>
+</div>
+</div>
+<!-- Navigation Links -->
+<nav class="flex flex-col gap-2 flex-1">
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-background-light dark:hover:bg-background-dark/50 transition-colors group" href="#">
+<span class="material-symbols-outlined text-text-sec-light dark:text-text-sec-dark group-hover:text-primary transition-colors">dashboard</span>
+<p class="text-text-main-light dark:text-text-main-dark text-sm font-medium">Dashboard</p>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-background-light dark:hover:bg-background-dark/50 transition-colors group" href="#">
+<span class="material-symbols-outlined text-text-sec-light dark:text-text-sec-dark group-hover:text-primary transition-colors">web</span>
+<p class="text-text-main-light dark:text-text-main-dark text-sm font-medium">Landing Pages</p>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-background-light dark:hover:bg-background-dark/50 transition-colors group" href="#">
+<span class="material-symbols-outlined text-text-sec-light dark:text-text-sec-dark group-hover:text-primary transition-colors">group</span>
+<p class="text-text-main-light dark:text-text-main-dark text-sm font-medium">Leads</p>
+</a>
+<!-- Active State -->
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg bg-primary/10 dark:bg-primary/20" href="#">
+<span class="material-symbols-outlined text-primary">settings_suggest</span>
+<p class="text-primary text-sm font-bold">AI Providers</p>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-background-light dark:hover:bg-background-dark/50 transition-colors group" href="#">
+<span class="material-symbols-outlined text-text-sec-light dark:text-text-sec-dark group-hover:text-primary transition-colors">settings</span>
+<p class="text-text-main-light dark:text-text-main-dark text-sm font-medium">Settings</p>
+</a>
+</nav>
+<!-- Bottom Links -->
+<div class="mt-auto">
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-background-light dark:hover:bg-background-dark/50 transition-colors" href="#">
+<span class="material-symbols-outlined text-text-sec-light dark:text-text-sec-dark">help</span>
+<p class="text-text-main-light dark:text-text-main-dark text-sm font-medium">Help &amp; Support</p>
+</a>
+</div>
+</div>
+</aside>
+<!-- Main Content -->
+<main class="flex-1 flex flex-col h-full overflow-y-auto relative">
+<div class="layout-container flex h-full grow flex-col">
+<div class="flex flex-1 justify-center py-5 px-4 md:px-8 lg:px-12">
+<div class="layout-content-container flex flex-col max-w-[1024px] flex-1 gap-6">
+<!-- Breadcrumbs -->
+<div class="flex flex-wrap gap-2 items-center">
+<a class="text-text-sec-light dark:text-text-sec-dark text-sm font-medium hover:text-primary transition-colors" href="#">Settings</a>
+<span class="material-symbols-outlined text-text-sec-light dark:text-text-sec-dark text-sm">chevron_right</span>
+<span class="text-text-main-light dark:text-text-main-dark text-sm font-medium">AI Integrations</span>
+</div>
+<!-- Header -->
+<div class="flex flex-col gap-2">
+<h1 class="text-text-main-light dark:text-text-main-dark text-3xl md:text-4xl font-black leading-tight tracking-[-0.033em]">AI Integrations &amp; API Settings</h1>
+<p class="text-text-sec-light dark:text-text-sec-dark text-base font-normal max-w-2xl">Manage your AI service providers, configure API keys, and monitor usage stats across your landing pages.</p>
+</div>
+<!-- Stats Cards -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+<!-- Card 1 -->
+<div class="flex flex-col gap-2 rounded-xl p-6 border border-border-light dark:border-border-dark bg-surface-light dark:bg-surface-dark shadow-sm">
+<div class="flex items-center justify-between">
+<p class="text-text-sec-light dark:text-text-sec-dark text-sm font-medium">Total Tokens Consumed</p>
+<span class="material-symbols-outlined text-primary bg-primary/10 p-1 rounded-md text-[20px]">token</span>
+</div>
+<div class="flex items-baseline gap-2">
+<p class="text-text-main-light dark:text-text-main-dark text-2xl font-bold">1.2M</p>
+<span class="text-emerald-600 dark:text-emerald-400 text-xs font-bold bg-emerald-100 dark:bg-emerald-900/30 px-1.5 py-0.5 rounded-full">+12%</span>
+</div>
+</div>
+<!-- Card 2 -->
+<div class="flex flex-col gap-2 rounded-xl p-6 border border-border-light dark:border-border-dark bg-surface-light dark:bg-surface-dark shadow-sm">
+<div class="flex items-center justify-between">
+<p class="text-text-sec-light dark:text-text-sec-dark text-sm font-medium">Estimated Cost (Month)</p>
+<span class="material-symbols-outlined text-primary bg-primary/10 p-1 rounded-md text-[20px]">attach_money</span>
+</div>
+<div class="flex items-baseline gap-2">
+<p class="text-text-main-light dark:text-text-main-dark text-2xl font-bold">$34.50</p>
+<span class="text-emerald-600 dark:text-emerald-400 text-xs font-bold bg-emerald-100 dark:bg-emerald-900/30 px-1.5 py-0.5 rounded-full">+8%</span>
+</div>
+</div>
+<!-- Card 3 -->
+<div class="flex flex-col gap-2 rounded-xl p-6 border border-border-light dark:border-border-dark bg-surface-light dark:bg-surface-dark shadow-sm">
+<div class="flex items-center justify-between">
+<p class="text-text-sec-light dark:text-text-sec-dark text-sm font-medium">Active Providers</p>
+<span class="material-symbols-outlined text-primary bg-primary/10 p-1 rounded-md text-[20px]">hub</span>
+</div>
+<p class="text-text-main-light dark:text-text-main-dark text-2xl font-bold">2</p>
+</div>
+</div>
+<!-- Section Header -->
+<div class="flex items-center justify-between mt-4">
+<h2 class="text-text-main-light dark:text-text-main-dark text-xl font-bold tracking-tight">Provider Configuration</h2>
+<button class="text-primary text-sm font-bold hover:underline">View Usage Logs</button>
+</div>
+<!-- Provider Cards Grid -->
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-6 pb-12">
+<!-- OpenAI Card -->
+<div class="group flex flex-col rounded-xl border border-border-light dark:border-border-dark bg-surface-light dark:bg-surface-dark shadow-sm hover:shadow-md transition-shadow">
+<!-- Card Header -->
+<div class="flex items-center justify-between p-5 border-b border-border-light dark:border-border-dark">
+<div class="flex items-center gap-3">
+<div class="size-10 rounded-lg bg-black text-white flex items-center justify-center font-bold text-xs" data-alt="OpenAI Logo Placeholder">OA</div>
+<div>
+<h3 class="text-text-main-light dark:text-text-main-dark font-bold text-base">OpenAI</h3>
+<div class="flex items-center gap-1.5">
+<div class="size-2 rounded-full bg-emerald-500 animate-pulse"></div>
+<span class="text-xs text-text-sec-light dark:text-text-sec-dark font-medium">Connected</span>
+</div>
+</div>
+</div>
+<label class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only peer" type="checkbox"/>
+<div class="w-11 h-6 bg-slate-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-primary/30 dark:peer-focus:ring-primary/80 rounded-full peer dark:bg-slate-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary"></div>
+</label>
+</div>
+<!-- Card Body -->
+<div class="p-5 flex flex-col gap-4">
+<div class="flex flex-col gap-1.5">
+<label class="text-xs font-semibold text-text-sec-light dark:text-text-sec-dark uppercase tracking-wider">API Key</label>
+<div class="relative">
+<input class="w-full bg-background-light dark:bg-background-dark border border-border-light dark:border-border-dark rounded-lg px-3 py-2.5 text-sm text-text-main-light dark:text-text-main-dark focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition-all" readonly="" type="password" value="sk-proj-xxxxxxxxxxxxxxxxxxxx89sF"/>
+<button class="absolute right-3 top-1/2 -translate-y-1/2 text-text-sec-light dark:text-text-sec-dark hover:text-primary">
+<span class="material-symbols-outlined text-[20px]">visibility</span>
+</button>
+</div>
+</div>
+<div class="flex flex-col gap-1.5">
+<label class="text-xs font-semibold text-text-sec-light dark:text-text-sec-dark uppercase tracking-wider">Default Model</label>
+<div class="relative">
+<select class="w-full appearance-none bg-background-light dark:bg-background-dark border border-border-light dark:border-border-dark rounded-lg px-3 py-2.5 text-sm text-text-main-light dark:text-text-main-dark focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition-all">
+<option>GPT-4 Turbo</option>
+<option>GPT-4</option>
+<option>GPT-3.5 Turbo</option>
+</select>
+<span class="material-symbols-outlined absolute right-3 top-1/2 -translate-y-1/2 text-text-sec-light dark:text-text-sec-dark pointer-events-none">expand_more</span>
+</div>
+</div>
+</div>
+<!-- Card Footer -->
+<div class="px-5 pb-5 pt-2 flex gap-3 mt-auto">
+<button class="flex-1 py-2 px-4 rounded-lg border border-border-light dark:border-border-dark text-text-main-light dark:text-text-main-dark text-sm font-semibold hover:bg-background-light dark:hover:bg-slate-800 transition-colors flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-[18px]">wifi_tethering</span>
+                                        Test Connection
+                                    </button>
+<button class="py-2 px-4 rounded-lg bg-primary text-white text-sm font-bold hover:bg-primary-dark transition-colors shadow-lg shadow-primary/25">
+                                        Save
+                                    </button>
+</div>
+</div>
+<!-- Anthropic Card -->
+<div class="group flex flex-col rounded-xl border border-border-light dark:border-border-dark bg-surface-light dark:bg-surface-dark shadow-sm hover:shadow-md transition-shadow">
+<div class="flex items-center justify-between p-5 border-b border-border-light dark:border-border-dark">
+<div class="flex items-center gap-3">
+<div class="size-10 rounded-lg bg-[#d97757] text-white flex items-center justify-center font-bold text-xs" data-alt="Anthropic Logo Placeholder">AN</div>
+<div>
+<h3 class="text-text-main-light dark:text-text-main-dark font-bold text-base">Anthropic</h3>
+<div class="flex items-center gap-1.5">
+<div class="size-2 rounded-full bg-slate-300 dark:bg-slate-600"></div>
+<span class="text-xs text-text-sec-light dark:text-text-sec-dark font-medium">Disabled</span>
+</div>
+</div>
+</div>
+<label class="relative inline-flex items-center cursor-pointer">
+<input class="sr-only peer" type="checkbox"/>
+<div class="w-11 h-6 bg-slate-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-primary/30 dark:peer-focus:ring-primary/80 rounded-full peer dark:bg-slate-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary"></div>
+</label>
+</div>
+<div class="p-5 flex flex-col gap-4 opacity-75 group-hover:opacity-100 transition-opacity">
+<div class="flex flex-col gap-1.5">
+<label class="text-xs font-semibold text-text-sec-light dark:text-text-sec-dark uppercase tracking-wider">API Key</label>
+<div class="relative">
+<input class="w-full bg-background-light dark:bg-background-dark border border-border-light dark:border-border-dark rounded-lg px-3 py-2.5 text-sm text-text-main-light dark:text-text-main-dark focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition-all" placeholder="Enter your Anthropic API Key" type="password"/>
+</div>
+</div>
+<div class="flex flex-col gap-1.5">
+<label class="text-xs font-semibold text-text-sec-light dark:text-text-sec-dark uppercase tracking-wider">Default Model</label>
+<div class="relative">
+<select class="w-full appearance-none bg-background-light dark:bg-background-dark border border-border-light dark:border-border-dark rounded-lg px-3 py-2.5 text-sm text-text-main-light dark:text-text-main-dark focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition-all" disabled="">
+<option>Claude 3 Opus</option>
+<option>Claude 3 Sonnet</option>
+<option>Claude 3 Haiku</option>
+</select>
+<span class="material-symbols-outlined absolute right-3 top-1/2 -translate-y-1/2 text-text-sec-light dark:text-text-sec-dark pointer-events-none opacity-50">expand_more</span>
+</div>
+</div>
+</div>
+<div class="px-5 pb-5 pt-2 flex gap-3 mt-auto">
+<button class="flex-1 py-2 px-4 rounded-lg border border-border-light dark:border-border-dark text-text-sec-light dark:text-text-sec-dark text-sm font-semibold hover:bg-background-light dark:hover:bg-slate-800 transition-colors flex items-center justify-center gap-2 cursor-not-allowed opacity-50">
+                                        Test Connection
+                                    </button>
+<button class="py-2 px-4 rounded-lg bg-primary text-white text-sm font-bold hover:bg-primary-dark transition-colors shadow-lg shadow-primary/25 opacity-50 cursor-not-allowed">
+                                        Save
+                                    </button>
+</div>
+</div>
+<!-- Google Gemini Card -->
+<div class="group flex flex-col rounded-xl border border-border-light dark:border-border-dark bg-surface-light dark:bg-surface-dark shadow-sm hover:shadow-md transition-shadow">
+<div class="flex items-center justify-between p-5 border-b border-border-light dark:border-border-dark">
+<div class="flex items-center gap-3">
+<div class="size-10 rounded-lg bg-gradient-to-br from-blue-500 to-purple-600 text-white flex items-center justify-center font-bold text-xs" data-alt="Google Gemini Logo Gradient">GG</div>
+<div>
+<h3 class="text-text-main-light dark:text-text-main-dark font-bold text-base">Google Gemini</h3>
+<div class="flex items-center gap-1.5">
+<div class="size-2 rounded-full bg-emerald-500 animate-pulse"></div>
+<span class="text-xs text-text-sec-light dark:text-text-sec-dark font-medium">Connected</span>
+</div>
+</div>
+</div>
+<label class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only peer" type="checkbox"/>
+<div class="w-11 h-6 bg-slate-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-primary/30 dark:peer-focus:ring-primary/80 rounded-full peer dark:bg-slate-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary"></div>
+</label>
+</div>
+<div class="p-5 flex flex-col gap-4">
+<div class="flex flex-col gap-1.5">
+<label class="text-xs font-semibold text-text-sec-light dark:text-text-sec-dark uppercase tracking-wider">API Key</label>
+<div class="relative">
+<input class="w-full bg-background-light dark:bg-background-dark border border-border-light dark:border-border-dark rounded-lg px-3 py-2.5 text-sm text-text-main-light dark:text-text-main-dark focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition-all" readonly="" type="password" value="AIzaSyB...234"/>
+<button class="absolute right-3 top-1/2 -translate-y-1/2 text-text-sec-light dark:text-text-sec-dark hover:text-primary">
+<span class="material-symbols-outlined text-[20px]">visibility_off</span>
+</button>
+</div>
+</div>
+<div class="flex flex-col gap-1.5">
+<label class="text-xs font-semibold text-text-sec-light dark:text-text-sec-dark uppercase tracking-wider">Default Model</label>
+<div class="relative">
+<select class="w-full appearance-none bg-background-light dark:bg-background-dark border border-border-light dark:border-border-dark rounded-lg px-3 py-2.5 text-sm text-text-main-light dark:text-text-main-dark focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition-all">
+<option>Gemini 1.5 Pro</option>
+<option>Gemini 1.0 Pro</option>
+</select>
+<span class="material-symbols-outlined absolute right-3 top-1/2 -translate-y-1/2 text-text-sec-light dark:text-text-sec-dark pointer-events-none">expand_more</span>
+</div>
+</div>
+</div>
+<div class="px-5 pb-5 pt-2 flex gap-3 mt-auto">
+<button class="flex-1 py-2 px-4 rounded-lg border border-border-light dark:border-border-dark text-text-main-light dark:text-text-main-dark text-sm font-semibold hover:bg-background-light dark:hover:bg-slate-800 transition-colors flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-[18px]">wifi_tethering</span>
+                                        Test Connection
+                                    </button>
+<button class="py-2 px-4 rounded-lg bg-primary text-white text-sm font-bold hover:bg-primary-dark transition-colors shadow-lg shadow-primary/25">
+                                        Save
+                                    </button>
+</div>
+</div>
+<!-- Add New Provider Button -->
+<button class="flex flex-col items-center justify-center gap-3 rounded-xl border-2 border-dashed border-border-light dark:border-border-dark hover:border-primary hover:bg-primary/5 dark:hover:bg-primary/10 p-8 transition-all min-h-[300px]">
+<div class="size-12 rounded-full bg-background-light dark:bg-surface-dark flex items-center justify-center">
+<span class="material-symbols-outlined text-primary text-2xl">add</span>
+</div>
+<div class="text-center">
+<h3 class="text-text-main-light dark:text-text-main-dark font-bold text-base">Add New Provider</h3>
+<p class="text-text-sec-light dark:text-text-sec-dark text-sm">Connect custom LLM endpoints</p>
+</div>
+</button>
+</div>
+</div>
+</div>
+</div>
+</main>
+</div>
+</body></html>

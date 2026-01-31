@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Media Library Grid View</title>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#6264f4",
+                        "primary-hover": "#4e50d6",
+                        "background-light": "#f6f6f8",
+                        "background-dark": "#101022",
+                        "surface-light": "#ffffff",
+                        "surface-dark": "#1a1a2e",
+                        "text-primary-light": "#0d0d1c",
+                        "text-secondary-light": "#4b4c9b",
+                        "text-primary-dark": "#ffffff",
+                        "text-secondary-dark": "#9ca3af",
+                        "border-light": "#e7e7f3",
+                        "border-dark": "#2d2d42",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        /* Custom scrollbar for webkit */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #94a3b8;
+        }
+        .dark ::-webkit-scrollbar-thumb {
+            background: #374151;
+        }
+        .dark ::-webkit-scrollbar-thumb:hover {
+            background: #4b5563;
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-text-primary-light dark:text-text-primary-dark transition-colors duration-200">
+<div class="relative flex min-h-screen w-full flex-col group/design-root overflow-x-hidden">
+<!-- Header -->
+<header class="flex items-center justify-between whitespace-nowrap border-b border-solid border-border-light dark:border-border-dark bg-surface-light dark:bg-surface-dark px-6 py-3 sticky top-0 z-30">
+<div class="flex items-center gap-4">
+<div class="size-8 flex items-center justify-center bg-primary/10 rounded-lg text-primary">
+<span class="material-symbols-outlined text-2xl">layers</span>
+</div>
+<h2 class="text-lg font-bold leading-tight tracking-[-0.015em] hidden sm:block">Builder SaaS</h2>
+<!-- Breadcrumbs in Header -->
+<div class="hidden md:flex items-center gap-2 ml-4 pl-4 border-l border-border-light dark:border-border-dark h-6">
+<a class="text-text-secondary-light dark:text-text-secondary-dark text-sm font-medium hover:text-primary transition-colors" href="#">Dashboard</a>
+<span class="material-symbols-outlined text-text-secondary-light dark:text-text-secondary-dark text-sm">chevron_right</span>
+<span class="text-sm font-medium">Media Library</span>
+</div>
+</div>
+<!-- Search Bar -->
+<div class="flex-1 max-w-md mx-6 hidden lg:block">
+<div class="relative group">
+<div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none text-text-secondary-light dark:text-text-secondary-dark group-focus-within:text-primary">
+<span class="material-symbols-outlined text-[20px]">search</span>
+</div>
+<input class="block w-full p-2 pl-10 text-sm text-text-primary-light dark:text-text-primary-dark bg-background-light dark:bg-background-dark border border-transparent rounded-lg focus:ring-2 focus:ring-primary focus:bg-surface-light dark:focus:bg-surface-dark focus:border-transparent placeholder-gray-400 transition-all" placeholder="Search assets..." type="text"/>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<div class="flex gap-2">
+<button class="flex items-center justify-center rounded-lg size-10 hover:bg-background-light dark:hover:bg-border-dark text-text-secondary-light dark:text-text-secondary-dark transition-colors">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<button class="flex items-center justify-center rounded-lg size-10 hover:bg-background-light dark:hover:bg-border-dark text-text-secondary-light dark:text-text-secondary-dark transition-colors">
+<span class="material-symbols-outlined">settings</span>
+</button>
+</div>
+<div class="relative group cursor-pointer">
+<div class="bg-center bg-no-repeat bg-cover rounded-full size-10 border-2 border-transparent group-hover:border-primary transition-all" data-alt="User profile avatar showing a smiling person" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuDrxH-gc4rUQ5DU37lQ4UWwYSmzRZmr_ClSWXxSE0xDQB9V-qkiRm6cA7TiC0j20dR795LGC-FF7OvA1U4w5vdgM63PFBPa9j-Gz7YBrx1guZwFjeYrBTqojG_u7Vc5hGgMOzJi-PSgOGjWwZ--hVenmqCK8wWXV0EhzVCRMAsdJYaYjnwFbneRuBGEcaJXnd4e179geSPX_qN7pQZtRf2mfb3EqNTec9z38S7YpNoVv1ojMtT0QjbJHi8bXYnNFb-anCS5N8G56_g");'></div>
+<div class="absolute bottom-0 right-0 w-3 h-3 bg-green-500 border-2 border-surface-light dark:border-surface-dark rounded-full"></div>
+</div>
+</div>
+</header>
+<div class="flex flex-1 overflow-hidden h-[calc(100vh-65px)]">
+<!-- Sidebar -->
+<aside class="w-64 hidden md:flex flex-col border-r border-border-light dark:border-border-dark bg-surface-light dark:bg-surface-dark">
+<div class="flex flex-col flex-1 p-4 gap-6 overflow-y-auto">
+<!-- Main Filters -->
+<div>
+<h3 class="px-3 text-xs font-semibold text-text-secondary-light dark:text-text-secondary-dark uppercase tracking-wider mb-2">Library</h3>
+<nav class="flex flex-col gap-1">
+<a class="flex items-center justify-between px-3 py-2 rounded-lg bg-primary/10 text-primary group" href="#">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined fill-1">folder</span>
+<span class="text-sm font-medium">All Files</span>
+</div>
+<span class="text-xs font-semibold bg-primary/20 px-2 py-0.5 rounded-full">120</span>
+</a>
+<a class="flex items-center justify-between px-3 py-2 rounded-lg hover:bg-background-light dark:hover:bg-border-dark text-text-secondary-light dark:text-text-secondary-dark hover:text-text-primary-light dark:hover:text-text-primary-dark group transition-colors" href="#">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined">image</span>
+<span class="text-sm font-medium">Images</span>
+</div>
+<span class="text-xs font-medium group-hover:bg-background-light dark:group-hover:bg-surface-dark px-2 py-0.5 rounded-full">85</span>
+</a>
+<a class="flex items-center justify-between px-3 py-2 rounded-lg hover:bg-background-light dark:hover:bg-border-dark text-text-secondary-light dark:text-text-secondary-dark hover:text-text-primary-light dark:hover:text-text-primary-dark group transition-colors" href="#">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined">videocam</span>
+<span class="text-sm font-medium">Videos</span>
+</div>
+<span class="text-xs font-medium group-hover:bg-background-light dark:group-hover:bg-surface-dark px-2 py-0.5 rounded-full">10</span>
+</a>
+<a class="flex items-center justify-between px-3 py-2 rounded-lg hover:bg-background-light dark:hover:bg-border-dark text-text-secondary-light dark:text-text-secondary-dark hover:text-text-primary-light dark:hover:text-text-primary-dark group transition-colors" href="#">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined">description</span>
+<span class="text-sm font-medium">Documents</span>
+</div>
+<span class="text-xs font-medium group-hover:bg-background-light dark:group-hover:bg-surface-dark px-2 py-0.5 rounded-full">25</span>
+</a>
+</nav>
+</div>
+<!-- Tags -->
+<div>
+<div class="flex items-center justify-between px-3 mb-2">
+<h3 class="text-xs font-semibold text-text-secondary-light dark:text-text-secondary-dark uppercase tracking-wider">Tags</h3>
+<button class="text-text-secondary-light hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-sm">add</span>
+</button>
+</div>
+<nav class="flex flex-col gap-1">
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-background-light dark:hover:bg-border-dark text-text-secondary-light dark:text-text-secondary-dark transition-colors" href="#">
+<span class="size-2 rounded-full bg-blue-400"></span>
+<span class="text-sm font-medium">#Hero</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-background-light dark:hover:bg-border-dark text-text-secondary-light dark:text-text-secondary-dark transition-colors" href="#">
+<span class="size-2 rounded-full bg-green-400"></span>
+<span class="text-sm font-medium">#Product</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-background-light dark:hover:bg-border-dark text-text-secondary-light dark:text-text-secondary-dark transition-colors" href="#">
+<span class="size-2 rounded-full bg-purple-400"></span>
+<span class="text-sm font-medium">#Logos</span>
+</a>
+</nav>
+</div>
+</div>
+<!-- Storage Progress -->
+<div class="p-4 border-t border-border-light dark:border-border-dark bg-background-light/50 dark:bg-background-dark/50">
+<div class="flex flex-col gap-3">
+<div class="flex gap-2 justify-between items-center">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-text-secondary-light text-lg">cloud_queue</span>
+<p class="text-text-primary-light dark:text-text-primary-dark text-sm font-medium">Storage</p>
+</div>
+<p class="text-text-secondary-light dark:text-text-secondary-dark text-xs font-medium">75%</p>
+</div>
+<div class="w-full h-2 bg-border-light dark:bg-border-dark rounded-full overflow-hidden">
+<div class="h-full bg-primary rounded-full" style="width: 75%;"></div>
+</div>
+<p class="text-text-secondary-light dark:text-text-secondary-dark text-xs">7.5 GB of 10 GB used</p>
+<button class="text-primary text-xs font-semibold hover:underline text-left">Upgrade Plan</button>
+</div>
+</div>
+</aside>
+<!-- Main Content -->
+<main class="flex-1 flex flex-col bg-background-light dark:bg-background-dark overflow-hidden relative">
+<!-- Page Heading & Controls -->
+<div class="p-6 md:p-8 flex flex-col gap-6 sticky top-0 bg-background-light/95 dark:bg-background-dark/95 backdrop-blur-sm z-20 border-b border-border-light dark:border-border-dark">
+<div class="flex flex-wrap items-end justify-between gap-4">
+<div class="flex flex-col gap-1">
+<h1 class="text-text-primary-light dark:text-text-primary-dark text-2xl md:text-3xl font-bold tracking-tight">Media Library</h1>
+<p class="text-text-secondary-light dark:text-text-secondary-dark text-sm">Manage assets for your landing pages.</p>
+</div>
+<div class="flex gap-3">
+<button class="hidden sm:flex items-center justify-center gap-2 px-4 h-10 bg-white dark:bg-surface-dark border border-border-light dark:border-border-dark rounded-lg hover:bg-gray-50 dark:hover:bg-border-dark text-text-primary-light dark:text-text-primary-dark text-sm font-medium transition-colors shadow-sm">
+<span class="material-symbols-outlined text-[20px]">filter_list</span>
+                                Filter
+                            </button>
+<button class="flex items-center justify-center gap-2 px-5 h-10 bg-primary hover:bg-primary-hover text-white rounded-lg text-sm font-semibold shadow-md transition-all active:scale-95">
+<span class="material-symbols-outlined text-[20px]">upload</span>
+<span class="hidden sm:inline">Upload</span>
+</button>
+</div>
+</div>
+<!-- Toolbar -->
+<div class="flex flex-wrap items-center justify-between gap-4">
+<div class="flex items-center gap-3">
+<div class="flex items-center h-5">
+<input class="w-5 h-5 text-primary border-gray-300 dark:border-gray-600 rounded focus:ring-primary dark:bg-surface-dark" id="select-all" type="checkbox"/>
+</div>
+<label class="text-sm font-medium text-text-primary-light dark:text-text-primary-dark cursor-pointer select-none" for="select-all">Select All</label>
+<div class="h-4 w-px bg-border-light dark:bg-border-dark mx-2"></div>
+<div class="flex items-center gap-2">
+<span class="text-sm text-text-secondary-light dark:text-text-secondary-dark">Sort by:</span>
+<button class="flex items-center gap-1 text-sm font-medium text-text-primary-light dark:text-text-primary-dark hover:text-primary transition-colors">
+                                    Date Added
+                                    <span class="material-symbols-outlined text-[16px]">expand_more</span>
+</button>
+</div>
+</div>
+<div class="flex bg-white dark:bg-surface-dark rounded-lg border border-border-light dark:border-border-dark p-0.5 shadow-sm">
+<button class="p-1.5 rounded bg-background-light dark:bg-border-dark text-text-primary-light dark:text-text-primary-dark shadow-sm">
+<span class="material-symbols-outlined text-[20px] block">grid_view</span>
+</button>
+<button class="p-1.5 rounded text-text-secondary-light dark:text-text-secondary-dark hover:bg-background-light dark:hover:bg-border-dark transition-colors">
+<span class="material-symbols-outlined text-[20px] block">view_list</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Media Grid -->
+<div class="flex-1 overflow-y-auto p-6 md:p-8">
+<div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6">
+<!-- Card 1: Image -->
+<div class="group relative flex flex-col bg-surface-light dark:bg-surface-dark rounded-lg border border-border-light dark:border-border-dark shadow-sm hover:shadow-md hover:border-primary/50 transition-all cursor-pointer">
+<div class="absolute top-3 left-3 z-10 opacity-0 group-hover:opacity-100 transition-opacity">
+<input class="w-5 h-5 text-primary border-gray-300 dark:border-gray-600 rounded focus:ring-primary shadow-sm" type="checkbox"/>
+</div>
+<div class="absolute top-3 right-3 z-10 opacity-0 group-hover:opacity-100 transition-opacity flex gap-1">
+<button class="p-1.5 bg-white/90 dark:bg-black/70 backdrop-blur rounded-md hover:text-primary transition-colors shadow-sm">
+<span class="material-symbols-outlined text-[18px] block">more_horiz</span>
+</button>
+</div>
+<div class="aspect-[4/3] w-full bg-gray-100 dark:bg-gray-800 rounded-t-lg overflow-hidden relative">
+<img alt="Dashboard analytics preview" class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-300" data-alt="Dashboard analytics preview" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCOqVg1-4KhKWaGg-0C6U9DfTX3oRbefZJanZVbqIowqLa1i40_8IccKoj6xutCBaqsq9-shdVbRVc-5e4heOEJkq5zJtFTZgiG5qbWoW0iHqE1oYXyUwHFBkOTEKo-Zc-TPj16KYyKqO5Q0jUQnoTT2fZzwhg2buHV7yHd2reLyzE4MgBa456HT8x-Z6vwSTFwPi8E7orCRdE7Sa6F1gTtO4rQ8Ng_z0o70leJtvUHEPbMJTDxigc_SK5atwmlZHl7ii6OPEWPEEw"/>
+</div>
+<div class="p-3 flex flex-col gap-1">
+<h3 class="text-sm font-medium text-text-primary-light dark:text-text-primary-dark truncate" title="analytics_dashboard_v2.png">analytics_dashboard_v2.png</h3>
+<div class="flex justify-between items-center text-xs text-text-secondary-light dark:text-text-secondary-dark">
+<span class="uppercase font-semibold bg-gray-100 dark:bg-gray-800 px-1.5 py-0.5 rounded">PNG</span>
+<span>2.4 MB</span>
+</div>
+</div>
+</div>
+<!-- Card 2: Image Selected -->
+<div class="group relative flex flex-col bg-surface-light dark:bg-surface-dark rounded-lg border-2 border-primary shadow-sm hover:shadow-md transition-all cursor-pointer bg-primary/5">
+<div class="absolute top-3 left-3 z-10 opacity-100 transition-opacity">
+<input checked="" class="w-5 h-5 text-primary border-gray-300 dark:border-gray-600 rounded focus:ring-primary shadow-sm" type="checkbox"/>
+</div>
+<div class="absolute top-3 right-3 z-10 opacity-100 flex gap-1">
+<button class="p-1.5 bg-white/90 dark:bg-black/70 backdrop-blur rounded-md text-primary transition-colors shadow-sm">
+<span class="material-symbols-outlined text-[18px] block">check</span>
+</button>
+</div>
+<div class="aspect-[4/3] w-full bg-gray-100 dark:bg-gray-800 rounded-t-lg overflow-hidden relative">
+<img alt="Team meeting discussion" class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-300" data-alt="Team meeting discussion" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC9-1yEXHfPq4fD8kO_UXCzYR-rXH6JLqcqyI_mmNehn5pX_uel9nqGn8pPyKG7k-vZ_2jvNKWAeBRRuWBPS2cvXGYolY0NT5cauXJhzLCiL4PWKLhKmVZyAWARvILc84eL2aniu9dvyGlYR5cYRmsUd3rVnY3POoS48J_OLMKe3r36i_roo1sHsQfjUx6VbMEdYYiMQIvqqM4jFsv9LYf9RiuK92oQ-f8QfLZIb7a6LMWEhQLbEFd58qk6hkCKZ85XX9Q4b0VB7lI"/>
+</div>
+<div class="p-3 flex flex-col gap-1">
+<h3 class="text-sm font-medium text-primary truncate" title="team_meeting_q3.jpg">team_meeting_q3.jpg</h3>
+<div class="flex justify-between items-center text-xs text-text-secondary-light dark:text-text-secondary-dark">
+<span class="uppercase font-semibold bg-primary/10 text-primary px-1.5 py-0.5 rounded">JPG</span>
+<span>4.1 MB</span>
+</div>
+</div>
+</div>
+<!-- Card 3: Video -->
+<div class="group relative flex flex-col bg-surface-light dark:bg-surface-dark rounded-lg border border-border-light dark:border-border-dark shadow-sm hover:shadow-md hover:border-primary/50 transition-all cursor-pointer">
+<div class="absolute top-3 left-3 z-10 opacity-0 group-hover:opacity-100 transition-opacity">
+<input class="w-5 h-5 text-primary border-gray-300 dark:border-gray-600 rounded focus:ring-primary shadow-sm" type="checkbox"/>
+</div>
+<div class="aspect-[4/3] w-full bg-gray-900 rounded-t-lg overflow-hidden relative flex items-center justify-center">
+<img alt="Abstract nature background for video" class="w-full h-full object-cover opacity-70 transform group-hover:scale-105 transition-transform duration-300" data-alt="Abstract nature background for video" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDwzkHCwUY99NsOGbb0W9LdK61Enxga5oBiVIhwr2hIgiLqlBg6o7R1y1HipNYoMSLf4qp9MuhxNLkXXC9YtKJp6ZqCv-1QahW45s8clDRb1Qw2A9BpyqRGT770ac30TVPRIwnS4m-WMqbSEjK-Pj9DWPwEHYQVyap9tx26SKdIfIH-mihd4Yh-jTloBu11EYD9knBda1lHK4lOdHVLcaDAVzR6ZhtMnKz9tH5b3zov9rdabAzaph9wTwhTPaPJY_Py1nzSlL_2nCA"/>
+<div class="absolute inset-0 flex items-center justify-center">
+<div class="size-10 bg-white/20 backdrop-blur rounded-full flex items-center justify-center text-white border border-white/30 group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined fill-1">play_arrow</span>
+</div>
+</div>
+<span class="absolute bottom-2 right-2 px-1.5 py-0.5 bg-black/70 text-white text-[10px] font-medium rounded">02:14</span>
+</div>
+<div class="p-3 flex flex-col gap-1">
+<h3 class="text-sm font-medium text-text-primary-light dark:text-text-primary-dark truncate" title="product_demo_reel.mp4">product_demo_reel.mp4</h3>
+<div class="flex justify-between items-center text-xs text-text-secondary-light dark:text-text-secondary-dark">
+<span class="uppercase font-semibold bg-gray-100 dark:bg-gray-800 px-1.5 py-0.5 rounded">MP4</span>
+<span>14.2 MB</span>
+</div>
+</div>
+</div>
+<!-- Card 4: Document -->
+<div class="group relative flex flex-col bg-surface-light dark:bg-surface-dark rounded-lg border border-border-light dark:border-border-dark shadow-sm hover:shadow-md hover:border-primary/50 transition-all cursor-pointer">
+<div class="absolute top-3 left-3 z-10 opacity-0 group-hover:opacity-100 transition-opacity">
+<input class="w-5 h-5 text-primary border-gray-300 dark:border-gray-600 rounded focus:ring-primary shadow-sm" type="checkbox"/>
+</div>
+<div class="aspect-[4/3] w-full bg-gray-50 dark:bg-gray-800 rounded-t-lg overflow-hidden relative flex items-center justify-center p-6">
+<div class="w-full h-full bg-white dark:bg-gray-700 shadow-sm rounded border border-gray-200 dark:border-gray-600 flex flex-col items-center justify-center gap-2 group-hover:-translate-y-1 transition-transform duration-300">
+<span class="material-symbols-outlined text-red-500 text-4xl">picture_as_pdf</span>
+</div>
+</div>
+<div class="p-3 flex flex-col gap-1">
+<h3 class="text-sm font-medium text-text-primary-light dark:text-text-primary-dark truncate" title="brand_guidelines_2024.pdf">brand_guidelines_2024.pdf</h3>
+<div class="flex justify-between items-center text-xs text-text-secondary-light dark:text-text-secondary-dark">
+<span class="uppercase font-semibold bg-gray-100 dark:bg-gray-800 px-1.5 py-0.5 rounded">PDF</span>
+<span>1.1 MB</span>
+</div>
+</div>
+</div>
+<!-- Card 5: Image -->
+<div class="group relative flex flex-col bg-surface-light dark:bg-surface-dark rounded-lg border border-border-light dark:border-border-dark shadow-sm hover:shadow-md hover:border-primary/50 transition-all cursor-pointer">
+<div class="absolute top-3 left-3 z-10 opacity-0 group-hover:opacity-100 transition-opacity">
+<input class="w-5 h-5 text-primary border-gray-300 dark:border-gray-600 rounded focus:ring-primary shadow-sm" type="checkbox"/>
+</div>
+<div class="aspect-[4/3] w-full bg-gray-100 dark:bg-gray-800 rounded-t-lg overflow-hidden relative">
+<img alt="Office workspace setup" class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-300" data-alt="Office workspace setup" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD9-fb7XsmS7HwUsgOevHRlgoGbR9CwcPFBD2wVWoQy9LQtDvbfXHynr382TRyR9TtNG6AQefalY_F_H0ahG_1BXfrgYfKfP2xtvBd-ez5ckCrmkS_j2BmXXVFL7rFwIdww54OajRcGlGodMVnqHMjkJqhMQSv_va3WtqE-oHfmgESZuRDcYqZZFxC-I8jKSxR4ovBLa8I7kND0LTDRbjvYmrotOsKUQUFFkz_kYau_kWaGPwYS83UqBnOyWsP_wP8_bAlGxo0G9s4"/>
+</div>
+<div class="p-3 flex flex-col gap-1">
+<h3 class="text-sm font-medium text-text-primary-light dark:text-text-primary-dark truncate" title="workspace_hero.jpg">workspace_hero.jpg</h3>
+<div class="flex justify-between items-center text-xs text-text-secondary-light dark:text-text-secondary-dark">
+<span class="uppercase font-semibold bg-gray-100 dark:bg-gray-800 px-1.5 py-0.5 rounded">JPG</span>
+<span>1.8 MB</span>
+</div>
+</div>
+</div>
+<!-- Card 6: Image -->
+<div class="group relative flex flex-col bg-surface-light dark:bg-surface-dark rounded-lg border border-border-light dark:border-border-dark shadow-sm hover:shadow-md hover:border-primary/50 transition-all cursor-pointer">
+<div class="absolute top-3 left-3 z-10 opacity-0 group-hover:opacity-100 transition-opacity">
+<input class="w-5 h-5 text-primary border-gray-300 dark:border-gray-600 rounded focus:ring-primary shadow-sm" type="checkbox"/>
+</div>
+<div class="aspect-[4/3] w-full bg-gray-100 dark:bg-gray-800 rounded-t-lg overflow-hidden relative">
+<img alt="Minimalist website mockup" class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-300" data-alt="Minimalist website mockup" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBgCUOIHxyJZhCBVAsbaaV1HIg75XJTqPPm6H8IpSDh9Tbmq3lDrOhQouNxDIDl3B6y4CgbyJDEw9aw8LtXxYu-CWRZ4aAj-5fasL3QLYkhQR7uPQIyNkAcTy7OBgGCQqnU7GbllhnPk0b28WDsALsE7IzR8lSxDWUDuYCvRZBKjb1ZJTX0GNKf6fxiu7epTKd0Pub7olaJWaA3Ms6mXj30UYmPKOu8vHh6CzmoWEwbw95INBBPWU5lGL_EQxsqMYbcjNW0ahALFg8"/>
+</div>
+<div class="p-3 flex flex-col gap-1">
+<h3 class="text-sm font-medium text-text-primary-light dark:text-text-primary-dark truncate" title="mockup_v3_light.png">mockup_v3_light.png</h3>
+<div class="flex justify-between items-center text-xs text-text-secondary-light dark:text-text-secondary-dark">
+<span class="uppercase font-semibold bg-gray-100 dark:bg-gray-800 px-1.5 py-0.5 rounded">PNG</span>
+<span>3.2 MB</span>
+</div>
+</div>
+</div>
+<!-- Card 7: SVG Icon -->
+<div class="group relative flex flex-col bg-surface-light dark:bg-surface-dark rounded-lg border border-border-light dark:border-border-dark shadow-sm hover:shadow-md hover:border-primary/50 transition-all cursor-pointer">
+<div class="absolute top-3 left-3 z-10 opacity-0 group-hover:opacity-100 transition-opacity">
+<input class="w-5 h-5 text-primary border-gray-300 dark:border-gray-600 rounded focus:ring-primary shadow-sm" type="checkbox"/>
+</div>
+<div class="aspect-[4/3] w-full bg-gray-50 dark:bg-gray-800 rounded-t-lg overflow-hidden relative flex items-center justify-center p-8">
+<img alt="Company Logo SVG" class="w-full h-full object-contain transform group-hover:scale-110 transition-transform duration-300" data-alt="Company Logo SVG" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDKw8XU-6vLlvpHkp9Am7f5SoiNwcuf7eSLMDzKtoJ3Et-MEpH4Kh9intTfIWtofGgKv08zgD1L93xRyvhWo48iHTFOxNeV1s3w6-qeoXPpw2plb67ZpEy8-sZHlu5l3iXHHQ6Tf3ZV6HIZ8LiZEJyViE_2UKdkTjUGjx3MK1qMNQfABXccEeEbmP1eapISRhj-fsEgh6n-MhFWyBq1RNLEwM9zLkGIe5Cpk_0QtilW4UJ2EbHGJaSX-GUXHEr_vQTqfye46-ffVH4"/>
+</div>
+<div class="p-3 flex flex-col gap-1">
+<h3 class="text-sm font-medium text-text-primary-light dark:text-text-primary-dark truncate" title="company_logo.svg">company_logo.svg</h3>
+<div class="flex justify-between items-center text-xs text-text-secondary-light dark:text-text-secondary-dark">
+<span class="uppercase font-semibold bg-gray-100 dark:bg-gray-800 px-1.5 py-0.5 rounded">SVG</span>
+<span>12 KB</span>
+</div>
+</div>
+</div>
+<!-- Card 8: Image -->
+<div class="group relative flex flex-col bg-surface-light dark:bg-surface-dark rounded-lg border border-border-light dark:border-border-dark shadow-sm hover:shadow-md hover:border-primary/50 transition-all cursor-pointer">
+<div class="absolute top-3 left-3 z-10 opacity-0 group-hover:opacity-100 transition-opacity">
+<input class="w-5 h-5 text-primary border-gray-300 dark:border-gray-600 rounded focus:ring-primary shadow-sm" type="checkbox"/>
+</div>
+<div class="aspect-[4/3] w-full bg-gray-100 dark:bg-gray-800 rounded-t-lg overflow-hidden relative">
+<img alt="Group of people working" class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-300" data-alt="Group of people working" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAQtIKnrNgd0cYBkk_xDpkVIw3mLbX4sdpe0uNUYI3MtJ_lOak27au2Q6COAjeK_GlVZasaz2g-vakYsjRRMLAcNaHBS5ChMeaz6HIXz4EvVN_8MkvGrUI-z7E43HUQeN-F1WwhDvTiuI3QeFuekGjohoWyk8LoEXtlb6O-p5EoQROh6qnylV5kRlop37Hk3NmArxdrSUazOztI7QjVy85jb67ARtJnFXwhc96TjUU85O40aMaszmBLtW_reaiYillIjtkdNipRsdg"/>
+</div>
+<div class="p-3 flex flex-col gap-1">
+<h3 class="text-sm font-medium text-text-primary-light dark:text-text-primary-dark truncate" title="team_collab_hero.jpg">team_collab_hero.jpg</h3>
+<div class="flex justify-between items-center text-xs text-text-secondary-light dark:text-text-secondary-dark">
+<span class="uppercase font-semibold bg-gray-100 dark:bg-gray-800 px-1.5 py-0.5 rounded">JPG</span>
+<span>2.9 MB</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Empty Space Filler for Scrolling Demo -->
+<div class="h-12 w-full"></div>
+</div>
+<!-- Floating Mobile Action Button -->
+<div class="absolute bottom-6 right-6 md:hidden">
+<button class="flex items-center justify-center size-14 bg-primary text-white rounded-full shadow-lg hover:bg-primary-hover active:scale-95 transition-all">
+<span class="material-symbols-outlined text-[24px]">add</span>
+</button>
+</div>
+</main>
+</div>
+</div>
+</body></html>

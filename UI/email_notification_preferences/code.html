@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Email Notification Preferences</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#4043f2",
+                        "background-light": "#f6f6f8",
+                        "background-dark": "#101022",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" },
+                },
+            },
+        }
+    </script>
+<style>
+        /* Custom scrollbar to keep it clean */
+        ::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 3px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #94a3b8;
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-white transition-colors duration-200">
+<div class="flex h-screen w-full overflow-hidden">
+<!-- Sidebar Navigation -->
+<aside class="flex w-72 flex-col border-r border-slate-200 bg-white dark:border-slate-800 dark:bg-slate-900 hidden md:flex">
+<div class="flex flex-col h-full p-4 justify-between">
+<div class="flex flex-col gap-6">
+<!-- User Profile Summary -->
+<div class="flex items-center gap-3 px-2">
+<div class="bg-center bg-no-repeat bg-cover rounded-full h-10 w-10 bg-slate-200" data-alt="User profile avatar showing a smiling person" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuC3DYFZtJB5RlndoDvKVFzHFTDxFTsA2yBZRbOG9_aNNMRgfCRIKaL8JtnkaRhbgjE8qAFd7cVMcyCRhl4TruzIuMg9Eyp98HDaWDHJht_aXfz9jbPc6zuCKLEf54GpOOO_DWd16sLI7T8NivD0cgRClMfQcADh6cwvfQdNhiRUk-o65-hVY4LuL-gkiIbDtARI6cEc3RRa-KZg_RdUSbRKVOILythTbEyegHc9HioeV2Okn8NxoE54GiXCwkRJpijsc6GBEIkVUAY");'></div>
+<div class="flex flex-col">
+<h1 class="text-slate-900 dark:text-white text-sm font-semibold">Alex Morgan</h1>
+<p class="text-slate-500 dark:text-slate-400 text-xs">Pro Plan</p>
+</div>
+</div>
+<!-- Navigation Links -->
+<nav class="flex flex-col gap-1">
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors group" href="#">
+<span class="material-symbols-outlined text-slate-400 group-hover:text-primary" style="font-size: 20px;">dashboard</span>
+<span class="text-sm font-medium">Dashboard</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors group" href="#">
+<span class="material-symbols-outlined text-slate-400 group-hover:text-primary" style="font-size: 20px;">language</span>
+<span class="text-sm font-medium">Landing Pages</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors group" href="#">
+<span class="material-symbols-outlined text-slate-400 group-hover:text-primary" style="font-size: 20px;">group</span>
+<span class="text-sm font-medium">Leads</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors group" href="#">
+<span class="material-symbols-outlined text-slate-400 group-hover:text-primary" style="font-size: 20px;">bar_chart</span>
+<span class="text-sm font-medium">Analytics</span>
+</a>
+<!-- Settings Group -->
+<div class="mt-4 mb-2 px-3 text-xs font-semibold text-slate-400 uppercase tracking-wider">Configuration</div>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg bg-primary/10 text-primary dark:bg-primary/20 transition-colors" href="#">
+<span class="material-symbols-outlined text-primary" style="font-size: 20px; font-variation-settings: 'FILL' 1;">settings</span>
+<span class="text-sm font-medium">Settings</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors group" href="#">
+<span class="material-symbols-outlined text-slate-400 group-hover:text-primary" style="font-size: 20px;">credit_card</span>
+<span class="text-sm font-medium">Billing</span>
+</a>
+</nav>
+</div>
+<!-- Bottom Action -->
+<div class="border-t border-slate-100 dark:border-slate-800 pt-4">
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-500 hover:text-red-500 hover:bg-red-50 dark:hover:bg-red-900/20 transition-colors" href="#">
+<span class="material-symbols-outlined" style="font-size: 20px;">logout</span>
+<span class="text-sm font-medium">Sign Out</span>
+</a>
+</div>
+</div>
+</aside>
+<!-- Main Content Area -->
+<main class="flex-1 flex flex-col h-full overflow-y-auto bg-background-light dark:bg-background-dark relative">
+<!-- Mobile Header (Visible only on small screens) -->
+<div class="md:hidden flex items-center justify-between p-4 bg-white dark:bg-slate-900 border-b border-slate-200 dark:border-slate-800 sticky top-0 z-10">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-slate-500">menu</span>
+<span class="font-semibold text-slate-900 dark:text-white">Settings</span>
+</div>
+<div class="h-8 w-8 rounded-full bg-slate-200 bg-center bg-cover" data-alt="User profile avatar mobile" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuD9bTd9VjpU-hgB2Xe9LU1aQ1PXLCugTJ-dc1Kz0yPgJJWK_xc0xXwCi3BwTaCHIyd70mMhy37-NSC1XNMlnH7usj3wQciPNTY68XtfrkUBtPB5id-GiNjlGuqW9hpDdCNVGEE-eFV5H_O8hsHwqOFxfkzypgBWD448YuRq9LVb-GyEkfif5UHGCgyjbz2vMbqWikrhGQNlf29o1DpZCDOlFh5LhcMmeX0qRAz-G3GkRiSOtp7pVQ4rSOdj8prSp7-PxefwV5FHtjA");'></div>
+</div>
+<div class="max-w-[1000px] w-full mx-auto p-6 md:p-12 pb-24">
+<!-- Page Header -->
+<header class="mb-10 animate-fade-in">
+<div class="flex flex-col gap-2">
+<h1 class="text-3xl md:text-4xl font-bold text-slate-900 dark:text-white tracking-tight">Email Notification Preferences</h1>
+<p class="text-slate-500 dark:text-slate-400 text-base md:text-lg max-w-2xl">
+                            Manage how we communicate with you. Choose which emails you'd like to receive at <span class="font-medium text-slate-700 dark:text-slate-300">alex.morgan@example.com</span>.
+                        </p>
+</div>
+</header>
+<!-- Settings Container -->
+<section class="flex flex-col gap-6">
+<!-- Notification Card -->
+<div class="bg-white dark:bg-slate-900 rounded-xl shadow-sm border border-slate-200 dark:border-slate-800 overflow-hidden">
+<!-- List Group -->
+<div class="divide-y divide-slate-100 dark:divide-slate-800">
+<!-- Item 1: New website views -->
+<div class="p-6 md:p-8 hover:bg-slate-50/50 dark:hover:bg-slate-800/50 transition-colors">
+<div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+<div class="flex flex-col gap-1 pr-4">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-xl" style="font-variation-settings: 'FILL' 1;">visibility</span>
+<h3 class="text-slate-900 dark:text-white text-base font-semibold leading-tight">New website views</h3>
+</div>
+<p class="text-slate-500 dark:text-slate-400 text-sm md:text-base leading-normal pl-7">Get notified immediately when a lead views your published landing page.</p>
+</div>
+<div class="flex items-center shrink-0 pl-7 sm:pl-0">
+<label class="relative flex h-[31px] w-[51px] cursor-pointer items-center rounded-full border-none bg-slate-200 dark:bg-slate-700 p-0.5 has-[:checked]:justify-end has-[:checked]:bg-primary transition-all duration-200 ease-in-out">
+<div class="h-[27px] w-[27px] rounded-full bg-white shadow-sm transition-transform"></div>
+<input checked="" class="peer sr-only" type="checkbox"/>
+</label>
+</div>
+</div>
+</div>
+<!-- Item 2: Weekly analytics report -->
+<div class="p-6 md:p-8 hover:bg-slate-50/50 dark:hover:bg-slate-800/50 transition-colors">
+<div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+<div class="flex flex-col gap-1 pr-4">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-xl" style="font-variation-settings: 'FILL' 1;">analytics</span>
+<h3 class="text-slate-900 dark:text-white text-base font-semibold leading-tight">Weekly analytics report</h3>
+</div>
+<p class="text-slate-500 dark:text-slate-400 text-sm md:text-base leading-normal pl-7">A detailed summary of your page performance sent every Monday morning.</p>
+</div>
+<div class="flex items-center shrink-0 pl-7 sm:pl-0">
+<label class="relative flex h-[31px] w-[51px] cursor-pointer items-center rounded-full border-none bg-slate-200 dark:bg-slate-700 p-0.5 has-[:checked]:justify-end has-[:checked]:bg-primary transition-all duration-200 ease-in-out">
+<div class="h-[27px] w-[27px] rounded-full bg-white shadow-sm transition-transform"></div>
+<input checked="" class="peer sr-only" type="checkbox"/>
+</label>
+</div>
+</div>
+</div>
+<!-- Item 3: Billing and invoices -->
+<div class="p-6 md:p-8 hover:bg-slate-50/50 dark:hover:bg-slate-800/50 transition-colors">
+<div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+<div class="flex flex-col gap-1 pr-4">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-xl" style="font-variation-settings: 'FILL' 1;">receipt_long</span>
+<h3 class="text-slate-900 dark:text-white text-base font-semibold leading-tight">Billing and invoices</h3>
+</div>
+<p class="text-slate-500 dark:text-slate-400 text-sm md:text-base leading-normal pl-7">Receive monthly PDF invoices and payment confirmation emails.</p>
+</div>
+<div class="flex items-center shrink-0 pl-7 sm:pl-0">
+<label class="relative flex h-[31px] w-[51px] cursor-pointer items-center rounded-full border-none bg-slate-200 dark:bg-slate-700 p-0.5 has-[:checked]:justify-end has-[:checked]:bg-primary transition-all duration-200 ease-in-out">
+<div class="h-[27px] w-[27px] rounded-full bg-white shadow-sm transition-transform"></div>
+<input checked="" class="peer sr-only" type="checkbox"/>
+</label>
+</div>
+</div>
+</div>
+<!-- Item 4: Security alerts (Critical) -->
+<div class="p-6 md:p-8 bg-slate-50/50 dark:bg-slate-800/20">
+<div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+<div class="flex flex-col gap-1 pr-4">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-slate-700 dark:text-slate-300 text-xl" style="font-variation-settings: 'FILL' 1;">security</span>
+<h3 class="text-slate-900 dark:text-white text-base font-semibold leading-tight">Security alerts</h3>
+</div>
+<p class="text-slate-500 dark:text-slate-400 text-sm md:text-base leading-normal pl-7">Important notifications about your account security and new login attempts.</p>
+</div>
+<div class="flex items-center shrink-0 pl-7 sm:pl-0">
+<label class="relative flex h-[31px] w-[51px] cursor-not-allowed items-center rounded-full border-none bg-primary/40 dark:bg-primary/30 p-0.5 justify-end">
+<div class="h-[27px] w-[27px] rounded-full bg-slate-100 dark:bg-slate-300 shadow-sm opacity-80"></div>
+<!-- Disabled input effectively -->
+<input checked="" class="hidden" disabled="" type="checkbox"/>
+</label>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Actions & Info -->
+<div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 px-1">
+<button class="text-sm text-slate-500 hover:text-slate-700 dark:text-slate-400 dark:hover:text-slate-200 underline decoration-slate-300 underline-offset-4 transition-colors">
+                            Unsubscribe from all marketing emails
+                        </button>
+<div class="flex gap-3 w-full sm:w-auto">
+<button class="w-full sm:w-auto px-6 py-2.5 rounded-lg border border-slate-300 dark:border-slate-700 text-slate-700 dark:text-white font-medium hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors">
+                                Cancel
+                            </button>
+<button class="w-full sm:w-auto px-6 py-2.5 rounded-lg bg-primary text-white font-medium hover:bg-primary/90 shadow-lg shadow-primary/20 transition-all active:scale-95">
+                                Save Preferences
+                            </button>
+</div>
+</div>
+</section>
+</div>
+</main>
+</div>
+</body></html>

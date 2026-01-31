@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Saved Payment Methods</title>
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Tailwind Config -->
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#4043f2",
+                        "background-light": "#f6f6f8",
+                        "background-dark": "#101022",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .icon-fill {
+            font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-[#0d0d1c] dark:text-white flex h-screen overflow-hidden font-display">
+<!-- Sidebar -->
+<aside class="w-72 bg-[#f8f8fc] dark:bg-[#1a1a2e] border-r border-[#e7e7f3] dark:border-[#2a2a3e] flex-shrink-0 flex flex-col h-full overflow-y-auto hidden md:flex">
+<div class="p-6 flex flex-col h-full justify-between">
+<div class="flex flex-col gap-8">
+<!-- User Profile -->
+<div class="flex items-center gap-3">
+<div class="bg-center bg-no-repeat bg-cover rounded-full size-12 shadow-sm relative" data-alt="User profile avatar showing a smiling professional" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuAOR1RaUEb_hHIQJ_sDL6r5MLWuA7SFbFNe_v4lCe3RfBh6n87-xcOv9ZVDa33hhoP85cJ1Amz3FVX8O8s9WesiMBXjYwljOAYQlZSNueUstC4sIvqGz3IhQhSmUhueAg88PXvZatYFTK60Bp0DM2aIV-vMk4eR8TGCzfB-OM8zJ1DaaoOA6p5Izs68FfrGZ7WcJcXvYNDjfUQZQImmR5GznZJiRucE4E-hlHAejmRswJEGUMkYAWJHusS39OKd5twjjMbk3vk7oe8");'>
+<div class="absolute bottom-0 right-0 size-3 bg-green-500 rounded-full border-2 border-white dark:border-[#1a1a2e]"></div>
+</div>
+<div class="flex flex-col">
+<h1 class="text-[#0d0d1c] dark:text-white text-base font-semibold leading-tight">Acme Builder</h1>
+<p class="text-[#4b4c9b] dark:text-[#8b8cc7] text-xs font-medium leading-normal">Pro Plan</p>
+</div>
+</div>
+<!-- Navigation -->
+<nav class="flex flex-col gap-2">
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-[#5e5e6e] dark:text-[#a0a0b0] hover:bg-[#e7e7f3] dark:hover:bg-[#2a2a3e] transition-colors group" href="#">
+<span class="material-symbols-outlined text-[24px] group-hover:text-primary transition-colors">dashboard</span>
+<p class="text-sm font-medium leading-normal">Dashboard</p>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-[#5e5e6e] dark:text-[#a0a0b0] hover:bg-[#e7e7f3] dark:hover:bg-[#2a2a3e] transition-colors group" href="#">
+<span class="material-symbols-outlined text-[24px] group-hover:text-primary transition-colors">article</span>
+<p class="text-sm font-medium leading-normal">Landing Pages</p>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-[#5e5e6e] dark:text-[#a0a0b0] hover:bg-[#e7e7f3] dark:hover:bg-[#2a2a3e] transition-colors group" href="#">
+<span class="material-symbols-outlined text-[24px] group-hover:text-primary transition-colors">group</span>
+<p class="text-sm font-medium leading-normal">Leads</p>
+</a>
+<!-- Active State -->
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg bg-primary/10 text-primary" href="#">
+<span class="material-symbols-outlined text-[24px] icon-fill">credit_card</span>
+<p class="text-sm font-bold leading-normal">Billing &amp; Settings</p>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-[#5e5e6e] dark:text-[#a0a0b0] hover:bg-[#e7e7f3] dark:hover:bg-[#2a2a3e] transition-colors group" href="#">
+<span class="material-symbols-outlined text-[24px] group-hover:text-primary transition-colors">support_agent</span>
+<p class="text-sm font-medium leading-normal">Support</p>
+</a>
+</nav>
+</div>
+<!-- Bottom Actions -->
+<div class="pt-4 border-t border-[#e7e7f3] dark:border-[#2a2a3e]">
+<button class="flex w-full items-center gap-3 px-3 py-2.5 rounded-lg text-[#5e5e6e] dark:text-[#a0a0b0] hover:text-red-500 hover:bg-red-50 dark:hover:bg-red-900/10 transition-colors">
+<span class="material-symbols-outlined text-[24px]">logout</span>
+<p class="text-sm font-medium leading-normal">Sign Out</p>
+</button>
+</div>
+</div>
+</aside>
+<!-- Main Content -->
+<main class="flex-1 flex flex-col h-full overflow-hidden relative">
+<!-- Mobile Header (Visible on small screens) -->
+<div class="md:hidden flex items-center justify-between p-4 bg-white dark:bg-[#1a1a2e] border-b border-[#e7e7f3] dark:border-[#2a2a3e]">
+<div class="flex items-center gap-3">
+<div class="bg-primary rounded-lg p-1">
+<span class="material-symbols-outlined text-white text-[20px]">layers</span>
+</div>
+<h1 class="text-[#0d0d1c] dark:text-white font-bold">Acme Builder</h1>
+</div>
+<button class="text-[#0d0d1c] dark:text-white">
+<span class="material-symbols-outlined">menu</span>
+</button>
+</div>
+<div class="flex-1 overflow-y-auto p-4 md:p-10 lg:p-16">
+<div class="max-w-5xl mx-auto flex flex-col gap-10">
+<!-- Page Heading -->
+<header class="flex flex-col gap-4 md:flex-row md:items-end md:justify-between animate-fade-in">
+<div class="flex flex-col gap-2">
+<h1 class="text-[#0d0d1c] dark:text-white text-3xl md:text-4xl font-black leading-tight tracking-[-0.033em]">Saved Payment Methods</h1>
+<p class="text-[#4b4c9b] dark:text-[#9ca3af] text-base font-normal leading-normal max-w-2xl">Manage your payment details for your monthly subscription. Your primary card will be charged automatically.</p>
+</div>
+</header>
+<!-- Cards Grid -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+<!-- Card 1: Default (Visa) -->
+<div class="relative group flex flex-col justify-between p-6 h-56 rounded-xl bg-gradient-to-br from-[#1e1e2f] to-[#0d0d1c] dark:from-[#2a2a3e] dark:to-[#1a1a2e] shadow-lg text-white transition-all hover:shadow-xl hover:-translate-y-1">
+<div class="flex justify-between items-start">
+<div class="bg-white/20 backdrop-blur-md px-3 py-1 rounded text-xs font-semibold tracking-wide border border-white/10 flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px] icon-fill text-green-400">check_circle</span>
+                                DEFAULT
+                            </div>
+<!-- Visa Logo -->
+<img alt="Visa Logo" class="h-5 opacity-90 invert brightness-0" data-alt="Visa Logo White" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCJYc_9N7zlOBYEWt2xL5G8fFriYXpOsAQmHC8Te2cfnjRW5dhd2JeexowOcBm4OIACMBwQ7nkMIeWSwIMSNjDDsLu03CCrUBRaKFw5fsV0dLRp6JgvQ6LGR5r0ukbvqoWLcte5FmWJQW5VvK5ddYJHcoUgVtzrPinQHU3urGCzE-1ViecEiSgtph3nZEBNhD8U7vhvqkP0qplvxzUtG8u9GRu-Y1kA-KA_y9jST2mc4bJE-MX4XdeHV6_2QbKVNi4Fdogx93rRrdw"/>
+</div>
+<div class="flex flex-col gap-1 mt-4">
+<div class="flex gap-2 items-center">
+<div class="flex gap-1">
+<div class="w-1.5 h-1.5 rounded-full bg-white/50"></div>
+<div class="w-1.5 h-1.5 rounded-full bg-white/50"></div>
+<div class="w-1.5 h-1.5 rounded-full bg-white/50"></div>
+<div class="w-1.5 h-1.5 rounded-full bg-white/50"></div>
+</div>
+<div class="w-4"></div>
+<div class="flex gap-1">
+<div class="w-1.5 h-1.5 rounded-full bg-white/50"></div>
+<div class="w-1.5 h-1.5 rounded-full bg-white/50"></div>
+<div class="w-1.5 h-1.5 rounded-full bg-white/50"></div>
+<div class="w-1.5 h-1.5 rounded-full bg-white/50"></div>
+</div>
+<div class="w-4"></div>
+<div class="flex gap-1">
+<div class="w-1.5 h-1.5 rounded-full bg-white/50"></div>
+<div class="w-1.5 h-1.5 rounded-full bg-white/50"></div>
+<div class="w-1.5 h-1.5 rounded-full bg-white/50"></div>
+<div class="w-1.5 h-1.5 rounded-full bg-white/50"></div>
+</div>
+<div class="w-4"></div>
+<span class="font-mono text-xl tracking-widest">4242</span>
+</div>
+</div>
+<div class="flex justify-between items-end mt-auto">
+<div class="flex flex-col">
+<span class="text-[10px] uppercase text-white/60 tracking-wider">Expires</span>
+<span class="font-mono text-sm font-medium">12 / 25</span>
+</div>
+<div class="flex items-center gap-2">
+<button class="p-2 rounded-full hover:bg-white/10 transition-colors text-white/80 hover:text-white" title="Edit Card">
+<span class="material-symbols-outlined text-[20px]">edit</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Card 2: Secondary (Mastercard) -->
+<div class="relative group flex flex-col justify-between p-6 h-56 rounded-xl bg-white dark:bg-[#1f1f33] border border-[#e7e7f3] dark:border-[#2a2a3e] shadow-sm text-[#0d0d1c] dark:text-white transition-all hover:shadow-md hover:border-primary/30 dark:hover:border-primary/30">
+<div class="flex justify-between items-start">
+<div class="flex flex-col">
+<span class="text-xs font-semibold text-[#4b4c9b] dark:text-[#8b8cc7] tracking-wide uppercase">Backup Method</span>
+</div>
+<!-- Mastercard Logo -->
+<img alt="Mastercard Logo" class="h-8" data-alt="Mastercard Logo Color" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAYplZ_KeM0SPvXL-jK4bCPTgJJK-js5lEH8IfoTrLMp9m5WChen82aDl-Ti2nCG_xCvohuciHCT9f-4km5TlHDehZe33aL1DktDyHdEJY6JxZi_qW0N0OY-RvdpcAkP835OU0n_Mf5j7-DvX3fx_p11WOyNNnP7a3eBgKJt6yxsAhm3gSM35i_3Ldc3kR9AzsdfCC4-DJS26inVp4mVuSicp9n66gKYKZ678-6udlS-ziHh1fYoz90C0ddUMqe3GEC1kRPybMwt2I"/>
+</div>
+<div class="flex flex-col gap-1 mt-4">
+<div class="flex gap-2 items-center text-[#0d0d1c] dark:text-white">
+<div class="flex gap-1">
+<div class="w-1.5 h-1.5 rounded-full bg-gray-300 dark:bg-gray-600"></div>
+<div class="w-1.5 h-1.5 rounded-full bg-gray-300 dark:bg-gray-600"></div>
+<div class="w-1.5 h-1.5 rounded-full bg-gray-300 dark:bg-gray-600"></div>
+<div class="w-1.5 h-1.5 rounded-full bg-gray-300 dark:bg-gray-600"></div>
+</div>
+<div class="w-4"></div>
+<div class="flex gap-1">
+<div class="w-1.5 h-1.5 rounded-full bg-gray-300 dark:bg-gray-600"></div>
+<div class="w-1.5 h-1.5 rounded-full bg-gray-300 dark:bg-gray-600"></div>
+<div class="w-1.5 h-1.5 rounded-full bg-gray-300 dark:bg-gray-600"></div>
+<div class="w-1.5 h-1.5 rounded-full bg-gray-300 dark:bg-gray-600"></div>
+</div>
+<div class="w-4"></div>
+<div class="flex gap-1">
+<div class="w-1.5 h-1.5 rounded-full bg-gray-300 dark:bg-gray-600"></div>
+<div class="w-1.5 h-1.5 rounded-full bg-gray-300 dark:bg-gray-600"></div>
+<div class="w-1.5 h-1.5 rounded-full bg-gray-300 dark:bg-gray-600"></div>
+<div class="w-1.5 h-1.5 rounded-full bg-gray-300 dark:bg-gray-600"></div>
+</div>
+<div class="w-4"></div>
+<span class="font-mono text-xl tracking-widest font-medium">8899</span>
+</div>
+</div>
+<div class="flex justify-between items-end mt-auto">
+<div class="flex flex-col">
+<span class="text-[10px] uppercase text-[#4b4c9b] dark:text-[#8b8cc7] tracking-wider">Expires</span>
+<span class="font-mono text-sm font-medium">01 / 24</span>
+</div>
+<div class="flex items-center gap-1">
+<button class="flex items-center gap-1 px-3 py-1.5 rounded-lg text-xs font-medium bg-[#e7e7f3] dark:bg-[#2a2a3e] hover:bg-primary hover:text-white transition-colors text-[#0d0d1c] dark:text-white" title="Set as Default">
+                                    Set Default
+                                </button>
+<button class="p-2 rounded-full hover:bg-red-50 hover:text-red-500 dark:hover:bg-red-900/20 text-[#5e5e6e] dark:text-[#a0a0b0] transition-colors" title="Delete Card">
+<span class="material-symbols-outlined text-[20px]">delete</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Add New Card -->
+<button class="group flex flex-col items-center justify-center p-6 h-56 rounded-xl border-2 border-dashed border-[#cfcfe8] dark:border-[#2a2a3e] bg-[#f8f8fc]/50 dark:bg-[#1a1a2e]/50 hover:border-primary hover:bg-primary/5 dark:hover:border-primary dark:hover:bg-primary/10 transition-all cursor-pointer">
+<div class="w-12 h-12 rounded-full bg-[#e7e7f3] dark:bg-[#2a2a3e] flex items-center justify-center group-hover:bg-primary group-hover:text-white transition-colors mb-4 text-primary dark:text-white">
+<span class="material-symbols-outlined text-[28px]">add</span>
+</div>
+<span class="text-[#0d0d1c] dark:text-white font-bold text-lg">Add Payment Method</span>
+<span class="text-[#4b4c9b] dark:text-[#8b8cc7] text-sm mt-1">Accepting Visa, Mastercard, Amex</span>
+<div class="mt-4 flex gap-2 opacity-50 grayscale group-hover:grayscale-0 group-hover:opacity-100 transition-all">
+<img alt="Visa Logo Icon" class="h-4" data-alt="Small Visa Logo" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA08v6lcql6CVKsQqkoUFeQFr3HlFFVd-wAwa2G_2ymWNvprP3c8zcmwkePyOEPpGgu1XtiX9yMfUMSh91tCRRDlIXPZbfx9oUQHBCJl8u7pcsEcN1NcDC9GbpBspkkKdPHnvhl4VrIF-fDOS3tki82VbRGllncZMrKNbsDMpd9Q7sCia4VO9JhGTlKg71uUi2iUNENzZ9gVb5zeD1-5TMRQqxAd-kTaSGIMginHOYlgamAu67ydFHRETcRpkXtDoK6ohYOvePq9gs"/>
+<img alt="Mastercard Logo Icon" class="h-4" data-alt="Small Mastercard Logo" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBtUpYVezD3SsVgx7eik74XmdcQGeQIx8soULYOsgfRnTCd7y4zx7jLSP3GoILtTXXYfBD60H6-sVtpcQiyQ493FSVFOA8BYNdI1k8pdVNiGr5hvcQzwKPvrqMGE9o8tMB17ksyNzcomnNoxtYX7hal1yTnz3qlcfqVTadkI3RXHjbGtm21XFnQoAggzzGRb3Qd5-k258dJQmJTR_W5qEvlerUI-0QXb4DQwrE-MWQRY1qXcYQ37e-2J9unrwB5ng_n79TQreXvzAU"/>
+<img alt="Amex Logo Icon" class="h-4" data-alt="Small Amex Logo" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBQFUG-SA0Fdtp-0GVxg8Y0d_JSeO9HwX-tmEeo1vuPi-WhNPG7xZi0wulsRar0LTs3XwhcWFZcc3EEB1zWCyGb1TQAXy1DR5cUgO0RFQ5HCL9eQx1d0gDwGjQC6SKo-1Xex-oLcf26VYyoxyNhcpCatvP8rDBBcIg730xJz3o0aL9fOcZhbv2FiPHJ55ZISouY5vemViYURHcXAPBZrzZGByDuZOyiHS2SFfj3MfbvEMSfJ1l8z4kpxDXlVvarq_pw5Z2t7Rr6bbc"/>
+</div>
+</button>
+</div>
+<!-- History Section -->
+<div class="mt-8 pt-8 border-t border-[#e7e7f3] dark:border-[#2a2a3e]">
+<div class="flex items-center justify-between mb-6">
+<h2 class="text-xl font-bold text-[#0d0d1c] dark:text-white">Billing History</h2>
+<a class="text-sm font-medium text-primary hover:underline flex items-center gap-1" href="#">
+                            View All Invoices
+                            <span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+</a>
+</div>
+<div class="rounded-xl border border-[#e7e7f3] dark:border-[#2a2a3e] bg-white dark:bg-[#1f1f33] overflow-hidden">
+<div class="overflow-x-auto">
+<table class="w-full text-left text-sm">
+<thead class="bg-[#f8f8fc] dark:bg-[#1a1a2e] text-[#4b4c9b] dark:text-[#8b8cc7] font-medium uppercase text-xs">
+<tr>
+<th class="px-6 py-4">Invoice</th>
+<th class="px-6 py-4">Date</th>
+<th class="px-6 py-4">Amount</th>
+<th class="px-6 py-4">Status</th>
+<th class="px-6 py-4 text-right">Download</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-[#e7e7f3] dark:divide-[#2a2a3e]">
+<tr class="hover:bg-gray-50 dark:hover:bg-[#252538] transition-colors">
+<td class="px-6 py-4 font-medium text-[#0d0d1c] dark:text-white">INV-2023-001</td>
+<td class="px-6 py-4 text-[#5e5e6e] dark:text-[#a0a0b0]">Oct 24, 2023</td>
+<td class="px-6 py-4 text-[#0d0d1c] dark:text-white font-medium">$49.00</td>
+<td class="px-6 py-4">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-400">
+<span class="w-1.5 h-1.5 rounded-full bg-green-600 dark:bg-green-400"></span>
+                                                Paid
+                                            </span>
+</td>
+<td class="px-6 py-4 text-right">
+<button class="text-[#5e5e6e] dark:text-[#a0a0b0] hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-[20px]">download</span>
+</button>
+</td>
+</tr>
+<tr class="hover:bg-gray-50 dark:hover:bg-[#252538] transition-colors">
+<td class="px-6 py-4 font-medium text-[#0d0d1c] dark:text-white">INV-2023-002</td>
+<td class="px-6 py-4 text-[#5e5e6e] dark:text-[#a0a0b0]">Sep 24, 2023</td>
+<td class="px-6 py-4 text-[#0d0d1c] dark:text-white font-medium">$49.00</td>
+<td class="px-6 py-4">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-400">
+<span class="w-1.5 h-1.5 rounded-full bg-green-600 dark:bg-green-400"></span>
+                                                Paid
+                                            </span>
+</td>
+<td class="px-6 py-4 text-right">
+<button class="text-[#5e5e6e] dark:text-[#a0a0b0] hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-[20px]">download</span>
+</button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<!-- Security Trust Footer -->
+<div class="flex items-center justify-center gap-2 text-[#5e5e6e] dark:text-[#a0a0b0] text-xs pb-10">
+<span class="material-symbols-outlined text-[16px] text-green-600">lock</span>
+<p>Your payment information is stored securely. Payments are processed by Stripe.</p>
+</div>
+</div>
+</div>
+</main>
+</body></html>

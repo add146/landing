@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Create Website Wizard - Template Selection</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,typography"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"/>
+<script>
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              primary: "#4F46E5", // Indigo-600
+              secondary: "#6366f1", // Indigo-500
+              "background-light": "#F9FAFB", // Gray-50
+              "background-dark": "#0F172A", // Slate-900
+              "surface-light": "#FFFFFF",
+              "surface-dark": "#1E293B", // Slate-800
+              "text-light": "#1F2937", // Gray-800
+              "text-dark": "#F3F4F6", // Gray-100
+              "border-light": "#E5E7EB", // Gray-200
+              "border-dark": "#334155", // Slate-700
+            },
+            fontFamily: {
+              display: ["Inter", "sans-serif"],
+            },
+            borderRadius: {
+              DEFAULT: "0.5rem",
+              lg: "0.75rem",
+              xl: "1rem",
+            },
+          },
+        },
+      };
+    </script>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display text-text-light dark:text-text-dark antialiased transition-colors duration-200 min-h-screen flex flex-col">
+<nav class="bg-surface-light dark:bg-surface-dark border-b border-border-light dark:border-border-dark px-6 py-4 flex items-center justify-between sticky top-0 z-50">
+<div class="flex items-center space-x-4">
+<div class="flex items-center text-primary font-bold text-xl">
+<span class="material-icons mr-2">layers</span>
+                LandBuilder
+            </div>
+<span class="h-6 w-px bg-border-light dark:bg-border-dark hidden md:block"></span>
+<div class="hidden md:flex items-center text-sm text-gray-500 dark:text-gray-400">
+<a class="hover:text-primary transition-colors" href="#">Projects</a>
+<span class="mx-2">/</span>
+<span class="text-gray-900 dark:text-white font-medium">New Project</span>
+</div>
+</div>
+<div class="flex items-center space-x-4">
+<button class="p-2 rounded-full hover:bg-gray-100 dark:hover:bg-slate-700 text-gray-500 dark:text-gray-400 transition-colors">
+<span class="material-icons">help_outline</span>
+</button>
+<button class="flex items-center space-x-2 text-sm font-medium text-gray-700 dark:text-gray-200 hover:text-primary dark:hover:text-primary transition-colors">
+<span>Save Draft</span>
+</button>
+<button class="text-gray-400 hover:text-gray-600 dark:hover:text-gray-200" onclick="document.documentElement.classList.toggle('dark')">
+<span class="material-icons">dark_mode</span>
+</button>
+</div>
+</nav>
+<main class="flex-grow flex flex-col items-center py-10 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto w-full">
+<div class="w-full max-w-3xl mb-12">
+<div class="flex items-center justify-between relative">
+<div class="absolute left-0 top-1/2 transform -translate-y-1/2 w-full h-1 bg-gray-200 dark:bg-gray-700 -z-10 rounded-full"></div>
+<div class="absolute left-0 top-1/2 transform -translate-y-1/2 w-1/2 h-1 bg-primary -z-10 rounded-full transition-all duration-500"></div>
+<div class="flex flex-col items-center group cursor-pointer">
+<div class="w-10 h-10 rounded-full bg-primary text-white flex items-center justify-center font-bold shadow-md ring-4 ring-background-light dark:ring-background-dark">
+<span class="material-icons text-sm">check</span>
+</div>
+<span class="mt-2 text-xs font-semibold text-primary">Project Name</span>
+</div>
+<div class="flex flex-col items-center">
+<div class="w-10 h-10 rounded-full bg-primary text-white flex items-center justify-center font-bold shadow-md ring-4 ring-primary ring-opacity-30">
+                        2
+                    </div>
+<span class="mt-2 text-xs font-semibold text-gray-900 dark:text-white">Choose Template</span>
+</div>
+<div class="flex flex-col items-center">
+<div class="w-10 h-10 rounded-full bg-white dark:bg-slate-700 border-2 border-gray-300 dark:border-gray-600 text-gray-400 dark:text-gray-500 flex items-center justify-center font-bold shadow-sm ring-4 ring-background-light dark:ring-background-dark">
+                        3
+                    </div>
+<span class="mt-2 text-xs font-medium text-gray-500 dark:text-gray-400">Configuration</span>
+</div>
+</div>
+</div>
+<div class="text-center mb-10">
+<h1 class="text-3xl font-bold text-gray-900 dark:text-white mb-3">How do you want to start?</h1>
+<p class="text-gray-600 dark:text-gray-400 max-w-lg mx-auto">Choose a professionally designed template or let our AI generate a custom layout based on your needs.</p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6 w-full max-w-4xl mb-12">
+<div class="relative group bg-surface-light dark:bg-surface-dark border border-purple-200 dark:border-purple-900/50 rounded-xl p-6 hover:shadow-xl transition-all duration-300 cursor-pointer overflow-hidden">
+<div class="absolute top-0 right-0 p-3 opacity-10 group-hover:opacity-20 transition-opacity">
+<span class="material-icons text-9xl text-purple-500">auto_awesome</span>
+</div>
+<div class="relative z-10">
+<div class="w-12 h-12 rounded-lg bg-gradient-to-br from-purple-500 to-indigo-600 flex items-center justify-center mb-4 shadow-lg">
+<span class="material-icons text-white">auto_awesome</span>
+</div>
+<h3 class="text-lg font-bold text-gray-900 dark:text-white mb-2">Start with AI</h3>
+<p class="text-sm text-gray-500 dark:text-gray-400 mb-6">Describe your business and let our AI build a complete structure, copy, and design for you in seconds.</p>
+<button class="w-full py-2.5 rounded-lg bg-indigo-50 dark:bg-slate-700 text-primary font-medium hover:bg-primary hover:text-white transition-colors flex items-center justify-center">
+                        Generate with AI <span class="material-icons text-sm ml-2">arrow_forward</span>
+</button>
+</div>
+<div class="absolute inset-0 border-2 border-transparent group-hover:border-primary rounded-xl transition-colors pointer-events-none"></div>
+</div>
+<div class="relative group bg-surface-light dark:bg-surface-dark border border-border-light dark:border-border-dark rounded-xl p-6 hover:shadow-xl transition-all duration-300 cursor-pointer">
+<div class="absolute top-0 right-0 p-3 opacity-10 group-hover:opacity-20 transition-opacity">
+<span class="material-icons text-9xl text-blue-500">dashboard</span>
+</div>
+<div class="relative z-10">
+<div class="w-12 h-12 rounded-lg bg-blue-100 dark:bg-blue-900/30 flex items-center justify-center mb-4">
+<span class="material-icons text-blue-600 dark:text-blue-400">view_quilt</span>
+</div>
+<h3 class="text-lg font-bold text-gray-900 dark:text-white mb-2">Select a Template</h3>
+<p class="text-sm text-gray-500 dark:text-gray-400 mb-6">Browse our library of high-converting templates and customize every detail with our drag-and-drop builder.</p>
+<button class="w-full py-2.5 rounded-lg bg-gray-50 dark:bg-slate-700 text-gray-700 dark:text-gray-200 font-medium hover:bg-gray-200 dark:hover:bg-slate-600 transition-colors flex items-center justify-center">
+                        Browse Templates <span class="material-icons text-sm ml-2">arrow_downward</span>
+</button>
+</div>
+<div class="absolute inset-0 border-2 border-transparent group-hover:border-blue-400 rounded-xl transition-colors pointer-events-none"></div>
+</div>
+</div>
+<div class="w-full mb-8">
+<div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+<div class="flex items-center space-x-2 overflow-x-auto pb-2 md:pb-0 no-scrollbar">
+<button class="px-4 py-2 rounded-full bg-primary text-white text-sm font-medium whitespace-nowrap shadow-sm">All Templates</button>
+<button class="px-4 py-2 rounded-full bg-white dark:bg-surface-dark border border-border-light dark:border-border-dark text-gray-600 dark:text-gray-300 text-sm font-medium hover:bg-gray-50 dark:hover:bg-slate-700 whitespace-nowrap transition-colors">SaaS</button>
+<button class="px-4 py-2 rounded-full bg-white dark:bg-surface-dark border border-border-light dark:border-border-dark text-gray-600 dark:text-gray-300 text-sm font-medium hover:bg-gray-50 dark:hover:bg-slate-700 whitespace-nowrap transition-colors">E-commerce</button>
+<button class="px-4 py-2 rounded-full bg-white dark:bg-surface-dark border border-border-light dark:border-border-dark text-gray-600 dark:text-gray-300 text-sm font-medium hover:bg-gray-50 dark:hover:bg-slate-700 whitespace-nowrap transition-colors">Portfolio</button>
+<button class="px-4 py-2 rounded-full bg-white dark:bg-surface-dark border border-border-light dark:border-border-dark text-gray-600 dark:text-gray-300 text-sm font-medium hover:bg-gray-50 dark:hover:bg-slate-700 whitespace-nowrap transition-colors">Agency</button>
+</div>
+<div class="relative w-full md:w-64">
+<span class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+<span class="material-icons text-gray-400 text-lg">search</span>
+</span>
+<input class="block w-full pl-10 pr-3 py-2 border border-border-light dark:border-border-dark rounded-lg leading-5 bg-white dark:bg-surface-dark text-gray-900 dark:text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary sm:text-sm transition-colors" placeholder="Search templates..." type="text"/>
+</div>
+</div>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 w-full">
+<div class="group flex flex-col bg-surface-light dark:bg-surface-dark rounded-xl overflow-hidden border border-border-light dark:border-border-dark hover:shadow-xl hover:border-primary dark:hover:border-primary transition-all duration-300">
+<div class="relative aspect-[4/3] bg-gray-100 dark:bg-slate-700 overflow-hidden">
+<img alt="SaaS Dashboard Template" class="object-cover w-full h-full transform group-hover:scale-105 transition-transform duration-500" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBZRduL1n4RUu3UW2JCXMku9PN1WDKPFj7pxtYjdAu5t7eorrFEIYXetDv7poN8QImPyuP9moB0Le0Lx1A1VA0i6Zx3hbWTkGIy-_EGPMNlpi51TF8pbMJAMEpOu5fkddQ0hs8Jxtk_zidqFOgEfN_c8a-NgiYVkSNBfft4T1BNxEpP3GPbohvoUNIqpwA_4wvTP-aufZtrw-u7J4ojmGShZUAurvGQFMQycXxTF00URgZS-895aAllpXd2aQT_vwBNUXPYtMUvT6k"/>
+<div class="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center space-x-3 backdrop-blur-sm">
+<button class="px-4 py-2 bg-white text-gray-900 text-sm font-medium rounded-lg hover:bg-gray-100 transition-colors">Preview</button>
+<button class="px-4 py-2 bg-primary text-white text-sm font-medium rounded-lg hover:bg-secondary transition-colors">Select</button>
+</div>
+<div class="absolute top-2 left-2 bg-black/60 text-white text-xs px-2 py-1 rounded backdrop-blur-md">Popular</div>
+</div>
+<div class="p-4">
+<div class="flex justify-between items-start mb-1">
+<h4 class="text-sm font-bold text-gray-900 dark:text-white">FinTech Pro</h4>
+<span class="text-xs text-gray-500 dark:text-gray-400 bg-gray-100 dark:bg-slate-700 px-2 py-0.5 rounded">SaaS</span>
+</div>
+<p class="text-xs text-gray-500 dark:text-gray-400">Clean dashboard for financial apps</p>
+</div>
+</div>
+<div class="group flex flex-col bg-surface-light dark:bg-surface-dark rounded-xl overflow-hidden border border-border-light dark:border-border-dark hover:shadow-xl hover:border-primary dark:hover:border-primary transition-all duration-300">
+<div class="relative aspect-[4/3] bg-gray-100 dark:bg-slate-700 overflow-hidden">
+<img alt="Agency Portfolio Template" class="object-cover w-full h-full transform group-hover:scale-105 transition-transform duration-500" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAQINPMGVfJGGWL04H8ZkXAM1MAbN5z91Xql8NJ_NTVMVDzV5YybMWUSyHtrQWQUgSwFFFnQQjeFUkbhuODH0fWDbNH4hNdyYuK8UFJY-M0iyw_b9zkpshuDj7kfXNQOTh4zBne9Bntmv-FMZqSAr01YUMdqJDKzbsq68ejj_JxMR3tMPWozogY4oXdcaIIOp-z9mfYRTLUzQF-ztCN9Ekl66YKXATmYIIPOb_jKyz61eKGc9kj0boE8GxqyTNvQd5D7Wvm_Cu1Dao"/>
+<div class="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center space-x-3 backdrop-blur-sm">
+<button class="px-4 py-2 bg-white text-gray-900 text-sm font-medium rounded-lg hover:bg-gray-100 transition-colors">Preview</button>
+<button class="px-4 py-2 bg-primary text-white text-sm font-medium rounded-lg hover:bg-secondary transition-colors">Select</button>
+</div>
+</div>
+<div class="p-4">
+<div class="flex justify-between items-start mb-1">
+<h4 class="text-sm font-bold text-gray-900 dark:text-white">Creative Studio</h4>
+<span class="text-xs text-gray-500 dark:text-gray-400 bg-gray-100 dark:bg-slate-700 px-2 py-0.5 rounded">Agency</span>
+</div>
+<p class="text-xs text-gray-500 dark:text-gray-400">Bold typography for creative agencies</p>
+</div>
+</div>
+<div class="group flex flex-col bg-surface-light dark:bg-surface-dark rounded-xl overflow-hidden border border-border-light dark:border-border-dark hover:shadow-xl hover:border-primary dark:hover:border-primary transition-all duration-300">
+<div class="relative aspect-[4/3] bg-gray-100 dark:bg-slate-700 overflow-hidden">
+<img alt="E-commerce Store Template" class="object-cover w-full h-full transform group-hover:scale-105 transition-transform duration-500" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC4JCBHyTI7ZECWJCQ1659-Q8ECdxPIDs16hDA-Sbqj8K3ym1gGdwTQb1ogPSnqZDUE7K1PdjcsplwOAbGR-keb2oMbdyKSg_I69ZwYBBFwAKGuj9NqtoBYkxUXYbBLL-BAXA3E5nO8tLjeRaYGYGGhWstnoP41rek0ta1reRqWFDvLMVYNcbNF8AWneH3pzXzOpspnlTdRpbmAc84I46h915CGZZ4uluEZoQHG8PlafzRwN0-4vHEyQMmbouTxUI2kJb3DjiUJgEc"/>
+<div class="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center space-x-3 backdrop-blur-sm">
+<button class="px-4 py-2 bg-white text-gray-900 text-sm font-medium rounded-lg hover:bg-gray-100 transition-colors">Preview</button>
+<button class="px-4 py-2 bg-primary text-white text-sm font-medium rounded-lg hover:bg-secondary transition-colors">Select</button>
+</div>
+</div>
+<div class="p-4">
+<div class="flex justify-between items-start mb-1">
+<h4 class="text-sm font-bold text-gray-900 dark:text-white">Nordic Shop</h4>
+<span class="text-xs text-gray-500 dark:text-gray-400 bg-gray-100 dark:bg-slate-700 px-2 py-0.5 rounded">E-comm</span>
+</div>
+<p class="text-xs text-gray-500 dark:text-gray-400">Minimalist layout for retail</p>
+</div>
+</div>
+<div class="group flex flex-col bg-surface-light dark:bg-surface-dark rounded-xl overflow-hidden border border-border-light dark:border-border-dark hover:shadow-xl hover:border-primary dark:hover:border-primary transition-all duration-300">
+<div class="relative aspect-[4/3] bg-gray-100 dark:bg-slate-700 overflow-hidden">
+<img alt="Tech Startup Template" class="object-cover w-full h-full transform group-hover:scale-105 transition-transform duration-500" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD2_cKN3wauloJKXqghtfr4r7p0L76gj-ATDYyKAMGh1Dkb0g7Ikf8rlefm5vmkS8faqbiKNYGZRRepRh1t-hjCwN7K8i1kgfJbIF2OpIwA7yYoRcKLTorlopNXZp8eYeYopojx8_GrIepSkPhPAD8OCcZWKVyCQuR0pU4KFCd_8eAmjx3DQrRtN86gVsCjoW6Ru1MPdUfe-FWzLC7S97KIrPF5MzRMN0vzk1C-Hx6h4rycmH9-rc6QzbN5MaeakIJ2_AzZbc36OkA"/>
+<div class="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center space-x-3 backdrop-blur-sm">
+<button class="px-4 py-2 bg-white text-gray-900 text-sm font-medium rounded-lg hover:bg-gray-100 transition-colors">Preview</button>
+<button class="px-4 py-2 bg-primary text-white text-sm font-medium rounded-lg hover:bg-secondary transition-colors">Select</button>
+</div>
+<div class="absolute top-2 left-2 bg-indigo-500 text-white text-xs px-2 py-1 rounded backdrop-blur-md">New</div>
+</div>
+<div class="p-4">
+<div class="flex justify-between items-start mb-1">
+<h4 class="text-sm font-bold text-gray-900 dark:text-white">Launchpad</h4>
+<span class="text-xs text-gray-500 dark:text-gray-400 bg-gray-100 dark:bg-slate-700 px-2 py-0.5 rounded">Startup</span>
+</div>
+<p class="text-xs text-gray-500 dark:text-gray-400">High-contrast dark mode ready</p>
+</div>
+</div>
+<div class="group flex flex-col bg-surface-light dark:bg-surface-dark rounded-xl overflow-hidden border border-border-light dark:border-border-dark hover:shadow-xl hover:border-primary dark:hover:border-primary transition-all duration-300">
+<div class="relative aspect-[4/3] bg-gray-100 dark:bg-slate-700 overflow-hidden">
+<img alt="Education Template" class="object-cover w-full h-full transform group-hover:scale-105 transition-transform duration-500" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD2tS30sKWrJMqo2KKcwCsX0Kkkcx2ZUJ0g0tlVFcB6t181FD94fUnGWNR5-dwnXs_U9TTSvY5rxicVzoFA_6xWdkORcTm--svB2qfxOlB4IAHsfOfnd62zI1pMp6mKvUTioKZrdms2CxjINe71WmSdwibOnlR9wicDdnVsp131CW8z189A0OAx5yipG-W2NWBCZXTdoqtqhsSjsqLmbKTWeV5vDN734XhhxAf9m9YNk0KrF-IX8kvKIP7pho0kqkvxuEiMvzRxVFA"/>
+<div class="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center space-x-3 backdrop-blur-sm">
+<button class="px-4 py-2 bg-white text-gray-900 text-sm font-medium rounded-lg hover:bg-gray-100 transition-colors">Preview</button>
+<button class="px-4 py-2 bg-primary text-white text-sm font-medium rounded-lg hover:bg-secondary transition-colors">Select</button>
+</div>
+</div>
+<div class="p-4">
+<div class="flex justify-between items-start mb-1">
+<h4 class="text-sm font-bold text-gray-900 dark:text-white">EduLearn</h4>
+<span class="text-xs text-gray-500 dark:text-gray-400 bg-gray-100 dark:bg-slate-700 px-2 py-0.5 rounded">Education</span>
+</div>
+<p class="text-xs text-gray-500 dark:text-gray-400">Perfect for online courses</p>
+</div>
+</div>
+<div class="group flex flex-col bg-surface-light dark:bg-surface-dark rounded-xl overflow-hidden border border-border-light dark:border-border-dark hover:shadow-xl hover:border-primary dark:hover:border-primary transition-all duration-300">
+<div class="relative aspect-[4/3] bg-gray-100 dark:bg-slate-700 overflow-hidden">
+<img alt="Consulting Template" class="object-cover w-full h-full transform group-hover:scale-105 transition-transform duration-500" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC7V8ysM1xum-RWsoYeV2P9-Oz2s2A4OIAYKMi9-DTPMvCECMoyR2piK3vaT-vtTawc1iSDgxpSYtPtNL-RO66IvFAtRqo1LmhFG6gCKHSQOOA6rJE5dT2JLLoZnXeWA-IYSm4rOZzjXGFL2RjNAW2eggpGYIR1G2C23l7PQTA_7ZbhLE3PpIEIy2KfSzJ0MS8i0E2wfpdnnsCO1Dzf4eJdRuiWILbh9AbdZuYxeh2QNe42EtUR4AVVBDO5oY0_k7LPmITnWgqzguo"/>
+<div class="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center space-x-3 backdrop-blur-sm">
+<button class="px-4 py-2 bg-white text-gray-900 text-sm font-medium rounded-lg hover:bg-gray-100 transition-colors">Preview</button>
+<button class="px-4 py-2 bg-primary text-white text-sm font-medium rounded-lg hover:bg-secondary transition-colors">Select</button>
+</div>
+</div>
+<div class="p-4">
+<div class="flex justify-between items-start mb-1">
+<h4 class="text-sm font-bold text-gray-900 dark:text-white">Consult X</h4>
+<span class="text-xs text-gray-500 dark:text-gray-400 bg-gray-100 dark:bg-slate-700 px-2 py-0.5 rounded">Business</span>
+</div>
+<p class="text-xs text-gray-500 dark:text-gray-400">Corporate and clean style</p>
+</div>
+</div>
+<div class="group flex flex-col bg-surface-light dark:bg-surface-dark rounded-xl overflow-hidden border-2 border-dashed border-gray-300 dark:border-gray-600 hover:border-primary dark:hover:border-primary hover:bg-gray-50 dark:hover:bg-slate-750 transition-all duration-300 cursor-pointer h-full min-h-[280px]">
+<div class="flex-grow flex flex-col items-center justify-center p-6 text-center">
+<div class="w-16 h-16 rounded-full bg-gray-100 dark:bg-slate-700 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+<span class="material-icons text-gray-400 dark:text-gray-500 text-3xl">add</span>
+</div>
+<h4 class="text-base font-bold text-gray-900 dark:text-white mb-2">Start from Scratch</h4>
+<p class="text-sm text-gray-500 dark:text-gray-400">Build your page element by element with a blank canvas.</p>
+</div>
+</div>
+</div>
+</main>
+<div class="sticky bottom-0 bg-surface-light dark:bg-surface-dark border-t border-border-light dark:border-border-dark py-4 px-6 md:px-8 flex justify-between items-center z-40 shadow-lg-up">
+<button class="px-6 py-2.5 rounded-lg border border-border-light dark:border-border-dark text-gray-700 dark:text-gray-300 font-medium hover:bg-gray-50 dark:hover:bg-slate-700 transition-colors">
+            Back
+        </button>
+<div class="text-sm text-gray-500 dark:text-gray-400 hidden sm:block">
+            Step 2 of 3
+        </div>
+<button class="px-6 py-2.5 rounded-lg bg-gray-200 dark:bg-slate-700 text-gray-400 dark:text-gray-500 font-medium cursor-not-allowed" disabled="">
+            Next Step
+        </button>
+</div>
+
+</body></html>

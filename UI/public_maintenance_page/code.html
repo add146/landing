@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Maintenance - Landing Page Builder</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#6366F1","primary-hover": "#4f46e5",
+                        "bg-primary": "#FFFFFF",
+                        "text-primary": "#0F172A",
+                        "text-secondary": "#64748B",
+                        "border-light": "#E2E8F0",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "2xl": "1rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style>::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #F1F5F9; 
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #CBD5E1; 
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #94A3B8; 
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+</head>
+<body class="bg-bg-primary font-display min-h-screen flex flex-col relative overflow-x-hidden text-text-primary transition-colors duration-300">
+<header class="w-full flex justify-center px-4 py-6 z-10">
+<div class="flex items-center gap-3">
+<div class="size-8 text-primary bg-indigo-50 rounded-lg flex items-center justify-center">
+<span class="material-symbols-outlined text-2xl">construction</span>
+</div>
+<h2 class="text-xl font-bold tracking-tight text-slate-900">Landing Page Builder</h2>
+</div>
+</header>
+<main class="flex-grow flex items-center justify-center px-4 py-12 relative z-10">
+<div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-indigo-50/50 rounded-full blur-[100px] -z-10 pointer-events-none"></div>
+<div class="w-full max-w-2xl bg-white border border-border-light rounded-2xl p-8 md:p-12 shadow-lg shadow-slate-200/50 flex flex-col items-center text-center gap-8">
+<div class="w-full max-w-[400px] aspect-[16/9] rounded-xl overflow-hidden bg-slate-50 relative flex items-center justify-center mb-2 border border-slate-100">
+<div class="absolute inset-0 bg-cover bg-center opacity-80" data-alt="Abstract blue digital interface background representing system maintenance" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAHKHjNgHG43ZoPmU_oDCXd0wetAEh-U9QQvdBS0Mls8LCto0hqXRfvUrnGuN0IRSxUcqco4jBec1XliO7dFhYs6WZLs8qq7PvCI_omEvvUzK6tU5bE46aTuQfD92LCyi0PfevuzdQxm-B8c-FjdZehgKjpHooDHU0MO_N98laKCI3yUvzUmH3TwEAK0W4GdElU3eufruDV1qagbFWApgBs4vX9-vpz_a7VT_vv3NGo0H96x6cUmIEedaXfF-B1jmf0vRM4mSmR-n0'); filter: saturate(0.8) brightness(1.1);">
+</div>
+<div class="absolute inset-0 bg-gradient-to-t from-slate-900/40 to-transparent opacity-60"></div>
+<div class="relative z-10 flex flex-col items-center gap-2">
+<span class="material-symbols-outlined text-6xl text-white drop-shadow-md">engineering</span>
+</div>
+</div>
+<div class="space-y-4 max-w-lg">
+<h1 class="text-3xl md:text-4xl font-extrabold tracking-tight text-text-primary">
+                    We're building something amazing
+                </h1>
+<p class="text-text-secondary text-lg leading-relaxed">
+                    Our platform is currently undergoing scheduled maintenance to improve your experience. We're polishing the pixels and will be back online shortly.
+                </p>
+</div>
+<div class="w-full max-w-md space-y-2">
+<div class="flex justify-between items-end px-1">
+<span class="text-sm font-medium text-slate-600">System Update</span>
+<span class="text-sm font-bold text-primary">85%</span>
+</div>
+<div class="w-full h-3 bg-slate-100 rounded-full overflow-hidden border border-slate-100">
+<div class="h-full bg-primary rounded-full relative overflow-hidden" style="width: 85%;">
+<div class="absolute inset-0 bg-white/20 w-full h-full animate-[shimmer_2s_infinite] bg-gradient-to-r from-transparent via-white/30 to-transparent -translate-x-full"></div>
+</div>
+</div>
+<p class="text-xs text-slate-400 text-right pt-1">Estimated time remaining: ~15 mins</p>
+</div>
+<hr class="w-full border-border-light"/>
+<div class="w-full max-w-md flex flex-col gap-4">
+<div class="text-center">
+<p class="text-base font-semibold text-slate-800">Get notified when we're back</p>
+<p class="text-sm text-slate-500 mt-1">Enter your email address to receive an instant update.</p>
+</div>
+<form class="flex flex-col sm:flex-row gap-3 mt-2" onsubmit="event.preventDefault();">
+<div class="relative flex-grow">
+<div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+<span class="material-symbols-outlined text-slate-400 text-[20px]">mail</span>
+</div>
+<input class="block w-full pl-10 pr-3 py-3 rounded-lg border-slate-200 bg-white text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all shadow-sm text-sm border" placeholder="name@company.com" required="" type="email"/>
+</div>
+<button class="inline-flex justify-center items-center gap-2 px-6 py-3 border border-transparent text-sm font-bold rounded-lg text-white bg-primary hover:bg-primary-hover focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary transition-colors shadow-lg shadow-indigo-200 whitespace-nowrap" type="submit">
+<span>Notify Me</span>
+<span class="material-symbols-outlined text-[18px]">arrow_forward</span>
+</button>
+</form>
+</div>
+</div>
+</main>
+<footer class="w-full py-8 text-center relative z-10 px-4">
+<div class="flex flex-col gap-6 items-center">
+<div class="flex items-center gap-6">
+<a aria-label="Twitter" class="text-slate-400 hover:text-primary transition-colors duration-200" href="#">
+<span class="material-symbols-outlined text-2xl">share</span>
+</a>
+<a aria-label="LinkedIn" class="text-slate-400 hover:text-primary transition-colors duration-200" href="#">
+<span class="material-symbols-outlined text-2xl">work</span>
+</a>
+<a aria-label="GitHub" class="text-slate-400 hover:text-primary transition-colors duration-200" href="#">
+<span class="material-symbols-outlined text-2xl">code</span>
+</a>
+</div>
+<div class="flex flex-col items-center gap-3">
+<div class="flex items-center gap-6 text-sm">
+<a class="text-slate-600 hover:text-primary transition-colors" href="#">Status Page</a>
+<span class="w-1 h-1 rounded-full bg-slate-300"></span>
+<a class="text-slate-600 hover:text-primary transition-colors" href="#">Help Center</a>
+</div>
+<p class="text-xs text-slate-400">© 2024 Landing Page Builder. All rights reserved.</p>
+</div>
+</div>
+</footer>
+<style>
+        @keyframes shimmer {
+            100% {
+                transform: translateX(100%);
+            }
+        }
+    </style>
+
+</body></html>

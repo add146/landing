@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Admin Financial Transactions</title>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#4043f2",
+                        "background-light": "#f6f6f8",
+                        "background-dark": "#101022",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display text-[#0d0d1c] dark:text-white overflow-x-hidden min-h-screen flex flex-col">
+<!-- Top Navigation -->
+<header class="w-full bg-[#f8f8fc] dark:bg-background-dark border-b border-[#e7e7f3] dark:border-gray-800">
+<div class="layout-container max-w-[1280px] mx-auto px-4 sm:px-8">
+<div class="flex items-center justify-between h-20">
+<!-- Logo & Search -->
+<div class="flex items-center gap-8">
+<div class="flex items-center gap-4 text-[#0d0d1c] dark:text-white">
+<div class="size-10 bg-primary/10 rounded-lg flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-2xl">dashboard</span>
+</div>
+<h2 class="text-lg font-bold leading-tight tracking-[-0.015em]">Landing Page Builder</h2>
+</div>
+<label class="hidden md:flex flex-col min-w-40 !h-10 max-w-64">
+<div class="flex w-full flex-1 items-stretch rounded-lg h-full group focus-within:ring-2 ring-primary/20 transition-all">
+<div class="text-[#4b4c9b] flex border-none bg-[#e7e7f3] dark:bg-gray-800 items-center justify-center pl-4 rounded-l-lg border-r-0">
+<span class="material-symbols-outlined" style="font-size: 20px;">search</span>
+</div>
+<input class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg text-[#0d0d1c] dark:text-white focus:outline-0 focus:ring-0 border-none bg-[#e7e7f3] dark:bg-gray-800 focus:border-none h-full placeholder:text-[#4b4c9b] px-4 rounded-l-none border-l-0 pl-2 text-sm font-normal leading-normal" placeholder="Search..." value=""/>
+</div>
+</label>
+</div>
+<!-- Right Actions -->
+<div class="flex items-center gap-8">
+<nav class="hidden lg:flex items-center gap-9">
+<a class="text-[#0d0d1c] dark:text-white hover:text-primary transition-colors text-sm font-medium leading-normal" href="#">Dashboard</a>
+<a class="text-[#0d0d1c] dark:text-white hover:text-primary transition-colors text-sm font-medium leading-normal" href="#">Users</a>
+<a class="text-primary text-sm font-medium leading-normal" href="#">Transactions</a>
+<a class="text-[#0d0d1c] dark:text-white hover:text-primary transition-colors text-sm font-medium leading-normal" href="#">Settings</a>
+</nav>
+<div class="flex items-center gap-4">
+<button class="relative p-2 text-[#0d0d1c] dark:text-white hover:bg-[#e7e7f3] dark:hover:bg-gray-800 rounded-full transition-colors">
+<span class="material-symbols-outlined">notifications</span>
+<span class="absolute top-2 right-2 w-2 h-2 bg-red-500 rounded-full"></span>
+</button>
+<div class="bg-center bg-no-repeat bg-cover rounded-full size-10 border border-[#e7e7f3] dark:border-gray-700 cursor-pointer" data-alt="User profile avatar showing a person smiling" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuAHJzODTREjPRUR2Hqp28Z1_S-hZoX4I0dG0rKPJ_NvVjprO1H8XRodkKnCUU2UUDHplxsK0fDjofxxyJQeNzQ4DahZzk6GehRhja_EkvDcwDR-RSa3WU2vkPPeZ06VuCRtjSihuj3ej4Q13KeKIce9QrWCbqdaqkMpyI5aFjcDbw62LMzF1yT73PMZWwWM4G62dPx0rRog-TOHB2qOGJPPUxVz89V3Uz2XUs0h2sa24iH9Q8AuQd82WFl9kqlxJ8xUm-2em-x82tE");'></div>
+</div>
+</div>
+</div>
+</div>
+</header>
+<!-- Main Content -->
+<main class="flex-1 flex justify-center py-8 px-4 sm:px-8">
+<div class="w-full max-w-[1200px] flex flex-col gap-6">
+<!-- Breadcrumbs -->
+<div class="flex flex-wrap gap-2 items-center">
+<a class="text-[#4b4c9b] hover:text-primary text-sm font-medium leading-normal transition-colors" href="#">Admin</a>
+<span class="material-symbols-outlined text-[#4b4c9b] text-base">chevron_right</span>
+<a class="text-[#4b4c9b] hover:text-primary text-sm font-medium leading-normal transition-colors" href="#">Finance</a>
+<span class="material-symbols-outlined text-[#4b4c9b] text-base">chevron_right</span>
+<span class="text-[#0d0d1c] dark:text-white text-sm font-medium leading-normal">Transactions</span>
+</div>
+<!-- Header -->
+<div class="flex flex-col md:flex-row md:items-end justify-between gap-4">
+<div class="flex flex-col gap-2">
+<h1 class="text-[#0d0d1c] dark:text-white text-3xl md:text-4xl font-black leading-tight tracking-[-0.033em]">Financial Transactions</h1>
+<p class="text-[#4b4c9b] text-base font-normal leading-normal max-w-2xl">Manage and audit all platform financial movements, review revenue streams, and handle payment discrepancies.</p>
+</div>
+<div class="flex items-center gap-3">
+<button class="flex items-center gap-2 px-4 py-2.5 bg-white dark:bg-gray-800 border border-[#cfcfe8] dark:border-gray-700 rounded-lg text-[#0d0d1c] dark:text-white font-medium text-sm hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors shadow-sm">
+<span class="material-symbols-outlined" style="font-size: 20px;">file_download</span>
+                        Export PDF
+                    </button>
+<button class="flex items-center gap-2 px-4 py-2.5 bg-primary rounded-lg text-white font-medium text-sm hover:bg-primary/90 transition-colors shadow-sm shadow-primary/20">
+<span class="material-symbols-outlined" style="font-size: 20px;">table_view</span>
+                        Export CSV
+                    </button>
+</div>
+</div>
+<!-- Stats Cards -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+<!-- Revenue Card -->
+<div class="flex flex-col gap-2 rounded-xl p-6 border border-[#cfcfe8] dark:border-gray-700 bg-white dark:bg-gray-800 shadow-sm relative overflow-hidden group">
+<div class="absolute right-0 top-0 p-6 opacity-10 group-hover:opacity-20 transition-opacity">
+<span class="material-symbols-outlined text-6xl text-primary">payments</span>
+</div>
+<div class="flex items-center gap-2">
+<p class="text-[#4b4c9b] dark:text-gray-400 text-sm font-medium leading-normal">Total Revenue (MTD)</p>
+<span class="material-symbols-outlined text-[#4b4c9b] text-sm cursor-help" title="Month to Date revenue">info</span>
+</div>
+<div class="flex items-end gap-3 mt-1">
+<p class="text-[#0d0d1c] dark:text-white tracking-tight text-3xl font-bold leading-none">$42,593.00</p>
+<div class="flex items-center gap-0.5 px-2 py-0.5 rounded-full bg-green-50 dark:bg-green-900/30 text-green-700 dark:text-green-400 text-xs font-bold mb-1">
+<span class="material-symbols-outlined text-sm">trending_up</span>
+<span>12%</span>
+</div>
+</div>
+<p class="text-xs text-[#4b4c9b] mt-1">+$5,230.00 vs last month</p>
+</div>
+<!-- Failed Payments Card -->
+<div class="flex flex-col gap-2 rounded-xl p-6 border border-[#cfcfe8] dark:border-gray-700 bg-white dark:bg-gray-800 shadow-sm relative overflow-hidden group">
+<div class="absolute right-0 top-0 p-6 opacity-10 group-hover:opacity-20 transition-opacity">
+<span class="material-symbols-outlined text-6xl text-red-500">credit_card_off</span>
+</div>
+<div class="flex items-center gap-2">
+<p class="text-[#4b4c9b] dark:text-gray-400 text-sm font-medium leading-normal">Failed Payments</p>
+<span class="material-symbols-outlined text-[#4b4c9b] text-sm cursor-help" title="Transactions that were declined or failed">info</span>
+</div>
+<div class="flex items-end gap-3 mt-1">
+<p class="text-[#0d0d1c] dark:text-white tracking-tight text-3xl font-bold leading-none">5</p>
+<div class="flex items-center gap-0.5 px-2 py-0.5 rounded-full bg-red-50 dark:bg-red-900/30 text-red-700 dark:text-red-400 text-xs font-bold mb-1">
+<span class="material-symbols-outlined text-sm">trending_up</span>
+<span>2%</span>
+</div>
+</div>
+<p class="text-xs text-[#4b4c9b] mt-1">Requires immediate attention</p>
+</div>
+</div>
+<!-- Toolbar & Filter -->
+<div class="flex flex-col md:flex-row gap-4 bg-white dark:bg-gray-800 p-4 rounded-xl border border-[#cfcfe8] dark:border-gray-700 shadow-sm items-center">
+<div class="relative flex-1 w-full md:w-auto">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-[#4b4c9b]" style="font-size: 20px;">search</span>
+<input class="w-full pl-10 pr-4 py-2.5 rounded-lg border border-[#cfcfe8] dark:border-gray-600 bg-[#f8f8fc] dark:bg-gray-700 text-[#0d0d1c] dark:text-white text-sm focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all placeholder:text-[#4b4c9b]" placeholder="Search by Transaction ID or User..."/>
+</div>
+<div class="flex gap-4 w-full md:w-auto overflow-x-auto pb-1 md:pb-0">
+<div class="relative min-w-[180px]">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-[#4b4c9b]" style="font-size: 20px;">calendar_today</span>
+<input class="w-full pl-10 pr-4 py-2.5 rounded-lg border border-[#cfcfe8] dark:border-gray-600 bg-[#f8f8fc] dark:bg-gray-700 text-[#0d0d1c] dark:text-white text-sm focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all placeholder:text-[#4b4c9b] cursor-pointer" placeholder="Select dates" readonly="" value="Oct 1, 2023 - Oct 31, 2023"/>
+<span class="material-symbols-outlined absolute right-3 top-1/2 -translate-y-1/2 text-[#4b4c9b] pointer-events-none" style="font-size: 18px;">expand_more</span>
+</div>
+<div class="relative min-w-[140px]">
+<select class="w-full pl-4 pr-10 py-2.5 rounded-lg border border-[#cfcfe8] dark:border-gray-600 bg-[#f8f8fc] dark:bg-gray-700 text-[#0d0d1c] dark:text-white text-sm focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all appearance-none cursor-pointer">
+<option value="">All Status</option>
+<option value="success">Success</option>
+<option value="failed">Failed</option>
+<option value="pending">Pending</option>
+</select>
+<span class="material-symbols-outlined absolute right-3 top-1/2 -translate-y-1/2 text-[#4b4c9b] pointer-events-none" style="font-size: 18px;">expand_more</span>
+</div>
+</div>
+</div>
+<!-- Transactions Table -->
+<div class="bg-white dark:bg-gray-800 border border-[#cfcfe8] dark:border-gray-700 rounded-xl shadow-sm overflow-hidden flex flex-col">
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="border-b border-[#e7e7f3] dark:border-gray-700 bg-[#f8f8fc] dark:bg-gray-900/50">
+<th class="p-4 py-3 text-xs font-semibold text-[#4b4c9b] uppercase tracking-wider whitespace-nowrap cursor-pointer hover:text-primary group">
+<div class="flex items-center gap-1">
+                                        Transaction ID
+                                        <span class="material-symbols-outlined opacity-0 group-hover:opacity-100 transition-opacity text-sm">arrow_downward</span>
+</div>
+</th>
+<th class="p-4 py-3 text-xs font-semibold text-[#4b4c9b] uppercase tracking-wider whitespace-nowrap">User</th>
+<th class="p-4 py-3 text-xs font-semibold text-[#4b4c9b] uppercase tracking-wider whitespace-nowrap">Plan</th>
+<th class="p-4 py-3 text-xs font-semibold text-[#4b4c9b] uppercase tracking-wider text-right whitespace-nowrap cursor-pointer hover:text-primary group">
+<div class="flex items-center justify-end gap-1">
+                                        Amount
+                                        <span class="material-symbols-outlined opacity-0 group-hover:opacity-100 transition-opacity text-sm">arrow_downward</span>
+</div>
+</th>
+<th class="p-4 py-3 text-xs font-semibold text-[#4b4c9b] uppercase tracking-wider whitespace-nowrap cursor-pointer hover:text-primary group">
+<div class="flex items-center gap-1">
+                                        Date
+                                        <span class="material-symbols-outlined opacity-100 text-primary transition-opacity text-sm">arrow_downward</span>
+</div>
+</th>
+<th class="p-4 py-3 text-xs font-semibold text-[#4b4c9b] uppercase tracking-wider whitespace-nowrap text-center">Status</th>
+<th class="p-4 py-3 text-xs font-semibold text-[#4b4c9b] uppercase tracking-wider whitespace-nowrap w-10"></th>
+</tr>
+</thead>
+<tbody class="divide-y divide-[#e7e7f3] dark:divide-gray-700">
+<!-- Row 1 -->
+<tr class="hover:bg-[#f8f8fc] dark:hover:bg-gray-700/50 transition-colors group">
+<td class="p-4 whitespace-nowrap">
+<span class="text-sm font-medium text-[#0d0d1c] dark:text-white font-mono">#TRX-9982</span>
+</td>
+<td class="p-4 whitespace-nowrap">
+<div class="flex items-center gap-3">
+<div class="size-8 rounded-full bg-gray-200 bg-cover bg-center" data-alt="Avatar of Sarah Smith" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCAOyiUGTyWQ2Qgj7ebjLUXwIXPICV0Yn_zFs1FcCEb-Ft05eN-UMaWbF2ob_JOp6I6XN7nZcufeSPzU09IVMmyY20vMY4EDgxOcr5FduEowVZzrDSGwioLOK9aF_Cc5GbiyzoUicVOQEJdU1ZlsYitMcNfVU_rE9dU4NQlajp21SelVV7fc_o23U-I4kVQEMzFotYaUkXgyQYJee1dN9Ge1UW0d-lRoYKuwxwhkaZddt-ayXYZTTLMANsr5dldbQKam5j28JS5KiM");'></div>
+<div class="flex flex-col">
+<span class="text-sm font-medium text-[#0d0d1c] dark:text-white">Sarah Smith</span>
+<span class="text-xs text-[#4b4c9b]">sarah@company.com</span>
+</div>
+</div>
+</td>
+<td class="p-4 whitespace-nowrap">
+<span class="text-sm text-[#0d0d1c] dark:text-gray-300">Pro Monthly</span>
+</td>
+<td class="p-4 whitespace-nowrap text-right">
+<span class="text-sm font-semibold text-[#0d0d1c] dark:text-white tabular-nums">$49.00</span>
+</td>
+<td class="p-4 whitespace-nowrap">
+<span class="text-sm text-[#0d0d1c] dark:text-gray-300">Oct 24, 2023 <span class="text-[#4b4c9b] text-xs ml-1">10:42 AM</span></span>
+</td>
+<td class="p-4 whitespace-nowrap text-center">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium bg-green-100 text-green-800 dark:bg-green-900/40 dark:text-green-400 border border-green-200 dark:border-green-800/50">
+<span class="w-1.5 h-1.5 rounded-full bg-green-600 dark:bg-green-400"></span>
+                                        Success
+                                    </span>
+</td>
+<td class="p-4 whitespace-nowrap text-right">
+<button class="text-[#4b4c9b] hover:text-primary p-1 rounded hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors">
+<span class="material-symbols-outlined text-xl">more_vert</span>
+</button>
+</td>
+</tr>
+<!-- Row 2 -->
+<tr class="hover:bg-[#f8f8fc] dark:hover:bg-gray-700/50 transition-colors group">
+<td class="p-4 whitespace-nowrap">
+<span class="text-sm font-medium text-[#0d0d1c] dark:text-white font-mono">#TRX-9981</span>
+</td>
+<td class="p-4 whitespace-nowrap">
+<div class="flex items-center gap-3">
+<div class="size-8 rounded-full bg-gray-200 bg-cover bg-center" data-alt="Avatar of Michael Chen" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuDIfNHZAUFiGK1A7Xfv4_RgrYbTF_c3onoCefZuPe_AhKjroYGo74ML5EXWQdWnzf8WowOYLj7P7O9G7_515OfTaqihBkVKz2OztSBj7WS3DS0XSqSh2ZQyY1HLP_udj5ZpJUKOtDMxCwcKEjiwzxrCN9YrFd2Z-w3FicHCiCUkV0LLGHpiFEQmt3K8NTIFh3Xqgmo-SyfTDYkvJXivCXXxdft5dZgV64X7wfXk1Q8ApAwH7bgnrrc-UiL4P5aVtD_dPf98hZa3qhc");'></div>
+<div class="flex flex-col">
+<span class="text-sm font-medium text-[#0d0d1c] dark:text-white">Michael Chen</span>
+<span class="text-xs text-[#4b4c9b]">michael.c@tech.io</span>
+</div>
+</div>
+</td>
+<td class="p-4 whitespace-nowrap">
+<span class="text-sm text-[#0d0d1c] dark:text-gray-300">Starter Yearly</span>
+</td>
+<td class="p-4 whitespace-nowrap text-right">
+<span class="text-sm font-semibold text-[#0d0d1c] dark:text-white tabular-nums">$120.00</span>
+</td>
+<td class="p-4 whitespace-nowrap">
+<span class="text-sm text-[#0d0d1c] dark:text-gray-300">Oct 23, 2023 <span class="text-[#4b4c9b] text-xs ml-1">02:15 PM</span></span>
+</td>
+<td class="p-4 whitespace-nowrap text-center">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium bg-red-100 text-red-800 dark:bg-red-900/40 dark:text-red-400 border border-red-200 dark:border-red-800/50">
+<span class="w-1.5 h-1.5 rounded-full bg-red-600 dark:bg-red-400"></span>
+                                        Failed
+                                    </span>
+</td>
+<td class="p-4 whitespace-nowrap text-right">
+<button class="text-[#4b4c9b] hover:text-primary p-1 rounded hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors">
+<span class="material-symbols-outlined text-xl">more_vert</span>
+</button>
+</td>
+</tr>
+<!-- Row 3 -->
+<tr class="hover:bg-[#f8f8fc] dark:hover:bg-gray-700/50 transition-colors group">
+<td class="p-4 whitespace-nowrap">
+<span class="text-sm font-medium text-[#0d0d1c] dark:text-white font-mono">#TRX-9980</span>
+</td>
+<td class="p-4 whitespace-nowrap">
+<div class="flex items-center gap-3">
+<div class="size-8 rounded-full bg-primary/10 flex items-center justify-center text-primary text-xs font-bold">
+                                            JD
+                                        </div>
+<div class="flex flex-col">
+<span class="text-sm font-medium text-[#0d0d1c] dark:text-white">John Doe</span>
+<span class="text-xs text-[#4b4c9b]">john@example.com</span>
+</div>
+</div>
+</td>
+<td class="p-4 whitespace-nowrap">
+<span class="text-sm text-[#0d0d1c] dark:text-gray-300">Pro Monthly</span>
+</td>
+<td class="p-4 whitespace-nowrap text-right">
+<span class="text-sm font-semibold text-[#0d0d1c] dark:text-white tabular-nums">$49.00</span>
+</td>
+<td class="p-4 whitespace-nowrap">
+<span class="text-sm text-[#0d0d1c] dark:text-gray-300">Oct 23, 2023 <span class="text-[#4b4c9b] text-xs ml-1">09:30 AM</span></span>
+</td>
+<td class="p-4 whitespace-nowrap text-center">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium bg-green-100 text-green-800 dark:bg-green-900/40 dark:text-green-400 border border-green-200 dark:border-green-800/50">
+<span class="w-1.5 h-1.5 rounded-full bg-green-600 dark:bg-green-400"></span>
+                                        Success
+                                    </span>
+</td>
+<td class="p-4 whitespace-nowrap text-right">
+<button class="text-[#4b4c9b] hover:text-primary p-1 rounded hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors">
+<span class="material-symbols-outlined text-xl">more_vert</span>
+</button>
+</td>
+</tr>
+<!-- Row 4 -->
+<tr class="hover:bg-[#f8f8fc] dark:hover:bg-gray-700/50 transition-colors group">
+<td class="p-4 whitespace-nowrap">
+<span class="text-sm font-medium text-[#0d0d1c] dark:text-white font-mono">#TRX-9979</span>
+</td>
+<td class="p-4 whitespace-nowrap">
+<div class="flex items-center gap-3">
+<div class="size-8 rounded-full bg-gray-200 bg-cover bg-center" data-alt="Avatar of Emily Davis" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCV32iFkAkUsK4vyiE60dJtDFUHPt8BLOYxbmTCllgMLZmmBqJWUrDPn-aDPlDPufArj5j7jKDNQtdCpVA9TMa1gJn5lWM-JOOGYJ6DtwZ0l3IJ5y4PciwoIxvQFlH4t1zx57BJNZ1NNVb1i04CNa8c_LskZP445Kqx7UopakYF7CFXm_mflBzE9vEisVdJlOsPMsJ8joY7dWn-WbNw-4BWL6IEZW3DB19xOgQVrZ8Qj5gTqK3PayuQZA2yNXG03YeF1X2ozEOECnI");'></div>
+<div class="flex flex-col">
+<span class="text-sm font-medium text-[#0d0d1c] dark:text-white">Emily Davis</span>
+<span class="text-xs text-[#4b4c9b]">emily.d@studio.net</span>
+</div>
+</div>
+</td>
+<td class="p-4 whitespace-nowrap">
+<span class="text-sm text-[#0d0d1c] dark:text-gray-300">Enterprise</span>
+</td>
+<td class="p-4 whitespace-nowrap text-right">
+<span class="text-sm font-semibold text-[#0d0d1c] dark:text-white tabular-nums">$299.00</span>
+</td>
+<td class="p-4 whitespace-nowrap">
+<span class="text-sm text-[#0d0d1c] dark:text-gray-300">Oct 22, 2023 <span class="text-[#4b4c9b] text-xs ml-1">04:45 PM</span></span>
+</td>
+<td class="p-4 whitespace-nowrap text-center">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium bg-green-100 text-green-800 dark:bg-green-900/40 dark:text-green-400 border border-green-200 dark:border-green-800/50">
+<span class="w-1.5 h-1.5 rounded-full bg-green-600 dark:bg-green-400"></span>
+                                        Success
+                                    </span>
+</td>
+<td class="p-4 whitespace-nowrap text-right">
+<button class="text-[#4b4c9b] hover:text-primary p-1 rounded hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors">
+<span class="material-symbols-outlined text-xl">more_vert</span>
+</button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- Pagination -->
+<div class="px-4 py-3 border-t border-[#e7e7f3] dark:border-gray-700 bg-white dark:bg-gray-800 flex items-center justify-between">
+<div class="hidden sm:flex flex-1 items-center justify-between">
+<div>
+<p class="text-sm text-[#4b4c9b]">
+                                Showing <span class="font-medium text-[#0d0d1c] dark:text-white">1</span> to <span class="font-medium text-[#0d0d1c] dark:text-white">4</span> of <span class="font-medium text-[#0d0d1c] dark:text-white">128</span> results
+                            </p>
+</div>
+<div>
+<nav aria-label="Pagination" class="isolate inline-flex -space-x-px rounded-md shadow-sm">
+<a class="relative inline-flex items-center rounded-l-md px-2 py-2 text-[#4b4c9b] ring-1 ring-inset ring-[#e7e7f3] dark:ring-gray-600 hover:bg-gray-50 dark:hover:bg-gray-700 focus:z-20 focus:outline-offset-0" href="#">
+<span class="sr-only">Previous</span>
+<span class="material-symbols-outlined text-sm">chevron_left</span>
+</a>
+<a aria-current="page" class="relative z-10 inline-flex items-center bg-primary px-4 py-2 text-sm font-semibold text-white focus:z-20 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary" href="#">1</a>
+<a class="relative inline-flex items-center px-4 py-2 text-sm font-semibold text-[#0d0d1c] dark:text-white ring-1 ring-inset ring-[#e7e7f3] dark:ring-gray-600 hover:bg-gray-50 dark:hover:bg-gray-700 focus:z-20 focus:outline-offset-0" href="#">2</a>
+<a class="relative hidden items-center px-4 py-2 text-sm font-semibold text-[#0d0d1c] dark:text-white ring-1 ring-inset ring-[#e7e7f3] dark:ring-gray-600 hover:bg-gray-50 dark:hover:bg-gray-700 focus:z-20 focus:outline-offset-0 md:inline-flex" href="#">3</a>
+<span class="relative inline-flex items-center px-4 py-2 text-sm font-semibold text-[#4b4c9b] ring-1 ring-inset ring-[#e7e7f3] dark:ring-gray-600 focus:outline-offset-0">...</span>
+<a class="relative hidden items-center px-4 py-2 text-sm font-semibold text-[#0d0d1c] dark:text-white ring-1 ring-inset ring-[#e7e7f3] dark:ring-gray-600 hover:bg-gray-50 dark:hover:bg-gray-700 focus:z-20 focus:outline-offset-0 md:inline-flex" href="#">8</a>
+<a class="relative inline-flex items-center rounded-r-md px-2 py-2 text-[#4b4c9b] ring-1 ring-inset ring-[#e7e7f3] dark:ring-gray-600 hover:bg-gray-50 dark:hover:bg-gray-700 focus:z-20 focus:outline-offset-0" href="#">
+<span class="sr-only">Next</span>
+<span class="material-symbols-outlined text-sm">chevron_right</span>
+</a>
+</nav>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+</body></html>

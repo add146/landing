@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>File Upload Modal</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#4043f2",
+                        "background-light": "#f6f6f8",
+                        "background-dark": "#101022",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        /* Custom scrollbar for the table/list area */
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 6px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background-color: #cbd5e1;
+            border-radius: 20px;
+        }
+        .dark .custom-scrollbar::-webkit-scrollbar-thumb {
+            background-color: #374151;
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-white font-display min-h-screen flex items-center justify-center p-4">
+<!-- Modal Backdrop -->
+<div aria-hidden="true" class="fixed inset-0 bg-black/40 backdrop-blur-sm z-40 transition-opacity"></div>
+<!-- Modal Container -->
+<div class="relative z-50 w-full max-w-[800px] flex flex-col bg-white dark:bg-slate-900 rounded-xl shadow-2xl overflow-hidden max-h-[90vh]">
+<!-- Header -->
+<div class="flex items-center justify-between px-6 py-5 border-b border-slate-100 dark:border-slate-800">
+<h3 class="text-lg font-bold leading-tight tracking-tight text-slate-900 dark:text-white">Upload Media</h3>
+<button class="text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 transition-colors">
+<span class="material-symbols-outlined text-2xl">close</span>
+</button>
+</div>
+<!-- Scrollable Content -->
+<div class="flex-1 overflow-y-auto custom-scrollbar">
+<div class="p-6 flex flex-col gap-6">
+<!-- Drag & Drop Zone -->
+<div class="group relative flex flex-col items-center justify-center gap-4 rounded-xl border-2 border-dashed border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-800/50 hover:bg-primary/5 hover:border-primary dark:hover:border-primary transition-all duration-300 px-6 py-10 cursor-pointer">
+<div class="w-12 h-12 rounded-full bg-slate-200 dark:bg-slate-700 flex items-center justify-center text-primary group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined text-3xl">cloud_upload</span>
+</div>
+<div class="flex flex-col items-center gap-1 text-center">
+<p class="text-lg font-bold text-slate-900 dark:text-white">Drag and drop your files here</p>
+<p class="text-sm text-slate-500 dark:text-slate-400">JPG, PNG, GIF, MP4 up to 10MB</p>
+</div>
+<div class="relative flex items-center gap-2 mt-2">
+<span class="text-xs text-slate-400 uppercase font-semibold">Or</span>
+</div>
+<button class="flex items-center justify-center gap-2 h-10 px-6 rounded-lg bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-600 text-sm font-semibold text-slate-900 dark:text-white shadow-sm hover:bg-slate-50 dark:hover:bg-slate-700 transition-colors">
+<span class="material-symbols-outlined text-[20px]">folder_open</span>
+<span>Browse Files</span>
+</button>
+</div>
+<!-- Upload List Header -->
+<div class="flex items-center justify-between">
+<h4 class="text-sm font-semibold text-slate-900 dark:text-white">Uploading 3 files</h4>
+<span class="text-xs font-medium text-slate-500 dark:text-slate-400">2 completed</span>
+</div>
+<!-- File List Table -->
+<div class="overflow-hidden rounded-lg border border-slate-200 dark:border-slate-800">
+<table class="w-full text-left text-sm">
+<thead class="bg-slate-50 dark:bg-slate-800/80 border-b border-slate-200 dark:border-slate-700">
+<tr>
+<th class="px-4 py-3 font-medium text-slate-500 dark:text-slate-400 w-16">File</th>
+<th class="px-4 py-3 font-medium text-slate-500 dark:text-slate-400">Name</th>
+<th class="px-4 py-3 font-medium text-slate-500 dark:text-slate-400 w-24">Size</th>
+<th class="px-4 py-3 font-medium text-slate-500 dark:text-slate-400 w-1/3">Status</th>
+<th class="px-4 py-3 font-medium text-slate-500 dark:text-slate-400 w-12 text-center">Action</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-slate-100 dark:divide-slate-800 bg-white dark:bg-slate-900">
+<!-- Item 1: Completed -->
+<tr class="group hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors">
+<td class="px-4 py-3">
+<div class="h-10 w-10 rounded-lg bg-cover bg-center shadow-sm" data-alt="Abstract mountain landscape thumbnail" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCpE-t05nHhtjPz12gj9rLKgTzq2wcpOVlkx1kux-fIY-P1LANJNKOXXAeOhCxa0fRU8imklLfEdz26lQHtkCnSb-0EL45fCJg3CfBS-QxDj8xV9O-GTPN1PMmdNzI-tI1V1ZxNZB9ePUM0rPuMp8lCbVzKUlQRHQ-ZHLs9XbdqvG0rIxLR1AELQITM4kJ3nk_1wbr1iMn3vZZbOXwW0d0rLRwT-fDL36-wSzmHD446RU0enwg4aiiH_19AJwiQS_BCW2EhsKcOtec");'></div>
+</td>
+<td class="px-4 py-3 font-medium text-slate-900 dark:text-white truncate max-w-[150px]">
+                                    header_image_v2.jpg
+                                </td>
+<td class="px-4 py-3 text-slate-500 dark:text-slate-400 text-xs">2.4 MB</td>
+<td class="px-4 py-3">
+<div class="flex flex-col gap-1.5">
+<div class="flex items-center justify-between text-xs">
+<span class="text-primary font-medium">Completed</span>
+<span class="text-slate-400">100%</span>
+</div>
+<div class="h-1.5 w-full rounded-full bg-slate-100 dark:bg-slate-700 overflow-hidden">
+<div class="h-full bg-primary w-full rounded-full"></div>
+</div>
+</div>
+</td>
+<td class="px-4 py-3 text-center">
+<span class="material-symbols-outlined text-green-500 text-[20px]">check_circle</span>
+</td>
+</tr>
+<!-- Item 2: In Progress -->
+<tr class="group hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors">
+<td class="px-4 py-3">
+<div class="h-10 w-10 rounded-lg bg-slate-100 dark:bg-slate-800 flex items-center justify-center text-slate-500">
+<span class="material-symbols-outlined">movie</span>
+</div>
+</td>
+<td class="px-4 py-3 font-medium text-slate-900 dark:text-white truncate max-w-[150px]">
+                                    hero_video_promo.mp4
+                                </td>
+<td class="px-4 py-3 text-slate-500 dark:text-slate-400 text-xs">14 MB</td>
+<td class="px-4 py-3">
+<div class="flex flex-col gap-1.5">
+<div class="flex items-center justify-between text-xs">
+<span class="text-slate-700 dark:text-slate-300 font-medium">Uploading...</span>
+<span class="text-slate-400">45%</span>
+</div>
+<div class="h-1.5 w-full rounded-full bg-slate-100 dark:bg-slate-700 overflow-hidden">
+<div class="h-full bg-primary w-[45%] rounded-full animate-pulse"></div>
+</div>
+</div>
+</td>
+<td class="px-4 py-3 text-center">
+<button class="text-slate-400 hover:text-red-500 transition-colors">
+<span class="material-symbols-outlined text-[20px]">cancel</span>
+</button>
+</td>
+</tr>
+<!-- Item 3: Error/Warning or Waiting -->
+<tr class="group hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors">
+<td class="px-4 py-3">
+<div class="h-10 w-10 rounded-lg bg-cover bg-center shadow-sm" data-alt="Colorful abstract geometric shape thumbnail" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuB_vrLUHbdaP82f1sIKpLSH8mvgZSQkUwEZ5Ss64MzXVmB9VSxEM9Ez2k1mFRX4Jmfmwb3_xZ842M-68hTFVgMUxRMIAeAbdee1rkNggV6TeQSwaFqqxbUeCqZyBh2ywWDA984nTxMOOpmlDj3tNzCybOg11BD6seItG2DgSdJl8z0O5s0xWCaFe1QrWG30YlfNBLK9UfBSQgLerV7Fr6kfNBC2MkANBoBIdwBGgKJcd7cJ2vgLGegxmhkVj8sDdylSVDWlO_7EjFo");'></div>
+</td>
+<td class="px-4 py-3 font-medium text-slate-900 dark:text-white truncate max-w-[150px]">
+                                    logo_transparent.png
+                                </td>
+<td class="px-4 py-3 text-slate-500 dark:text-slate-400 text-xs">500 KB</td>
+<td class="px-4 py-3">
+<div class="flex flex-col gap-1.5">
+<div class="flex items-center justify-between text-xs">
+<span class="text-slate-500 dark:text-slate-400 font-medium">Waiting...</span>
+<span class="text-slate-400">0%</span>
+</div>
+<div class="h-1.5 w-full rounded-full bg-slate-100 dark:bg-slate-700 overflow-hidden">
+<div class="h-full bg-slate-300 dark:bg-slate-600 w-0 rounded-full"></div>
+</div>
+</div>
+</td>
+<td class="px-4 py-3 text-center">
+<button class="text-slate-400 hover:text-red-500 transition-colors">
+<span class="material-symbols-outlined text-[20px]">close</span>
+</button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<!-- Footer Actions -->
+<div class="border-t border-slate-100 dark:border-slate-800 px-6 py-4 flex items-center justify-end gap-3 bg-slate-50/50 dark:bg-slate-900">
+<button class="h-10 px-4 rounded-lg text-sm font-semibold text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors">
+                Cancel
+            </button>
+<button class="h-10 px-6 rounded-lg bg-primary text-white text-sm font-semibold hover:bg-primary/90 shadow-sm transition-colors flex items-center gap-2">
+<span>Done</span>
+<span class="material-symbols-outlined text-[18px]">check</span>
+</button>
+</div>
+</div>
+</body></html>

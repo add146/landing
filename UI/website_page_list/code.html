@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Website Page List - Dashboard</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,typography"></script>
+<script>
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              primary: "#6366f1", // Indigo 500
+              "primary-hover": "#4f46e5", // Indigo 600
+              "background-light": "#f3f4f6", // Gray 100
+              "background-dark": "#111827", // Gray 900
+              "surface-light": "#ffffff",
+              "surface-dark": "#1f2937", // Gray 800
+              "border-light": "#e5e7eb", // Gray 200
+              "border-dark": "#374151", // Gray 700
+              "text-main-light": "#111827",
+              "text-main-dark": "#f9fafb",
+              "text-sec-light": "#6b7280",
+              "text-sec-dark": "#9ca3af",
+            },
+            fontFamily: {
+              display: ["Inter", "sans-serif"],
+              sans: ["Inter", "sans-serif"],
+            },
+            borderRadius: {
+              DEFAULT: "0.5rem",
+              'lg': "0.75rem",
+              'xl': "1rem",
+            },
+          },
+        },
+      };
+    </script>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-text-main-light dark:text-text-main-dark font-sans antialiased transition-colors duration-200">
+<div class="flex h-screen overflow-hidden">
+<aside class="hidden w-64 flex-col border-r border-border-light dark:border-border-dark bg-surface-light dark:bg-surface-dark md:flex">
+<div class="flex h-16 items-center justify-center border-b border-border-light dark:border-border-dark px-6">
+<div class="flex items-center gap-2 font-bold text-xl text-primary">
+<span class="material-icons-round text-3xl">layers</span>
+<span>SiteBuilder</span>
+</div>
+</div>
+<nav class="flex-1 space-y-1 px-3 py-4">
+<a class="group flex items-center rounded-lg px-3 py-2 text-sm font-medium text-text-sec-light hover:bg-gray-100 hover:text-text-main-light dark:text-text-sec-dark dark:hover:bg-gray-700 dark:hover:text-text-main-dark" href="#">
+<span class="material-icons-round mr-3 text-xl">dashboard</span>
+                    Dashboard
+                </a>
+<a class="group flex items-center rounded-lg bg-primary/10 px-3 py-2 text-sm font-medium text-primary dark:bg-primary/20" href="#">
+<span class="material-icons-round mr-3 text-xl">web</span>
+                    Websites
+                </a>
+<a class="group flex items-center rounded-lg px-3 py-2 text-sm font-medium text-text-sec-light hover:bg-gray-100 hover:text-text-main-light dark:text-text-sec-dark dark:hover:bg-gray-700 dark:hover:text-text-main-dark" href="#">
+<span class="material-icons-round mr-3 text-xl">domain</span>
+                    Domains
+                </a>
+<a class="group flex items-center rounded-lg px-3 py-2 text-sm font-medium text-text-sec-light hover:bg-gray-100 hover:text-text-main-light dark:text-text-sec-dark dark:hover:bg-gray-700 dark:hover:text-text-main-dark" href="#">
+<span class="material-icons-round mr-3 text-xl">settings</span>
+                    Settings
+                </a>
+</nav>
+<div class="border-t border-border-light dark:border-border-dark p-4">
+<div class="flex items-center gap-3">
+<img alt="User Avatar" class="h-9 w-9 rounded-full bg-gray-300" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBVIveJLu_hxTz3fMJUPP8hwO24Htsq4fjXluZu9WMdmQ0nUS9bJ0HCtLt9sLcBcWqetx5-mq2AezD0r6yO6Ht080O3hrA1gubw3Fwm28tprn8DxLog5jH8vK49JDHpHTmBcU2UV9IVWR0IpPO2rxD4-JoI6UMhnUt2Q0m2Oh03un8gv8Dc49cZRcjgWMfz0VTJ6xDoBX8UEk1L_hMa6ONg9m2xz-It5gV2zyC1ThqaAahvJBPK3HRaKOCX7iGDJ4qhErmP2Vo78-0"/>
+<div>
+<p class="text-sm font-medium">Jane Doe</p>
+<p class="text-xs text-text-sec-light dark:text-text-sec-dark">Pro Plan</p>
+</div>
+</div>
+</div>
+</aside>
+<main class="flex-1 overflow-y-auto bg-background-light dark:bg-background-dark">
+<header class="flex h-16 items-center justify-between border-b border-border-light dark:border-border-dark bg-surface-light px-6 dark:bg-surface-dark">
+<nav class="flex text-sm text-text-sec-light dark:text-text-sec-dark">
+<ol class="flex items-center space-x-2">
+<li><a class="hover:text-primary" href="#">Websites</a></li>
+<li><span class="material-icons-round text-base">chevron_right</span></li>
+<li class="font-medium text-text-main-light dark:text-text-main-dark">My Portfolio</li>
+</ol>
+</nav>
+<div class="flex items-center gap-4">
+<button class="rounded-full p-2 text-text-sec-light hover:bg-gray-100 hover:text-text-main-light dark:text-text-sec-dark dark:hover:bg-gray-700 dark:hover:text-text-main-dark">
+<span class="material-icons-round">notifications</span>
+</button>
+<button class="rounded-full p-2 text-text-sec-light hover:bg-gray-100 hover:text-text-main-light dark:text-text-sec-dark dark:hover:bg-gray-700 dark:hover:text-text-main-dark" onclick="document.documentElement.classList.toggle('dark')">
+<span class="material-icons-round block dark:hidden">dark_mode</span>
+<span class="material-icons-round hidden dark:block">light_mode</span>
+</button>
+</div>
+</header>
+<div class="mx-auto max-w-6xl px-6 py-8">
+<div class="mb-8 flex flex-col justify-between gap-4 sm:flex-row sm:items-center">
+<div>
+<h1 class="text-2xl font-bold text-text-main-light dark:text-text-main-dark">Pages</h1>
+<p class="mt-1 text-sm text-text-sec-light dark:text-text-sec-dark">Manage the pages and structure of <span class="font-medium text-primary">My Portfolio</span>.</p>
+</div>
+<div class="flex items-center gap-3">
+<a class="flex items-center justify-center rounded-lg border border-border-light bg-surface-light px-4 py-2 text-sm font-medium text-text-main-light shadow-sm hover:bg-gray-50 dark:border-border-dark dark:bg-surface-dark dark:text-text-main-dark dark:hover:bg-gray-700" href="#">
+<span class="material-icons-round mr-2 text-lg">settings</span>
+                            Site Settings
+                        </a>
+<button class="flex items-center justify-center rounded-lg bg-primary px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-primary-hover focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 dark:focus:ring-offset-background-dark">
+<span class="material-icons-round mr-2 text-lg">add</span>
+                            Add New Page
+                        </button>
+</div>
+</div>
+<div class="mb-6 grid grid-cols-1 gap-4 sm:grid-cols-3">
+<div class="rounded-xl border border-border-light bg-surface-light p-4 shadow-sm dark:border-border-dark dark:bg-surface-dark">
+<div class="text-xs font-medium uppercase tracking-wider text-text-sec-light dark:text-text-sec-dark">Total Pages</div>
+<div class="mt-1 text-2xl font-bold">5</div>
+</div>
+<div class="rounded-xl border border-border-light bg-surface-light p-4 shadow-sm dark:border-border-dark dark:bg-surface-dark">
+<div class="text-xs font-medium uppercase tracking-wider text-text-sec-light dark:text-text-sec-dark">Published</div>
+<div class="mt-1 text-2xl font-bold text-green-500">4</div>
+</div>
+<div class="rounded-xl border border-border-light bg-surface-light p-4 shadow-sm dark:border-border-dark dark:bg-surface-dark">
+<div class="text-xs font-medium uppercase tracking-wider text-text-sec-light dark:text-text-sec-dark">Drafts</div>
+<div class="mt-1 text-2xl font-bold text-yellow-500">1</div>
+</div>
+</div>
+<div class="overflow-hidden rounded-xl border border-border-light bg-surface-light shadow-sm dark:border-border-dark dark:bg-surface-dark">
+<div class="flex items-center justify-between border-b border-border-light px-4 py-3 dark:border-border-dark">
+<div class="relative w-full max-w-xs">
+<div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
+<span class="material-icons-round text-lg text-text-sec-light dark:text-text-sec-dark">search</span>
+</div>
+<input class="block w-full rounded-lg border-border-light bg-gray-50 py-2 pl-10 pr-3 text-sm leading-5 placeholder-text-sec-light focus:border-primary focus:bg-white focus:placeholder-gray-400 focus:outline-none focus:ring-1 focus:ring-primary dark:border-border-dark dark:bg-gray-800 dark:placeholder-text-sec-dark dark:focus:bg-gray-900" placeholder="Search pages..." type="text"/>
+</div>
+<div class="flex items-center gap-2">
+<button class="rounded p-2 text-text-sec-light hover:bg-gray-100 hover:text-text-main-light dark:text-text-sec-dark dark:hover:bg-gray-700 dark:hover:text-text-main-dark">
+<span class="material-icons-round text-xl">filter_list</span>
+</button>
+<button class="rounded p-2 text-text-sec-light hover:bg-gray-100 hover:text-text-main-light dark:text-text-sec-dark dark:hover:bg-gray-700 dark:hover:text-text-main-dark">
+<span class="material-icons-round text-xl">sort</span>
+</button>
+</div>
+</div>
+<div class="overflow-x-auto">
+<table class="min-w-full divide-y divide-border-light dark:divide-border-dark">
+<thead class="bg-gray-50 dark:bg-gray-800/50">
+<tr>
+<th class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-text-sec-light dark:text-text-sec-dark" scope="col">Page Title</th>
+<th class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-text-sec-light dark:text-text-sec-dark" scope="col">Slug</th>
+<th class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-text-sec-light dark:text-text-sec-dark" scope="col">Status</th>
+<th class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-text-sec-light dark:text-text-sec-dark" scope="col">Last Modified</th>
+<th class="relative px-6 py-3 text-right" scope="col">
+<span class="sr-only">Actions</span>
+</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-border-light bg-surface-light dark:divide-border-dark dark:bg-surface-dark">
+<tr class="group hover:bg-gray-50 dark:hover:bg-gray-800/50">
+<td class="whitespace-nowrap px-6 py-4">
+<div class="flex items-center">
+<div class="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-lg bg-indigo-100 text-primary dark:bg-indigo-900/30">
+<span class="material-icons-round text-xl">home</span>
+</div>
+<div class="ml-4">
+<div class="text-sm font-medium text-text-main-light dark:text-text-main-dark">Home</div>
+<div class="text-xs text-text-sec-light dark:text-text-sec-dark">Main landing page</div>
+</div>
+</div>
+</td>
+<td class="whitespace-nowrap px-6 py-4">
+<div class="text-sm text-text-sec-light dark:text-text-sec-dark flex items-center gap-1">
+<span class="opacity-50">/</span>
+<span class="rounded bg-gray-100 px-1.5 py-0.5 text-xs font-medium text-gray-800 dark:bg-gray-700 dark:text-gray-300">index</span>
+<a class="text-primary hover:underline ml-1" href="#"><span class="material-icons-round text-[14px]">open_in_new</span></a>
+</div>
+</td>
+<td class="whitespace-nowrap px-6 py-4">
+<span class="inline-flex rounded-full bg-green-100 px-2 py-1 text-xs font-semibold leading-5 text-green-800 dark:bg-green-900/30 dark:text-green-300">
+                                            Published
+                                        </span>
+</td>
+<td class="whitespace-nowrap px-6 py-4 text-sm text-text-sec-light dark:text-text-sec-dark">
+                                        2 hours ago
+                                    </td>
+<td class="whitespace-nowrap px-6 py-4 text-right text-sm font-medium">
+<div class="flex justify-end gap-2 opacity-0 transition-opacity group-hover:opacity-100">
+<button class="text-text-sec-light hover:text-primary dark:text-text-sec-dark dark:hover:text-primary" title="Edit Builder">
+<span class="material-icons-round">edit</span>
+</button>
+<button class="text-text-sec-light hover:text-text-main-light dark:text-text-sec-dark dark:hover:text-text-main-dark" title="Settings">
+<span class="material-icons-round">settings</span>
+</button>
+<button class="text-text-sec-light hover:text-text-main-light dark:text-text-sec-dark dark:hover:text-text-main-dark" title="Duplicate">
+<span class="material-icons-round">content_copy</span>
+</button>
+<button class="text-text-sec-light hover:text-red-500 dark:text-text-sec-dark dark:hover:text-red-400" title="Delete">
+<span class="material-icons-round">delete_outline</span>
+</button>
+</div>
+</td>
+</tr>
+<tr class="group hover:bg-gray-50 dark:hover:bg-gray-800/50">
+<td class="whitespace-nowrap px-6 py-4">
+<div class="flex items-center">
+<div class="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-lg bg-pink-100 text-pink-600 dark:bg-pink-900/30 dark:text-pink-400">
+<span class="material-icons-round text-xl">person</span>
+</div>
+<div class="ml-4">
+<div class="text-sm font-medium text-text-main-light dark:text-text-main-dark">About Me</div>
+</div>
+</div>
+</td>
+<td class="whitespace-nowrap px-6 py-4">
+<div class="text-sm text-text-sec-light dark:text-text-sec-dark flex items-center gap-1">
+<span class="opacity-50">/</span>
+<span class="rounded bg-gray-100 px-1.5 py-0.5 text-xs font-medium text-gray-800 dark:bg-gray-700 dark:text-gray-300">about-me</span>
+<a class="text-primary hover:underline ml-1" href="#"><span class="material-icons-round text-[14px]">open_in_new</span></a>
+</div>
+</td>
+<td class="whitespace-nowrap px-6 py-4">
+<span class="inline-flex rounded-full bg-green-100 px-2 py-1 text-xs font-semibold leading-5 text-green-800 dark:bg-green-900/30 dark:text-green-300">
+                                            Published
+                                        </span>
+</td>
+<td class="whitespace-nowrap px-6 py-4 text-sm text-text-sec-light dark:text-text-sec-dark">
+                                        Yesterday
+                                    </td>
+<td class="whitespace-nowrap px-6 py-4 text-right text-sm font-medium">
+<div class="flex justify-end gap-2 opacity-0 transition-opacity group-hover:opacity-100">
+<button class="text-text-sec-light hover:text-primary dark:text-text-sec-dark dark:hover:text-primary" title="Edit Builder">
+<span class="material-icons-round">edit</span>
+</button>
+<button class="text-text-sec-light hover:text-text-main-light dark:text-text-sec-dark dark:hover:text-text-main-dark" title="Settings">
+<span class="material-icons-round">settings</span>
+</button>
+<button class="text-text-sec-light hover:text-text-main-light dark:text-text-sec-dark dark:hover:text-text-main-dark" title="Duplicate">
+<span class="material-icons-round">content_copy</span>
+</button>
+<button class="text-text-sec-light hover:text-red-500 dark:text-text-sec-dark dark:hover:text-red-400" title="Delete">
+<span class="material-icons-round">delete_outline</span>
+</button>
+</div>
+</td>
+</tr>
+<tr class="group hover:bg-gray-50 dark:hover:bg-gray-800/50">
+<td class="whitespace-nowrap px-6 py-4">
+<div class="flex items-center">
+<div class="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-lg bg-orange-100 text-orange-600 dark:bg-orange-900/30 dark:text-orange-400">
+<span class="material-icons-round text-xl">work</span>
+</div>
+<div class="ml-4">
+<div class="text-sm font-medium text-text-main-light dark:text-text-main-dark">Projects</div>
+<div class="text-xs text-text-sec-light dark:text-text-sec-dark">Portfolio showcase</div>
+</div>
+</div>
+</td>
+<td class="whitespace-nowrap px-6 py-4">
+<div class="text-sm text-text-sec-light dark:text-text-sec-dark flex items-center gap-1">
+<span class="opacity-50">/</span>
+<span class="rounded bg-gray-100 px-1.5 py-0.5 text-xs font-medium text-gray-800 dark:bg-gray-700 dark:text-gray-300">projects</span>
+</div>
+</td>
+<td class="whitespace-nowrap px-6 py-4">
+<span class="inline-flex rounded-full bg-yellow-100 px-2 py-1 text-xs font-semibold leading-5 text-yellow-800 dark:bg-yellow-900/30 dark:text-yellow-300">
+                                            Draft
+                                        </span>
+</td>
+<td class="whitespace-nowrap px-6 py-4 text-sm text-text-sec-light dark:text-text-sec-dark">
+                                        3 days ago
+                                    </td>
+<td class="whitespace-nowrap px-6 py-4 text-right text-sm font-medium">
+<div class="flex justify-end gap-2 opacity-0 transition-opacity group-hover:opacity-100">
+<button class="text-text-sec-light hover:text-primary dark:text-text-sec-dark dark:hover:text-primary" title="Edit Builder">
+<span class="material-icons-round">edit</span>
+</button>
+<button class="text-text-sec-light hover:text-text-main-light dark:text-text-sec-dark dark:hover:text-text-main-dark" title="Settings">
+<span class="material-icons-round">settings</span>
+</button>
+<button class="text-text-sec-light hover:text-text-main-light dark:text-text-sec-dark dark:hover:text-text-main-dark" title="Duplicate">
+<span class="material-icons-round">content_copy</span>
+</button>
+<button class="text-text-sec-light hover:text-red-500 dark:text-text-sec-dark dark:hover:text-red-400" title="Delete">
+<span class="material-icons-round">delete_outline</span>
+</button>
+</div>
+</td>
+</tr>
+<tr class="group hover:bg-gray-50 dark:hover:bg-gray-800/50">
+<td class="whitespace-nowrap px-6 py-4">
+<div class="flex items-center">
+<div class="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-lg bg-teal-100 text-teal-600 dark:bg-teal-900/30 dark:text-teal-400">
+<span class="material-icons-round text-xl">mail</span>
+</div>
+<div class="ml-4">
+<div class="text-sm font-medium text-text-main-light dark:text-text-main-dark">Contact</div>
+</div>
+</div>
+</td>
+<td class="whitespace-nowrap px-6 py-4">
+<div class="text-sm text-text-sec-light dark:text-text-sec-dark flex items-center gap-1">
+<span class="opacity-50">/</span>
+<span class="rounded bg-gray-100 px-1.5 py-0.5 text-xs font-medium text-gray-800 dark:bg-gray-700 dark:text-gray-300">contact-us</span>
+<a class="text-primary hover:underline ml-1" href="#"><span class="material-icons-round text-[14px]">open_in_new</span></a>
+</div>
+</td>
+<td class="whitespace-nowrap px-6 py-4">
+<span class="inline-flex rounded-full bg-green-100 px-2 py-1 text-xs font-semibold leading-5 text-green-800 dark:bg-green-900/30 dark:text-green-300">
+                                            Published
+                                        </span>
+</td>
+<td class="whitespace-nowrap px-6 py-4 text-sm text-text-sec-light dark:text-text-sec-dark">
+                                        1 week ago
+                                    </td>
+<td class="whitespace-nowrap px-6 py-4 text-right text-sm font-medium">
+<div class="flex justify-end gap-2 opacity-0 transition-opacity group-hover:opacity-100">
+<button class="text-text-sec-light hover:text-primary dark:text-text-sec-dark dark:hover:text-primary" title="Edit Builder">
+<span class="material-icons-round">edit</span>
+</button>
+<button class="text-text-sec-light hover:text-text-main-light dark:text-text-sec-dark dark:hover:text-text-main-dark" title="Settings">
+<span class="material-icons-round">settings</span>
+</button>
+<button class="text-text-sec-light hover:text-text-main-light dark:text-text-sec-dark dark:hover:text-text-main-dark" title="Duplicate">
+<span class="material-icons-round">content_copy</span>
+</button>
+<button class="text-text-sec-light hover:text-red-500 dark:text-text-sec-dark dark:hover:text-red-400" title="Delete">
+<span class="material-icons-round">delete_outline</span>
+</button>
+</div>
+</td>
+</tr>
+<tr class="group hover:bg-gray-50 dark:hover:bg-gray-800/50">
+<td class="whitespace-nowrap px-6 py-4">
+<div class="flex items-center">
+<div class="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-lg bg-gray-200 text-gray-600 dark:bg-gray-700 dark:text-gray-400">
+<span class="material-icons-round text-xl">error_outline</span>
+</div>
+<div class="ml-4">
+<div class="text-sm font-medium text-text-main-light dark:text-text-main-dark">404 Error</div>
+<div class="text-xs text-text-sec-light dark:text-text-sec-dark">System page</div>
+</div>
+</div>
+</td>
+<td class="whitespace-nowrap px-6 py-4">
+<div class="text-sm text-text-sec-light dark:text-text-sec-dark flex items-center gap-1">
+<span class="opacity-50">/</span>
+<span class="rounded bg-gray-100 px-1.5 py-0.5 text-xs font-medium text-gray-800 dark:bg-gray-700 dark:text-gray-300">404</span>
+</div>
+</td>
+<td class="whitespace-nowrap px-6 py-4">
+<span class="inline-flex rounded-full bg-green-100 px-2 py-1 text-xs font-semibold leading-5 text-green-800 dark:bg-green-900/30 dark:text-green-300">
+                                            Published
+                                        </span>
+</td>
+<td class="whitespace-nowrap px-6 py-4 text-sm text-text-sec-light dark:text-text-sec-dark">
+                                        2 weeks ago
+                                    </td>
+<td class="whitespace-nowrap px-6 py-4 text-right text-sm font-medium">
+<div class="flex justify-end gap-2 opacity-0 transition-opacity group-hover:opacity-100">
+<button class="text-text-sec-light hover:text-primary dark:text-text-sec-dark dark:hover:text-primary" title="Edit Builder">
+<span class="material-icons-round">edit</span>
+</button>
+<button class="text-text-sec-light hover:text-text-main-light dark:text-text-sec-dark dark:hover:text-text-main-dark" title="Settings">
+<span class="material-icons-round">settings</span>
+</button>
+<button class="text-gray-300 cursor-not-allowed dark:text-gray-600" disabled="">
+<span class="material-icons-round">content_copy</span>
+</button>
+<button class="text-gray-300 cursor-not-allowed dark:text-gray-600" disabled="">
+<span class="material-icons-round">delete_outline</span>
+</button>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="flex items-center justify-between border-t border-border-light bg-surface-light px-4 py-3 dark:border-border-dark dark:bg-surface-dark sm:px-6">
+<div class="hidden sm:flex sm:flex-1 sm:items-center sm:justify-between">
+<div>
+<p class="text-sm text-text-sec-light dark:text-text-sec-dark">
+                                    Showing <span class="font-medium text-text-main-light dark:text-text-main-dark">1</span> to <span class="font-medium text-text-main-light dark:text-text-main-dark">5</span> of <span class="font-medium text-text-main-light dark:text-text-main-dark">5</span> results
+                                </p>
+</div>
+<div>
+<nav aria-label="Pagination" class="isolate inline-flex -space-x-px rounded-md shadow-sm">
+<a class="relative inline-flex items-center rounded-l-md border border-border-light bg-surface-light px-2 py-2 text-sm font-medium text-text-sec-light hover:bg-gray-50 focus:z-20 dark:border-border-dark dark:bg-surface-dark dark:text-text-sec-dark dark:hover:bg-gray-800" href="#">
+<span class="sr-only">Previous</span>
+<span class="material-icons-round text-base">chevron_left</span>
+</a>
+<a aria-current="page" class="relative z-10 inline-flex items-center border border-primary bg-primary/10 px-4 py-2 text-sm font-medium text-primary focus:z-20" href="#">1</a>
+<a class="relative inline-flex items-center rounded-r-md border border-border-light bg-surface-light px-2 py-2 text-sm font-medium text-text-sec-light hover:bg-gray-50 focus:z-20 dark:border-border-dark dark:bg-surface-dark dark:text-text-sec-dark dark:hover:bg-gray-800" href="#">
+<span class="sr-only">Next</span>
+<span class="material-icons-round text-base">chevron_right</span>
+</a>
+</nav>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+</div>
+
+</body></html>

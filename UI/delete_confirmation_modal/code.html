@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Delete Confirmation Modal - SaaS</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,typography"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet"/>
+<script>
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        primary: "#3B82F6", // Generic SaaS Blue
+                        danger: "#EF4444", // Requested Red
+                        "background-light": "#F9FAFB",
+                        "background-dark": "#0F172A",
+                        "surface-light": "#FFFFFF",
+                        "surface-dark": "#1E293B",
+                    },
+                    fontFamily: {
+                        display: ["Inter", "sans-serif"],
+                        body: ["Inter", "sans-serif"],
+                    },
+                    borderRadius: {
+                        DEFAULT: "8px", // Requested 8px
+                        lg: "8px",
+                        xl: "12px",
+                    },
+                },
+            },
+        };
+    </script>
+<style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: transparent; 
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #CBD5E1; 
+            border-radius: 4px;
+        }
+        .dark ::-webkit-scrollbar-thumb {
+            background: #475569; 
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-gray-900 dark:text-gray-100 antialiased min-h-screen relative overflow-hidden">
+<div class="h-full w-full flex flex-col blur-[2px] opacity-50 select-none pointer-events-none absolute inset-0 z-0">
+<nav class="border-b border-gray-200 dark:border-gray-800 bg-surface-light dark:bg-surface-dark px-6 py-4 flex items-center justify-between">
+<div class="flex items-center gap-8">
+<div class="flex items-center gap-2 text-primary font-bold text-xl">
+<span class="material-icons-round">layers</span>
+<span>LandBuilder</span>
+</div>
+<div class="hidden md:flex gap-6 text-sm font-medium text-gray-500 dark:text-gray-400">
+<a class="text-gray-900 dark:text-white" href="#">Websites</a>
+<a class="hover:text-gray-700 dark:hover:text-gray-200" href="#">Templates</a>
+<a class="hover:text-gray-700 dark:hover:text-gray-200" href="#">Integrations</a>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<button class="p-2 text-gray-400 hover:text-gray-600 dark:hover:text-gray-200">
+<span class="material-icons-round">notifications</span>
+</button>
+<div class="h-8 w-8 rounded-full bg-gradient-to-tr from-blue-500 to-purple-500"></div>
+</div>
+</nav>
+<main class="flex-1 p-8 max-w-7xl mx-auto w-full">
+<div class="flex justify-between items-center mb-8">
+<div>
+<h1 class="text-2xl font-bold text-gray-900 dark:text-white">My Websites</h1>
+<p class="text-gray-500 dark:text-gray-400 text-sm mt-1">Manage and edit your landing pages.</p>
+</div>
+<button class="bg-primary text-white px-4 py-2 rounded-lg text-sm font-medium flex items-center gap-2 shadow-sm">
+<span class="material-icons-round text-sm">add</span>
+                    New Website
+                </button>
+</div>
+<div class="flex flex-col sm:flex-row gap-4 mb-6">
+<div class="relative flex-1">
+<span class="material-icons-round absolute left-3 top-2.5 text-gray-400 text-lg">search</span>
+<input class="w-full pl-10 pr-4 py-2 rounded-lg border border-gray-200 dark:border-gray-700 bg-white dark:bg-slate-800 text-sm focus:ring-2 focus:ring-primary focus:border-transparent" placeholder="Search websites..." type="text"/>
+</div>
+<div class="flex gap-2">
+<button class="px-4 py-2 border border-gray-200 dark:border-gray-700 rounded-lg bg-white dark:bg-slate-800 text-sm font-medium text-gray-600 dark:text-gray-300 flex items-center gap-2">
+<span class="material-icons-round text-lg">filter_list</span> Filter
+                    </button>
+<button class="px-4 py-2 border border-gray-200 dark:border-gray-700 rounded-lg bg-white dark:bg-slate-800 text-sm font-medium text-gray-600 dark:text-gray-300 flex items-center gap-2">
+<span class="material-icons-round text-lg">grid_view</span>
+</button>
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+<div class="bg-surface-light dark:bg-surface-dark rounded-lg border border-gray-200 dark:border-gray-800 shadow-sm overflow-hidden group">
+<div class="h-40 bg-gray-100 dark:bg-slate-900 relative flex items-center justify-center">
+<span class="material-icons-round text-4xl text-gray-300 dark:text-gray-700">image</span>
+</div>
+<div class="p-4">
+<div class="flex justify-between items-start">
+<div>
+<h3 class="font-semibold text-gray-900 dark:text-white">SaaS Marketing v2</h3>
+<p class="text-xs text-gray-500 mt-1">Published • Last edited 2h ago</p>
+</div>
+<button class="text-gray-400 hover:text-gray-600 dark:hover:text-gray-200">
+<span class="material-icons-round">more_horiz</span>
+</button>
+</div>
+</div>
+</div>
+<div class="bg-surface-light dark:bg-surface-dark rounded-lg border border-red-200 dark:border-red-900/30 shadow-md ring-2 ring-red-100 dark:ring-red-900/20 overflow-hidden">
+<div class="h-40 bg-gray-100 dark:bg-slate-900 relative flex items-center justify-center">
+<div class="absolute inset-0 bg-red-50/50 dark:bg-red-900/10 z-10"></div>
+<span class="material-icons-round text-4xl text-gray-300 dark:text-gray-700">web</span>
+</div>
+<div class="p-4">
+<div class="flex justify-between items-start">
+<div>
+<h3 class="font-semibold text-gray-900 dark:text-white">Portfolio 2024</h3>
+<p class="text-xs text-gray-500 mt-1">Draft • Last edited 1d ago</p>
+</div>
+<button class="text-gray-400">
+<span class="material-icons-round">more_horiz</span>
+</button>
+</div>
+</div>
+</div>
+<div class="bg-surface-light dark:bg-surface-dark rounded-lg border border-gray-200 dark:border-gray-800 shadow-sm overflow-hidden">
+<div class="h-40 bg-gray-100 dark:bg-slate-900 relative flex items-center justify-center">
+<span class="material-icons-round text-4xl text-gray-300 dark:text-gray-700">shopping_bag</span>
+</div>
+<div class="p-4">
+<div class="flex justify-between items-start">
+<div>
+<h3 class="font-semibold text-gray-900 dark:text-white">E-commerce Store</h3>
+<p class="text-xs text-gray-500 mt-1">Published • Last edited 5d ago</p>
+</div>
+<button class="text-gray-400">
+<span class="material-icons-round">more_horiz</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+</main>
+</div>
+<div aria-labelledby="modal-title" aria-modal="true" class="relative z-50" role="dialog">
+<div class="fixed inset-0 bg-gray-900/60 dark:bg-black/70 backdrop-blur-sm transition-opacity"></div>
+<div class="fixed inset-0 z-10 w-screen overflow-y-auto">
+<div class="flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0">
+<div class="relative transform overflow-hidden rounded-lg bg-surface-light dark:bg-surface-dark text-left shadow-2xl transition-all sm:my-8 sm:w-full sm:max-w-md border border-gray-100 dark:border-gray-700">
+<div class="bg-surface-light dark:bg-surface-dark px-4 pb-4 pt-5 sm:p-6 sm:pb-4">
+<div class="sm:flex sm:items-start">
+<div class="mx-auto flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-full bg-red-100 dark:bg-red-900/30 sm:mx-0 sm:h-10 sm:w-10 ring-4 ring-red-50 dark:ring-transparent">
+<span aria-hidden="true" class="material-icons-round text-danger text-2xl">warning</span>
+</div>
+<div class="mt-3 text-center sm:ml-4 sm:mt-0 sm:text-left w-full">
+<h3 class="text-lg font-semibold leading-6 text-gray-900 dark:text-white" id="modal-title">Delete Website?</h3>
+<div class="mt-2">
+<p class="text-sm text-gray-500 dark:text-gray-400">
+                                        This action cannot be undone. Are you sure you want to delete <span class="font-semibold text-gray-900 dark:text-white">Portfolio 2024</span>? All data associated with this site will be permanently removed.
+                                    </p>
+</div>
+</div>
+</div>
+</div>
+<div class="bg-gray-50 dark:bg-slate-800/50 px-4 py-3 sm:flex sm:flex-row-reverse sm:px-6 border-t border-gray-100 dark:border-gray-700/50 gap-3">
+<button class="inline-flex w-full justify-center rounded-lg bg-[#EF4444] px-4 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-red-500 sm:ml-0 sm:w-auto transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 dark:focus:ring-offset-gray-900" type="button">
+                            Delete
+                        </button>
+<button class="mt-3 inline-flex w-full justify-center rounded-lg bg-white dark:bg-transparent px-4 py-2.5 text-sm font-semibold text-gray-900 dark:text-gray-300 shadow-sm ring-1 ring-inset ring-gray-300 dark:ring-gray-600 hover:bg-gray-50 dark:hover:bg-slate-700/50 sm:mt-0 sm:w-auto transition-colors duration-200" type="button">
+                            Cancel
+                        </button>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="fixed bottom-4 right-4 z-50">
+<button class="bg-gray-800 dark:bg-white text-white dark:text-gray-900 p-3 rounded-full shadow-lg hover:scale-105 transition-transform" onclick="document.documentElement.classList.toggle('dark')">
+<span class="material-icons-round text-xl dark:hidden">dark_mode</span>
+<span class="material-icons-round text-xl hidden dark:block">light_mode</span>
+</button>
+</div>
+
+</body></html>
