@@ -1,7 +1,7 @@
-// import type { Editor } from 'grapesjs'; // Unused
 import { useState } from 'react';
 import GjsEditor from '@grapesjs/react';
-import grapesjs, { Editor } from 'grapesjs';
+import grapesjs from 'grapesjs';
+import type { Editor } from 'grapesjs';
 // @ts-ignore
 import webpagePlugin from 'grapesjs-preset-webpage';
 // @ts-ignore
@@ -28,7 +28,6 @@ export default function GrapesEditor() {
     const { currentPage, updatePage } = useEditorStore();
     const [editorInstance, setEditorInstance] = useState<Editor | null>(null);
     const [activeTab, setActiveTab] = useState<'content' | 'style' | 'advanced'>('style');
-    const [blocks, setBlocks] = useState<any[]>([]);
     const [pageSettingsOpen, setPageSettingsOpen] = useState(false);
     const [aiModalOpen, setAiModalOpen] = useState(false);
 
@@ -82,17 +81,7 @@ export default function GrapesEditor() {
         editor.Panels.getPanels().reset();
 
         // Get blocks for custom UI
-        const blockManager = editor.BlockManager;
-        const allBlocks = blockManager.getAll();
-        // @ts-ignore
-        setBlocks(allBlocks.models || allBlocks);
 
-        // Listen for new blocks
-        editor.on('block:add', () => {
-            const all = blockManager.getAll();
-            // @ts-ignore
-            setBlocks([...(all.models || all)]);
-        });
     };
 
     if (!currentPage) {
