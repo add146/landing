@@ -24,10 +24,11 @@ https://github.com/add146/landing.git
 ## 🌐 Live Deployment
 
 **Phase 1 - Authentication System:**
-- 🚀 **Primary URL:** https://landing-bzy.pages.dev
-- 🚀 **Custom Domain:** https://build.khibroh.com
+- 🚀 **Frontend (Primary):** https://landing-bzy.pages.dev
+- 🚀 **Frontend (Custom):** https://build.khibroh.com
+- 🚀 **Backend API:** https://landing-page-api.khibroh.workers.dev
 
-**Status:** ✅ Deployed & Live on Cloudflare Pages
+**Status:** ✅ Fully Deployed & Live on Cloudflare
 
 **Features Available:**
 - User registration with password strength validation
@@ -35,6 +36,11 @@ https://github.com/add146/landing.git
 - Protected dashboard
 - JWT-based authentication
 - Dark mode UI design
+- Full REST API for authentication
+
+**Database:** D1 (SQLite) with 9 tables  
+**Storage:** R2 bucket for media  
+**Cache:** KV namespace for sessions
 
 ---
 

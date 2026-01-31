@@ -8,7 +8,7 @@ compatibility_date = "2024-01-01"
 [[d1_databases]]
 binding = "DB"
 database_name = "landing-page-db"
-database_id = "<YOUR_DB_ID_HERE>"
+database_id = "a19ea956-d47b-40a1-903b-99111750250e"
 
 # R2 Storage (for media/assets)
 # Run: wrangler r2 bucket create landing-page-assets
@@ -20,15 +20,9 @@ bucket_name = "landing-page-assets"
 # Run: wrangler kv:namespace create SESSIONS
 [[kv_namespaces]]
 binding = "SESSIONS"
-id = "<YOUR_KV_ID_HERE>"
+id = "49134cd22ada423b98dc7fcdd8b3b231"
 
 # Environment Variables
 [vars]
 JWT_SECRET = "change-this-to-a-secure-random-secret-in-production"
-FRONTEND_URL = "http://localhost:5173"
-
-# CORS settings
-[cors]
-allowed_origins = ["http://localhost:5173"]
-allowed_methods = ["GET", "POST", "PATCH", "DELETE", "OPTIONS"]
-allowed_headers = ["Content-Type", "Authorization"]
+FRONTEND_URL = "https://build.khibroh.com"
