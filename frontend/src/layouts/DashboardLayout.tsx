@@ -6,13 +6,15 @@ import {
     Settings,
     LogOut,
     Menu,
-    X
+    X,
+    CreditCard
 } from 'lucide-react';
 import { useState } from 'react';
 import { useAuthStore } from '../store/authStore';
 
 const navigation = [
     { name: 'My Websites', href: '/dashboard', icon: LayoutDashboard },
+    { name: 'vCards', href: '/dashboard/vcards', icon: CreditCard },
     { name: 'Media Library', href: '/dashboard/media', icon: Image },
     { name: 'Settings', href: '/dashboard/settings', icon: Settings },
 ];

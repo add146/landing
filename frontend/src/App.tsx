@@ -9,6 +9,9 @@ import PagesList from './pages/dashboard/PagesList';
 import MediaLibrary from './pages/dashboard/MediaLibrary';
 import Settings from './pages/dashboard/Settings';
 import PageEditor from './pages/editor/PageEditor';
+import VCardsList from './pages/dashboard/VCardsList';
+import VCardBuilder from './pages/dashboard/VCardBuilder';
+import PublicVCard from './pages/public/PublicVCard';
 
 function App() {
   return (
@@ -18,6 +21,9 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/forgot-password" element={<ForgotPassword />} />
+
+        {/* Public vCard view */}
+        <Route path="/card/:slug" element={<PublicVCard />} />
 
         {/* Protected dashboard routes */}
         <Route
@@ -30,6 +36,7 @@ function App() {
         >
           <Route index element={<WebsitesList />} />
           <Route path="websites/:id/pages" element={<PagesList />} />
+          <Route path="vcards" element={<VCardsList />} />
           <Route path="media" element={<MediaLibrary />} />
           <Route path="settings" element={<Settings />} />
         </Route>
@@ -40,6 +47,24 @@ function App() {
           element={
             <ProtectedRoute>
               <PageEditor />
+            </ProtectedRoute>
+          }
+        />
+
+        {/* vCard Builder */}
+        <Route
+          path="/dashboard/vcards/create"
+          element={
+            <ProtectedRoute>
+              <VCardBuilder />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/dashboard/vcards/:id/edit"
+          element={
+            <ProtectedRoute>
+              <VCardBuilder />
             </ProtectedRoute>
           }
         />
