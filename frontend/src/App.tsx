@@ -12,6 +12,7 @@ import PageEditor from './pages/editor/PageEditor';
 import VCardsList from './pages/dashboard/VCardsList';
 import VCardBuilder from './pages/dashboard/VCardBuilder';
 import PublicVCard from './pages/public/PublicVCard';
+import AIWizard from './pages/dashboard/AIWizard';
 
 function App() {
   return (
@@ -37,6 +38,7 @@ function App() {
           <Route index element={<WebsitesList />} />
           <Route path="websites/:id/pages" element={<PagesList />} />
           <Route path="vcards" element={<VCardsList />} />
+          <Route path="ai-wizard" element={<AIWizard />} />
           <Route path="media" element={<MediaLibrary />} />
           <Route path="settings" element={<Settings />} />
         </Route>

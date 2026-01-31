@@ -7,7 +7,8 @@ import {
     LogOut,
     Menu,
     X,
-    CreditCard
+    CreditCard,
+    Wand2
 } from 'lucide-react';
 import { useState } from 'react';
 import { useAuthStore } from '../store/authStore';
@@ -65,6 +66,18 @@ export default function DashboardLayout() {
 
                     {/* Navigation */}
                     <nav className="flex-1 px-2 py-4 space-y-1 overflow-y-auto">
+                        {/* AI Wizard - Prominent CTA */}
+                        <Link
+                            to="/dashboard/ai-wizard"
+                            className="flex items-center px-3 py-3 mb-4 text-sm font-medium rounded-lg bg-gradient-to-r from-purple-600 to-blue-600 text-white hover:from-purple-700 hover:to-blue-700 transition-all shadow-lg hover:shadow-xl"
+                        >
+                            <Wand2 className="w-5 h-5 mr-3" />
+                            <span className="flex-1">AI Website Wizard</span>
+                            <span className="px-2 py-0.5 text-xs bg-white/20 rounded-full">
+                                New
+                            </span>
+                        </Link>
+
                         {navigation.map((item) => {
                             const isActive = location.pathname === item.href;
                             return (
