@@ -59,6 +59,7 @@ interface EditorState {
     addElement: (sectionId: string, type: string) => Promise<void>;
     updateElement: (id: string, data: Partial<Element>) => Promise<void>;
     deleteElement: (id: string) => Promise<void>;
+    reorderElements: (sectionId: string, elements: Element[]) => Promise<void>;
 
     selectItem: (id: string | null, type: 'section' | 'element' | null) => void;
     setPreviewDevice: (device: 'desktop' | 'tablet' | 'mobile') => void;
@@ -137,9 +138,29 @@ export const useEditorStore = create<EditorState>((set, get) => ({
             });
 
             const newSection = response.data.section;
+
+            // Automatically add default elements for this section type
+            const defaultElements = getDefaultSectionElements(type);
+            const addedElements: Element[] = [];
+
+            for (const elType of defaultElements) {
+                // We sequentially add elements
+                const elResponse = await client.post('/api/elements', {
+                    section_id: newSection.id,
+                    element_type: elType,
+                    content: JSON.stringify(getDefaultContent(elType)),
+                    style_desktop: JSON.stringify({}),
+                    style_tablet: JSON.stringify({}),
+                    style_mobile: JSON.stringify({}),
+                    sort_order: addedElements.length,
+                    is_visible: 1,
+                });
+                addedElements.push(elResponse.data.element);
+            }
+
             set((state) => ({
                 sections: [...state.sections, newSection],
-                elements: { ...state.elements, [newSection.id]: [] },
+                elements: { ...state.elements, [newSection.id]: addedElements },
                 isSaving: false,
             }));
         } catch (error) {
@@ -274,6 +295,28 @@ export const useEditorStore = create<EditorState>((set, get) => ({
         }
     },
 
+    reorderElements: async (sectionId: string, elements: Element[]) => {
+        const reorderData = elements.map((el, index) => ({
+            id: el.id,
+            sort_order: index,
+        }));
+
+        try {
+            set({ isSaving: true });
+            await client.patch('/api/elements/reorder', { elements: reorderData });
+            set((state) => ({
+                elements: {
+                    ...state.elements,
+                    [sectionId]: elements,
+                },
+                isSaving: false,
+            }));
+        } catch (error) {
+            console.error('Failed to reorder elements:', error);
+            set({ isSaving: false });
+        }
+    },
+
     selectItem: (id: string | null, type: 'section' | 'element' | null) => {
         set({ selectedId: id, selectedType: type });
     },
@@ -301,12 +344,34 @@ function getDefaultContent(type: string): any {
         case 'video':
             return { url: '' };
         case 'icon':
-            return { name: 'star' };
+            return { name: 'star', size: 24, color: '#000000' };
+        case 'container':
+            return { direction: 'column', padding: '20px', gap: '10px' };
         case 'spacer':
             return { height: 40 };
         case 'divider':
-            return { style: 'solid' };
+            return { style: 'solid', color: '#e2e8f0', thickness: 1 };
         default:
             return {};
+    }
+}
+
+// Helper to get default elements for a section type
+function getDefaultSectionElements(sectionType: string): string[] {
+    switch (sectionType) {
+        case 'hero':
+            return ['heading', 'text', 'button'];
+        case 'features':
+            return ['heading', 'container']; // Simplified for now
+        case 'testimonials':
+            return ['heading', 'container'];
+        case 'pricing':
+            return ['heading', 'container'];
+        case 'contact':
+            return ['heading', 'text', 'button'];
+        case 'cta':
+            return ['heading', 'button'];
+        default:
+            return [];
     }
 }

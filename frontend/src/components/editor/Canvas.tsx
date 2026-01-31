@@ -6,7 +6,7 @@ import { useEditorStore } from '../../store/editorStore';
 import SectionRenderer from './SectionRenderer';
 
 export default function Canvas() {
-    const { sections, reorderSections, previewDevice, clearSelection } = useEditorStore();
+    const { sections, elements, reorderSections, reorderElements, previewDevice, clearSelection } = useEditorStore();
 
     const sensors = useSensors(
         useSensor(PointerSensor, {
@@ -19,13 +19,40 @@ export default function Canvas() {
     const handleDragEnd = (event: DragEndEvent) => {
         const { active, over } = event;
 
-        if (over && active.id !== over.id) {
+        if (!over || active.id === over.id) return;
+
+        // Check if it's a section reorder
+        const isSection = sections.some(s => s.id === active.id);
+
+        if (isSection) {
             const oldIndex = sections.findIndex((s) => s.id === active.id);
             const newIndex = sections.findIndex((s) => s.id === over.id);
 
             if (oldIndex !== -1 && newIndex !== -1) {
                 const newSections = arrayMove(sections, oldIndex, newIndex);
                 reorderSections(newSections);
+            }
+        } else {
+            // It's likely an element reorder
+            // Find which section belongs to this element
+            // We can iterate over elements keys
+            let foundSectionId = null;
+            for (const sectionId in elements) {
+                if (elements[sectionId].some(e => e.id === active.id)) {
+                    foundSectionId = sectionId;
+                    break;
+                }
+            }
+
+            if (foundSectionId) {
+                const sectionElements = elements[foundSectionId];
+                const oldIndex = sectionElements.findIndex((e) => e.id === active.id);
+                const newIndex = sectionElements.findIndex((e) => e.id === over.id);
+
+                if (oldIndex !== -1 && newIndex !== -1) {
+                    const newElements = arrayMove(sectionElements, oldIndex, newIndex);
+                    reorderElements(foundSectionId, newElements);
+                }
             }
         }
     };

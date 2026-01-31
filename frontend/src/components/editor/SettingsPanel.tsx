@@ -1,4 +1,4 @@
-import { Settings, Palette, Smartphone, Wand2, Type, AlignLeft, AlignCenter, AlignRight, AlignJustify, Trash2, ChevronDown, ChevronUp } from 'lucide-react';
+import { Settings, Palette, Smartphone, Wand2, Type, AlignLeft, AlignCenter, AlignRight, AlignJustify, Trash2, ChevronDown, ChevronUp, Box } from 'lucide-react';
 import { useState } from 'react';
 import { useEditorStore } from '../../store/editorStore';
 import ContentImproverModal from './ContentImproverModal';
@@ -228,126 +228,240 @@ export default function SettingsPanel() {
 
                 {activeTab === 'style' && selectedType === 'element' && (
                     <div className="space-y-4">
-                        {/* Typography Section */}
+                        {/* Typography Section (Only for text-based elements) */}
+                        {['heading', 'text', 'button'].includes(selectedItem.element_type) && (
+                            <div className="border border-slate-200 rounded-lg overflow-hidden">
+                                <button
+                                    onClick={() => toggleSection('typography')}
+                                    className="w-full flex items-center justify-between p-3 bg-slate-50 hover:bg-slate-100 transition-colors"
+                                >
+                                    <div className="flex items-center gap-2">
+                                        <Type className="w-4 h-4 text-slate-400" />
+                                        <span className="text-xs font-bold text-slate-700 uppercase tracking-wide">Typography</span>
+                                    </div>
+                                    {expandedSections.typography ? <ChevronUp className="w-4 h-4 text-slate-400" /> : <ChevronDown className="w-4 h-4 text-slate-400" />}
+                                </button>
+
+                                {expandedSections.typography && (
+                                    <div className="p-3 space-y-4 bg-white border-t border-slate-200">
+                                        <div className="grid grid-cols-2 gap-3">
+                                            <div>
+                                                <label className="text-[10px] text-slate-400 mb-1 block">Font Family</label>
+                                                <select
+                                                    value={style.fontFamily || 'Inter'}
+                                                    onChange={(e) => handleStyleUpdate('fontFamily', e.target.value)}
+                                                    className="w-full rounded-md border-slate-200 bg-slate-50 text-xs py-1.5 focus:ring-1 focus:ring-primary"
+                                                >
+                                                    <option value="Inter">Inter</option>
+                                                    <option value="Roboto">Roboto</option>
+                                                    <option value="Playfair Display">Playfair Display</option>
+                                                    <option value="Montserrat">Montserrat</option>
+                                                </select>
+                                            </div>
+                                            <div>
+                                                <label className="text-[10px] text-slate-400 mb-1 block">Weight</label>
+                                                <select
+                                                    value={style.fontWeight || '400'}
+                                                    onChange={(e) => handleStyleUpdate('fontWeight', e.target.value)}
+                                                    className="w-full rounded-md border-slate-200 bg-slate-50 text-xs py-1.5 focus:ring-1 focus:ring-primary"
+                                                >
+                                                    <option value="300">Light</option>
+                                                    <option value="400">Regular</option>
+                                                    <option value="500">Medium</option>
+                                                    <option value="600">Semi Bold</option>
+                                                    <option value="700">Bold</option>
+                                                    <option value="900">Black</option>
+                                                </select>
+                                            </div>
+                                        </div>
+
+                                        <div>
+                                            <div className="flex justify-between mb-1">
+                                                <label className="text-[10px] text-slate-400">Size</label>
+                                                <span className="text-[10px] text-slate-500 bg-slate-100 px-1.5 rounded">
+                                                    {style.fontSize ? parseInt(style.fontSize) : 16}px
+                                                </span>
+                                            </div>
+                                            <input
+                                                type="range"
+                                                min="10"
+                                                max="96"
+                                                value={style.fontSize ? parseInt(style.fontSize) : 16}
+                                                onChange={(e) => handleStyleUpdate('fontSize', `${e.target.value}px`)}
+                                                className="w-full h-1 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-primary"
+                                            />
+                                        </div>
+
+                                        <div>
+                                            <div className="flex justify-between mb-1">
+                                                <label className="text-[10px] text-slate-400">Line Height</label>
+                                                <span className="text-[10px] text-slate-500 bg-slate-100 px-1.5 rounded">
+                                                    {style.lineHeight || 1.5}
+                                                </span>
+                                            </div>
+                                            <input
+                                                type="range"
+                                                min="0.8"
+                                                max="2.5"
+                                                step="0.1"
+                                                value={style.lineHeight || 1.5}
+                                                onChange={(e) => handleStyleUpdate('lineHeight', e.target.value)}
+                                                className="w-full h-1 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-primary"
+                                            />
+                                        </div>
+
+                                        <div>
+                                            <label className="text-[10px] text-slate-400 mb-1 block">Color</label>
+                                            <div className="flex items-center gap-2">
+                                                <input
+                                                    type="color"
+                                                    value={style.color || '#000000'}
+                                                    onChange={(e) => handleStyleUpdate('color', e.target.value)}
+                                                    className="w-8 h-8 p-0 border-0 rounded cursor-pointer"
+                                                />
+                                                <input
+                                                    type="text"
+                                                    value={style.color || '#000000'}
+                                                    onChange={(e) => handleStyleUpdate('color', e.target.value)}
+                                                    className="flex-1 rounded-md border-slate-200 bg-slate-50 text-xs py-1.5 font-mono uppercase text-slate-500 focus:ring-1 focus:ring-primary"
+                                                />
+                                            </div>
+                                        </div>
+
+                                        <div>
+                                            <label className="text-[10px] text-slate-400 mb-1 block">Alignment</label>
+                                            <div className="flex bg-slate-100 rounded p-1">
+                                                {[
+                                                    { val: 'left', icon: AlignLeft },
+                                                    { val: 'center', icon: AlignCenter },
+                                                    { val: 'right', icon: AlignRight },
+                                                    { val: 'justify', icon: AlignJustify }
+                                                ].map((align) => (
+                                                    <button
+                                                        key={align.val}
+                                                        onClick={() => handleStyleUpdate('textAlign', align.val)}
+                                                        className={`
+                                                            flex-1 flex justify-center py-1 rounded transition-colors
+                                                            ${style.textAlign === align.val ? 'bg-white shadow-sm text-slate-900' : 'text-slate-400 hover:text-slate-600'}
+                                                        `}
+                                                    >
+                                                        <align.icon className="w-4 h-4" />
+                                                    </button>
+                                                ))}
+                                            </div>
+                                        </div>
+                                    </div>
+                                )}
+                            </div>
+                        )}
+
+                        {/* Layout Section (Margin/Padding) - For all elements */}
                         <div className="border border-slate-200 rounded-lg overflow-hidden">
                             <button
-                                onClick={() => toggleSection('typography')}
+                                onClick={() => toggleSection('layout')}
                                 className="w-full flex items-center justify-between p-3 bg-slate-50 hover:bg-slate-100 transition-colors"
                             >
                                 <div className="flex items-center gap-2">
-                                    <Type className="w-4 h-4 text-slate-400" />
-                                    <span className="text-xs font-bold text-slate-700 uppercase tracking-wide">Typography</span>
+                                    <Box className="w-4 h-4 text-slate-400" />
+                                    <span className="text-xs font-bold text-slate-700 uppercase tracking-wide">Layout</span>
                                 </div>
-                                {expandedSections.typography ? <ChevronUp className="w-4 h-4 text-slate-400" /> : <ChevronDown className="w-4 h-4 text-slate-400" />}
+                                {expandedSections.layout ? <ChevronUp className="w-4 h-4 text-slate-400" /> : <ChevronDown className="w-4 h-4 text-slate-400" />}
                             </button>
 
-                            {expandedSections.typography && (
+                            {expandedSections.layout && (
                                 <div className="p-3 space-y-4 bg-white border-t border-slate-200">
                                     <div className="grid grid-cols-2 gap-3">
                                         <div>
-                                            <label className="text-[10px] text-slate-400 mb-1 block">Font Family</label>
-                                            <select
-                                                value={style.fontFamily || 'Inter'}
-                                                onChange={(e) => handleStyleUpdate('fontFamily', e.target.value)}
+                                            <label className="text-[10px] text-slate-400 mb-1 block">Padding (px)</label>
+                                            <input
+                                                type="text"
+                                                value={style.padding || ''}
+                                                onChange={(e) => handleStyleUpdate('padding', e.target.value)}
+                                                placeholder="e.g. 10px 20px"
                                                 className="w-full rounded-md border-slate-200 bg-slate-50 text-xs py-1.5 focus:ring-1 focus:ring-primary"
-                                            >
-                                                <option value="Inter">Inter</option>
-                                                <option value="Roboto">Roboto</option>
-                                                <option value="Playfair Display">Playfair Display</option>
-                                                <option value="Montserrat">Montserrat</option>
-                                            </select>
+                                            />
                                         </div>
                                         <div>
-                                            <label className="text-[10px] text-slate-400 mb-1 block">Weight</label>
-                                            <select
-                                                value={style.fontWeight || '400'}
-                                                onChange={(e) => handleStyleUpdate('fontWeight', e.target.value)}
+                                            <label className="text-[10px] text-slate-400 mb-1 block">Margin (px)</label>
+                                            <input
+                                                type="text"
+                                                value={style.margin || ''}
+                                                onChange={(e) => handleStyleUpdate('margin', e.target.value)}
+                                                placeholder="e.g. 10px 0"
                                                 className="w-full rounded-md border-slate-200 bg-slate-50 text-xs py-1.5 focus:ring-1 focus:ring-primary"
-                                            >
-                                                <option value="300">Light</option>
-                                                <option value="400">Regular</option>
-                                                <option value="500">Medium</option>
-                                                <option value="600">Semi Bold</option>
-                                                <option value="700">Bold</option>
-                                                <option value="900">Black</option>
-                                            </select>
+                                            />
                                         </div>
                                     </div>
-
-                                    <div>
-                                        <div className="flex justify-between mb-1">
-                                            <label className="text-[10px] text-slate-400">Size</label>
-                                            <span className="text-[10px] text-slate-500 bg-slate-100 px-1.5 rounded">
-                                                {style.fontSize ? parseInt(style.fontSize) : 16}px
-                                            </span>
+                                    {selectedItem.element_type === 'container' && (
+                                        <div className="grid grid-cols-2 gap-3">
+                                            <div>
+                                                <label className="text-[10px] text-slate-400 mb-1 block">Gap (px)</label>
+                                                <input
+                                                    type="text"
+                                                    value={content.gap || '10px'}
+                                                    onChange={(e) => handleContentUpdate('gap', e.target.value)}
+                                                    className="w-full rounded-md border-slate-200 bg-slate-50 text-xs py-1.5 focus:ring-1 focus:ring-primary"
+                                                />
+                                            </div>
+                                            <div>
+                                                <label className="text-[10px] text-slate-400 mb-1 block">Direction</label>
+                                                <select
+                                                    value={content.direction || 'column'}
+                                                    onChange={(e) => handleContentUpdate('direction', e.target.value)}
+                                                    className="w-full rounded-md border-slate-200 bg-slate-50 text-xs py-1.5 focus:ring-1 focus:ring-primary"
+                                                >
+                                                    <option value="column">Vertical</option>
+                                                    <option value="row">Horizontal</option>
+                                                </select>
+                                            </div>
                                         </div>
-                                        <input
-                                            type="range"
-                                            min="10"
-                                            max="96"
-                                            value={style.fontSize ? parseInt(style.fontSize) : 16}
-                                            onChange={(e) => handleStyleUpdate('fontSize', `${e.target.value}px`)}
-                                            className="w-full h-1 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-primary"
-                                        />
-                                    </div>
+                                    )}
+                                </div>
+                            )}
+                        </div>
 
-                                    <div>
-                                        <div className="flex justify-between mb-1">
-                                            <label className="text-[10px] text-slate-400">Line Height</label>
-                                            <span className="text-[10px] text-slate-500 bg-slate-100 px-1.5 rounded">
-                                                {style.lineHeight || 1.5}
-                                            </span>
-                                        </div>
-                                        <input
-                                            type="range"
-                                            min="0.8"
-                                            max="2.5"
-                                            step="0.1"
-                                            value={style.lineHeight || 1.5}
-                                            onChange={(e) => handleStyleUpdate('lineHeight', e.target.value)}
-                                            className="w-full h-1 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-primary"
-                                        />
-                                    </div>
+                        {/* Background & Border */}
+                        <div className="border border-slate-200 rounded-lg overflow-hidden">
+                            <button
+                                onClick={() => toggleSection('decoration')}
+                                className="w-full flex items-center justify-between p-3 bg-slate-50 hover:bg-slate-100 transition-colors"
+                            >
+                                <div className="flex items-center gap-2">
+                                    <Palette className="w-4 h-4 text-slate-400" />
+                                    <span className="text-xs font-bold text-slate-700 uppercase tracking-wide">Decoration</span>
+                                </div>
+                                {expandedSections.decoration ? <ChevronUp className="w-4 h-4 text-slate-400" /> : <ChevronDown className="w-4 h-4 text-slate-400" />}
+                            </button>
 
+                            {expandedSections.decoration && (
+                                <div className="p-3 space-y-4 bg-white border-t border-slate-200">
                                     <div>
-                                        <label className="text-[10px] text-slate-400 mb-1 block">Color</label>
+                                        <label className="text-[10px] text-slate-400 mb-1 block">Background Color</label>
                                         <div className="flex items-center gap-2">
                                             <input
                                                 type="color"
-                                                value={style.color || '#000000'}
-                                                onChange={(e) => handleStyleUpdate('color', e.target.value)}
+                                                value={style.backgroundColor || '#ffffff'}
+                                                onChange={(e) => handleStyleUpdate('backgroundColor', e.target.value)}
                                                 className="w-8 h-8 p-0 border-0 rounded cursor-pointer"
                                             />
                                             <input
                                                 type="text"
-                                                value={style.color || '#000000'}
-                                                onChange={(e) => handleStyleUpdate('color', e.target.value)}
+                                                value={style.backgroundColor || ''}
+                                                onChange={(e) => handleStyleUpdate('backgroundColor', e.target.value)}
+                                                placeholder="transparent"
                                                 className="flex-1 rounded-md border-slate-200 bg-slate-50 text-xs py-1.5 font-mono uppercase text-slate-500 focus:ring-1 focus:ring-primary"
                                             />
                                         </div>
                                     </div>
 
                                     <div>
-                                        <label className="text-[10px] text-slate-400 mb-1 block">Alignment</label>
-                                        <div className="flex bg-slate-100 rounded p-1">
-                                            {[
-                                                { val: 'left', icon: AlignLeft },
-                                                { val: 'center', icon: AlignCenter },
-                                                { val: 'right', icon: AlignRight },
-                                                { val: 'justify', icon: AlignJustify }
-                                            ].map((align) => (
-                                                <button
-                                                    key={align.val}
-                                                    onClick={() => handleStyleUpdate('textAlign', align.val)}
-                                                    className={`
-                                                        flex-1 flex justify-center py-1 rounded transition-colors
-                                                        ${style.textAlign === align.val ? 'bg-white shadow-sm text-slate-900' : 'text-slate-400 hover:text-slate-600'}
-                                                    `}
-                                                >
-                                                    <align.icon className="w-4 h-4" />
-                                                </button>
-                                            ))}
-                                        </div>
+                                        <label className="text-[10px] text-slate-400 mb-1 block">Border Radius (px)</label>
+                                        <input
+                                            type="text"
+                                            value={style.borderRadius || ''}
+                                            onChange={(e) => handleStyleUpdate('borderRadius', e.target.value)}
+                                            className="w-full rounded-md border-slate-200 bg-slate-50 text-xs py-1.5 focus:ring-1 focus:ring-primary"
+                                        />
                                     </div>
                                 </div>
                             )}

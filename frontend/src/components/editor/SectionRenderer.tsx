@@ -1,4 +1,4 @@
-import { useSortable } from '@dnd-kit/sortable';
+import { useSortable, SortableContext, verticalListSortingStrategy } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
 import { GripVertical, Trash2 } from 'lucide-react';
 import { useEditorStore } from '../../store/editorStore';
@@ -99,12 +99,14 @@ export default function SectionRenderer({ section }: SectionRendererProps) {
                     </div>
                 ) : (
                     <div className="space-y-4">
-                        {sectionElements.map((element) => (
-                            <ElementRenderer
-                                key={element.id}
-                                element={element}
-                            />
-                        ))}
+                        <SortableContext items={sectionElements.map(e => e.id)} strategy={verticalListSortingStrategy}>
+                            {sectionElements.map((element) => (
+                                <ElementRenderer
+                                    key={element.id}
+                                    element={element}
+                                />
+                            ))}
+                        </SortableContext>
                     </div>
                 )}
             </div>
