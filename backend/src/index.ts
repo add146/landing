@@ -8,6 +8,8 @@ import sections from './routes/sections';
 import elements from './routes/elements';
 import media from './routes/media';
 import vcards from './routes/vcards';
+import ai from './routes/ai';
+import { authMiddleware } from './middleware/auth';
 
 const app = new Hono<{ Bindings: Env }>();
 
@@ -51,6 +53,10 @@ app.route('/api/sections', sections);
 app.route('/api/elements', elements);
 app.route('/api/media', media);
 app.route('/api/vcards', vcards);
+
+// AI routes (protected)
+app.use('/api/ai/*', authMiddleware);
+app.route('/api/ai', ai);
 
 // 404 handler
 app.notFound((c) => {
