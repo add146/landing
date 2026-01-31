@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Wand2, ArrowRight, ArrowLeft, Check, Sparkles, AlertCircle } from 'lucide-react';
 import aiService from '../../services/ai';
@@ -29,9 +29,9 @@ export default function AIWizard() {
     const [generatedWebsite, setGeneratedWebsite] = useState<any>(null);
 
     // Load providers on mount
-    useState(() => {
+    useEffect(() => {
         loadProviders();
-    });
+    }, []);
 
     const loadProviders = async () => {
         const availableProviders = await aiService.getProviders();
