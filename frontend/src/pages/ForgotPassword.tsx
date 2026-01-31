@@ -38,7 +38,7 @@ export default function ForgotPassword() {
                     <p className="text-gray-400 text-sm font-normal leading-normal pt-2 text-center max-w-xs">
                         {sent
                             ? `We've sent a password reset link to ${email}`
-                            : 'Enter your email and we'll send you a link to reset your password.'}
+                            : "Enter your email and we'll send you a link to reset your password."}
                     </p>
                 </div>
 
