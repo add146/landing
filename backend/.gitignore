@@ -1,0 +1,12 @@
+# Backend dependencies
+node_modules/
+dist/
+.wrangler/
+.dev.vars
+
+# Logs
+*.log
+
+# Environment
+.env
+.env.local

@@ -1,0 +1,34 @@
+name = "landing-page-api"
+main = "src/index.ts"
+compatibility_date = "2024-01-01"
+
+# D1 Database (SQLite)
+# Run: wrangler d1 create landing-page-db
+# Copy the database_id from the output below
+[[d1_databases]]
+binding = "DB"
+database_name = "landing-page-db"
+database_id = "<YOUR_DB_ID_HERE>"
+
+# R2 Storage (for media/assets)
+# Run: wrangler r2 bucket create landing-page-assets
+[[r2_buckets]]
+binding = "STORAGE"
+bucket_name = "landing-page-assets"
+
+# KV Namespace (for sessions/cache)
+# Run: wrangler kv:namespace create SESSIONS
+[[kv_namespaces]]
+binding = "SESSIONS"
+id = "<YOUR_KV_ID_HERE>"
+
+# Environment Variables
+[vars]
+JWT_SECRET = "change-this-to-a-secure-random-secret-in-production"
+FRONTEND_URL = "http://localhost:5173"
+
+# CORS settings
+[cors]
+allowed_origins = ["http://localhost:5173"]
+allowed_methods = ["GET", "POST", "PATCH", "DELETE", "OPTIONS"]
+allowed_headers = ["Content-Type", "Authorization"]

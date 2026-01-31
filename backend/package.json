@@ -1,0 +1,33 @@
+{
+  "name": "landing-page-api",
+  "version": "1.0.0",
+  "description": "Landing Page Builder API - Cloudflare Workers",
+  "main": "src/index.ts",
+  "scripts": {
+    "dev": "wrangler dev",
+    "deploy": "wrangler deploy",
+    "db:create": "wrangler d1 create landing-page-db",
+    "db:migrate": "wrangler d1 execute landing-page-db --file=./schema.sql",
+    "db:studio": "wrangler d1 execute landing-page-db --command=\"SELECT * FROM users\""
+  },
+  "keywords": [
+    "cloudflare",
+    "workers",
+    "landing-page",
+    "saas"
+  ],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "hono": "^4.6.14",
+    "@hono/zod-validator": "^0.4.1",
+    "zod": "^3.23.8",
+    "bcryptjs": "^2.4.3",
+    "jose": "^5.9.6"
+  },
+  "devDependencies": {
+    "wrangler": "^3.95.0",
+    "typescript": "^5.7.2",
+    "@cloudflare/workers-types": "^4.20250110.0"
+  }
+}
