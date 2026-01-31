@@ -7,7 +7,15 @@ const app = new Hono<{ Bindings: Env }>();
 
 // CORS middleware
 app.use('*', cors({
-    origin: (origin) => origin, // Allow all origins in development
+    origin: (origin) => {
+        const allowedOrigins = [
+            'https://landing-bzy.pages.dev',
+            'https://build.khibroh.com',
+            'http://localhost:5173',
+            'http://localhost:3000',
+        ];
+        return allowedOrigins.includes(origin) ? origin : allowedOrigins[0];
+    },
     allowMethods: ['GET', 'POST', 'PATCH', 'DELETE', 'OPTIONS'],
     allowHeaders: ['Content-Type', 'Authorization'],
     credentials: true,
@@ -19,6 +27,13 @@ app.get('/', (c) => {
         name: 'Landing Page Builder API',
         version: '1.0.0',
         status: 'healthy',
+    });
+});
+
+app.get('/health', (c) => {
+    return c.json({
+        status: 'ok',
+        timestamp: new Date().toISOString(),
     });
 });
 
