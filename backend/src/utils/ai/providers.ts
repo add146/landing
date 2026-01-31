@@ -41,7 +41,7 @@ export class GeminiProvider implements AIProvider {
     async generateText(prompt: string, options?: GenerateOptions): Promise<string> {
         try {
             const model = this.client.getGenerativeModel({
-                model: options?.model || 'gemini-pro'
+                model: options?.model || 'gemini-2.5-flash'
             });
 
             const result = await model.generateContent(prompt);

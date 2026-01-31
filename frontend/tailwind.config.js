@@ -19,7 +19,11 @@ export default {
                     700: '#4338ca',
                     800: '#3730a3',
                     900: '#312e81',
+                    DEFAULT: '#6264f4',
                 },
+                'primary-dark': '#4f51c9',
+                'background-light': '#f6f6f8',
+                'background-dark': '#101022',
                 secondary: {
                     50: '#fdf2f8',
                     100: '#fce7f3',

@@ -1,131 +1,139 @@
 import {
+    Type,
+    Image as ImageIcon,
+    MousePointerClick,
+    Box,
+    Maximize2,
+    Minus,
+    Smile,
     LayoutDashboard,
     Grid3x3,
     MessageSquare,
-    DollarSign,
-    Zap,
-    Mail,
-    Plus,
-    Type,
-    Image as ImageIcon,
-    Square,
-    MousePointer,
     Wand2,
-    Sparkles
+    Search
 } from 'lucide-react';
 import { useEditorStore } from '../../store/editorStore';
-
-const sectionTemplates = [
-    { type: 'hero', label: 'Hero', icon: LayoutDashboard, color: 'blue' },
-    { type: 'features', label: 'Features', icon: Grid3x3, color: 'green' },
-    { type: 'testimonials', label: 'Testimonials', icon: MessageSquare, color: 'purple' },
-    { type: 'pricing', label: 'Pricing', icon: DollarSign, color: 'yellow' },
-    { type: 'cta', label: 'Call to Action', icon: Zap, color: 'red' },
-    { type: 'contact', label: 'Contact', icon: Mail, color: 'indigo' },
-];
-
-const elementTypes = [
-    { type: 'heading', label: 'Heading', icon: Type },
-    { type: 'text', label: 'Text', icon: Type },
-    { type: 'button', label: 'Button', icon: MousePointer },
-    { type: 'image', label: 'Image', icon: ImageIcon },
-    { type: 'spacer', label: 'Spacer', icon: Square },
-];
+import { useState } from 'react';
 
 interface LeftToolbarProps {
     onAIClick?: () => void;
 }
 
+interface ToolbarItem {
+    type: string;
+    label: string;
+    icon: any;
+    action?: () => void;
+    isSpecial?: boolean;
+}
+
+interface ToolbarCategory {
+    title: string;
+    items: ToolbarItem[];
+}
+
 export default function LeftToolbar({ onAIClick }: LeftToolbarProps) {
-    const { addSection, selectedId, selectedType } = useEditorStore();
+    const { addSection, addElement, selectedId, selectedType } = useEditorStore();
+    const [searchTerm, setSearchTerm] = useState('');
+
+    const handleAddSection = (type: string) => {
+        addSection(type);
+    };
+
+    const handleAddElement = (type: string) => {
+        if (selectedId && selectedType === 'section') {
+            addElement(selectedId, type);
+        } else {
+            alert('Please select a section first to add an element.');
+        }
+    };
+
+    const categories: ToolbarCategory[] = [
+        {
+            title: 'Basic',
+            items: [
+                { type: 'heading', label: 'Heading', icon: Type, action: () => handleAddElement('heading') },
+                { type: 'text', label: 'Text', icon: Type, action: () => handleAddElement('text') },
+                { type: 'image', label: 'Image', icon: ImageIcon, action: () => handleAddElement('image') },
+                { type: 'button', label: 'Button', icon: MousePointerClick, action: () => handleAddElement('button') },
+            ]
+        },
+        {
+            title: 'General',
+            items: [
+                { type: 'container', label: 'Container', icon: Box, action: () => handleAddElement('container') },
+                { type: 'spacer', label: 'Spacer', icon: Maximize2, action: () => handleAddElement('spacer') },
+                { type: 'divider', label: 'Divider', icon: Minus, action: () => handleAddElement('divider') },
+                { type: 'icon', label: 'Icon', icon: Smile, action: () => handleAddElement('icon') },
+            ]
+        },
+        {
+            title: 'Section',
+            items: [
+                { type: 'hero', label: 'Hero', icon: LayoutDashboard, action: () => handleAddSection('hero') },
+                { type: 'features', label: 'Features', icon: Grid3x3, action: () => handleAddSection('features') },
+                { type: 'testimonials', label: 'Testimonial', icon: MessageSquare, action: () => handleAddSection('testimonials') },
+            ]
+        },
+        {
+            title: 'AI Tools',
+            items: [
+                { type: 'ai-gen', label: 'AI Section Gen', icon: Wand2, action: onAIClick, isSpecial: true }
+            ]
+        }
+    ];
+
+    const filteredCategories = categories.map(cat => ({
+        ...cat,
+        items: cat.items.filter(item => item.label.toLowerCase().includes(searchTerm.toLowerCase()))
+    })).filter(cat => cat.items.length > 0);
 
     return (
-        <div className="p-4">
-            {/* AI Section Generator - Prominent CTA */}
-            {onAIClick && (
-                <div className="mb-6">
-                    <button
-                        onClick={onAIClick}
-                        className="w-full flex items-center justify-center px-4 py-3 rounded-lg bg-gradient-to-r from-purple-600 to-blue-600 text-white hover:from-purple-700 hover:to-blue-700 transition-all shadow-lg hover:shadow-xl group"
-                    >
-                        <Wand2 className="w-5 h-5 mr-2 group-hover:rotate-12 transition-transform" />
-                        <span className="font-semibold">Generate with AI</span>
-                        <Sparkles className="w-4 h-4 ml-2" />
-                    </button>
-                </div>
-            )}
-
-            <div className="mb-6">
-                <h3 className="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-3">
-                    Add Sections
-                </h3>
-                <div className="space-y-2">
-                    {sectionTemplates.map((template) => {
-                        const Icon = template.icon;
-                        return (
-                            <button
-                                key={template.type}
-                                onClick={() => addSection(template.type)}
-                                className={`
-                  w-full flex items-center px-3 py-2 rounded-lg transition-colors text-left
-                  border border-gray-200 hover:border-${template.color}-500 hover:bg-${template.color}-50
-                  group
-                `}
-                            >
-                                <div className={`p-1.5 rounded bg-${template.color}-100 text-${template.color}-600 mr-3`}>
-                                    <Icon className="w-4 h-4" />
-                                </div>
-                                <span className="text-sm font-medium text-gray-700 group-hover:text-gray-900">
-                                    {template.label}
-                                </span>
-                                <Plus className="w-4 h-4 ml-auto text-gray-400 group-hover:text-gray-600" />
-                            </button>
-                        );
-                    })}
+        <div className="flex flex-col h-full bg-white border-r border-slate-200">
+            {/* Search */}
+            <div className="p-4 border-b border-slate-100">
+                <div className="relative">
+                    <Search className="absolute left-3 top-2.5 text-slate-400 w-5 h-5" />
+                    <input
+                        className="w-full pl-10 pr-4 py-2 bg-slate-50 border border-slate-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-primary/50 text-slate-700 placeholder:text-slate-400"
+                        placeholder="Find elements..."
+                        type="text"
+                        value={searchTerm}
+                        onChange={(e) => setSearchTerm(e.target.value)}
+                    />
                 </div>
             </div>
 
-            {selectedId && selectedType === 'section' && (
-                <div className="mb-6">
-                    <h3 className="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-3">
-                        Add Elements
-                    </h3>
-                    <p className="text-xs text-gray-600 mb-3">
-                        Click an element to add it to the selected section
-                    </p>
-                    <div className="space-y-2">
-                        {elementTypes.map((element) => {
-                            const Icon = element.icon;
-                            return (
-                                <button
-                                    key={element.type}
-                                    onClick={() => {
-                                        if (selectedId) {
-                                            const { addElement } = useEditorStore.getState();
-                                            addElement(selectedId, element.type);
-                                        }
-                                    }}
-                                    className="w-full flex items-center px-3 py-2 rounded-lg border border-gray-200 hover:border-blue-500 hover:bg-blue-50 transition-colors text-left group"
-                                >
-                                    <Icon className="w-4 h-4 text-gray-600 group-hover:text-blue-600 mr-3" />
-                                    <span className="text-sm font-medium text-gray-700 group-hover:text-gray-900">
-                                        {element.label}
-                                    </span>
-                                    <Plus className="w-4 h-4 ml-auto text-gray-400 group-hover:text-gray-600" />
-                                </button>
-                            );
-                        })}
+            {/* Content */}
+            <div className="flex-1 overflow-y-auto p-4 space-y-6">
+                {filteredCategories.map((category, idx) => (
+                    <div key={idx}>
+                        <h3 className="text-xs font-bold text-slate-400 uppercase tracking-wider mb-3">
+                            {category.title}
+                        </h3>
+                        <div className={`grid ${category.title === 'AI Tools' ? 'grid-cols-1' : 'grid-cols-2'} gap-2`}>
+                            {category.items.map((item, itemIdx) => {
+                                const Icon = item.icon;
+                                return (
+                                    <div
+                                        key={itemIdx}
+                                        onClick={item.action}
+                                        className={`
+                                            group flex ${category.title === 'AI Tools' ? 'flex-row items-center gap-3' : 'flex-col items-center justify-center'} 
+                                            p-3 rounded-lg border border-slate-200 hover:border-primary/50 hover:bg-slate-50 cursor-pointer transition-all
+                                        `}
+                                    >
+                                        <Icon className={`${item.isSpecial ? 'text-primary' : 'text-slate-500 group-hover:text-primary'} ${category.title === 'AI Tools' ? 'mb-0' : 'mb-2 h-6 w-6'}`} />
+                                        <span className="text-xs font-medium text-slate-600">
+                                            {item.label}
+                                        </span>
+                                    </div>
+                                );
+                            })}
+                        </div>
                     </div>
-                </div>
-            )}
-
-            {!selectedId && (
-                <div className="mt-6 p-4 bg-gray-50 rounded-lg border border-gray-200">
-                    <p className="text-xs text-gray-600">
-                        💡 <strong>Tip:</strong> Click on a section to add elements to it
-                    </p>
-                </div>
-            )}
+                ))}
+            </div>
         </div>
     );
 }

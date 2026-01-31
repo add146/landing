@@ -1,13 +1,15 @@
 import { useEffect, useState } from 'react';
 import { useParams, useNavigate, Link } from 'react-router-dom';
 import {
-    ChevronLeft,
+    ArrowLeft,
     Eye,
-    Save,
     Monitor,
     Tablet,
     Smartphone,
-    Search
+    Undo,
+    Redo,
+    Settings,
+    BarChart3
 } from 'lucide-react';
 import { useEditorStore } from '../../store/editorStore';
 import Canvas from '../../components/editor/Canvas';
@@ -29,7 +31,6 @@ export default function PageEditor() {
         updatePage,
         previewDevice,
         setPreviewDevice,
-        isSaving,
     } = useEditorStore();
 
     const [loading, setLoading] = useState(true);
@@ -131,7 +132,7 @@ export default function PageEditor() {
     if (loading) {
         return (
             <div className="flex items-center justify-center h-screen">
-                <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"></div>
+                <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary"></div>
             </div>
         );
     }
@@ -141,7 +142,7 @@ export default function PageEditor() {
             <div className="flex items-center justify-center h-screen">
                 <div className="text-center">
                     <h2 className="text-2xl font-bold text-gray-900 mb-2">Page not found</h2>
-                    <Link to="/dashboard" className="text-blue-600 hover:underline">
+                    <Link to="/dashboard" className="text-primary hover:underline">
                         Return to Dashboard
                     </Link>
                 </div>
@@ -156,70 +157,76 @@ export default function PageEditor() {
     };
 
     return (
-        <div className="h-screen flex flex-col bg-gray-50">
-            {/* Top Bar */}
-            <header className="bg-white border-b border-gray-200 px-4 py-3 flex items-center justify-between">
-                {/* Left: Back button */}
-                <div className="flex items-center space-x-4">
-                    <Link
-                        to="/dashboard"
-                        className="flex items-center text-gray-600 hover:text-gray-900 transition-colors"
-                    >
-                        <ChevronLeft className="w-5 h-5 mr-1" />
-                        <span className="text-sm font-medium">Back</span>
+        <div className="h-screen flex flex-col bg-background-light overflow-hidden font-sans text-slate-900">
+            {/* Header */}
+            <header className="flex items-center justify-between px-4 py-2 border-b border-slate-200 bg-white shrink-0 h-14 z-50 relative">
+                {/* Left: Back & Title */}
+                <div className="flex items-center gap-4">
+                    <Link to="/dashboard" className="p-2 hover:bg-slate-100 rounded-lg transition-colors text-slate-500">
+                        <ArrowLeft className="w-5 h-5" />
                     </Link>
-                    <div className="border-l border-gray-300 h-6"></div>
-                    <div>
-                        <h1 className="text-lg font-semibold text-gray-900">
-                            {currentPage.title}
-                        </h1>
-                        <p className="text-xs text-gray-500">/{currentPage.slug}</p>
+                    <div className="flex items-center gap-3">
+                        <div className="flex flex-col">
+                            <span className="text-sm font-bold text-slate-900 w-48 truncate">{currentPage.title}</span>
+                            <span className="text-[10px] text-slate-400">/{currentPage.slug} • v2.4</span>
+                        </div>
+                        <button
+                            onClick={() => setShowSEOModal(true)}
+                            className="flex items-center gap-1.5 px-2 py-1 rounded-md bg-slate-50 hover:bg-slate-100 border border-slate-200 text-xs font-medium text-slate-600 transition-colors"
+                            title="Page Settings & SEO"
+                        >
+                            <Settings className="w-4 h-4" />
+                            <span>Page Settings</span>
+                        </button>
+                        <div className="flex items-center gap-1 px-2 py-1 bg-green-50 text-green-700 rounded-full text-[10px] font-bold border border-green-100">
+                            <BarChart3 className="w-3 h-3" />
+                            SEO: 92/100
+                        </div>
                     </div>
                 </div>
 
-                {/* Center: Device switcher */}
-                <div className="flex items-center space-x-2 bg-gray-100 rounded-lg p-1">
-                    {(Object.entries(deviceIcons) as [typeof previewDevice, typeof Monitor][]).map(([device, Icon]) => (
-                        <button
-                            key={device}
-                            onClick={() => setPreviewDevice(device)}
-                            className={`
-                p-2 rounded transition-colors
-                ${previewDevice === device
-                                    ? 'bg-white text-blue-600 shadow-sm'
-                                    : 'text-gray-600 hover:text-gray-900'
-                                }
-              `}
-                            title={device.charAt(0).toUpperCase() + device.slice(1)}
-                        >
-                            <Icon className="w-5 h-5" />
-                        </button>
-                    ))}
+                {/* Center: Device Switcher & Undo/Redo */}
+                <div className="flex items-center gap-2">
+                    <div className="flex bg-slate-100 rounded-lg p-1 mr-2 gap-1">
+                        {(Object.entries(deviceIcons) as [typeof previewDevice, typeof Monitor][]).map(([device, Icon]) => (
+                            <button
+                                key={device}
+                                onClick={() => setPreviewDevice(device)}
+                                className={`
+                                    p-2 rounded transition-colors
+                                    ${previewDevice === device
+                                        ? 'bg-white text-primary shadow-sm'
+                                        : 'text-slate-500 hover:text-slate-800'
+                                    }
+                                `}
+                                title={device.charAt(0).toUpperCase() + device.slice(1)}
+                            >
+                                <Icon className="w-5 h-5" />
+                            </button>
+                        ))}
+                    </div>
+                    <div className="h-6 w-px bg-slate-200 mx-1"></div>
+                    <button className="p-2 hover:bg-slate-100 rounded-lg text-slate-500 disabled:opacity-50" title="Undo (Coming Soon)">
+                        <Undo className="w-5 h-5" />
+                    </button>
+                    <button className="p-2 hover:bg-slate-100 rounded-lg text-slate-500 disabled:opacity-50" title="Redo (Coming Soon)">
+                        <Redo className="w-5 h-5" />
+                    </button>
                 </div>
 
-                {/* Right: Actions */}
-                <div className="flex items-center space-x-2">
-                    {isSaving && (
-                        <div className="flex items-center text-sm text-gray-600">
-                            <Save className="w-4 h-4 mr-1 animate-pulse" />
-                            Saving...
-                        </div>
-                    )}
-                    <button
-                        onClick={() => setShowSEOModal(true)}
-                        className="flex items-center px-3 py-2 text-gray-700 hover:bg-gray-100 rounded-lg transition-colors"
-                        title="SEO Optimization"
-                    >
-                        <Search className="w-4 h-4 mr-2" />
-                        SEO AI
-                    </button>
+                {/* Right: Preview & Publish */}
+                <div className="flex items-center gap-3">
                     <button
                         onClick={() => setShowPreview(true)}
-                        className="flex items-center px-3 py-2 text-gray-700 hover:bg-gray-100 rounded-lg transition-colors"
+                        className="flex items-center gap-2 px-3 py-1.5 text-sm font-semibold text-slate-600 hover:bg-slate-100 rounded-lg transition-colors"
                     >
-                        <Eye className="w-4 h-4 mr-2" />
-                        Preview
+                        <Eye className="w-4 h-4" />
+                        <span className="hidden sm:inline">Preview</span>
                     </button>
+
+                    {/* We reuse PublishWorkflow component but we might want to style it to match 'bg-primary' etc */}
+                    {/* For now, let's keep it as is, or use the design's button if PublishWorkflow allows custom trigger */}
+                    {/* Design has: bg-primary text-white ... flex gap-2 Rocket icon */}
                     <PublishWorkflow
                         pageId={currentPage.id}
                         pageTitle={currentPage.title}
@@ -232,19 +239,26 @@ export default function PageEditor() {
             </header>
 
             {/* Editor Layout */}
-            <div className="flex-1 flex overflow-hidden">
+            <div className="flex-1 flex overflow-hidden relative">
                 {/* Left Toolbar */}
-                <aside className="w-64 bg-white border-r border-gray-200 overflow-y-auto">
+                <aside className="w-64 bg-white border-r border-slate-200 flex flex-col shrink-0 z-20">
                     <LeftToolbar onAIClick={() => setShowAIModal(true)} />
                 </aside>
 
-                {/* Canvas */}
-                <main className="flex-1 overflow-y-auto">
-                    <Canvas />
+                {/* Canvas Area */}
+                <main className="flex-1 bg-slate-100 relative overflow-hidden flex flex-col bg-grid-pattern z-0" id="canvas-area">
+                    {/* Floating Navigator (Optional, adding placeholder or leaving for future) */}
+
+                    <div className="flex-1 overflow-auto flex justify-center items-start p-12">
+                        {/* Canvas Wrapper */}
+                        <div className="min-h-[900px] bg-white shadow-2xl ring-1 ring-slate-200 transition-all origin-top">
+                            <Canvas />
+                        </div>
+                    </div>
                 </main>
 
                 {/* Right Settings Panel */}
-                <aside className="w-80 bg-white border-l border-gray-200 overflow-y-auto">
+                <aside className="w-80 bg-white border-l border-slate-200 flex flex-col shrink-0 overflow-y-auto z-20 shadow-[-5px_0_15px_rgba(0,0,0,0.02)]">
                     <SettingsPanel />
                 </aside>
             </div>
