@@ -9,7 +9,9 @@ import {
     Type,
     Image as ImageIcon,
     Square,
-    MousePointer
+    MousePointer,
+    Wand2,
+    Sparkles
 } from 'lucide-react';
 import { useEditorStore } from '../../store/editorStore';
 
@@ -30,11 +32,29 @@ const elementTypes = [
     { type: 'spacer', label: 'Spacer', icon: Square },
 ];
 
-export default function LeftToolbar() {
+interface LeftToolbarProps {
+    onAIClick?: () => void;
+}
+
+export default function LeftToolbar({ onAIClick }: LeftToolbarProps) {
     const { addSection, selectedId, selectedType } = useEditorStore();
 
     return (
         <div className="p-4">
+            {/* AI Section Generator - Prominent CTA */}
+            {onAIClick && (
+                <div className="mb-6">
+                    <button
+                        onClick={onAIClick}
+                        className="w-full flex items-center justify-center px-4 py-3 rounded-lg bg-gradient-to-r from-purple-600 to-blue-600 text-white hover:from-purple-700 hover:to-blue-700 transition-all shadow-lg hover:shadow-xl group"
+                    >
+                        <Wand2 className="w-5 h-5 mr-2 group-hover:rotate-12 transition-transform" />
+                        <span className="font-semibold">Generate with AI</span>
+                        <Sparkles className="w-4 h-4 ml-2" />
+                    </button>
+                </div>
+            )}
+
             <div className="mb-6">
                 <h3 className="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-3">
                     Add Sections

@@ -14,6 +14,7 @@ import LeftToolbar from '../../components/editor/LeftToolbar';
 import SettingsPanel from '../../components/editor/SettingsPanel';
 import PreviewModal from '../../components/editor/PreviewModal';
 import PublishWorkflow from '../../components/editor/PublishWorkflow';
+import AISectionModal from '../../components/editor/AISectionModal';
 
 export default function PageEditor() {
     const { pageId } = useParams<{ pageId: string }>();
@@ -28,6 +29,7 @@ export default function PageEditor() {
 
     const [loading, setLoading] = useState(true);
     const [showPreview, setShowPreview] = useState(false);
+    const [showAIModal, setShowAIModal] = useState(false);
     const [isPublished, setIsPublished] = useState(false);
     const [websiteSlug, setWebsiteSlug] = useState('');
 
@@ -60,6 +62,29 @@ export default function PageEditor() {
             });
         }
     }, [currentPage]);
+
+    const handleAIInsert = async (section: any) => {
+        // Insert AI-generated section
+        try {
+            // Create section via API directly since we have custom content
+            const client = await import('../../api/client').then(m => m.default);
+            await client.post('/api/sections', {
+                page_id: pageId,
+                type: section.type,
+                layout_variant: section.layout_variant || 'default',
+                content: JSON.stringify(section.content),
+                order_index: 999, // Add at the end
+            });
+
+            // Reload page to show new section
+            if (pageId) {
+                await loadPage(pageId);
+            }
+        } catch (error) {
+            console.error('Failed to insert AI section:', error);
+            alert('Failed to insert section');
+        }
+    };
 
     if (loading) {
         return (
@@ -160,7 +185,7 @@ export default function PageEditor() {
             <div className="flex-1 flex overflow-hidden">
                 {/* Left Toolbar */}
                 <aside className="w-64 bg-white border-r border-gray-200 overflow-y-auto">
-                    <LeftToolbar />
+                    <LeftToolbar onAIClick={() => setShowAIModal(true)} />
                 </aside>
 
                 {/* Canvas */}
@@ -177,6 +202,14 @@ export default function PageEditor() {
             {/* Preview Modal */}
             {showPreview && (
                 <PreviewModal onClose={() => setShowPreview(false)} />
+            )}
+
+            {/* AI Section Modal */}
+            {showAIModal && (
+                <AISectionModal
+                    onClose={() => setShowAIModal(false)}
+                    onInsert={handleAIInsert}
+                />
             )}
         </div>
     );
