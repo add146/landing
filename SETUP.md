@@ -1,6 +1,10 @@
 # Landing Page Builder - Setup Instructions
 
-## Phase 1: Authentication System - ✅ COMPLETE
+## ✅ Phase 1: Authentication System - DEPLOYED & LIVE
+
+**Live URLs:**
+- 🌐 **Primary:** https://landing-bzy.pages.dev
+- 🌐 **Custom Domain:** https://build.khibroh.com
 
 ### What's Been Built
 

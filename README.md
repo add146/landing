@@ -21,6 +21,23 @@ https://github.com/add146/landing.git
 
 ---
 
+## 🌐 Live Deployment
+
+**Phase 1 - Authentication System:**
+- 🚀 **Primary URL:** https://landing-bzy.pages.dev
+- 🚀 **Custom Domain:** https://build.khibroh.com
+
+**Status:** ✅ Deployed & Live on Cloudflare Pages
+
+**Features Available:**
+- User registration with password strength validation
+- Login/logout functionality
+- Protected dashboard
+- JWT-based authentication
+- Dark mode UI design
+
+---
+
 ## 📚 Documentation
 
 | File | Description |
