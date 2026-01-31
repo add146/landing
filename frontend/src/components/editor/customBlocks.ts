@@ -110,6 +110,97 @@ const myTailwindBlocks = (editor: Editor) => {
         content: '<i class="fa fa-star text-2xl text-yellow-400"></i>',
         attributes: { class: 'fa fa-star' }
     });
+    // 5. Section Templates (Hero, Features, Testimonial)
+    bm.add('hero-section', {
+        label: 'Hero',
+        category: 'Section',
+        content: `
+      <section class="relative bg-white dark:bg-slate-900 py-20 overflow-hidden">
+        <div class="container mx-auto px-6 relative z-10 flex flex-col md:flex-row items-center gap-12">
+            <div class="flex-1 space-y-6">
+                <h1 class="text-5xl font-black leading-tight text-slate-900 dark:text-white">
+                    Build your online presence with AI.
+                </h1>
+                <p class="text-lg text-slate-600 dark:text-slate-400">
+                    Create stunning landing pages in minutes using our drag-and-drop editor.
+                </p>
+                <div class="flex gap-4 pt-2">
+                    <a href="#" class="inline-block px-8 py-4 bg-indigo-600 text-white font-bold rounded-lg shadow-lg hover:bg-indigo-700 transition-colors">Get Started</a>
+                    <a href="#" class="inline-block px-8 py-4 bg-slate-100 dark:bg-slate-800 text-slate-900 dark:text-white font-bold rounded-lg hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors">Learn More</a>
+                </div>
+            </div>
+            <div class="flex-1 w-full relative">
+                <div class="aspect-video bg-slate-200 dark:bg-slate-800 rounded-2xl shadow-2xl overflow-hidden">
+                     <img src="https://placehold.co/600x400/6264f4/ffffff?text=Hero+Image" alt="Hero" class="w-full h-full object-cover" />
+                </div>
+            </div>
+        </div>
+      </section>
+    `,
+        attributes: { class: 'fa fa-window-maximize' }
+    });
+
+    bm.add('features-grid', {
+        label: 'Features',
+        category: 'Section',
+        content: `
+      <section class="py-20 bg-slate-50 dark:bg-slate-950">
+        <div class="container mx-auto px-6">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="p-8 bg-white dark:bg-slate-900 rounded-2xl shadow-sm border border-slate-100 dark:border-slate-800 hover:shadow-md transition-shadow">
+                    <div class="w-12 h-12 bg-indigo-100 dark:bg-indigo-900/50 rounded-lg flex items-center justify-center text-indigo-600 dark:text-indigo-400 mb-6">
+                        <i class="fa fa-bolt text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-slate-900 dark:text-white mb-3">Fast Setup</h3>
+                    <p class="text-slate-600 dark:text-slate-400">Launch in minutes, not days. Our templates are designed for speed.</p>
+                </div>
+                <div class="p-8 bg-white dark:bg-slate-900 rounded-2xl shadow-sm border border-slate-100 dark:border-slate-800 hover:shadow-md transition-shadow">
+                    <div class="w-12 h-12 bg-indigo-100 dark:bg-indigo-900/50 rounded-lg flex items-center justify-center text-indigo-600 dark:text-indigo-400 mb-6">
+                        <i class="fa fa-paint-brush text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-slate-900 dark:text-white mb-3">Custom Design</h3>
+                    <p class="text-slate-600 dark:text-slate-400">Tailor every pixel to your brand with our advanced style editor.</p>
+                </div>
+                <div class="p-8 bg-white dark:bg-slate-900 rounded-2xl shadow-sm border border-slate-100 dark:border-slate-800 hover:shadow-md transition-shadow">
+                    <div class="w-12 h-12 bg-indigo-100 dark:bg-indigo-900/50 rounded-lg flex items-center justify-center text-indigo-600 dark:text-indigo-400 mb-6">
+                         <i class="fa fa-magic text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-slate-900 dark:text-white mb-3">AI Powered</h3>
+                    <p class="text-slate-600 dark:text-slate-400">Generate copy and images instantly using state-of-the-art AI.</p>
+                </div>
+            </div>
+        </div>
+      </section>
+    `,
+        attributes: { class: 'fa fa-th-large' }
+    });
+
+    bm.add('testimonial', {
+        label: 'Testimonial',
+        category: 'Section',
+        content: `
+      <section class="py-20 bg-white dark:bg-slate-900">
+        <div class="container mx-auto px-6 text-center max-w-4xl">
+            <div class="mb-8">
+                 <i class="fa fa-quote-left text-4xl text-indigo-200 dark:text-indigo-900"></i>
+            </div>
+            <p class="text-2xl md:text-3xl font-medium text-slate-900 dark:text-white mb-8 leading-relaxed">
+                "This builder has completely transformed how we create landing pages. The AI features are a game changer!"
+            </p>
+            <div class="flex items-center justify-center gap-4">
+                <div class="w-12 h-12 bg-slate-200 rounded-full overflow-hidden">
+                    <img src="https://placehold.co/100x100?text=Avatar" alt="User" class="w-full h-full object-cover" />
+                </div>
+                <div class="text-left">
+                    <div class="font-bold text-slate-900 dark:text-white">Sarah Johnson</div>
+                    <div class="text-sm text-slate-500">Marketing Director</div>
+                </div>
+            </div>
+        </div>
+      </section>
+    `,
+        attributes: { class: 'fa fa-quote-right' }
+    });
 };
 
 export default myTailwindBlocks;

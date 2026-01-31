@@ -29,10 +29,15 @@ export default function GrapesEditor() {
     const [editorInstance, setEditorInstance] = useState<Editor | null>(null);
     const [activeTab, setActiveTab] = useState<'content' | 'style' | 'advanced'>('style');
     const [blocks, setBlocks] = useState<any[]>([]);
+    const [pageSettingsOpen, setPageSettingsOpen] = useState(false);
+    const [aiModalOpen, setAiModalOpen] = useState(false);
 
     const onEditor = (editor: Editor) => {
         setEditorInstance(editor);
         console.log('Editor loaded', editor);
+
+        // ... (rest of onEditor)
+
 
         // Load content if available
         if (currentPage?.content_json) {
@@ -134,9 +139,19 @@ export default function GrapesEditor() {
                         <button className="p-2 hover:bg-slate-800 rounded-lg transition-colors text-slate-400">
                             <span className="material-symbols-outlined">arrow_back</span>
                         </button>
-                        <div className="flex flex-col">
-                            <span className="text-sm font-bold text-white">{currentPage.title}</span>
-                            <span className="text-[10px] text-slate-400">Path: /{currentPage.slug}</span>
+                        <div className="flex items-center gap-3">
+                            <div className="flex flex-col">
+                                <span className="text-sm font-bold text-white">{currentPage.title}</span>
+                                <span className="text-[10px] text-slate-400">Path: /{currentPage.slug}</span>
+                            </div>
+                            <button onClick={() => setPageSettingsOpen(!pageSettingsOpen)} className="flex items-center gap-1.5 px-2 py-1 rounded-md bg-slate-800 hover:bg-slate-700 border border-slate-700 text-xs font-medium text-slate-300 transition-colors" title="Page SEO & Metadata">
+                                <span className="material-symbols-outlined text-[16px]">settings</span>
+                                <span>Page Settings</span>
+                            </button>
+                            <div className="flex items-center gap-1 px-2 py-1 bg-green-900/20 text-green-400 rounded-full text-[10px] font-bold border border-green-900/30">
+                                <span className="material-symbols-outlined text-[12px]">analytics</span>
+                                SEO: 92/100
+                            </div>
                         </div>
                     </div>
 
@@ -176,7 +191,20 @@ export default function GrapesEditor() {
                                 <input className="w-full pl-10 pr-4 py-2 bg-slate-900 border border-slate-700 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-primary/50 text-slate-200 placeholder:text-slate-400" placeholder="Find elements..." type="text" />
                             </div>
                         </div>
-                        <div className="flex-1 overflow-y-auto p-4 space-y-6 scrollbar-hide">
+                        {/* Custom "AI Tools" Category Header for quick access */}
+                        <div className="px-4 pt-4 pb-0">
+                            <h3 className="text-xs font-bold text-slate-400 uppercase tracking-wider mb-3 flex items-center gap-1">
+                                AI Tools
+                                <span className="material-symbols-outlined text-primary text-[14px]">auto_awesome</span>
+                            </h3>
+                            <div className="grid grid-cols-1 gap-2 mb-6">
+                                <div onClick={() => setAiModalOpen(true)} className="group flex items-center gap-3 p-3 rounded-lg border border-slate-700 hover:border-primary/50 hover:bg-slate-800 cursor-pointer transition-all">
+                                    <span className="material-symbols-outlined text-primary mb-0">magic_button</span>
+                                    <span className="text-xs font-medium text-slate-300">AI Section Gen</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div className="flex-1 overflow-y-auto px-4 pb-4 space-y-6 scrollbar-hide">
                             {Object.entries(groupedBlocks).map(([category, items]: [string, any]) => (
                                 <div key={category}>
                                     <h3 className="text-xs font-bold text-slate-400 uppercase tracking-wider mb-3">{category}</h3>
@@ -265,6 +293,86 @@ export default function GrapesEditor() {
                         >
                             {/* GrapesJS mounts here */}
                         </GjsEditor>
+
+                        {/* AI Assistant Modal (Centered) */}
+                        {aiModalOpen && (
+                            <div className="absolute top-[30%] left-1/2 -translate-x-1/2 -translate-y-1/2 w-[520px] bg-[#15152a] rounded-2xl shadow-2xl border border-primary/20 ring-4 ring-primary/5 z-50 overflow-hidden transform transition-all animate-fade-in-scale">
+                                <div className="h-1 w-full bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500"></div>
+                                <div className="p-6">
+                                    <div className="flex justify-between items-start mb-4">
+                                        <div>
+                                            <h3 className="text-lg font-bold text-white flex items-center gap-2">
+                                                <span className="material-symbols-outlined text-primary filled">auto_awesome</span>
+                                                AI Assistant
+                                            </h3>
+                                            <p className="text-slate-400 text-sm mt-1">Generate a new section or modify existing content.</p>
+                                        </div>
+                                        <button onClick={() => setAiModalOpen(false)} className="text-slate-400 hover:text-slate-200"><span className="material-symbols-outlined">close</span></button>
+                                    </div>
+                                    <div className="mb-3">
+                                        <label className="text-[10px] uppercase font-bold text-slate-400 mb-1.5 block tracking-wider">Model Provider</label>
+                                        <div className="relative">
+                                            <select className="w-full appearance-none bg-slate-900 border border-slate-700 text-slate-200 text-sm rounded-lg px-3 py-2 focus:ring-1 focus:ring-primary focus:border-primary">
+                                                <option>OpenAI GPT-4o (Best Quality)</option>
+                                                <option>Anthropic Claude 3.5 Sonnet (Fastest)</option>
+                                                <option>Gemini Pro (Google)</option>
+                                            </select>
+                                            <span className="material-symbols-outlined absolute right-3 top-2.5 text-slate-400 pointer-events-none text-[18px]">expand_more</span>
+                                        </div>
+                                    </div>
+                                    <div className="relative mb-4">
+                                        <textarea className="w-full rounded-xl border-slate-700 bg-slate-900 text-white text-sm p-4 focus:border-primary focus:ring-primary h-28 resize-none shadow-inner" placeholder="E.g., Create a pricing section with 3 distinct tiers, highlighting the 'Pro' plan in the middle..."></textarea>
+                                        <div className="absolute bottom-3 right-3 flex gap-2">
+                                            <button className="p-1.5 rounded-md hover:bg-slate-800 text-slate-500" title="Voice Input"><span className="material-symbols-outlined text-[18px]">mic</span></button>
+                                            <button className="p-1.5 rounded-md hover:bg-slate-800 text-slate-500" title="Upload Reference"><span className="material-symbols-outlined text-[18px]">image</span></button>
+                                        </div>
+                                    </div>
+                                    <div className="flex justify-between items-center">
+                                        <div className="flex gap-2 text-xs">
+                                            <button className="px-2 py-1 bg-slate-800 rounded-full text-slate-400 cursor-pointer hover:bg-slate-700 transition-colors">Testimonials</button>
+                                            <button className="px-2 py-1 bg-slate-800 rounded-full text-slate-400 cursor-pointer hover:bg-slate-700 transition-colors">FAQ</button>
+                                        </div>
+                                        <button className="bg-primary hover:bg-indigo-600 text-white text-sm font-bold px-5 py-2 rounded-lg shadow-md shadow-primary/20 transition-all flex items-center gap-2">
+                                            <span className="material-symbols-outlined text-[18px]">magic_button</span>
+                                            Generate
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        )}
+
+                        {/* Page Settings Modal (Centered Overlay) */}
+                        {pageSettingsOpen && (
+                            <div className="absolute inset-0 z-[60] bg-black/50 backdrop-blur-sm flex items-center justify-center">
+                                <div className="bg-[#15152a] w-[500px] rounded-xl shadow-2xl border border-slate-800 overflow-hidden">
+                                    <div className="px-6 py-4 border-b border-slate-800 flex justify-between items-center">
+                                        <h3 className="font-bold text-lg text-white">Page Settings</h3>
+                                        <button className="text-slate-400 hover:text-slate-200" onClick={() => setPageSettingsOpen(false)}><span className="material-symbols-outlined">close</span></button>
+                                    </div>
+                                    <div className="p-6 space-y-4">
+                                        <div>
+                                            <label className="block text-sm font-medium text-slate-300 mb-1">Page Title</label>
+                                            <input className="w-full rounded-lg border-slate-700 bg-slate-900 px-3 py-2 text-sm text-white focus:ring-primary focus:border-primary" type="text" defaultValue={currentPage.title} />
+                                        </div>
+                                        <div>
+                                            <label className="block text-sm font-medium text-slate-300 mb-1">URL Slug</label>
+                                            <div className="flex items-center">
+                                                <span className="bg-slate-800 border border-r-0 border-slate-700 px-3 py-2 text-sm text-slate-400 rounded-l-lg">website.com/</span>
+                                                <input className="flex-1 rounded-r-lg border-slate-700 bg-slate-900 px-3 py-2 text-sm text-white focus:ring-primary focus:border-primary" type="text" defaultValue={currentPage.slug} />
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <label className="block text-sm font-medium text-slate-300 mb-1">SEO Description</label>
+                                            <textarea className="w-full rounded-lg border-slate-700 bg-slate-900 px-3 py-2 text-sm h-24 text-white focus:ring-primary focus:border-primary"></textarea>
+                                        </div>
+                                    </div>
+                                    <div className="px-6 py-4 bg-slate-900/50 flex justify-end gap-2">
+                                        <button className="px-4 py-2 text-sm font-medium text-slate-400 hover:bg-slate-800 rounded-lg" onClick={() => setPageSettingsOpen(false)}>Cancel</button>
+                                        <button className="px-4 py-2 text-sm font-medium text-white bg-primary hover:bg-primary-dark rounded-lg">Save Changes</button>
+                                    </div>
+                                </div>
+                            </div>
+                        )}
                     </main>
 
 
