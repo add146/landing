@@ -3,6 +3,8 @@ import GjsEditor from '@grapesjs/react';
 import grapesjs from 'grapesjs';
 // @ts-ignore
 import webpagePlugin from 'grapesjs-preset-webpage';
+import 'grapesjs/dist/css/grapes.min.css';
+import 'grapesjs-preset-webpage/dist/grapesjs-preset-webpage.min.css';
 import { useEditorStore } from '../../store/editorStore';
 import { Loader2 } from 'lucide-react';
 
