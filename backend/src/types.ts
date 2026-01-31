@@ -5,6 +5,9 @@ export interface Env {
     SESSIONS: KVNamespace;
     JWT_SECRET: string;
     FRONTEND_URL: string;
+    Variables?: {
+        user: JWTPayload;
+    };
 }
 
 // Database Models
