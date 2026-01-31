@@ -31,6 +31,11 @@ interface Page {
     slug: string;
     page_type: string;
     is_published: number;
+    seo_title?: string;
+    seo_description?: string;
+    seo_keywords?: string;
+    og_image?: string;
+    twitter_card?: string;
 }
 
 interface EditorState {
@@ -45,6 +50,7 @@ interface EditorState {
 
     // Actions
     loadPage: (pageId: string) => Promise<void>;
+    updatePage: (data: Partial<Page>) => Promise<void>;
     addSection: (type: string, variant?: number) => Promise<void>;
     updateSection: (id: string, data: Partial<Section>) => Promise<void>;
     deleteSection: (id: string) => Promise<void>;
@@ -91,6 +97,25 @@ export const useEditorStore = create<EditorState>((set, get) => ({
             });
         } catch (error) {
             console.error('Failed to load page:', error);
+            throw error;
+        }
+    },
+
+    updatePage: async (data: Partial<Page>) => {
+        const { currentPage } = get();
+        if (!currentPage) return;
+
+        try {
+            set({ isSaving: true });
+            const response = await client.patch(`/api/pages/${currentPage.id}`, data);
+
+            set((state) => ({
+                currentPage: { ...state.currentPage!, ...response.data.page },
+                isSaving: false,
+            }));
+        } catch (error) {
+            console.error('Failed to update page:', error);
+            set({ isSaving: false });
             throw error;
         }
     },

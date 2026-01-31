@@ -6,7 +6,8 @@ import {
     Save,
     Monitor,
     Tablet,
-    Smartphone
+    Smartphone,
+    Search
 } from 'lucide-react';
 import { useEditorStore } from '../../store/editorStore';
 import Canvas from '../../components/editor/Canvas';
@@ -15,13 +16,17 @@ import SettingsPanel from '../../components/editor/SettingsPanel';
 import PreviewModal from '../../components/editor/PreviewModal';
 import PublishWorkflow from '../../components/editor/PublishWorkflow';
 import AISectionModal from '../../components/editor/AISectionModal';
+import SEOOptimizerModal from '../../components/editor/SEOOptimizerModal';
 
 export default function PageEditor() {
     const { pageId } = useParams<{ pageId: string }>();
     const navigate = useNavigate();
     const {
         currentPage,
+        sections,
+        elements,
         loadPage,
+        updatePage,
         previewDevice,
         setPreviewDevice,
         isSaving,
@@ -30,6 +35,7 @@ export default function PageEditor() {
     const [loading, setLoading] = useState(true);
     const [showPreview, setShowPreview] = useState(false);
     const [showAIModal, setShowAIModal] = useState(false);
+    const [showSEOModal, setShowSEOModal] = useState(false);
     const [isPublished, setIsPublished] = useState(false);
     const [websiteSlug, setWebsiteSlug] = useState('');
 
@@ -84,6 +90,42 @@ export default function PageEditor() {
             console.error('Failed to insert AI section:', error);
             alert('Failed to insert section');
         }
+    };
+
+    const handleSaveSEO = async (seoData: { title: string; description: string; keywords: string }) => {
+        try {
+            await updatePage({
+                seo_title: seoData.title,
+                seo_description: seoData.description,
+                seo_keywords: seoData.keywords,
+            });
+            alert('SEO settings saved successfully!');
+        } catch (error) {
+            console.error('Failed to save SEO:', error);
+            alert('Failed to save SEO settings');
+        }
+    };
+
+    const getPageContent = () => {
+        // Aggregate text content from all sections
+        let content = '';
+        sections.forEach(section => {
+            // Add section content
+            if (section.content && typeof section.content === 'object') {
+                content += JSON.stringify(section.content) + ' ';
+            }
+            // Add element content
+            const sectionElements = elements[section.id] || [];
+            sectionElements.forEach(el => {
+                const elContent = typeof el.content === 'string'
+                    ? JSON.parse(el.content)
+                    : el.content;
+
+                if (elContent.text) content += elContent.text + ' ';
+                if (elContent.alt) content += elContent.alt + ' ';
+            });
+        });
+        return content;
     };
 
     if (loading) {
@@ -164,6 +206,14 @@ export default function PageEditor() {
                         </div>
                     )}
                     <button
+                        onClick={() => setShowSEOModal(true)}
+                        className="flex items-center px-3 py-2 text-gray-700 hover:bg-gray-100 rounded-lg transition-colors"
+                        title="SEO Optimization"
+                    >
+                        <Search className="w-4 h-4 mr-2" />
+                        SEO AI
+                    </button>
+                    <button
                         onClick={() => setShowPreview(true)}
                         className="flex items-center px-3 py-2 text-gray-700 hover:bg-gray-100 rounded-lg transition-colors"
                     >
@@ -209,6 +259,21 @@ export default function PageEditor() {
                 <AISectionModal
                     onClose={() => setShowAIModal(false)}
                     onInsert={handleAIInsert}
+                />
+            )}
+
+            {/* SEO Optimizer Modal */}
+            {showSEOModal && (
+                <SEOOptimizerModal
+                    pageTitle={currentPage.title}
+                    pageContent={getPageContent()}
+                    currentSEO={{
+                        title: currentPage.seo_title,
+                        description: currentPage.seo_description,
+                        keywords: currentPage.seo_keywords,
+                    }}
+                    onClose={() => setShowSEOModal(false)}
+                    onSave={handleSaveSEO}
                 />
             )}
         </div>

@@ -1,10 +1,13 @@
-import { Settings, Palette, Smartphone } from 'lucide-react';
+import { Settings, Palette, Smartphone, Wand2 } from 'lucide-react';
 import { useState } from 'react';
 import { useEditorStore } from '../../store/editorStore';
+import ContentImproverModal from './ContentImproverModal';
 
 export default function SettingsPanel() {
     const { selectedId, selectedType, sections, elements, updateElement } = useEditorStore();
     const [activeTab, setActiveTab] = useState<'content' | 'style' | 'responsive'>('content');
+    const [showImprover, setShowImprover] = useState(false);
+    const [improverField, setImproverField] = useState<string | null>(null);
 
     if (!selectedId || !selectedType) {
         return (
@@ -47,6 +50,19 @@ export default function SettingsPanel() {
             updateElement(selectedId, {
                 content: JSON.stringify({ ...content, [key]: value }),
             });
+        }
+    };
+
+    const openImprover = (field: string) => {
+        setImproverField(field);
+        setShowImprover(true);
+    };
+
+    const handleImproveSave = (improvedText: string) => {
+        if (improverField) {
+            handleContentUpdate(improverField, improvedText);
+            setShowImprover(false);
+            setImproverField(null);
         }
     };
 
@@ -101,9 +117,18 @@ export default function SettingsPanel() {
                         {selectedItem.element_type === 'heading' && (
                             <>
                                 <div>
-                                    <label className="block text-sm font-medium text-gray-700 mb-1">
-                                        Text
-                                    </label>
+                                    <div className="flex items-center justify-between mb-1">
+                                        <label className="block text-sm font-medium text-gray-700">
+                                            Text
+                                        </label>
+                                        <button
+                                            onClick={() => openImprover('text')}
+                                            className="text-xs flex items-center text-purple-600 hover:text-purple-700 font-medium"
+                                        >
+                                            <Wand2 className="w-3 h-3 mr-1" />
+                                            AI Improve
+                                        </button>
+                                    </div>
                                     <input
                                         type="text"
                                         value={content.text || ''}
@@ -134,13 +159,22 @@ export default function SettingsPanel() {
                         {/* Text Settings */}
                         {selectedItem.element_type === 'text' && (
                             <div>
-                                <label className="block text-sm font-medium text-gray-700 mb-1">
-                                    Text
-                                </label>
+                                <div className="flex items-center justify-between mb-1">
+                                    <label className="block text-sm font-medium text-gray-700">
+                                        Text
+                                    </label>
+                                    <button
+                                        onClick={() => openImprover('text')}
+                                        className="text-xs flex items-center text-purple-600 hover:text-purple-700 font-medium"
+                                    >
+                                        <Wand2 className="w-3 h-3 mr-1" />
+                                        AI Improve
+                                    </button>
+                                </div>
                                 <textarea
                                     value={content.text || ''}
                                     onChange={(e) => handleContentUpdate('text', e.target.value)}
-                                    rows={4}
+                                    rows={6}
                                     className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                                 />
                             </div>
@@ -150,9 +184,18 @@ export default function SettingsPanel() {
                         {selectedItem.element_type === 'button' && (
                             <>
                                 <div>
-                                    <label className="block text-sm font-medium text-gray-700 mb-1">
-                                        Button Text
-                                    </label>
+                                    <div className="flex items-center justify-between mb-1">
+                                        <label className="block text-sm font-medium text-gray-700">
+                                            Button Text
+                                        </label>
+                                        <button
+                                            onClick={() => openImprover('text')}
+                                            className="text-xs flex items-center text-purple-600 hover:text-purple-700 font-medium"
+                                        >
+                                            <Wand2 className="w-3 h-3 mr-1" />
+                                            AI Improve
+                                        </button>
+                                    </div>
                                     <input
                                         type="text"
                                         value={content.text || ''}
@@ -225,6 +268,15 @@ export default function SettingsPanel() {
                     </div>
                 )}
             </div>
+
+            {/* AI Improver Modal */}
+            {showImprover && improverField && (
+                <ContentImproverModal
+                    initialContent={content[improverField] || ''}
+                    onClose={() => setShowImprover(false)}
+                    onSave={handleImproveSave}
+                />
+            )}
         </div>
     );
 }

@@ -24,5 +24,11 @@ id = "49134cd22ada423b98dc7fcdd8b3b231"
 
 # Environment Variables
 [vars]
-JWT_SECRET = "change-this-to-a-secure-random-secret-in-production"
+# JWT Configuration
+JWT_SECRET = "your-secret-key-change-this-in-production"
+
+# AI Providers
+GEMINI_API_KEY = "AIzaSyBXi0AzDXsYNTSX1PDar9pzGyyq2y2A0f8"
+# OPENAI_API_KEY = "your_openai_key"
+# ANTHROPIC_API_KEY = "your_anthropic_key"
 FRONTEND_URL = "https://build.khibroh.com"
