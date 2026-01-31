@@ -1,14 +1,34 @@
-// import React from 'react'; // Not needed with new JSX transform
+// import type { Editor } from 'grapesjs'; // Unused
 import GjsEditor from '@grapesjs/react';
 import grapesjs from 'grapesjs';
 // @ts-ignore
 import webpagePlugin from 'grapesjs-preset-webpage';
+// @ts-ignore
+import basicBlocksPlugin from 'grapesjs-blocks-basic';
+// @ts-ignore
+import formsPlugin from 'grapesjs-plugin-forms';
+// @ts-ignore
+import countdownPlugin from 'grapesjs-component-countdown';
+// @ts-ignore
+import tabsPlugin from 'grapesjs-tabs';
+// @ts-ignore
+import customCodePlugin from 'grapesjs-custom-code';
+// @ts-ignore
+import tooltipPlugin from 'grapesjs-tooltip';
+// @ts-ignore
+import typedPlugin from 'grapesjs-typed';
+
 import 'grapesjs/dist/css/grapes.min.css';
 import { useEditorStore } from '../../store/editorStore';
-import { addCustomBlocks } from './customBlocks';
+import myTailwindBlocks from './customBlocks';
 import { Loader2 } from 'lucide-react';
 
 export default function GrapesEditor() {
+    // ... code ...
+
+    // Skipping to the options part to avoid context mismatch issues if possible
+    // actually I should replace the whole top part carefully.
+
     const { currentPage, updatePage } = useEditorStore();
 
     const onEditor = (editor: any) => {
@@ -111,7 +131,15 @@ export default function GrapesEditor() {
                         ],
                     },
                     plugins: [
-                        webpagePlugin
+                        webpagePlugin,
+                        basicBlocksPlugin,
+                        formsPlugin,
+                        countdownPlugin,
+                        tabsPlugin,
+                        customCodePlugin,
+                        tooltipPlugin,
+                        typedPlugin,
+                        myTailwindBlocks
                     ],
                     pluginsOpts: {
                         'gjs-preset-webpage': {
@@ -119,14 +147,23 @@ export default function GrapesEditor() {
                             modalImportTitle: 'Import',
                             modalImportLabel: '<div style="margin-bottom: 10px; font-size: 13px;">Paste here your HTML/CSS and click Import</div>',
                             modalImportContent: (editor: any) => editor.getHtml() + '<style>' + editor.getCss() + '</style>',
+                        },
+                        'grapesjs-tabs': {
+                            tabsBlock: { category: 'Extra' }
+                        },
+                        'grapesjs-typed': {
+                            block: { category: 'Extra', label: 'Typed' }
+                        },
+                        'gjs-component-countdown': {
+                            label: 'Countdown',
+                            category: 'Extra'
+                        },
+                        'grapesjs-tooltip': {
+                            blockTooltip: { category: 'Extra' }
                         }
                     }
                 }}
-                onEditor={(editor) => {
-                    onEditor(editor);
-                    // Add our custom blocks
-                    addCustomBlocks(editor as any);
-                }}
+                onEditor={onEditor}
             >
             </GjsEditor>
         </div>

@@ -1,6 +1,6 @@
 import type { Editor } from 'grapesjs';
 
-export const addCustomBlocks = (editor: Editor) => {
+const myTailwindBlocks = (editor: Editor) => {
     const bm = editor.BlockManager;
 
     // 1. Basic Section / Container
@@ -111,3 +111,5 @@ export const addCustomBlocks = (editor: Editor) => {
         attributes: { class: 'fa fa-star' }
     });
 };
+
+export default myTailwindBlocks;
