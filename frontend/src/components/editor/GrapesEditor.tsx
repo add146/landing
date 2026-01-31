@@ -95,29 +95,6 @@ export default function GrapesEditor() {
         });
     };
 
-    // Helper to group blocks by category
-    const groupedBlocks = blocks.reduce((acc: any, block: any) => {
-        const category = block.get('category') || 'General';
-        const label = typeof category === 'string' ? category : category.label;
-        if (!acc[label]) acc[label] = [];
-        acc[label].push(block);
-        return acc;
-    }, {});
-
-    const handleDragStart = (block: any) => {
-        if (editorInstance) {
-            // @ts-ignore
-            editorInstance.BlockManager.dragStart(block);
-        }
-    };
-
-    const handleDragEnd = () => {
-        if (editorInstance) {
-            // @ts-ignore
-            editorInstance.BlockManager.dragStop(null);
-        }
-    };
-
     if (!currentPage) {
         return (
             <div className="flex flex-col items-center justify-center h-screen bg-gray-50">
@@ -136,19 +113,19 @@ export default function GrapesEditor() {
                 {/* Header */}
                 <header className="flex items-center justify-between px-4 py-2 border-b border-slate-800 bg-[#15152a] shrink-0 h-14 z-50">
                     <div className="flex items-center gap-4">
-                        <button className="p-2 hover:bg-slate-800 rounded-lg transition-colors text-slate-400">
+                        <button className="p-2 hover:bg-slate-100 rounded-lg transition-colors text-slate-500">
                             <span className="material-symbols-outlined">arrow_back</span>
                         </button>
                         <div className="flex items-center gap-3">
                             <div className="flex flex-col">
-                                <span className="text-sm font-bold text-white">{currentPage.title}</span>
-                                <span className="text-[10px] text-slate-400">Path: /{currentPage.slug}</span>
+                                <span className="text-sm font-bold text-slate-900">{currentPage.title}</span>
+                                <span className="text-[10px] text-slate-500">Path: /{currentPage.slug}</span>
                             </div>
-                            <button onClick={() => setPageSettingsOpen(!pageSettingsOpen)} className="flex items-center gap-1.5 px-2 py-1 rounded-md bg-slate-800 hover:bg-slate-700 border border-slate-700 text-xs font-medium text-slate-300 transition-colors" title="Page SEO & Metadata">
+                            <button onClick={() => setPageSettingsOpen(!pageSettingsOpen)} className="flex items-center gap-1.5 px-2 py-1 rounded-md bg-slate-50 hover:bg-slate-100 border border-slate-200 text-xs font-medium text-slate-600 transition-colors" title="Page SEO & Metadata">
                                 <span className="material-symbols-outlined text-[16px]">settings</span>
                                 <span>Page Settings</span>
                             </button>
-                            <div className="flex items-center gap-1 px-2 py-1 bg-green-900/20 text-green-400 rounded-full text-[10px] font-bold border border-green-900/30">
+                            <div className="flex items-center gap-1 px-2 py-1 bg-green-50 text-green-700 rounded-full text-[10px] font-bold border border-green-200">
                                 <span className="material-symbols-outlined text-[12px]">analytics</span>
                                 SEO: 92/100
                             </div>
@@ -156,22 +133,23 @@ export default function GrapesEditor() {
                     </div>
 
                     <div className="flex items-center gap-2">
-                        <div className="flex bg-slate-800 rounded-lg p-1 mr-2 gap-1">
-                            <button onClick={() => editorInstance?.setDevice('Desktop')} className="p-2 rounded hover:bg-slate-700 text-slate-400 hover:text-white transition-colors"><span className="material-symbols-outlined text-[20px]">desktop_windows</span></button>
-                            <button onClick={() => editorInstance?.setDevice('Tablet')} className="p-2 rounded hover:bg-slate-700 text-slate-400 hover:text-white transition-colors"><span className="material-symbols-outlined text-[20px]">tablet_mac</span></button>
-                            <button onClick={() => editorInstance?.setDevice('Mobile Portrait')} className="p-2 rounded hover:bg-slate-700 text-slate-400 hover:text-white transition-colors"><span className="material-symbols-outlined text-[20px]">smartphone</span></button>
+                        {/* Devices */}
+                        <div className="flex bg-slate-100 rounded-lg p-1 mr-2 gap-1">
+                            <button onClick={() => editorInstance?.setDevice('Desktop')} className="p-2 rounded hover:bg-white hover:text-primary hover:shadow-sm text-slate-500 transition-all"><span className="material-symbols-outlined text-[20px]">desktop_windows</span></button>
+                            <button onClick={() => editorInstance?.setDevice('Tablet')} className="p-2 rounded hover:bg-white hover:text-primary hover:shadow-sm text-slate-500 transition-all"><span className="material-symbols-outlined text-[20px]">tablet_mac</span></button>
+                            <button onClick={() => editorInstance?.setDevice('Mobile Portrait')} className="p-2 rounded hover:bg-white hover:text-primary hover:shadow-sm text-slate-500 transition-all"><span className="material-symbols-outlined text-[20px]">smartphone</span></button>
                         </div>
-                        <div className="h-6 w-px bg-slate-700 mx-1"></div>
-                        <button onClick={() => editorInstance?.runCommand('core:undo')} className="p-2 hover:bg-slate-800 rounded-lg text-slate-400">
+                        <div className="h-6 w-px bg-slate-200 mx-1"></div>
+                        <button onClick={() => editorInstance?.runCommand('core:undo')} className="p-2 hover:bg-slate-100 rounded-lg text-slate-500">
                             <span className="material-symbols-outlined text-[20px]">undo</span>
                         </button>
-                        <button onClick={() => editorInstance?.runCommand('core:redo')} className="p-2 hover:bg-slate-800 rounded-lg text-slate-400">
+                        <button onClick={() => editorInstance?.runCommand('core:redo')} className="p-2 hover:bg-slate-100 rounded-lg text-slate-500">
                             <span className="material-symbols-outlined text-[20px]">redo</span>
                         </button>
                     </div>
 
                     <div className="flex items-center gap-3">
-                        <button onClick={() => editorInstance?.runCommand('preview')} className="flex items-center gap-2 px-3 py-1.5 text-sm font-semibold text-slate-300 hover:bg-slate-800 rounded-lg transition-colors">
+                        <button onClick={() => editorInstance?.runCommand('preview')} className="flex items-center gap-2 px-3 py-1.5 text-sm font-semibold text-slate-600 hover:bg-slate-100 rounded-lg transition-colors">
                             <span className="material-symbols-outlined text-[18px]">visibility</span>
                             <span className="hidden sm:inline">Preview</span>
                         </button>
@@ -184,11 +162,11 @@ export default function GrapesEditor() {
 
                 <div className="flex flex-1 overflow-hidden relative">
                     {/* Left Sidebar - Blocks */}
-                    <aside className="w-64 bg-[#15152a] border-r border-slate-800 flex flex-col shrink-0 z-20">
-                        <div className="p-4 border-b border-slate-800">
+                    <aside className="w-64 bg-white border-r border-slate-200 flex flex-col shrink-0 z-20">
+                        <div className="p-4 border-b border-slate-200">
                             <div className="relative">
                                 <span className="material-symbols-outlined absolute left-3 top-2.5 text-slate-400 text-[20px]">search</span>
-                                <input className="w-full pl-10 pr-4 py-2 bg-slate-900 border border-slate-700 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-primary/50 text-slate-200 placeholder:text-slate-400" placeholder="Find elements..." type="text" />
+                                <input className="w-full pl-10 pr-4 py-2 bg-slate-50 border border-slate-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-primary/50 text-slate-700 placeholder:text-slate-400" placeholder="Find elements..." type="text" />
                             </div>
                         </div>
                         {/* Custom "AI Tools" Category Header for quick access */}
@@ -198,37 +176,21 @@ export default function GrapesEditor() {
                                 <span className="material-symbols-outlined text-primary text-[14px]">auto_awesome</span>
                             </h3>
                             <div className="grid grid-cols-1 gap-2 mb-6">
-                                <div onClick={() => setAiModalOpen(true)} className="group flex items-center gap-3 p-3 rounded-lg border border-slate-700 hover:border-primary/50 hover:bg-slate-800 cursor-pointer transition-all">
+                                <div onClick={() => setAiModalOpen(true)} className="group flex items-center gap-3 p-3 rounded-lg border border-slate-200 hover:border-primary/50 hover:bg-slate-50 cursor-pointer transition-all">
                                     <span className="material-symbols-outlined text-primary mb-0">magic_button</span>
-                                    <span className="text-xs font-medium text-slate-300">AI Section Gen</span>
+                                    <span className="text-xs font-medium text-slate-600">AI Section Gen</span>
                                 </div>
                             </div>
                         </div>
+
                         <div className="flex-1 overflow-y-auto px-4 pb-4 space-y-6 scrollbar-hide">
-                            {Object.entries(groupedBlocks).map(([category, items]: [string, any]) => (
-                                <div key={category}>
-                                    <h3 className="text-xs font-bold text-slate-400 uppercase tracking-wider mb-3">{category}</h3>
-                                    <div className="grid grid-cols-2 gap-2">
-                                        {items.map((block: any) => (
-                                            <div
-                                                key={block.getId()}
-                                                draggable
-                                                onDragStart={() => handleDragStart(block)}
-                                                onDragEnd={handleDragEnd}
-                                                className="group flex flex-col items-center justify-center p-3 rounded-lg border border-slate-700 hover:border-primary/50 hover:bg-slate-800 cursor-grab active:cursor-grabbing transition-all select-none"
-                                            >
-                                                <div dangerouslySetInnerHTML={{ __html: block.getMedia() || `<span class="material-symbols-outlined text-slate-500 group-hover:text-primary mb-2">${block.get('attributes')?.class?.replace('fa fa-', '') || 'extension'}</span>` }} />
-                                                <span className="text-xs font-medium text-slate-300 mt-2 text-center">{block.getLabel()}</span>
-                                            </div>
-                                        ))}
-                                    </div>
-                                </div>
-                            ))}
+                            <div id="blocks-custom-container"></div>
                         </div>
                     </aside>
 
                     {/* Editor Canvas */}
-                    <main className="flex-1 bg-[#0b0b15] relative overflow-hidden flex flex-col">
+                    {/* Editor Canvas */}
+                    <main className="flex-1 bg-slate-50 relative overflow-hidden flex flex-col">
                         <GjsEditor
                             grapesjs={grapesjs}
                             options={{
@@ -246,6 +208,9 @@ export default function GrapesEditor() {
                                     ]
                                 },
                                 panels: { defaults: [] }, // Disable default panels
+                                blockManager: {
+                                    appendTo: '#blocks-custom-container',
+                                },
                                 layerManager: {
                                     appendTo: '.gjs-lm-container'
                                 },
@@ -377,12 +342,12 @@ export default function GrapesEditor() {
 
 
                     {/* Right Sidebar - Styles/Settings */}
-                    <aside className="w-72 bg-[#15152a] border-l border-slate-800 flex flex-col shrink-0 overflow-hidden z-20">
-                        <div className="p-3 border-b border-slate-800">
-                            <div className="flex bg-slate-800 p-1 rounded-lg">
-                                <button onClick={() => setActiveTab('content')} className={`flex-1 py-1.5 text-xs font-bold uppercase tracking-wide rounded-md transition-colors ${activeTab === 'content' ? 'bg-slate-700 text-white shadow-sm' : 'text-slate-400 hover:text-slate-200'}`}>Content</button>
-                                <button onClick={() => setActiveTab('style')} className={`flex-1 py-1.5 text-xs font-bold uppercase tracking-wide rounded-md transition-colors ${activeTab === 'style' ? 'bg-slate-700 text-white shadow-sm' : 'text-slate-400 hover:text-slate-200'}`}>Style</button>
-                                <button onClick={() => setActiveTab('advanced')} className={`flex-1 py-1.5 text-xs font-bold uppercase tracking-wide rounded-md transition-colors ${activeTab === 'advanced' ? 'bg-slate-700 text-white shadow-sm' : 'text-slate-400 hover:text-slate-200'}`}>Settings</button>
+                    <aside className="w-72 bg-white border-l border-slate-200 flex flex-col shrink-0 overflow-hidden z-20">
+                        <div className="p-3 border-b border-slate-200">
+                            <div className="flex bg-slate-100 p-1 rounded-lg">
+                                <button onClick={() => setActiveTab('content')} className={`flex-1 py-1.5 text-xs font-bold uppercase tracking-wide rounded-md transition-colors ${activeTab === 'content' ? 'bg-white text-primary shadow-sm ring-1 ring-slate-200' : 'text-slate-500 hover:text-slate-700'}`}>Layer</button>
+                                <button onClick={() => setActiveTab('style')} className={`flex-1 py-1.5 text-xs font-bold uppercase tracking-wide rounded-md transition-colors ${activeTab === 'style' ? 'bg-white text-primary shadow-sm ring-1 ring-slate-200' : 'text-slate-500 hover:text-slate-700'}`}>Style</button>
+                                <button onClick={() => setActiveTab('advanced')} className={`flex-1 py-1.5 text-xs font-bold uppercase tracking-wide rounded-md transition-colors ${activeTab === 'advanced' ? 'bg-white text-primary shadow-sm ring-1 ring-slate-200' : 'text-slate-500 hover:text-slate-700'}`}>Settings</button>
                             </div>
                         </div>
                         <div className="flex-1 overflow-y-auto">
@@ -390,10 +355,10 @@ export default function GrapesEditor() {
                             <div className={`${activeTab === 'style' ? 'block' : 'hidden'} h-full `}>
                                 <div className="gjs-sm-container"></div>  {/* Style Manager mounts here */}
                             </div>
-                            <div className={`${activeTab === 'content' ? 'block' : 'hidden'} h-full text-slate-400 p-4 text-sm text-center`}>
+                            <div className={`${activeTab === 'content' ? 'block' : 'hidden'} h-full text-slate-600 p-4 text-sm text-center`}>
                                 <div className="gjs-lm-container"></div> {/* Layer Manager mounts here */}
                             </div>
-                            <div className={`${activeTab === 'advanced' ? 'block' : 'hidden'} h-full text-slate-400 p-4 text-sm text-center`}>
+                            <div className={`${activeTab === 'advanced' ? 'block' : 'hidden'} h-full text-slate-600 p-4 text-sm text-center`}>
                                 <div className="gjs-tm-container"></div> {/* Trait Manager mounts here */}
                             </div>
                         </div>

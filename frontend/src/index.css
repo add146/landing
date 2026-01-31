@@ -6,8 +6,126 @@
 
 @layer base {
   body {
-    @apply bg-gray-950 text-gray-100 font-sans;
+    @apply bg-gray-50 text-slate-900 font-sans;
   }
+}
+
+/* Custom GrapesJS Light Theme Overrides */
+.gjs-cv-canvas {
+  background-color: #f8fafc !important;
+  /* bg-slate-50 */
+  top: 0 !important;
+  height: 100% !important;
+}
+
+.gjs-one-bg {
+  background-color: #ffffff !important;
+}
+
+.gjs-two-color {
+  color: #475569 !important;
+  /* text-slate-600 */
+}
+
+.gjs-three-bg {
+  background-color: #f1f5f9 !important;
+  /* bg-slate-100 */
+  color: #1e293b !important;
+  /* text-slate-800 */
+}
+
+.gjs-four-color,
+.gjs-four-color-h:hover {
+  color: #6264f4 !important;
+  /* primary */
+}
+
+/* Make Blocks Smaller and Light Themed */
+.gjs-block {
+  width: 28% !important;
+  min-height: 60px !important;
+  background-color: #ffffff !important;
+  border: 1px solid #e2e8f0 !important;
+  /* border-slate-200 */
+  box-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05) !important;
+  border-radius: 8px !important;
+  margin: 2% !important;
+  padding: 10px !important;
+  transition: all 0.2s;
+  color: #475569 !important;
+}
+
+.gjs-block:hover {
+  border-color: #6264f4 !important;
+  color: #6264f4 !important;
+  box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1) !important;
+}
+
+.gjs-block-label {
+  font-size: 10px !important;
+  margin-top: 6px !important;
+  font-weight: 500 !important;
+}
+
+/* Categories */
+.gjs-block-category .gjs-title {
+  background-color: transparent !important;
+  border-bottom: 1px solid #f1f5f9 !important;
+  padding: 8px 12px !important;
+  font-size: 11px !important;
+  font-weight: 700 !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.05em !important;
+  color: #94a3b8 !important;
+  /* text-slate-400 */
+}
+
+/* Icons within blocks */
+.gjs-block .fa {
+  font-size: 18px !important;
+}
+
+/* Style Manager Inputs */
+.gjs-field {
+  background-color: #f8fafc !important;
+  /* bg-slate-50 */
+  border: 1px solid #e2e8f0 !important;
+  border-radius: 4px !important;
+  color: #334155 !important;
+}
+
+.gjs-field:focus-within {
+  border-color: #6264f4 !important;
+  ring: 2px solid #6264f420 !important;
+}
+
+.gjs-color-main {
+  background-color: #f8fafc !important;
+  border: 1px solid #e2e8f0 !important;
+}
+
+/* Input Holders */
+.gjs-input-holder {
+  color: #64748b !important;
+}
+
+/* Custom Scrollbar for light theme */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8;
 }
 
 @layer utilities {
