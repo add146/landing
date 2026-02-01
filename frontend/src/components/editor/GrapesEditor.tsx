@@ -132,12 +132,23 @@ export default function GrapesEditor() {
             {/* Main Layout Area */}
             <div className="flex flex-col flex-1 h-full min-w-0">
 
-                {/* Header */}
+                /* Header */
                 <header className="flex items-center justify-between px-4 py-2 border-b border-slate-200 bg-white shrink-0 h-14 z-50">
                     <div className="flex items-center gap-4">
                         <button onClick={() => navigate(-1)} className="p-2 hover:bg-slate-100 rounded-lg transition-colors text-slate-500">
                             <span className="material-symbols-outlined">arrow_back</span>
                         </button>
+
+                        {/* Undo / Redo Buttons */}
+                        <div className="flex items-center gap-1 border-r border-slate-200 pr-4 mr-2">
+                            <button onClick={() => editorInstance?.runCommand('core:undo')} className="p-1.5 hover:bg-slate-100 rounded-md text-slate-500 transition-colors" title="Undo (Ctrl+Z)">
+                                <span className="material-symbols-outlined text-[20px]">undo</span>
+                            </button>
+                            <button onClick={() => editorInstance?.runCommand('core:redo')} className="p-1.5 hover:bg-slate-100 rounded-md text-slate-500 transition-colors" title="Redo (Ctrl+Y)">
+                                <span className="material-symbols-outlined text-[20px]">redo</span>
+                            </button>
+                        </div>
+
                         <div className="flex items-center gap-3">
                             <div className="flex flex-col">
                                 <span className="text-sm font-bold text-slate-900">{currentPage.title}</span>
@@ -196,9 +207,19 @@ export default function GrapesEditor() {
                                 options={{
                                     height: '100%',
                                     storageManager: false,
-                                    undoManager: { trackSelection: false },
+                                    undoManager: { trackSelection: true }, // Enable Selection tracking for better UX
                                     selectorManager: { componentFirst: true },
                                     projectData: undefined, // Loaded manually
+                                    assetManager: {
+                                        upload: 'https://landing-page-api.khibroh.workers.dev/api/media/upload',
+                                        uploadName: 'file',
+                                        headers: {
+                                            'Authorization': `Bearer ${localStorage.getItem('token')}`
+                                        },
+                                        autoAdd: true,
+                                        openAssetsOnDrop: true, // Open when dropping image
+                                        dropzone: true, // Enable dropzone
+                                    },
                                     blockManager: {
                                         appendTo: '#blocks-custom-container',
                                     },
@@ -243,7 +264,19 @@ export default function GrapesEditor() {
                                         ]
                                     }
                                 }}
-                                onEditor={onEditor}
+                                onEditor={(editor) => {
+                                    onEditor(editor);
+
+                                    // Auto-switch to Style tab when component selected
+                                    editor.on('component:selected', () => {
+                                        setActiveTab('style');
+                                    });
+
+                                    // Refresh assets on open
+                                    editor.on('run:open-assets', () => {
+                                        // Optional: Reload assets from backend if needed
+                                    });
+                                }}
                             />
                         </div>
                     </div>
