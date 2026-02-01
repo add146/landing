@@ -21,7 +21,24 @@ export default function ImportCodeModal({ isOpen, onClose, onImport }: ImportCod
                 return;
             }
             setError(null);
-            onImport(htmlCode, cssCode);
+
+            let finalHtml = htmlCode;
+            let finalCss = cssCode;
+
+            // Auto-extract styles if present in HTML
+            const styleRegex = /<style[^>]*>([\s\S]*?)<\/style>/gi;
+            const matches = [...finalHtml.matchAll(styleRegex)];
+
+            if (matches.length > 0) {
+                // Remove style tags from HTML
+                finalHtml = finalHtml.replace(styleRegex, '');
+
+                // Append extracted styles to CSS
+                const extractedCss = matches.map(match => match[1]).join('\n');
+                finalCss = finalCss ? `${finalCss}\n${extractedCss}` : extractedCss;
+            }
+
+            onImport(finalHtml, finalCss);
             onClose();
         } catch (err) {
             setError('Failed to process code. Please check your input.');
