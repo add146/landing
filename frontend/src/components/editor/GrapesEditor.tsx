@@ -102,6 +102,33 @@ export default function GrapesEditor() {
     return (
         <div className="flex h-screen w-full bg-slate-50 text-slate-900 overflow-hidden font-sans">
 
+            {/* Left Sidebar - Blocks */}
+            <aside className="w-64 bg-white border-r border-slate-200 flex flex-col shrink-0 z-20">
+                <div className="p-4 border-b border-slate-200">
+                    <div className="relative">
+                        <span className="material-symbols-outlined absolute left-3 top-2.5 text-slate-400 text-[20px]">search</span>
+                        <input className="w-full pl-10 pr-4 py-2 bg-slate-50 border border-slate-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-primary/50 text-slate-700 placeholder:text-slate-400" placeholder="Find elements..." type="text" />
+                    </div>
+                </div>
+                {/* Custom "AI Tools" Category Header for quick access */}
+                <div className="px-4 pt-4 pb-0">
+                    <h3 className="text-xs font-bold text-slate-400 uppercase tracking-wider mb-3 flex items-center gap-1">
+                        AI Tools
+                        <span className="material-symbols-outlined text-primary text-[14px]">auto_awesome</span>
+                    </h3>
+                    <div className="grid grid-cols-1 gap-2 mb-6">
+                        <div onClick={() => setAiModalOpen(true)} className="group flex items-center gap-3 p-3 rounded-lg border border-slate-200 hover:border-primary/50 hover:bg-slate-50 cursor-pointer transition-all">
+                            <span className="material-symbols-outlined text-primary mb-0">magic_button</span>
+                            <span className="text-xs font-medium text-slate-600">AI Section Gen</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div className="flex-1 overflow-y-auto px-4 pb-4 space-y-6 scrollbar-hide">
+                    <div id="blocks-custom-container"></div>
+                </div>
+            </aside>
+
             {/* Main Layout Area */}
             <div className="flex flex-col flex-1 h-full min-w-0">
 
@@ -172,6 +199,18 @@ export default function GrapesEditor() {
                                     undoManager: { trackSelection: false },
                                     selectorManager: { componentFirst: true },
                                     projectData: undefined, // Loaded manually
+                                    blockManager: {
+                                        appendTo: '#blocks-custom-container',
+                                    },
+                                    layerManager: {
+                                        appendTo: '.gjs-lm-container'
+                                    },
+                                    styleManager: {
+                                        appendTo: '.gjs-sm-container'
+                                    },
+                                    traitManager: {
+                                        appendTo: '.gjs-tm-container'
+                                    },
                                     deviceManager: {
                                         devices: [
                                             { name: 'Desktop', width: '' },
@@ -191,15 +230,12 @@ export default function GrapesEditor() {
                                         myTailwindBlocks
                                     ],
                                     pluginsOpts: {
-                                        /*
-                                            [webpagePlugin]: {
-                                                modalImportTitle: 'Import Template',
-                                                modalImportLabel: '<div style="margin-bottom: 10px; font-size: 13px;">Paste your HTML/CSS here</div>',
-                                                modalImportContent: function(editor: any) {
-                                                    return editor.getHtml() + '<style>' + editor.getCss() + '</style>';
-                                                },
-                                            },
-                                        */
+                                        'gjs-preset-webpage': {
+                                            blocksBasicOpts: false,
+                                            formsOpts: false,
+                                            countdownOpts: false,
+                                            modalImportTitle: 'Import',
+                                        },
                                     },
                                 }}
                                 onEditor={onEditor}
@@ -210,40 +246,27 @@ export default function GrapesEditor() {
             </div>
 
             {/* Right Sidebar */}
-            <div className="w-80 border-l border-slate-200 bg-white flex flex-col shrink-0 overflow-hidden z-20">
-                {/* Tabs */}
-                <div className="flex border-b border-slate-200">
-                    <button
-                        onClick={() => setActiveTab('style')}
-                        className={`flex-1 py-3 text-xs font-medium border-b-2 transition-colors flex items-center justify-center gap-2 ${activeTab === 'style' ? 'border-blue-600 text-blue-600 bg-blue-50/50' : 'border-transparent text-slate-500 hover:text-slate-700 hover:bg-slate-50'}`}
-                    >
-                        <span className="material-symbols-outlined text-[18px]">brush</span>
-                        Style
-                    </button>
-                    <button
-                        onClick={() => setActiveTab('content')}
-                        className={`flex-1 py-3 text-xs font-medium border-b-2 transition-colors flex items-center justify-center gap-2 ${activeTab === 'content' ? 'border-blue-600 text-blue-600 bg-blue-50/50' : 'border-transparent text-slate-500 hover:text-slate-700 hover:bg-slate-50'}`}
-                    >
-                        <span className="material-symbols-outlined text-[18px]">add_box</span>
-                        Blocks
-                    </button>
-                    <button
-                        onClick={() => setActiveTab('advanced')}
-                        className={`flex-1 py-3 text-xs font-medium border-b-2 transition-colors flex items-center justify-center gap-2 ${activeTab === 'advanced' ? 'border-blue-600 text-blue-600 bg-blue-50/50' : 'border-transparent text-slate-500 hover:text-slate-700 hover:bg-slate-50'}`}
-                    >
-                        <span className="material-symbols-outlined text-[18px]">layers</span>
-                        Layers
-                    </button>
+            <aside className="w-72 bg-white border-l border-slate-200 flex flex-col shrink-0 overflow-hidden z-20">
+                <div className="p-3 border-b border-slate-200">
+                    <div className="flex bg-slate-100 p-1 rounded-lg">
+                        <button onClick={() => setActiveTab('content')} className={`flex-1 py-1.5 text-xs font-bold uppercase tracking-wide rounded-md transition-colors ${activeTab === 'content' ? 'bg-white text-primary shadow-sm ring-1 ring-slate-200' : 'text-slate-500 hover:text-slate-700'}`}>Layer</button>
+                        <button onClick={() => setActiveTab('style')} className={`flex-1 py-1.5 text-xs font-bold uppercase tracking-wide rounded-md transition-colors ${activeTab === 'style' ? 'bg-white text-primary shadow-sm ring-1 ring-slate-200' : 'text-slate-500 hover:text-slate-700'}`}>Style</button>
+                        <button onClick={() => setActiveTab('advanced')} className={`flex-1 py-1.5 text-xs font-bold uppercase tracking-wide rounded-md transition-colors ${activeTab === 'advanced' ? 'bg-white text-primary shadow-sm ring-1 ring-slate-200' : 'text-slate-500 hover:text-slate-700'}`}>Settings</button>
+                    </div>
                 </div>
-
-                {/* Content Area */}
-                <div className="flex-1 overflow-y-auto custom-scrollbar bg-white">
-                    <div id="styles-container" className={activeTab === 'style' ? 'block' : 'hidden'}></div>
-                    <div id="blocks-container" className={`p-4 grid grid-cols-2 gap-3 ${activeTab === 'content' ? 'block' : 'hidden'}`}></div>
-                    <div id="layers-container" className={activeTab === 'advanced' ? 'block' : 'hidden'}></div>
-                    <div id="trait-container" className={activeTab === 'advanced' ? 'block' : 'hidden'}></div>
+                <div className="flex-1 overflow-y-auto">
+                    {/* Targeting GrapesJS Managers to these Containers */}
+                    <div className={`${activeTab === 'style' ? 'block' : 'hidden'} h-full `}>
+                        <div className="gjs-sm-container"></div>  {/* Style Manager mounts here */}
+                    </div>
+                    <div className={`${activeTab === 'content' ? 'block' : 'hidden'} h-full text-slate-600 p-4 text-sm text-center`}>
+                        <div className="gjs-lm-container"></div> {/* Layer Manager mounts here */}
+                    </div>
+                    <div className={`${activeTab === 'advanced' ? 'block' : 'hidden'} h-full text-slate-600 p-4 text-sm text-center`}>
+                        <div className="gjs-tm-container"></div> {/* Trait Manager mounts here */}
+                    </div>
                 </div>
-            </div>
+            </aside>
 
             {/* Modals */}
             {pageSettingsOpen && (
