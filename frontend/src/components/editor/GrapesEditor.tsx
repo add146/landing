@@ -281,6 +281,15 @@ export default function GrapesEditor() {
                                     editor.on('run:open-assets', () => {
                                         // Optional: Reload assets from backend if needed
                                     });
+
+                                    // Double-click to change image
+                                    editor.on('component:dblclick', (model) => {
+                                        if (model.get('type') === 'image') {
+                                            editor.runCommand('open-assets', {
+                                                target: model
+                                            });
+                                        }
+                                    });
                                 }}
                             />
                         </div>
