@@ -267,9 +267,14 @@ export default function GrapesEditor() {
                                 onEditor={(editor) => {
                                     onEditor(editor);
 
-                                    // Auto-switch to Style tab when component selected
-                                    editor.on('component:selected', () => {
-                                        setActiveTab('style');
+                                    // Auto-switch to Style/Settings tab based on component type
+                                    editor.on('component:selected', (model) => {
+                                        const type = model.get('type');
+                                        if (['image', 'link', 'map', 'video'].includes(type)) {
+                                            setActiveTab('advanced'); // Show Settings (Traits) for media/links
+                                        } else {
+                                            setActiveTab('style'); // Show Style for text, containers, etc.
+                                        }
                                     });
 
                                     // Refresh assets on open

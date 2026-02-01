@@ -88,7 +88,21 @@ media.post('/upload', async (c) => {
             .bind(mediaId)
             .first();
 
-        return c.json({ media: mediaRecord }, 201);
+        // Construct public URL (assuming R2 public access is enabled)
+        const publicUrl = `https://pub-landing-page-assets.r2.dev/${r2Key}`;
+
+        // Return format compatible with GrapesJS Asset Manager
+        return c.json({
+            data: [{
+                src: publicUrl,
+                type: 'image',
+                name: file.name,
+                width: 0, // Optional
+                height: 0 // Optional
+            }],
+            // Keep original data for other uses
+            media: mediaRecord
+        }, 201);
     } catch (error) {
         console.error('Upload error:', error);
         return c.json({ error: 'Upload failed' }, 500);
