@@ -7,6 +7,7 @@ const myTailwindBlocks = (editor: Editor) => {
     bm.add('section', {
         label: 'Section',
         category: 'Layout',
+        media: '<i class="fa fa-columns"></i>',
         content: `
       <section class="py-12 px-4 md:px-6 bg-white">
         <div class="container mx-auto">
@@ -18,71 +19,71 @@ const myTailwindBlocks = (editor: Editor) => {
             </div>
         </div>
       </section>
-    `,
-        attributes: { class: 'fa fa-columns' }
+    `
     });
 
     bm.add('container', {
         label: 'Container',
         category: 'Layout',
-        content: '<div class="container mx-auto p-4 border border-dashed border-slate-300 min-h-[100px]"></div>',
-        attributes: { class: 'fa fa-square-o' }
+        media: '<i class="fa fa-square-o"></i>',
+        content: '<div class="container mx-auto p-4 border border-dashed border-slate-300 min-h-[100px]"></div>'
     });
 
     // 2. Typography
     bm.add('heading-1', {
         label: 'Heading 1',
         category: 'Typography',
-        content: '<h1 class="text-4xl md:text-5xl font-bold text-slate-900 mb-4">Heading 1</h1>',
-        attributes: { class: 'fa fa-header' }
+        media: '<i class="fa fa-header"></i>',
+        content: '<h1 class="text-4xl md:text-5xl font-bold text-slate-900 mb-4">Heading 1</h1>'
     });
 
     bm.add('heading-2', {
         label: 'Heading 2',
         category: 'Typography',
-        content: '<h2 class="text-3xl md:text-4xl font-bold text-slate-800 mb-3">Heading 2</h2>',
-        attributes: { class: 'fa fa-header' }
+        media: '<i class="fa fa-header"></i>',
+        content: '<h2 class="text-3xl md:text-4xl font-bold text-slate-800 mb-3">Heading 2</h2>'
     });
 
     bm.add('paragraph', {
         label: 'Paragraph',
         category: 'Typography',
-        content: '<p class="text-base text-slate-600 leading-relaxed mb-4">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>',
-        attributes: { class: 'fa fa-paragraph' }
+        media: '<i class="fa fa-paragraph"></i>',
+        content: '<p class="text-base text-slate-600 leading-relaxed mb-4">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>'
     });
 
     // 3. Components
     bm.add('button', {
         label: 'Button',
         category: 'Components',
-        content: '<a href="#" class="inline-block px-6 py-3 bg-indigo-600 text-white font-semibold rounded-lg hover:bg-indigo-700 transition-colors">Click Me</a>',
-        attributes: { class: 'fa fa-hand-pointer-o' }
+        media: '<i class="fa fa-hand-pointer-o"></i>',
+        content: '<a href="#" class="inline-block px-6 py-3 bg-indigo-600 text-white font-semibold rounded-lg hover:bg-indigo-700 transition-colors">Click Me</a>'
     });
 
     bm.add('button-outline', {
         label: 'Button (Outline)',
         category: 'Components',
-        content: '<a href="#" class="inline-block px-6 py-3 border-2 border-indigo-600 text-indigo-600 font-semibold rounded-lg hover:bg-indigo-50 transition-colors">Click Me</a>',
-        attributes: { class: 'fa fa-hand-pointer-o' }
+        media: '<i class="fa fa-hand-pointer-o"></i>',
+        content: '<a href="#" class="inline-block px-6 py-3 border-2 border-indigo-600 text-indigo-600 font-semibold rounded-lg hover:bg-indigo-50 transition-colors">Click Me</a>'
     });
 
     bm.add('image', {
         label: 'Image',
         category: 'Media',
-        content: { type: 'image', style: { color: 'black' }, activeOnRender: 1 },
-        attributes: { class: 'fa fa-picture-o' }
+        media: '<i class="fa fa-picture-o"></i>',
+        content: { type: 'image', style: { color: 'black' }, activeOnRender: 1 }
     });
 
     bm.add('video', {
         label: 'Video',
         category: 'Media',
-        content: { type: 'video', src: 'img/video2.webm', style: { height: '350px', width: '100%' } },
-        attributes: { class: 'fa fa-youtube-play' }
+        media: '<i class="fa fa-youtube-play"></i>',
+        content: { type: 'video', src: 'img/video2.webm', style: { height: '350px', width: '100%' } }
     });
 
     bm.add('card', {
         label: 'Card',
         category: 'Components',
+        media: '<i class="fa fa-id-card-o"></i>',
         content: `
       <div class="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden">
         <div class="h-48 bg-slate-200 w-full object-cover"></div>
@@ -92,28 +93,28 @@ const myTailwindBlocks = (editor: Editor) => {
           <a href="#" class="text-indigo-600 font-medium hover:text-indigo-700">Read more &rarr;</a>
         </div>
       </div>
-    `,
-        attributes: { class: 'fa fa-id-card-o' }
+    `
     });
 
     // 4. Forms
     bm.add('input', {
         label: 'Input',
         category: 'Forms',
-        content: '<input type="text" class="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none transition-all" placeholder="Enter text here..." />',
-        attributes: { class: 'fa fa-pencil' }
+        media: '<i class="fa fa-pencil"></i>',
+        content: '<input type="text" class="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none transition-all" placeholder="Enter text here..." />'
     });
 
     bm.add('icon', {
         label: 'Icon',
         category: 'Basic',
-        content: '<i class="fa fa-star text-2xl text-yellow-400"></i>',
-        attributes: { class: 'fa fa-star' }
+        media: '<i class="fa fa-star"></i>',
+        content: '<i class="fa fa-star text-2xl text-yellow-400"></i>'
     });
     // 5. Section Templates (Hero, Features, Testimonial)
     bm.add('hero-section', {
         label: 'Hero',
         category: 'Section',
+        media: '<i class="fa fa-window-maximize"></i>',
         content: `
       <section class="relative bg-white dark:bg-slate-900 py-20 overflow-hidden">
         <div class="container mx-auto px-6 relative z-10 flex flex-col md:flex-row items-center gap-12">
@@ -136,13 +137,13 @@ const myTailwindBlocks = (editor: Editor) => {
             </div>
         </div>
       </section>
-    `,
-        attributes: { class: 'fa fa-window-maximize' }
+    `
     });
 
     bm.add('features-grid', {
         label: 'Features',
         category: 'Section',
+        media: '<i class="fa fa-th-large"></i>',
         content: `
       <section class="py-20 bg-slate-50 dark:bg-slate-950">
         <div class="container mx-auto px-6">
@@ -171,13 +172,13 @@ const myTailwindBlocks = (editor: Editor) => {
             </div>
         </div>
       </section>
-    `,
-        attributes: { class: 'fa fa-th-large' }
+    `
     });
 
     bm.add('testimonial', {
         label: 'Testimonial',
         category: 'Section',
+        media: '<i class="fa fa-quote-right"></i>',
         content: `
       <section class="py-20 bg-white dark:bg-slate-900">
         <div class="container mx-auto px-6 text-center max-w-4xl">
@@ -198,8 +199,7 @@ const myTailwindBlocks = (editor: Editor) => {
             </div>
         </div>
       </section>
-    `,
-        attributes: { class: 'fa fa-quote-right' }
+    `
     });
 };
 
