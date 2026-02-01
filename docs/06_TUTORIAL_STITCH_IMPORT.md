@@ -15,8 +15,7 @@ Panduan ini akan menjelaskan cara mengambil hasil desain (UI) dari **Google Stit
 3.  Tunggu hingga Stitch menghasilkan preview desain.
 4.  Jika diminta memilih mode, pilih yang menghasilkan **HTML & CSS**.
 5.  Setelah puas dengan tampilannya, cari tombol **"Code"**, **"Export"**, atau icon **"Salin Kode" (Copy Code)**.
-    *   Biasanya Stitch memberikan **satu file HTML** yang sudah berisi CSS (di dalam tag `<style>`).
-    *   **Salin seluruh kode tersebut.**
+    *   **Salin seluruh kode (HTML + CSS) yang diberikan.**
 
 ## Langkah 2: Buka Landing Page Builder
 
@@ -26,17 +25,18 @@ Panduan ini akan menjelaskan cara mengambil hasil desain (UI) dari **Google Stit
 
 ## Langkah 3: Paste Kode
 
-Akan muncul popup **Import Code**:
+Akan muncul popup **Import Design Code**:
 
-1.  **Tab HTML**: Paste **seluruh kode** yang Anda salin dari Stitch ke kolom ini.
-    *   *Sistem kami cerdas!* Jika ada kode CSS (dalam tag `<style>`) yang tercampur, sistem akan otomatis memisahkannya.
-    *   Jadi Anda tidak perlu repot memisahkan HTML dan CSS manual.
-2.  **Tab CSS**: (Opsional) Biarkan kosong jika CSS Anda sudah menyatu di HTML tadi.
+1.  Paste **seluruh kode** yang Anda salin dari Stitch ke dalam kotak input yang tersedia.
+    *   Termasuk jika ada tag `<style>`.
+    *   Termasuk jika menggunakan **Tailwind CSS**.
+2.  Sistem kami otomatis mengenali dan memproses kode tersebut.
 
 ## Langkah 4: Klik "Import"
 
-1.  Klik tombol **Import** di bagian bawah popup.
+1.  Klik tombol **Import Code** di bagian bawah popup.
 2.  Desain Anda akan otomatis muncul di canvas editor!
+    *   *Note: Jika desain menggunakan Tailwind, tampilannya kini akan sesuai (tidak berantakan) karena kami sudah mendukung Tailwind secara native.*
 
 ## Langkah 5: Edit & Sesuaikan
 
@@ -46,9 +46,3 @@ Sekarang desain tersebut sudah menjadi bagian dari editor GrapesJS kami:
 *   **Ganti Gambar**: Klik gambar, lalu gunakan panel Settings (kanan) untuk mengganti URL gambar.
 *   **Drag & Drop**: Anda bisa menambahkan blok baru dari sidebar kiri ke dalam desain yang baru di-import.
 *   **Simpan**: Jangan lupa klik **Save** di pojok kanan atas.
-
----
-
-**Catatan Tambahan:**
-*   Fitur ini mendukung **Tailwind CSS** jika desain Anda menggunakannya (pastikan class-nya valid).
-*   Jika tampilan sedikit berantakan, cek kembali kode HTML/CSS Anda, mungkin ada tag yang belum tertutup.

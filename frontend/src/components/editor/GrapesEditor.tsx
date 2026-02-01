@@ -237,6 +237,11 @@ export default function GrapesEditor() {
                                             modalImportTitle: 'Import',
                                         },
                                     },
+                                    canvas: {
+                                        scripts: [
+                                            'https://cdn.tailwindcss.com'
+                                        ]
+                                    }
                                 }}
                                 onEditor={onEditor}
                             />
