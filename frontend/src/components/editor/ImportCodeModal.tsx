@@ -8,22 +8,21 @@ interface ImportCodeModalProps {
 }
 
 export default function ImportCodeModal({ isOpen, onClose, onImport }: ImportCodeModalProps) {
-    const [htmlCode, setHtmlCode] = useState('');
-    const [cssCode, setCssCode] = useState('');
+    const [code, setCode] = useState('');
     const [error, setError] = useState<string | null>(null);
 
     if (!isOpen) return null;
 
     const handleImport = () => {
         try {
-            if (!htmlCode.trim()) {
-                setError('HTML content is required');
+            if (!code.trim()) {
+                setError('Code content is required');
                 return;
             }
             setError(null);
 
-            let finalHtml = htmlCode;
-            let finalCss = cssCode;
+            let finalHtml = code;
+            let finalCss = '';
 
             // Auto-extract styles if present in HTML
             const styleRegex = /<style[^>]*>([\s\S]*?)<\/style>/gi;
@@ -34,11 +33,11 @@ export default function ImportCodeModal({ isOpen, onClose, onImport }: ImportCod
                 finalHtml = finalHtml.replace(styleRegex, '');
 
                 // Append extracted styles to CSS
-                const extractedCss = matches.map(match => match[1]).join('\n');
-                finalCss = finalCss ? `${finalCss}\n${extractedCss}` : extractedCss;
+                finalCss = matches.map(match => match[1]).join('\n');
             }
 
             onImport(finalHtml, finalCss);
+            setCode(''); // Clear input after successful import
             onClose();
         } catch (err) {
             setError('Failed to process code. Please check your input.');
@@ -47,7 +46,7 @@ export default function ImportCodeModal({ isOpen, onClose, onImport }: ImportCod
 
     return (
         <div className="fixed inset-0 z-[100] flex items-center justify-center bg-black/50 backdrop-blur-sm p-4">
-            <div className="bg-white rounded-xl shadow-2xl w-full max-w-4xl max-h-[90vh] flex flex-col overflow-hidden animate-in fade-in zoom-in-95 duration-200">
+            <div className="bg-white rounded-xl shadow-2xl w-full max-w-2xl flex flex-col overflow-hidden animate-in fade-in zoom-in-95 duration-200">
                 {/* Header */}
                 <div className="px-6 py-4 border-b border-gray-100 flex items-center justify-between bg-white">
                     <div className="flex items-center gap-3">
@@ -56,7 +55,7 @@ export default function ImportCodeModal({ isOpen, onClose, onImport }: ImportCod
                         </div>
                         <div>
                             <h2 className="text-lg font-bold text-gray-900">Import Design Code</h2>
-                            <p className="text-sm text-gray-500">Paste your Stitch (or other) HTML & CSS export here</p>
+                            <p className="text-sm text-gray-500">Paste your Stitch/AI exported HTML (include &lt;style&gt; tags)</p>
                         </div>
                     </div>
                     <button
@@ -76,34 +75,19 @@ export default function ImportCodeModal({ isOpen, onClose, onImport }: ImportCod
                         </div>
                     )}
 
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6 h-full">
-                        {/* HTML Input */}
-                        <div className="flex flex-col h-full min-h-[300px]">
-                            <label className="block text-sm font-semibold text-gray-700 mb-2 flex items-center gap-2">
-                                <span className="w-2 h-2 rounded-full bg-orange-500"></span>
-                                HTML
-                            </label>
-                            <textarea
-                                value={htmlCode}
-                                onChange={(e) => setHtmlCode(e.target.value)}
-                                className="flex-1 w-full p-4 bg-white border border-gray-200 rounded-lg font-mono text-sm text-gray-800 placeholder:text-gray-400 focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 outline-none transition-all resize-none shadow-sm"
-                                placeholder="<div class='hero'>...</div>"
-                            />
-                        </div>
-
-                        {/* CSS Input */}
-                        <div className="flex flex-col h-full min-h-[300px]">
-                            <label className="block text-sm font-semibold text-gray-700 mb-2 flex items-center gap-2">
-                                <span className="w-2 h-2 rounded-full bg-blue-500"></span>
-                                CSS
-                            </label>
-                            <textarea
-                                value={cssCode}
-                                onChange={(e) => setCssCode(e.target.value)}
-                                className="flex-1 w-full p-4 bg-white border border-gray-200 rounded-lg font-mono text-sm text-gray-800 placeholder:text-gray-400 focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 outline-none transition-all resize-none shadow-sm"
-                                placeholder=".hero { background: #fff; ... }"
-                            />
-                        </div>
+                    <div className="flex flex-col h-full min-h-[300px]">
+                        <label className="block text-sm font-semibold text-gray-700 mb-2 flex items-center gap-2">
+                            <span className="w-2 h-2 rounded-full bg-purple-500"></span>
+                            Paste HTML & CSS Here
+                        </label>
+                        <textarea
+                            value={code}
+                            onChange={(e) => setCode(e.target.value)}
+                            className="flex-1 w-full p-4 bg-white border border-gray-200 rounded-lg font-mono text-sm text-gray-800 placeholder:text-gray-400 focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 outline-none transition-all resize-none shadow-sm"
+                            placeholder="Example: 
+<style>.hero { color: red; }</style>
+<div class='hero'>Hello World</div>"
+                        />
                     </div>
                 </div>
 
