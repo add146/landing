@@ -82,7 +82,7 @@ const myTailwindBlocks = (editor: Editor) => {
 
     bm.add('image-carousel', {
         label: 'Image Carousel',
-        category: 'Media',
+        category: 'Components',
         media: '<i class="fa fa-images"></i>',
         content: `
       <div class="relative w-full overflow-hidden group" data-carousel="true" data-autoplay="true" data-interval="3000">
