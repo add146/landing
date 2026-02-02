@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import GjsEditor from '@grapesjs/react';
 import grapesjs from 'grapesjs';
@@ -37,13 +37,64 @@ export default function GrapesEditor() {
     const [aiModalOpen, setAiModalOpen] = useState(false);
     const [importModalOpen, setImportModalOpen] = useState(false);
     const [, setUpdateCounter] = useState(0); // Force re-render for sidebar updates
+    const [selectedComponent, setSelectedComponent] = useState<any>(null);
+    const [componentProps, setComponentProps] = useState<{
+        content: string;
+        marginTop: string;
+        marginRight: string;
+        marginBottom: string;
+        marginLeft: string;
+        paddingTop: string;
+        paddingRight: string;
+        paddingBottom: string;
+        paddingLeft: string;
+        width: string;
+        height: string;
+        position: string;
+        zIndex: string;
+        order: string;
+    }>({
+        content: '',
+        marginTop: '',
+        marginRight: '',
+        marginBottom: '',
+        marginLeft: '',
+        paddingTop: '',
+        paddingRight: '',
+        paddingBottom: '',
+        paddingLeft: '',
+        width: '',
+        height: '',
+        position: 'static',
+        zIndex: '',
+        order: ''
+    });
 
-    // Helper function to update styles and force re-render
+    // Helper function to update styles and local state
     const handleStyleChange = (property: string, value: string) => {
         const component = editorInstance?.getSelected();
         if (component) {
             component.setStyle({ [property]: value });
-            setUpdateCounter((c: number) => c + 1); // Force React re-render
+            // Update local state immediately
+            const propMap: Record<string, keyof typeof componentProps> = {
+                'margin-top': 'marginTop',
+                'margin-right': 'marginRight',
+                'margin-bottom': 'marginBottom',
+                'margin-left': 'marginLeft',
+                'padding-top': 'paddingTop',
+                'padding-right': 'paddingRight',
+                'padding-bottom': 'paddingBottom',
+                'padding-left': 'paddingLeft',
+                'width': 'width',
+                'height': 'height',
+                'position': 'position',
+                'z-index': 'zIndex',
+                'order': 'order'
+            };
+            const stateKey = propMap[property];
+            if (stateKey) {
+                setComponentProps(prev => ({ ...prev, [stateKey]: value }));
+            }
         }
     };
 
@@ -52,9 +103,34 @@ export default function GrapesEditor() {
         const component = editorInstance?.getSelected();
         if (component && component.components().length === 0) {
             component.set('content', value);
-            setUpdateCounter((c: number) => c + 1);
+            setComponentProps(prev => ({ ...prev, content: value }));
         }
     };
+
+    // Sync component properties to local state when selection changes
+    useEffect(() => {
+        if (selectedComponent) {
+            const styles = selectedComponent.getStyle();
+            const content = selectedComponent.components().length === 0 ? selectedComponent.get('content') : '';
+
+            setComponentProps({
+                content: String(content || ''),
+                marginTop: String(styles['margin-top'] || ''),
+                marginRight: String(styles['margin-right'] || ''),
+                marginBottom: String(styles['margin-bottom'] || ''),
+                marginLeft: String(styles['margin-left'] || ''),
+                paddingTop: String(styles['padding-top'] || ''),
+                paddingRight: String(styles['padding-right'] || ''),
+                paddingBottom: String(styles['padding-bottom'] || ''),
+                paddingLeft: String(styles['padding-left'] || ''),
+                width: String(styles['width'] || ''),
+                height: String(styles['height'] || ''),
+                position: String(styles['position'] || 'static'),
+                zIndex: String(styles['z-index'] || ''),
+                order: String(styles['order'] || '')
+            });
+        }
+    }, [selectedComponent]);
 
     const onEditor = (editor: Editor) => {
         setEditorInstance(editor);
@@ -323,8 +399,8 @@ export default function GrapesEditor() {
 
                                     // Auto-switch tabs based on component type (Elementor-style)
                                     editor.on('component:selected', (model) => {
-                                        // Force React re-render to update Sidebar inputs
-                                        setUpdateCounter((c: number) => c + 1);
+                                        // Update selected component state (triggers useEffect to load properties)
+                                        setSelectedComponent(model);
 
                                         const type = model.get('type');
                                         const isText = model.is('text') || type === 'text';
@@ -515,7 +591,7 @@ export default function GrapesEditor() {
                                     <label className="text-xs font-medium">Text Content</label>
                                     <textarea
                                         className="w-full text-xs p-2 border rounded min-h-[80px]"
-                                        value={editorInstance.getSelected()?.getTrait('content')?.getValue() || editorInstance.getSelected()?.components().length === 0 ? editorInstance.getSelected()?.get('content') : ''}
+                                        value={componentProps.content}
                                         onChange={(e) => handleContentChange(e.target.value)}
                                         placeholder="Edit text content..."
                                     />
@@ -543,16 +619,16 @@ export default function GrapesEditor() {
                                             <label className="block text-slate-600 font-medium mb-2">Margin</label>
                                             <div className="grid grid-cols-4 gap-1">
                                                 <input type="text" placeholder="Top" className="p-1.5 border rounded text-center text-[11px]"
-                                                    value={String(editorInstance.getSelected()?.getStyle()['margin-top'] || '')}
+                                                    value={componentProps.marginTop}
                                                     onChange={(e) => handleStyleChange('margin-top', e.target.value)} />
                                                 <input type="text" placeholder="Right" className="p-1.5 border rounded text-center text-[11px]"
-                                                    value={String(editorInstance.getSelected()?.getStyle()['margin-right'] || '')}
+                                                    value={componentProps.marginRight}
                                                     onChange={(e) => handleStyleChange('margin-right', e.target.value)} />
                                                 <input type="text" placeholder="Bottom" className="p-1.5 border rounded text-center text-[11px]"
-                                                    value={String(editorInstance.getSelected()?.getStyle()['margin-bottom'] || '')}
+                                                    value={componentProps.marginBottom}
                                                     onChange={(e) => handleStyleChange('margin-bottom', e.target.value)} />
                                                 <input type="text" placeholder="Left" className="p-1.5 border rounded text-center text-[11px]"
-                                                    value={String(editorInstance.getSelected()?.getStyle()['margin-left'] || '')}
+                                                    value={componentProps.marginLeft}
                                                     onChange={(e) => handleStyleChange('margin-left', e.target.value)} />
                                             </div>
                                         </div>
@@ -562,16 +638,16 @@ export default function GrapesEditor() {
                                             <label className="block text-slate-600 font-medium mb-2">Padding</label>
                                             <div className="grid grid-cols-4 gap-1">
                                                 <input type="text" placeholder="Top" className="p-1.5 border rounded text-center text-[11px]"
-                                                    value={String(editorInstance.getSelected()?.getStyle()['padding-top'] || '')}
+                                                    value={componentProps.paddingTop}
                                                     onChange={(e) => handleStyleChange('padding-top', e.target.value)} />
                                                 <input type="text" placeholder="Right" className="p-1.5 border rounded text-center text-[11px]"
-                                                    value={String(editorInstance.getSelected()?.getStyle()['padding-right'] || '')}
+                                                    value={componentProps.paddingRight}
                                                     onChange={(e) => handleStyleChange('padding-right', e.target.value)} />
                                                 <input type="text" placeholder="Bottom" className="p-1.5 border rounded text-center text-[11px]"
-                                                    value={String(editorInstance.getSelected()?.getStyle()['padding-bottom'] || '')}
+                                                    value={componentProps.paddingBottom}
                                                     onChange={(e) => handleStyleChange('padding-bottom', e.target.value)} />
                                                 <input type="text" placeholder="Left" className="p-1.5 border rounded text-center text-[11px]"
-                                                    value={String(editorInstance.getSelected()?.getStyle()['padding-left'] || '')}
+                                                    value={componentProps.paddingLeft}
                                                     onChange={(e) => handleStyleChange('padding-left', e.target.value)} />
                                             </div>
                                         </div>
@@ -581,13 +657,13 @@ export default function GrapesEditor() {
                                             <div>
                                                 <label className="block text-slate-600 font-medium mb-2">Width</label>
                                                 <input type="text" placeholder="auto" className="w-full p-1.5 border rounded text-[11px]"
-                                                    value={String(editorInstance.getSelected()?.getStyle()['width'] || '')}
+                                                    value={componentProps.width}
                                                     onChange={(e) => handleStyleChange('width', e.target.value)} />
                                             </div>
                                             <div>
                                                 <label className="block text-slate-600 font-medium mb-2">Height</label>
                                                 <input type="text" placeholder="auto" className="w-full p-1.5 border rounded text-[11px]"
-                                                    value={String(editorInstance.getSelected()?.getStyle()['height'] || '')}
+                                                    value={componentProps.height}
                                                     onChange={(e) => handleStyleChange('height', e.target.value)} />
                                             </div>
                                         </div>
@@ -597,7 +673,7 @@ export default function GrapesEditor() {
                                             <div>
                                                 <label className="block text-slate-600 font-medium mb-2">Position</label>
                                                 <select className="w-full p-1.5 border rounded text-[11px]"
-                                                    value={String(editorInstance.getSelected()?.getStyle()['position'] || 'static')}
+                                                    value={componentProps.position}
                                                     onChange={(e) => handleStyleChange('position', e.target.value)}>
                                                     <option value="static">Static</option>
                                                     <option value="relative">Relative</option>
@@ -609,7 +685,7 @@ export default function GrapesEditor() {
                                             <div>
                                                 <label className="block text-slate-600 font-medium mb-2">Z-Index</label>
                                                 <input type="text" placeholder="0" className="w-full p-1.5 border rounded text-[11px]"
-                                                    value={String(editorInstance.getSelected()?.getStyle()['z-index'] || '')}
+                                                    value={componentProps.zIndex}
                                                     onChange={(e) => handleStyleChange('z-index', e.target.value)} />
                                             </div>
                                         </div>
@@ -618,7 +694,7 @@ export default function GrapesEditor() {
                                         <div>
                                             <label className="block text-slate-600 font-medium mb-2">Order</label>
                                             <input type="text" placeholder="0" className="w-full p-1.5 border rounded text-[11px]"
-                                                value={String(editorInstance.getSelected()?.getStyle()['order'] || '')}
+                                                value={componentProps.order}
                                                 onChange={(e) => handleStyleChange('order', e.target.value)} />
                                             <p className="text-[10px] text-slate-400 mt-1">Controls flex item order</p>
                                         </div>
