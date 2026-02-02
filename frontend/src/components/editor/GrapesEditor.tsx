@@ -36,7 +36,7 @@ export default function GrapesEditor() {
     const [pageSettingsOpen, setPageSettingsOpen] = useState(false);
     const [aiModalOpen, setAiModalOpen] = useState(false);
     const [importModalOpen, setImportModalOpen] = useState(false);
-    const [updateCounter, setUpdateCounter] = useState(0); // Force re-render for sidebar updates
+    const [, setUpdateCounter] = useState(0); // Force re-render for sidebar updates
 
     const onEditor = (editor: Editor) => {
         setEditorInstance(editor);
