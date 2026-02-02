@@ -278,6 +278,62 @@ export default function GrapesEditor() {
                 const fullHtml = `
                     <style>${css}</style>
                     ${html}
+                    <script>
+                        (function() {
+                            function checkDisplayConditions() {
+                                const elements = document.querySelectorAll('[data-display-conditions]');
+                                if (!elements.length) return;
+
+                                const now = new Date();
+                                let user = null;
+                                let isLoggedIn = false;
+                                try {
+                                    const userStr = localStorage.getItem('user');
+                                    user = userStr ? JSON.parse(userStr) : null;
+                                    isLoggedIn = !!localStorage.getItem('token');
+                                } catch(e) { console.error('Auth check failed', e); }
+                                
+                                const userRole = user?.role || '';
+
+                                elements.forEach(el => {
+                                    try {
+                                        const attr = el.getAttribute('data-display-conditions');
+                                        if (!attr) return;
+                                        const config = JSON.parse(attr);
+                                        let shouldShow = true;
+
+                                        if (config.type === 'schedule') {
+                                            if (config.startDate && new Date(config.startDate) > now) shouldShow = false;
+                                            if (config.endDate && new Date(config.endDate) < now) shouldShow = false;
+                                        } else if (config.type === 'loggedin') {
+                                            if (!isLoggedIn) {
+                                                shouldShow = false;
+                                            } else if (config.role && config.role !== 'any') {
+                                                if (config.role !== userRole) shouldShow = false;
+                                            }
+                                        } else if (config.type === 'loggedout') {
+                                            if (isLoggedIn) shouldShow = false;
+                                        }
+
+                                        if (!shouldShow) {
+                                            el.style.display = 'none';
+                                        } else {
+                                            el.style.removeProperty('display');
+                                        }
+                                    } catch (e) {
+                                        console.error('Display condition error', e);
+                                    }
+                                });
+                            }
+                            
+                            if (document.readyState === 'loading') {
+                                document.addEventListener('DOMContentLoaded', checkDisplayConditions);
+                            } else {
+                                checkDisplayConditions();
+                            }
+                            window.addEventListener('storage', checkDisplayConditions);
+                        })();
+                    </script>
                 `;
 
                 try {
