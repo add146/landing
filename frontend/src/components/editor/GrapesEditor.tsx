@@ -234,11 +234,6 @@ export default function GrapesEditor() {
                                         appendTo: '.gjs-sm-container',
                                         sectors: [
                                             {
-                                                name: 'Layout',
-                                                open: true,
-                                                buildProps: ['width', 'height', 'max-width', 'min-height', 'margin', 'padding']
-                                            },
-                                            {
                                                 name: 'Typography',
                                                 open: false,
                                                 buildProps: ['font-family', 'font-size', 'font-weight', 'letter-spacing', 'color', 'line-height', 'text-align', 'text-decoration', 'text-shadow']
@@ -247,11 +242,6 @@ export default function GrapesEditor() {
                                                 name: 'Decorations',
                                                 open: false,
                                                 buildProps: ['background-color', 'border-radius', 'border', 'box-shadow', 'background']
-                                            },
-                                            {
-                                                name: 'Extra',
-                                                open: false,
-                                                buildProps: ['opacity', 'transition', 'perspective', 'transform']
                                             },
                                             {
                                                 name: 'Flex',
@@ -523,6 +513,107 @@ export default function GrapesEditor() {
                             {!editorInstance?.getSelected() && (
                                 <p className="text-xs text-center italic">Select an element to edit content.</p>
                             )}
+                        </div>
+
+                        {/* Layout Section - Advanced Properties */}
+                        <div className="border-b border-slate-200">
+                            <div className="p-4">
+                                <h4 className="text-xs font-bold uppercase mb-3 text-slate-700 flex items-center gap-2">
+                                    <span className="material-symbols-outlined text-[16px]">dashboard_customize</span>
+                                    Layout
+                                </h4>
+
+                                {editorInstance?.getSelected() ? (
+                                    <div className="space-y-4 text-xs">
+                                        {/* Margin */}
+                                        <div>
+                                            <label className="block text-slate-600 font-medium mb-2">Margin</label>
+                                            <div className="grid grid-cols-4 gap-1">
+                                                <input type="text" placeholder="Top" className="p-1.5 border rounded text-center text-[11px]"
+                                                    value={String(editorInstance.getSelected()?.getStyle()['margin-top'] || '')}
+                                                    onChange={(e) => editorInstance.getSelected()?.setStyle({ 'margin-top': e.target.value })} />
+                                                <input type="text" placeholder="Right" className="p-1.5 border rounded text-center text-[11px]"
+                                                    value={String(editorInstance.getSelected()?.getStyle()['margin-right'] || '')}
+                                                    onChange={(e) => editorInstance.getSelected()?.setStyle({ 'margin-right': e.target.value })} />
+                                                <input type="text" placeholder="Bottom" className="p-1.5 border rounded text-center text-[11px]"
+                                                    value={String(editorInstance.getSelected()?.getStyle()['margin-bottom'] || '')}
+                                                    onChange={(e) => editorInstance.getSelected()?.setStyle({ 'margin-bottom': e.target.value })} />
+                                                <input type="text" placeholder="Left" className="p-1.5 border rounded text-center text-[11px]"
+                                                    value={String(editorInstance.getSelected()?.getStyle()['margin-left'] || '')}
+                                                    onChange={(e) => editorInstance.getSelected()?.setStyle({ 'margin-left': e.target.value })} />
+                                            </div>
+                                        </div>
+
+                                        {/* Padding */}
+                                        <div>
+                                            <label className="block text-slate-600 font-medium mb-2">Padding</label>
+                                            <div className="grid grid-cols-4 gap-1">
+                                                <input type="text" placeholder="Top" className="p-1.5 border rounded text-center text-[11px]"
+                                                    value={String(editorInstance.getSelected()?.getStyle()['padding-top'] || '')}
+                                                    onChange={(e) => editorInstance.getSelected()?.setStyle({ 'padding-top': e.target.value })} />
+                                                <input type="text" placeholder="Right" className="p-1.5 border rounded text-center text-[11px]"
+                                                    value={String(editorInstance.getSelected()?.getStyle()['padding-right'] || '')}
+                                                    onChange={(e) => editorInstance.getSelected()?.setStyle({ 'padding-right': e.target.value })} />
+                                                <input type="text" placeholder="Bottom" className="p-1.5 border rounded text-center text-[11px]"
+                                                    value={String(editorInstance.getSelected()?.getStyle()['padding-bottom'] || '')}
+                                                    onChange={(e) => editorInstance.getSelected()?.setStyle({ 'padding-bottom': e.target.value })} />
+                                                <input type="text" placeholder="Left" className="p-1.5 border rounded text-center text-[11px]"
+                                                    value={String(editorInstance.getSelected()?.getStyle()['padding-left'] || '')}
+                                                    onChange={(e) => editorInstance.getSelected()?.setStyle({ 'padding-left': e.target.value })} />
+                                            </div>
+                                        </div>
+
+                                        {/* Width & Height */}
+                                        <div className="grid grid-cols-2 gap-3">
+                                            <div>
+                                                <label className="block text-slate-600 font-medium mb-2">Width</label>
+                                                <input type="text" placeholder="auto" className="w-full p-1.5 border rounded text-[11px]"
+                                                    value={String(editorInstance.getSelected()?.getStyle()['width'] || '')}
+                                                    onChange={(e) => editorInstance.getSelected()?.setStyle({ 'width': e.target.value })} />
+                                            </div>
+                                            <div>
+                                                <label className="block text-slate-600 font-medium mb-2">Height</label>
+                                                <input type="text" placeholder="auto" className="w-full p-1.5 border rounded text-[11px]"
+                                                    value={String(editorInstance.getSelected()?.getStyle()['height'] || '')}
+                                                    onChange={(e) => editorInstance.getSelected()?.setStyle({ 'height': e.target.value })} />
+                                            </div>
+                                        </div>
+
+                                        {/* Position & Z-Index */}
+                                        <div className="grid grid-cols-2 gap-3">
+                                            <div>
+                                                <label className="block text-slate-600 font-medium mb-2">Position</label>
+                                                <select className="w-full p-1.5 border rounded text-[11px]"
+                                                    value={String(editorInstance.getSelected()?.getStyle()['position'] || 'static')}
+                                                    onChange={(e) => editorInstance.getSelected()?.setStyle({ 'position': e.target.value })}>
+                                                    <option value="static">Static</option>
+                                                    <option value="relative">Relative</option>
+                                                    <option value="absolute">Absolute</option>
+                                                    <option value="fixed">Fixed</option>
+                                                    <option value="sticky">Sticky</option>
+                                                </select>
+                                            </div>
+                                            <div>
+                                                <label className="block text-slate-600 font-medium mb-2">Z-Index</label>
+                                                <input type="text" placeholder="0" className="w-full p-1.5 border rounded text-[11px]"
+                                                    value={String(editorInstance.getSelected()?.getStyle()['z-index'] || '')}
+                                                    onChange={(e) => editorInstance.getSelected()?.setStyle({ 'z-index': e.target.value })} />
+                                            </div>
+                                        </div>
+
+                                        {/* Order (Flexbox) */}
+                                        <div>
+                                            <label className="block text-slate-600 font-medium mb-2">Order</label>
+                                            <input type="text" placeholder="0" className="w-full p-1.5 border rounded text-[11px]"
+                                                value={String(editorInstance.getSelected()?.getStyle()['order'] || '')}
+                                                onChange={(e) => editorInstance.getSelected()?.setStyle({ 'order': e.target.value })} />
+                                            <p className="text-[10px] text-slate-400 mt-1">Controls flex item order</p>
+                                        </div>
+                                    </div>
+                                ) : (
+                                    <p className="text-xs text-slate-400 text-center py-4">Select an element to edit layout properties</p>
+                                )}
+                            </div>
                         </div>
 
                         <div className="p-4 border-t border-slate-200">
