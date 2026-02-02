@@ -448,8 +448,8 @@ export default function GrapesEditor() {
                     </div>
                     <div className={`${activeTab === 'advanced' ? 'block' : 'hidden'} h-full text-slate-600`}>
                         {/* Custom Content Editor */}
-                        <div className="p-4 border-b border-slate-200 bg-slate-50">
-                            <h4 className="text-xs font-bold uppercase mb-3 text-slate-500">Quick Edit</h4>
+                        <div className="p-4 border-b border-slate-200">
+                            <h4 className="text-xs font-bold uppercase mb-3 text-slate-700">Layers</h4>
 
                             {/* Image Editor */}
                             {editorInstance?.getSelected() && editorInstance.getSelected()?.get('type') === 'image' && (
@@ -498,7 +498,10 @@ export default function GrapesEditor() {
                             )}
                         </div>
 
-                        <div className="gjs-tm-container p-4"></div> {/* Trait Manager mounts here */}
+                        <div className="p-4 border-t border-slate-200">
+                            <h4 className="text-xs font-bold uppercase mb-3 text-slate-700">Attributes</h4>
+                            <div className="gjs-tm-container"></div> {/* Trait Manager */}
+                        </div>
                     </div>
                 </div>
             </aside>
