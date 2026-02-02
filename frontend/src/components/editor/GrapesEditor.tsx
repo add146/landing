@@ -504,7 +504,7 @@ return (
         {/* Main Layout Area */}
         <div className="flex flex-col flex-1 h-full min-w-0">
 
-                /* Header */
+
             <header className="flex items-center justify-between px-4 py-2 border-b border-slate-200 bg-white shrink-0 h-14 z-50">
                 <div className="flex items-center gap-4">
                     <button onClick={() => navigate(-1)} className="p-2 hover:bg-slate-100 rounded-lg transition-colors text-slate-500">
