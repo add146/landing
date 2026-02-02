@@ -42,6 +42,7 @@ export default function GrapesEditor() {
     const [selectedComponent, setSelectedComponent] = useState<any>(null);
     const [clipboardConditions, setClipboardConditions] = useState<any>(null);
     const [contextMenu, setContextMenu] = useState<{ x: number; y: number; component: any } | null>(null);
+    const [blockSearchTerm, setBlockSearchTerm] = useState('');
     const [componentProps, setComponentProps] = useState<{
         content: string;
         marginTop: string;
@@ -230,6 +231,30 @@ export default function GrapesEditor() {
             }, 100);
         }
     }, [floatingLayersOpen, editorInstance]);
+
+    // Filter blocks based on search term
+    useEffect(() => {
+        if (!editorInstance) return;
+
+        const blockManager = editorInstance.BlockManager;
+        const blocks = blockManager.getAll();
+
+        blocks.forEach((block: any) => {
+            const blockLabel = block.get('label') || '';
+            const blockCategory = block.get('category')?.get('label') || '';
+            const searchLower = blockSearchTerm.toLowerCase();
+
+            const matches =
+                blockLabel.toLowerCase().includes(searchLower) ||
+                blockCategory.toLowerCase().includes(searchLower);
+
+            // Get the block element in the DOM
+            const blockEl = document.querySelector(`[data-block-id="${block.get('id')}"]`);
+            if (blockEl) {
+                (blockEl as HTMLElement).style.display = matches ? '' : 'none';
+            }
+        });
+    }, [blockSearchTerm, editorInstance]);
 
     const onEditor = (editor: Editor) => {
         setEditorInstance(editor);
@@ -447,7 +472,13 @@ return (
             <div className="p-4 border-b border-slate-200">
                 <div className="relative">
                     <span className="material-symbols-outlined absolute left-3 top-2.5 text-slate-400 text-[20px]">search</span>
-                    <input className="w-full pl-10 pr-4 py-2 bg-slate-50 border border-slate-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-primary/50 text-slate-700 placeholder:text-slate-400" placeholder="Find elements..." type="text" />
+                    <input
+                        className="w-full pl-10 pr-4 py-2 bg-slate-50 border border-slate-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-primary/50 text-slate-700 placeholder:text-slate-400"
+                        placeholder="Find elements..."
+                        type="text"
+                        value={blockSearchTerm}
+                        onChange={(e) => setBlockSearchTerm(e.target.value)}
+                    />
                 </div>
             </div>
             {/* Custom "AI Tools" Category Header for quick access */}
