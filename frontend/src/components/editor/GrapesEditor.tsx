@@ -286,17 +286,20 @@ export default function GrapesEditor() {
                                 onEditor={(editor) => {
                                     onEditor(editor);
 
-                                    // Auto-switch to Style/Settings tab based on component type
+                                    // Auto-switch tabs based on component type (Elementor-style)
                                     editor.on('component:selected', (model) => {
                                         // Force React re-render to update Sidebar inputs
                                         setUpdateCounter((c: number) => c + 1);
 
                                         const type = model.get('type');
-                                        if (['image', 'link', 'map', 'video'].includes(type)) {
-                                            setActiveTab('advanced'); // Show Settings (Traits) for media/links
+                                        const isText = model.is('text') || type === 'text';
+
+                                        // Show Content tab for image and text elements
+                                        if (type === 'image' || isText) {
+                                            setActiveTab('content');
                                         } else {
-                                            // Keep current tab if it's style, or default to style
-                                            if (activeTab !== 'advanced') setActiveTab('style');
+                                            // Show Style tab for other elements (containers, etc)
+                                            setActiveTab('style');
                                         }
                                     });
 
