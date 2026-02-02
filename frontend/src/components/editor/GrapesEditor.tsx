@@ -103,8 +103,15 @@ export default function GrapesEditor() {
     // Helper for text content changes
     const handleContentChange = (value: string) => {
         const component = editorInstance?.getSelected();
-        if (component && component.components().length === 0) {
-            component.set('content', value);
+        if (component) {
+            // Check if it's a text component
+            if (component.is('text')) {
+                // Clear existing components (children like spans) to ensure content is treated as text/html
+                component.components([]);
+                component.set('content', value);
+            } else {
+                component.set('content', value);
+            }
             setComponentProps(prev => ({ ...prev, content: value }));
         }
     };
@@ -566,13 +573,8 @@ export default function GrapesEditor() {
                                                 <label className="text-xs font-medium block mb-2 text-slate-600">Text Content</label>
                                                 <textarea
                                                     className="w-full text-sm p-3 border rounded focus:ring-2 focus:ring-primary/20 font-sans"
-                                                    value={editorInstance.getSelected()?.getTrait('content')?.getValue() || editorInstance.getSelected()?.components().length === 0 ? editorInstance.getSelected()?.get('content') : ''}
-                                                    onChange={(e) => {
-                                                        const comp = editorInstance.getSelected();
-                                                        if (comp?.components().length === 0) {
-                                                            comp.set('content', e.target.value);
-                                                        }
-                                                    }}
+                                                    value={componentProps.content}
+                                                    onChange={(e) => handleContentChange(e.target.value)}
                                                     placeholder="Enter your text here..."
                                                     rows={6}
                                                 />
@@ -603,52 +605,6 @@ export default function GrapesEditor() {
                         </div>
                     </div>
                     <div className={`${activeTab === 'advanced' ? 'block' : 'hidden'} h-full text-slate-600`}>
-                        {/* Custom Content Editor */}
-                        <div className="p-4 border-b border-slate-200">
-                            <h4 className="text-xs font-bold uppercase mb-3 text-slate-700">Layers</h4>
-
-                            {/* Image Editor */}
-                            {editorInstance?.getSelected() && editorInstance.getSelected()?.get('type') === 'image' && (
-                                <div className="space-y-2">
-                                    <label className="text-xs font-medium">Image Source</label>
-                                    <div className="flex gap-2">
-                                        <input
-                                            type="text"
-                                            className="w-full text-xs p-2 border rounded"
-                                            value={editorInstance.getSelected()?.getAttributes().src || ''}
-                                            onChange={(e) => editorInstance.getSelected()?.addAttributes({ src: e.target.value })}
-                                            placeholder="https://..."
-                                        />
-                                        <button
-                                            onClick={() => editorInstance.runCommand('open-assets', { target: editorInstance.getSelected() })}
-                                            className="p-2 bg-white border rounded hover:bg-slate-100"
-                                            title="Open Gallery"
-                                        >
-                                            <span className="material-symbols-outlined text-[16px]">image</span>
-                                        </button>
-                                    </div>
-                                </div>
-                            )}
-
-                            {/* Text Editor */}
-                            {editorInstance?.getSelected() && (editorInstance.getSelected()?.is('text') || editorInstance.getSelected()?.get('type') === 'text') && (
-                                <div className="space-y-2">
-                                    <label className="text-xs font-medium">Text Content</label>
-                                    <textarea
-                                        className="w-full text-xs p-2 border rounded min-h-[80px]"
-                                        value={componentProps.content}
-                                        onChange={(e) => handleContentChange(e.target.value)}
-                                        placeholder="Edit text content..."
-                                    />
-                                    <p className="text-[10px] text-slate-400">Edit text here or double-click element on canvas.</p>
-                                </div>
-                            )}
-
-                            {!editorInstance?.getSelected() && (
-                                <p className="text-xs text-center italic">Select an element to edit content.</p>
-                            )}
-                        </div>
-
                         {/* Layout Section - Advanced Properties */}
                         <div className="border-b border-slate-200">
                             <div className="p-4">
