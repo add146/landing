@@ -36,6 +36,7 @@ export default function GrapesEditor() {
     const [pageSettingsOpen, setPageSettingsOpen] = useState(false);
     const [aiModalOpen, setAiModalOpen] = useState(false);
     const [importModalOpen, setImportModalOpen] = useState(false);
+    const [updateCounter, setUpdateCounter] = useState(0); // Force re-render for sidebar updates
 
     const onEditor = (editor: Editor) => {
         setEditorInstance(editor);
@@ -287,13 +288,20 @@ export default function GrapesEditor() {
 
                                     // Auto-switch to Style/Settings tab based on component type
                                     editor.on('component:selected', (model) => {
+                                        // Force React re-render to update Sidebar inputs
+                                        setUpdateCounter(c => c + 1);
+
                                         const type = model.get('type');
                                         if (['image', 'link', 'map', 'video'].includes(type)) {
                                             setActiveTab('advanced'); // Show Settings (Traits) for media/links
                                         } else {
-                                            setActiveTab('style'); // Show Style for text, containers, etc.
+                                            // Keep current tab if it's style, or default to style
+                                            if (activeTab !== 'advanced') setActiveTab('style');
                                         }
                                     });
+
+                                    // Force update on component change (text edit, etc)
+                                    editor.on('component:update', () => setUpdateCounter(c => c + 1));
 
                                     // Refresh assets on open
                                     editor.on('run:open-assets', () => {
@@ -335,8 +343,59 @@ export default function GrapesEditor() {
                     <div className={`${activeTab === 'content' ? 'block' : 'hidden'} h-full text-slate-600 p-4 text-sm text-center`}>
                         <div className="gjs-lm-container"></div> {/* Layer Manager mounts here */}
                     </div>
-                    <div className={`${activeTab === 'advanced' ? 'block' : 'hidden'} h-full text-slate-600 p-4 text-sm text-center`}>
-                        <div className="gjs-tm-container"></div> {/* Trait Manager mounts here */}
+                    <div className={`${activeTab === 'advanced' ? 'block' : 'hidden'} h-full text-slate-600`}>
+                        {/* Custom Content Editor */}
+                        <div className="p-4 border-b border-slate-200 bg-slate-50">
+                            <h4 className="text-xs font-bold uppercase mb-3 text-slate-500">Quick Edit</h4>
+
+                            {/* Image Editor */}
+                            {editorInstance?.getSelected() && editorInstance.getSelected()?.get('type') === 'image' && (
+                                <div className="space-y-2">
+                                    <label className="text-xs font-medium">Image Source</label>
+                                    <div className="flex gap-2">
+                                        <input
+                                            type="text"
+                                            className="w-full text-xs p-2 border rounded"
+                                            value={editorInstance.getSelected()?.getAttributes().src || ''}
+                                            onChange={(e) => editorInstance.getSelected()?.addAttributes({ src: e.target.value })}
+                                            placeholder="https://..."
+                                        />
+                                        <button
+                                            onClick={() => editorInstance.runCommand('open-assets', { target: editorInstance.getSelected() })}
+                                            className="p-2 bg-white border rounded hover:bg-slate-100"
+                                            title="Open Gallery"
+                                        >
+                                            <span className="material-symbols-outlined text-[16px]">image</span>
+                                        </button>
+                                    </div>
+                                </div>
+                            )}
+
+                            {/* Text Editor */}
+                            {editorInstance?.getSelected() && (editorInstance.getSelected()?.is('text') || editorInstance.getSelected()?.get('type') === 'text') && (
+                                <div className="space-y-2">
+                                    <label className="text-xs font-medium">Text Content</label>
+                                    <textarea
+                                        className="w-full text-xs p-2 border rounded min-h-[80px]"
+                                        value={editorInstance.getSelected()?.getTrait('content')?.getValue() || editorInstance.getSelected()?.components().length === 0 ? editorInstance.getSelected()?.get('content') : ''}
+                                        onChange={(e) => {
+                                            const comp = editorInstance.getSelected();
+                                            if (comp?.components().length === 0) {
+                                                comp.set('content', e.target.value);
+                                            }
+                                        }}
+                                        placeholder="Edit text content..."
+                                    />
+                                    <p className="text-[10px] text-slate-400">Edit text here or double-click element on canvas.</p>
+                                </div>
+                            )}
+
+                            {!editorInstance?.getSelected() && (
+                                <p className="text-xs text-center italic">Select an element to edit content.</p>
+                            )}
+                        </div>
+
+                        <div className="gjs-tm-container p-4"></div> {/* Trait Manager mounts here */}
                     </div>
                 </div>
             </aside>
