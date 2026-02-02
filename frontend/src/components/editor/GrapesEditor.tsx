@@ -289,7 +289,7 @@ export default function GrapesEditor() {
                                     // Auto-switch to Style/Settings tab based on component type
                                     editor.on('component:selected', (model) => {
                                         // Force React re-render to update Sidebar inputs
-                                        setUpdateCounter(c => c + 1);
+                                        setUpdateCounter((c: number) => c + 1);
 
                                         const type = model.get('type');
                                         if (['image', 'link', 'map', 'video'].includes(type)) {
@@ -301,7 +301,7 @@ export default function GrapesEditor() {
                                     });
 
                                     // Force update on component change (text edit, etc)
-                                    editor.on('component:update', () => setUpdateCounter(c => c + 1));
+                                    editor.on('component:update', () => setUpdateCounter((c: number) => c + 1));
 
                                     // Refresh assets on open
                                     editor.on('run:open-assets', () => {
