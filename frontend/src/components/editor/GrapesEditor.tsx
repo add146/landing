@@ -40,6 +40,8 @@ export default function GrapesEditor() {
     const [floatingLayersOpen, setFloatingLayersOpen] = useState(false);
     const [, setUpdateCounter] = useState(0); // Force re-render for sidebar updates
     const [selectedComponent, setSelectedComponent] = useState<any>(null);
+    const [clipboardConditions, setClipboardConditions] = useState<any>(null);
+    const [contextMenu, setContextMenu] = useState<{ x: number; y: number; component: any } | null>(null);
     const [componentProps, setComponentProps] = useState<{
         content: string;
         marginTop: string;
@@ -311,7 +313,7 @@ export default function GrapesEditor() {
     }
 
     return (
-        <div className="flex h-screen w-full bg-slate-50 text-slate-900 overflow-hidden font-sans">
+        <div className="flex h-screen w-full bg-slate-50 text-slate-900 overflow-hidden font-sans" onClick={() => setContextMenu(null)}>
 
             {/* Left Sidebar - Blocks */}
             <aside className="w-64 bg-white border-r border-slate-200 flex flex-col shrink-0 z-20">
@@ -557,8 +559,96 @@ export default function GrapesEditor() {
                                             });
                                         }
                                     });
+
+                                    // Context Menu
+                                    editor.on('component:contextmenu', (event: any) => {
+                                        event.preventDefault(); // Stop default browser menu
+                                        // GrapesJS might wrap the event, ensure we get coordinates
+                                        const clientX = event.clientX || event.originalEvent?.clientX || 0;
+                                        const clientY = event.clientY || event.originalEvent?.clientY || 0;
+
+                                        const selected = editor.getSelected();
+                                        if (selected) {
+                                            setContextMenu({
+                                                x: clientX,
+                                                y: clientY,
+                                                component: selected
+                                            });
+                                        }
+                                    });
+
+                                    // Close context menu on general canvas click
+                                    editor.on('canvas:click', () => setContextMenu(null));
                                 }}
                             />
+
+                            {/* Custom Context Menu */}
+                            {contextMenu && (
+                                <div
+                                    className="fixed z-[100] bg-white rounded-lg shadow-xl border border-slate-200 py-1 w-56 text-sm"
+                                    style={{ top: contextMenu.y, left: contextMenu.x }}
+                                    onClick={(e) => e.stopPropagation()}
+                                >
+                                    <div className="px-3 py-2 border-b border-slate-100 mb-1">
+                                        <div className="font-medium text-slate-700">{contextMenu.component.get('tagName') || contextMenu.component.get('type')}</div>
+                                    </div>
+
+                                    <button
+                                        className="w-full text-left px-3 py-2 hover:bg-slate-50 flex items-center gap-2 text-slate-600"
+                                        onClick={() => {
+                                            const conditions = contextMenu.component.getAttributes()['data-display-conditions'];
+                                            if (conditions) {
+                                                setClipboardConditions(conditions);
+                                                alert('Conditions copied!');
+                                            } else {
+                                                alert('No conditions to copy.');
+                                            }
+                                            setContextMenu(null);
+                                        }}
+                                    >
+                                        <span className="material-symbols-outlined text-[16px]">content_copy</span>
+                                        Copy Display Conditions
+                                    </button>
+
+                                    <button
+                                        className={`w-full text-left px-3 py-2 hover:bg-slate-50 flex items-center gap-2 text-slate-600 ${!clipboardConditions ? 'opacity-50 cursor-not-allowed' : ''}`}
+                                        onClick={() => {
+                                            if (clipboardConditions) {
+                                                contextMenu.component.addAttributes({ 'data-display-conditions': clipboardConditions });
+                                                setUpdateCounter(c => c + 1); // Force refresh
+                                                alert('Conditions pasted!');
+                                            }
+                                            setContextMenu(null);
+                                        }}
+                                        disabled={!clipboardConditions}
+                                    >
+                                        <span className="material-symbols-outlined text-[16px]">content_paste</span>
+                                        Paste Display Conditions
+                                    </button>
+
+                                    <div className="h-px bg-slate-100 my-1"></div>
+
+                                    <button
+                                        className="w-full text-left px-3 py-2 hover:bg-red-50 text-red-600 flex items-center gap-2"
+                                        onClick={() => {
+                                            const attrs = { ...contextMenu.component.getAttributes() };
+                                            delete attrs['data-display-conditions'];
+                                            contextMenu.component.setAttributes(attrs);
+                                            // Need to explicitly remove if setAttributes merges, but usually setAttributes overwrites or we can set to null?
+                                            // GrapesJS setAttributes usually replaces or merges. To remove, we might need to recreate attributes object.
+                                            // Safer:
+                                            contextMenu.component.addAttributes({ 'data-display-conditions': '' }); // Clear it effectively
+                                            // OR: contextMenu.component.removeAttributes('data-display-conditions'); // If version supports
+
+                                            setUpdateCounter(c => c + 1);
+                                            setContextMenu(null);
+                                        }}
+                                    >
+                                        <span className="material-symbols-outlined text-[16px]">backspace</span>
+                                        Clear Display Conditions
+                                    </button>
+                                </div>
+                            )}
                         </div>
                     </div>
                 </div>
@@ -842,6 +932,92 @@ export default function GrapesEditor() {
                                 ) : (
                                     <p className="text-xs text-slate-400 text-center py-4">Select an element to edit layout properties</p>
                                 )}
+                            </div>
+                        </div>
+
+                        {/* Display Conditions Section */}
+                        <div className="border-t border-slate-200">
+                            <div className="p-4">
+                                <h4 className="text-xs font-bold uppercase mb-3 text-slate-700 flex items-center gap-2">
+                                    <span className="material-symbols-outlined text-[16px]">visibility</span>
+                                    Display Conditions
+                                </h4>
+
+                                {editorInstance?.getSelected() ? (() => {
+                                    const selected = editorInstance.getSelected();
+                                    const rawConditions = selected?.getAttributes()['data-display-conditions'];
+                                    const conditions = rawConditions ? JSON.parse(rawConditions) : { type: 'always' };
+
+                                    const updateCondition = (newConditions: any) => {
+                                        selected?.addAttributes({ 'data-display-conditions': JSON.stringify(newConditions) });
+                                        setUpdateCounter(c => c + 1);
+                                    };
+
+                                    return (
+                                        <div className="space-y-3 text-xs">
+                                            <div>
+                                                <label className="block text-slate-600 font-medium mb-2">Condition Type</label>
+                                                <select
+                                                    className="w-full p-2 border rounded bg-white"
+                                                    value={conditions.type}
+                                                    onChange={(e) => updateCondition({ ...conditions, type: e.target.value })}
+                                                >
+                                                    <option value="always">Always Show</option>
+                                                    <option value="schedule">Schedule (Date/Time)</option>
+                                                    <option value="loggedin">Logged In User</option>
+                                                    <option value="loggedout">Logged Out User</option>
+                                                </select>
+                                            </div>
+
+                                            {conditions.type === 'schedule' && (
+                                                <>
+                                                    <div>
+                                                        <label className="block text-slate-600 font-medium mb-1">Start Date</label>
+                                                        <input
+                                                            type="datetime-local"
+                                                            className="w-full p-2 border rounded"
+                                                            value={conditions.startDate || ''}
+                                                            onChange={(e) => updateCondition({ ...conditions, startDate: e.target.value })}
+                                                        />
+                                                    </div>
+                                                    <div>
+                                                        <label className="block text-slate-600 font-medium mb-1">End Date</label>
+                                                        <input
+                                                            type="datetime-local"
+                                                            className="w-full p-2 border rounded"
+                                                            value={conditions.endDate || ''}
+                                                            onChange={(e) => updateCondition({ ...conditions, endDate: e.target.value })}
+                                                        />
+                                                    </div>
+                                                </>
+                                            )}
+
+                                            {conditions.type === 'loggedin' && (
+                                                <div>
+                                                    <label className="block text-slate-600 font-medium mb-1">Required Role</label>
+                                                    <select
+                                                        className="w-full p-2 border rounded bg-white"
+                                                        value={conditions.role || 'any'}
+                                                        onChange={(e) => updateCondition({ ...conditions, role: e.target.value })}
+                                                    >
+                                                        <option value="any">Any Role</option>
+                                                        <option value="admin">Administrator</option>
+                                                        <option value="user">User</option>
+                                                    </select>
+                                                </div>
+                                            )}
+
+                                            {conditions.type !== 'always' && (
+                                                <div className="p-2 bg-yellow-50 text-yellow-800 rounded border border-yellow-200 mt-2">
+                                                    <div className="flex items-start gap-2">
+                                                        <span className="material-symbols-outlined text-[16px] mt-0.5">info</span>
+                                                        <p className="leading-tight">Conditions will apply on the live site.</p>
+                                                    </div>
+                                                </div>
+                                            )}
+                                        </div>
+                                    );
+                                })() : null}
                             </div>
                         </div>
 
