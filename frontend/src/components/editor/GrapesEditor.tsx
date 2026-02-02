@@ -260,7 +260,8 @@ export default function GrapesEditor() {
         setEditorInstance(editor);
         console.log('Editor loaded', editor);
 
-        // ... (rest of onEditor)
+        // Register custom Tailwind blocks including carousel
+        myTailwindBlocks(editor);
 
 
         // Load content if available
