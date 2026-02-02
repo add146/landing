@@ -201,6 +201,79 @@ const myTailwindBlocks = (editor: Editor) => {
       </section>
     `
     });
+
+    // 6. Social / Bio Link Widgets (Elementor Style)
+    bm.add('bio-link', {
+        label: 'Link in Bio',
+        category: 'Basic',
+        media: '<i class="fa fa-id-badge"></i>',
+        content: `
+      <div class="max-w-md mx-auto p-8 bg-white dark:bg-slate-900 rounded-3xl shadow-xl border border-slate-100 dark:border-slate-800 text-center font-sans">
+        <!-- Profile Image -->
+        <div class="mb-6 relative inline-block group">
+            <div class="w-32 h-32 mx-auto rounded-full p-1 border-4 border-indigo-100 dark:border-indigo-900 overflow-hidden">
+                <img src="https://placehold.co/400x400?text=Profile" alt="Profile" class="w-full h-full object-cover rounded-full" />
+            </div>
+        </div>
+
+        <!-- Identity -->
+        <h2 class="text-2xl font-bold text-slate-900 dark:text-white mb-2">Your Name</h2>
+        <p class="text-slate-500 dark:text-slate-400 mb-8 px-4 leading-relaxed">
+            Digital Creator & Designer. Sharing my journey and tips for building better products.
+        </p>
+
+        <!-- Links Stack -->
+        <div class="space-y-4 mb-10">
+            <a href="#" class="block w-full py-4 px-6 bg-slate-50 dark:bg-slate-800 hover:bg-indigo-50 dark:hover:bg-indigo-900/30 border border-slate-200 dark:border-slate-700 rounded-xl transition-all hover:scale-[1.02] hover:border-indigo-300 dark:hover:border-indigo-500 group">
+                <div class="flex items-center justify-between">
+                    <div class="flex items-center gap-3">
+                        <i class="fa fa-globe text-xl text-indigo-500"></i>
+                         <span class="font-semibold text-slate-700 dark:text-slate-200 group-hover:text-indigo-600 dark:group-hover:text-indigo-400">Visit Website</span>
+                    </div>
+                    <i class="fa fa-chevron-right text-slate-400 text-sm"></i>
+                </div>
+            </a>
+            
+            <a href="#" class="block w-full py-4 px-6 bg-slate-50 dark:bg-slate-800 hover:bg-indigo-50 dark:hover:bg-indigo-900/30 border border-slate-200 dark:border-slate-700 rounded-xl transition-all hover:scale-[1.02] hover:border-indigo-300 dark:hover:border-indigo-500 group">
+                <div class="flex items-center justify-between">
+                    <div class="flex items-center gap-3">
+                        <i class="fa fa-shopping-bag text-xl text-pink-500"></i>
+                         <span class="font-semibold text-slate-700 dark:text-slate-200 group-hover:text-indigo-600 dark:group-hover:text-indigo-400">My Shop</span>
+                    </div>
+                     <i class="fa fa-chevron-right text-slate-400 text-sm"></i>
+                </div>
+            </a>
+
+            <a href="#" class="block w-full py-4 px-6 bg-slate-50 dark:bg-slate-800 hover:bg-indigo-50 dark:hover:bg-indigo-900/30 border border-slate-200 dark:border-slate-700 rounded-xl transition-all hover:scale-[1.02] hover:border-indigo-300 dark:hover:border-indigo-500 group">
+                <div class="flex items-center justify-between">
+                    <div class="flex items-center gap-3">
+                        <i class="fa fa-youtube-play text-xl text-red-500"></i>
+                         <span class="font-semibold text-slate-700 dark:text-slate-200 group-hover:text-indigo-600 dark:group-hover:text-indigo-400">Latest Video</span>
+                    </div>
+                     <i class="fa fa-chevron-right text-slate-400 text-sm"></i>
+                </div>
+            </a>
+        </div>
+
+        <!-- Social Icons -->
+        <div class="flex justify-center gap-6">
+            <a href="#" class="w-10 h-10 flex items-center justify-center rounded-full bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 hover:bg-indigo-600 hover:text-white transition-all hover:-translate-y-1">
+                <i class="fa fa-instagram text-lg"></i>
+            </a>
+            <a href="#" class="w-10 h-10 flex items-center justify-center rounded-full bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 hover:bg-blue-500 hover:text-white transition-all hover:-translate-y-1">
+                <i class="fa fa-twitter text-lg"></i>
+            </a>
+             <a href="#" class="w-10 h-10 flex items-center justify-center rounded-full bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 hover:bg-blue-600 hover:text-white transition-all hover:-translate-y-1">
+                <i class="fa fa-linkedin text-lg"></i>
+            </a>
+             <a href="#" class="w-10 h-10 flex items-center justify-center rounded-full bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 hover:bg-black hover:text-white transition-all hover:-translate-y-1">
+                <i class="fa fa-tiktok text-lg"></i>
+            </a>
+        </div>
+      </div>
+    `
+    });
+
 };
 
 export default myTailwindBlocks;

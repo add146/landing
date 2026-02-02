@@ -246,6 +246,25 @@ export default function GrapesEditor() {
             }
         }
 
+        // Load Assets from Backend
+        const loadAssets = async () => {
+            try {
+                const token = localStorage.getItem('token');
+                const response = await fetch('https://landing-page-api.khibroh.workers.dev/api/media?format=grapesjs', {
+                    headers: {
+                        'Authorization': `Bearer ${token}`
+                    }
+                });
+                if (response.ok) {
+                    const assets = await response.json();
+                    editor.AssetManager.add(assets);
+                }
+            } catch (e) {
+                console.error('Failed to load assets', e);
+            }
+        };
+        loadAssets();
+
         // Add Save Command
         editor.Commands.add('save-db', {
             run: async (editor: any) => {
@@ -421,22 +440,6 @@ export default function GrapesEditor() {
                                         uploadName: 'file',
                                         headers: {
                                             'Authorization': `Bearer ${localStorage.getItem('token')}`
-                                        },
-                                        // Load assets from backend
-                                        assets: async () => {
-                                            try {
-                                                const token = localStorage.getItem('token');
-                                                const response = await fetch('https://landing-page-api.khibroh.workers.dev/api/media?format=grapesjs', {
-                                                    headers: {
-                                                        'Authorization': `Bearer ${token}`
-                                                    }
-                                                });
-                                                if (!response.ok) return [];
-                                                return await response.json();
-                                            } catch (e) {
-                                                console.error('Failed to load assets', e);
-                                                return [];
-                                            }
                                         },
                                         autoAdd: true,
                                         openAssetsOnDrop: true, // Open when dropping image
