@@ -175,3 +175,25 @@
     background-image: radial-gradient(#1e293b 1px, transparent 1px);
   }
 }
+
+/* Highlight selected layer in Layer Manager */
+.gjs-layer.gjs-selected {
+  background-color: #e0e7ff !important;
+  /* indigo-100 */
+  border-left: 3px solid #6366f1 !important;
+  /* indigo-500 */
+  color: #4338ca !important;
+  /* indigo-700 */
+}
+
+.gjs-layer.gjs-selected .gjs-layer-name,
+.gjs-layer.gjs-selected .gjs-layer-title {
+  font-weight: 600 !important;
+  color: #4338ca !important;
+}
+
+/* Hover state for layers */
+.gjs-layer:hover {
+  background-color: #f8fafc !important;
+  /* slate-50 */
+}
