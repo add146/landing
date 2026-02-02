@@ -230,96 +230,124 @@ export default function GrapesEditor() {
                                     layerManager: {
                                         appendTo: '.gjs-lm-container'
                                     },
+                                },
                                     styleManager: {
-                                        appendTo: '.gjs-sm-container'
+                                appendTo: '.gjs-sm-container',
+                            sectors: [
+                            {
+                                name: 'Layout',
+                            open: true,
+                            buildProps: ['width', 'height', 'max-width', 'min-height', 'margin', 'padding']
+                                            },
+                            {
+                                name: 'Typography',
+                            open: false,
+                            buildProps: ['font-family', 'font-size', 'font-weight', 'letter-spacing', 'color', 'line-height', 'text-align', 'text-decoration', 'text-shadow']
+                                            },
+                            {
+                                name: 'Decorations',
+                            open: false,
+                            buildProps: ['background-color', 'border-radius', 'border', 'box-shadow', 'background']
+                                            },
+                            {
+                                name: 'Extra',
+                            open: false,
+                            buildProps: ['opacity', 'transition', 'perspective', 'transform']
+                                            },
+                            {
+                                name: 'Flex',
+                            open: false,
+                            buildProps: ['flex-direction', 'justify-content', 'align-items', 'flex-wrap', 'align-content', 'gap']
+                                            }
+                            ]
                                     },
-                                    traitManager: {
-                                        appendTo: '.gjs-tm-container'
+                            traitManager: {
+                                appendTo: '.gjs-tm-container'
                                     },
-                                    deviceManager: {
-                                        devices: [
-                                            { name: 'Desktop', width: '' },
-                                            { name: 'Tablet', width: '768px' },
-                                            { name: 'Mobile', width: '320px' },
-                                        ]
+                            deviceManager: {
+                                devices: [
+                            {name: 'Desktop', width: '' },
+                            {name: 'Tablet', width: '768px' },
+                            {name: 'Mobile', width: '320px' },
+                            ]
                                     },
-                                    plugins: [
-                                        webpagePlugin,
-                                        basicBlocksPlugin,
-                                        formsPlugin,
-                                        countdownPlugin,
-                                        tabsPlugin,
-                                        customCodePlugin,
-                                        tooltipPlugin,
-                                        typedPlugin,
-                                        myTailwindBlocks
-                                    ],
-                                    pluginsOpts: {
-                                        'gjs-preset-webpage': {
-                                            blocksBasicOpts: false,
-                                            formsOpts: false,
-                                            countdownOpts: false,
-                                            modalImportTitle: 'Import',
+                            plugins: [
+                            webpagePlugin,
+                            basicBlocksPlugin,
+                            formsPlugin,
+                            countdownPlugin,
+                            tabsPlugin,
+                            customCodePlugin,
+                            tooltipPlugin,
+                            typedPlugin,
+                            myTailwindBlocks
+                            ],
+                            pluginsOpts: {
+                                'gjs-preset-webpage': {
+                                blocksBasicOpts: false,
+                            formsOpts: false,
+                            countdownOpts: false,
+                            modalImportTitle: 'Import',
                                         },
                                     },
-                                    canvas: {
-                                        scripts: [
-                                            'https://cdn.tailwindcss.com'
-                                        ],
-                                        styles: [
-                                            'https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap',
-                                            // Material Symbols
-                                            'https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200',
-                                            'https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200',
-                                            'https://fonts.googleapis.com/css2?family=Material+Symbols+Sharp:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200',
-                                            // Material Icons (Legacy Variants)
-                                            'https://fonts.googleapis.com/icon?family=Material+Icons',
-                                            'https://fonts.googleapis.com/icon?family=Material+Icons+Outlined',
-                                            'https://fonts.googleapis.com/icon?family=Material+Icons+Round',
-                                            'https://fonts.googleapis.com/icon?family=Material+Icons+Sharp',
-                                            'https://fonts.googleapis.com/icon?family=Material+Icons+Two+Tone',
-                                            // Font Awesome
-                                            'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css'
-                                        ]
+                            canvas: {
+                                scripts: [
+                            'https://cdn.tailwindcss.com'
+                            ],
+                            styles: [
+                            'https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap',
+                            // Material Symbols
+                            'https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200',
+                            'https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200',
+                            'https://fonts.googleapis.com/css2?family=Material+Symbols+Sharp:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200',
+                            // Material Icons (Legacy Variants)
+                            'https://fonts.googleapis.com/icon?family=Material+Icons',
+                            'https://fonts.googleapis.com/icon?family=Material+Icons+Outlined',
+                            'https://fonts.googleapis.com/icon?family=Material+Icons+Round',
+                            'https://fonts.googleapis.com/icon?family=Material+Icons+Sharp',
+                            'https://fonts.googleapis.com/icon?family=Material+Icons+Two+Tone',
+                            // Font Awesome
+                            'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css'
+                            ]
                                     }
                                 }}
-                                onEditor={(editor) => {
-                                    onEditor(editor);
+                            onEditor={(editor) => {
+                                onEditor(editor);
 
-                                    // Auto-switch tabs based on component type (Elementor-style)
-                                    editor.on('component:selected', (model) => {
-                                        // Force React re-render to update Sidebar inputs
-                                        setUpdateCounter((c: number) => c + 1);
+                                // Auto-switch tabs based on component type (Elementor-style)
+                                editor.on('component:selected', (model) => {
+                                    // Force React re-render to update Sidebar inputs
+                                    setUpdateCounter((c: number) => c + 1);
 
-                                        const type = model.get('type');
-                                        const isText = model.is('text') || type === 'text';
+                                    const type = model.get('type');
+                                    const isText = model.is('text') || type === 'text';
 
-                                        // Show Content tab for image and text elements
-                                        if (type === 'image' || isText) {
-                                            setActiveTab('content');
-                                        } else {
-                                            // Show Style tab for other elements (containers, etc)
-                                            setActiveTab('style');
-                                        }
-                                    });
+                                    // Show Content tab for image and text elements
+                                    if (type === 'image' || isText) {
+                                        setActiveTab('content');
+                                    } else {
+                                        // Show Style tab for other elements (containers, etc)
+                                        setActiveTab('style');
+                                    }
+                                });
 
-                                    // Force update on component change (text edit, etc)
-                                    editor.on('component:update', () => setUpdateCounter((c: number) => c + 1));
+                                // Force update on component change (text edit, etc)
+                                editor.on('component:update', () => setUpdateCounter((c: number) => c + 1));
 
-                                    // Refresh assets on open
-                                    editor.on('run:open-assets', () => {
-                                        // Optional: Reload assets from backend if needed
-                                    });
+                                // Refresh assets on open
+                                editor.on('run:open-assets', () => {
+                                    // Optional: Reload assets from backend if needed
+                                });
 
-                                    // Double-click to change image
-                                    editor.on('component:dblclick', (model) => {
-                                        if (model.get('type') === 'image') {
-                                            editor.runCommand('open-assets', {
-                                                target: model
-                                            });
-                                        }
-                                    });
-                                }}
+                                // Double-click to change image
+                                editor.on('component:dblclick', (model) => {
+                                    if (model.get('type') === 'image') {
+                                        editor.runCommand('open-assets', {
+                                            target: model
+                                        });
+                                    }
+                                });
+                            }}
                             />
                         </div>
                     </div>
