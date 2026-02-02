@@ -55,6 +55,11 @@ export default function GrapesEditor() {
         position: string;
         zIndex: string;
         order: string;
+        // Image props
+        imageSrc: string;
+        imageAlign: string;
+        imageWidth: string;
+        imageHeight: string;
     }>({
         content: '',
         marginTop: '',
@@ -69,7 +74,11 @@ export default function GrapesEditor() {
         height: '',
         position: 'static',
         zIndex: '',
-        order: ''
+        order: '',
+        imageSrc: '',
+        imageAlign: 'left',
+        imageWidth: '',
+        imageHeight: ''
     });
 
     // Helper function to update styles and local state
@@ -100,6 +109,47 @@ export default function GrapesEditor() {
         }
     };
 
+    // Helper for image property changes
+    const handleImageChange = (prop: string, value: string) => {
+        const component = editorInstance?.getSelected();
+        if (!component) return;
+
+        if (prop === 'src') {
+            component.addAttributes({ src: value });
+            setComponentProps(prev => ({ ...prev, imageSrc: value }));
+        } else if (prop === 'width') {
+            component.setStyle({ width: value });
+            setComponentProps(prev => ({ ...prev, imageWidth: value }));
+        } else if (prop === 'height') {
+            component.setStyle({ height: value });
+            setComponentProps(prev => ({ ...prev, imageHeight: value }));
+        } else if (prop === 'align') {
+            // Handle alignment logic
+            const style: any = { display: 'block' }; // Ensure block for margin auto to work
+            if (value === 'left') {
+                style['margin-left'] = '0';
+                style['margin-right'] = 'auto';
+            } else if (value === 'center') {
+                style['margin-left'] = 'auto';
+                style['margin-right'] = 'auto';
+            } else if (value === 'right') {
+                style['margin-left'] = 'auto';
+                style['margin-right'] = '0';
+            }
+            component.setStyle(style);
+            setComponentProps(prev => ({ ...prev, imageAlign: value }));
+        } else if (prop === 'resolution') {
+            // Preset resolutions
+            let w = 'auto', h = 'auto';
+            if (value === 'thumbnail') { w = '150px'; h = '150px'; }
+            else if (value === 'medium') { w = '300px'; h = '300px'; }
+            else if (value === 'large') { w = '1024px'; h = 'auto'; }
+
+            component.setStyle({ width: w, height: h });
+            setComponentProps(prev => ({ ...prev, imageWidth: w, imageHeight: h }));
+        }
+    };
+
     // Helper for text content changes
     const handleContentChange = (value: string) => {
         const component = editorInstance?.getSelected();
@@ -120,6 +170,7 @@ export default function GrapesEditor() {
     useEffect(() => {
         if (selectedComponent) {
             const styles = selectedComponent.getStyle();
+            const attribs = selectedComponent.getAttributes();
 
             // Extract text content - try multiple methods
             let content = '';
@@ -146,7 +197,12 @@ export default function GrapesEditor() {
                 height: String(styles['height'] || ''),
                 position: String(styles['position'] || 'static'),
                 zIndex: String(styles['z-index'] || ''),
-                order: String(styles['order'] || '')
+                order: String(styles['order'] || ''),
+                imageSrc: String(attribs.src || ''),
+                imageAlign: String(styles['text-align'] || 'left'), // Assuming text-align on wrapper or float on img
+                // For direct image width/height in style or attributes
+                imageWidth: String(styles['width'] || attribs.width || ''),
+                imageHeight: String(styles['height'] || attribs.height || '')
             });
         }
     }, [selectedComponent]);
@@ -526,32 +582,96 @@ export default function GrapesEditor() {
                                             <span className="material-symbols-outlined text-[16px]">image</span>
                                             Image
                                         </h4>
-                                        <div className="space-y-3">
-                                            <div>
-                                                <label className="text-xs font-medium block mb-2 text-slate-600">Choose Image</label>
-                                                <div className="border rounded-lg p-2 bg-slate-50">
-                                                    <img
-                                                        src={editorInstance.getSelected()?.getAttributes().src || ''}
-                                                        alt="Preview"
-                                                        className="w-full h-32 object-cover rounded mb-2"
-                                                        onError={(e) => { (e.target as HTMLImageElement).src = 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="100" height="100"%3E%3Crect fill="%23ddd" width="100" height="100"/%3E%3Ctext fill="%23999" x="50%25" y="50%25" dominant-baseline="middle" text-anchor="middle"%3ENo Image%3C/text%3E%3C/svg%3E'; }}
-                                                    />
+                                        <div className="space-y-4">
+                                            {/* Preview & Choose */}
+                                            <div className="bg-slate-50 border rounded-lg p-3">
+                                                <div className="flex justify-between items-center mb-2">
+                                                    <label className="text-xs font-medium text-slate-600">Choose Image</label>
                                                     <button
                                                         onClick={() => editorInstance.runCommand('open-assets', { target: editorInstance.getSelected() })}
-                                                        className="w-full p-2 bg-primary text-white rounded hover:bg-primary/90 text-xs font-medium flex items-center justify-center gap-2"
+                                                        className="text-primary hover:text-primary/80"
                                                     >
-                                                        <span className="material-symbols-outlined text-[16px]">upload</span>
-                                                        Upload / Select Image
+                                                        <span className="material-symbols-outlined text-[18px]">collections</span>
+                                                    </button>
+                                                </div>
+                                                <div
+                                                    className="group relative w-full h-32 bg-white border border-dashed rounded flex items-center justify-center cursor-pointer overflow-hidden"
+                                                    onClick={() => editorInstance.runCommand('open-assets', { target: editorInstance.getSelected() })}
+                                                >
+                                                    {componentProps.imageSrc ? (
+                                                        <img
+                                                            src={componentProps.imageSrc}
+                                                            alt="Preview"
+                                                            className="w-full h-full object-contain"
+                                                            onError={(e) => { (e.target as HTMLImageElement).style.display = 'none'; }}
+                                                        />
+                                                    ) : (
+                                                        <span className="material-symbols-outlined text-3xl text-slate-300">image</span>
+                                                    )}
+                                                    <div className="absolute inset-0 bg-black/50 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+                                                        <span className="text-xs text-white font-medium">Change Image</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            {/* Resolution */}
+                                            <div>
+                                                <label className="text-xs font-medium block mb-2 text-slate-600">Image Resolution</label>
+                                                <select
+                                                    className="w-full text-xs p-2 border rounded bg-white focus:ring-2 focus:ring-primary/20"
+                                                    onChange={(e) => handleImageChange('resolution', e.target.value)}
+                                                >
+                                                    <option value="full">Full</option>
+                                                    <option value="thumbnail">Thumbnail - 150 x 150</option>
+                                                    <option value="medium">Medium - 300 x 300</option>
+                                                    <option value="large">Large - 1024 x 1024</option>
+                                                </select>
+                                            </div>
+
+                                            {/* Alignment */}
+                                            <div>
+                                                <label className="text-xs font-medium block mb-2 text-slate-600">Alignment</label>
+                                                <div className="flex border rounded overflow-hidden">
+                                                    <button
+                                                        onClick={() => handleImageChange('align', 'left')}
+                                                        className={`flex-1 p-2 flex items-center justify-center hover:bg-slate-50 transition-colors ${componentProps.imageAlign === 'left' ? 'bg-indigo-50 text-primary' : 'bg-white text-slate-500'}`}
+                                                    >
+                                                        <span className="material-symbols-outlined text-[18px]">format_align_left</span>
+                                                    </button>
+                                                    <button
+                                                        onClick={() => handleImageChange('align', 'center')}
+                                                        className={`flex-1 p-2 border-l border-r flex items-center justify-center hover:bg-slate-50 transition-colors ${componentProps.imageAlign === 'center' ? 'bg-indigo-50 text-primary' : 'bg-white text-slate-500'}`}
+                                                    >
+                                                        <span className="material-symbols-outlined text-[18px]">format_align_center</span>
+                                                    </button>
+                                                    <button
+                                                        onClick={() => handleImageChange('align', 'right')}
+                                                        className={`flex-1 p-2 flex items-center justify-center hover:bg-slate-50 transition-colors ${componentProps.imageAlign === 'right' ? 'bg-indigo-50 text-primary' : 'bg-white text-slate-500'}`}
+                                                    >
+                                                        <span className="material-symbols-outlined text-[18px]">format_align_right</span>
                                                     </button>
                                                 </div>
                                             </div>
+
+                                            {/* Caption */}
+                                            <div>
+                                                <label className="text-xs font-medium block mb-2 text-slate-600">Caption</label>
+                                                <input
+                                                    type="text"
+                                                    className="w-full text-xs p-2 border rounded focus:ring-2 focus:ring-primary/20"
+                                                    placeholder="Enter caption..."
+                                                    onChange={(e) => editorInstance?.getSelected()?.addAttributes({ alt: e.target.value, title: e.target.value })}
+                                                />
+                                            </div>
+
+                                            {/* Direct URL */}
                                             <div>
                                                 <label className="text-xs font-medium block mb-2 text-slate-600">Image URL</label>
                                                 <input
                                                     type="text"
                                                     className="w-full text-xs p-2 border rounded focus:ring-2 focus:ring-primary/20"
-                                                    value={editorInstance.getSelected()?.getAttributes().src || ''}
-                                                    onChange={(e) => editorInstance.getSelected()?.addAttributes({ src: e.target.value })}
+                                                    value={componentProps.imageSrc}
+                                                    onChange={(e) => handleImageChange('src', e.target.value)}
                                                     placeholder="https://example.com/image.jpg"
                                                 />
                                             </div>
