@@ -329,10 +329,19 @@ export default function GrapesEditor() {
             {/* Right Sidebar */}
             <aside className="w-72 bg-white border-l border-slate-200 flex flex-col shrink-0 overflow-hidden z-20">
                 <div className="p-3 border-b border-slate-200">
-                    <div className="flex bg-slate-100 p-1 rounded-lg">
-                        <button onClick={() => setActiveTab('content')} className={`flex-1 py-1.5 text-xs font-bold uppercase tracking-wide rounded-md transition-colors ${activeTab === 'content' ? 'bg-white text-primary shadow-sm ring-1 ring-slate-200' : 'text-slate-500 hover:text-slate-700'}`}>Layer</button>
-                        <button onClick={() => setActiveTab('style')} className={`flex-1 py-1.5 text-xs font-bold uppercase tracking-wide rounded-md transition-colors ${activeTab === 'style' ? 'bg-white text-primary shadow-sm ring-1 ring-slate-200' : 'text-slate-500 hover:text-slate-700'}`}>Style</button>
-                        <button onClick={() => setActiveTab('advanced')} className={`flex-1 py-1.5 text-xs font-bold uppercase tracking-wide rounded-md transition-colors ${activeTab === 'advanced' ? 'bg-white text-primary shadow-sm ring-1 ring-slate-200' : 'text-slate-500 hover:text-slate-700'}`}>Settings</button>
+                    <div className="flex bg-white p-1 rounded-lg border border-slate-200">
+                        <button onClick={() => setActiveTab('content')} className={`flex-1 py-2 text-xs font-semibold rounded-md transition-all flex items-center justify-center gap-1 ${activeTab === 'content' ? 'bg-primary text-white shadow-sm' : 'text-slate-600 hover:text-slate-900 hover:bg-slate-50'}`}>
+                            <span className="material-symbols-outlined text-[16px]">edit_note</span>
+                            Content
+                        </button>
+                        <button onClick={() => setActiveTab('style')} className={`flex-1 py-2 text-xs font-semibold rounded-md transition-all flex items-center justify-center gap-1 ${activeTab === 'style' ? 'bg-primary text-white shadow-sm' : 'text-slate-600 hover:text-slate-900 hover:bg-slate-50'}`}>
+                            <span className="material-symbols-outlined text-[16px]">palette</span>
+                            Style
+                        </button>
+                        <button onClick={() => setActiveTab('advanced')} className={`flex-1 py-2 text-xs font-semibold rounded-md transition-all flex items-center justify-center gap-1 ${activeTab === 'advanced' ? 'bg-primary text-white shadow-sm' : 'text-slate-600 hover:text-slate-900 hover:bg-slate-50'}`}>
+                            <span className="material-symbols-outlined text-[16px]">tune</span>
+                            Advanced
+                        </button>
                     </div>
                 </div>
                 <div className="flex-1 overflow-y-auto">
@@ -343,8 +352,99 @@ export default function GrapesEditor() {
                         </div>
                         <div className="gjs-sm-container"></div>  {/* Style Manager mounts here */}
                     </div>
-                    <div className={`${activeTab === 'content' ? 'block' : 'hidden'} h-full text-slate-600 p-4 text-sm text-center`}>
-                        <div className="gjs-lm-container"></div> {/* Layer Manager mounts here */}
+                    {/* CONTENT TAB - Element Content Editor (like Elementor) */}
+                    <div className={`${activeTab === 'content' ? 'block' : 'hidden'} h-full`}>
+                        <div className="p-4 space-y-4">
+                            {/* Image Content Editor */}
+                            {editorInstance?.getSelected() && editorInstance.getSelected()?.get('type') === 'image' && (
+                                <div className="space-y-4">
+                                    <div>
+                                        <h4 className="text-xs font-bold uppercase mb-3 text-slate-700 flex items-center gap-2">
+                                            <span className="material-symbols-outlined text-[16px]">image</span>
+                                            Image
+                                        </h4>
+                                        <div className="space-y-3">
+                                            <div>
+                                                <label className="text-xs font-medium block mb-2 text-slate-600">Choose Image</label>
+                                                <div className="border rounded-lg p-2 bg-slate-50">
+                                                    <img
+                                                        src={editorInstance.getSelected()?.getAttributes().src || ''}
+                                                        alt="Preview"
+                                                        className="w-full h-32 object-cover rounded mb-2"
+                                                        onError={(e) => { (e.target as HTMLImageElement).src = 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="100" height="100"%3E%3Crect fill="%23ddd" width="100" height="100"/%3E%3Ctext fill="%23999" x="50%25" y="50%25" dominant-baseline="middle" text-anchor="middle"%3ENo Image%3C/text%3E%3C/svg%3E'; }}
+                                                    />
+                                                    <button
+                                                        onClick={() => editorInstance.runCommand('open-assets', { target: editorInstance.getSelected() })}
+                                                        className="w-full p-2 bg-primary text-white rounded hover:bg-primary/90 text-xs font-medium flex items-center justify-center gap-2"
+                                                    >
+                                                        <span className="material-symbols-outlined text-[16px]">upload</span>
+                                                        Upload / Select Image
+                                                    </button>
+                                                </div>
+                                            </div>
+                                            <div>
+                                                <label className="text-xs font-medium block mb-2 text-slate-600">Image URL</label>
+                                                <input
+                                                    type="text"
+                                                    className="w-full text-xs p-2 border rounded focus:ring-2 focus:ring-primary/20"
+                                                    value={editorInstance.getSelected()?.getAttributes().src || ''}
+                                                    onChange={(e) => editorInstance.getSelected()?.addAttributes({ src: e.target.value })}
+                                                    placeholder="https://example.com/image.jpg"
+                                                />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            )}
+
+                            {/* Text Content Editor */}
+                            {editorInstance?.getSelected() && (editorInstance.getSelected()?.is('text') || editorInstance.getSelected()?.get('type') === 'text') && (
+                                <div className="space-y-4">
+                                    <div>
+                                        <h4 className="text-xs font-bold uppercase mb-3 text-slate-700 flex items-center gap-2">
+                                            <span className="material-symbols-outlined text-[16px]">text_fields</span>
+                                            Text Editor
+                                        </h4>
+                                        <div className="space-y-3">
+                                            <div>
+                                                <label className="text-xs font-medium block mb-2 text-slate-600">Text Content</label>
+                                                <textarea
+                                                    className="w-full text-sm p-3 border rounded focus:ring-2 focus:ring-primary/20 font-sans"
+                                                    value={editorInstance.getSelected()?.getTrait('content')?.getValue() || editorInstance.getSelected()?.components().length === 0 ? editorInstance.getSelected()?.get('content') : ''}
+                                                    onChange={(e) => {
+                                                        const comp = editorInstance.getSelected();
+                                                        if (comp?.components().length === 0) {
+                                                            comp.set('content', e.target.value);
+                                                        }
+                                                    }}
+                                                    placeholder="Enter your text here..."
+                                                    rows={6}
+                                                />
+                                                <p className="text-[10px] text-slate-400 mt-1">You can also double-click the text on canvas to edit.</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            )}
+
+                            {/* Default State */}
+                            {!editorInstance?.getSelected() && (
+                                <div className="flex flex-col items-center justify-center py-12 text-center">
+                                    <span className="material-symbols-outlined text-5xl text-slate-300 mb-3">touch_app</span>
+                                    <p className="text-sm font-medium text-slate-600">Select an element</p>
+                                    <p className="text-xs text-slate-400 mt-1">Click any element on the canvas to edit its content</p>
+                                </div>
+                            )}
+
+                            {/* Show message for container elements */}
+                            {editorInstance?.getSelected() && !['image', 'text'].includes(editorInstance.getSelected()?.get('type') || '') && !(editorInstance.getSelected()?.is('text')) && (
+                                <div className="flex flex-col items-center justify-center py-12 text-center">
+                                    <span className="material-symbols-outlined text-5xl text-slate-300 mb-3">widgets</span>
+                                    <p className="text-sm font-medium text-slate-600">Container Element</p>
+                                    <p className="text-xs text-slate-400 mt-1">This element contains other elements. Use Style and Advanced tabs to customize.</p>
+                                </div>
+                            )}
+                        </div>
                     </div>
                     <div className={`${activeTab === 'advanced' ? 'block' : 'hidden'} h-full text-slate-600`}>
                         {/* Custom Content Editor */}
