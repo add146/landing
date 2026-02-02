@@ -80,8 +80,8 @@ const myTailwindBlocks = (editor: Editor) => {
         content: { type: 'video', src: 'img/video2.webm', style: { height: '350px', width: '100%' } }
     });
 
-    bm.add('image-carousel', {
-        label: 'Image Carousel',
+    bm.add('custom-image-carousel', {
+        label: 'My Carousel',
         category: 'Components',
         media: '<i class="fa fa-images"></i>',
         content: `
