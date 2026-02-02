@@ -27,6 +27,7 @@ import { Loader2 } from 'lucide-react';
 import AISectionModal from './AISectionModal';
 import SEOOptimizerModal from './SEOOptimizerModal';
 import ImportCodeModal from './ImportCodeModal';
+import FloatingLayersPanel from './FloatingLayersPanel';
 
 export default function GrapesEditor() {
     const navigate = useNavigate();
@@ -36,6 +37,7 @@ export default function GrapesEditor() {
     const [pageSettingsOpen, setPageSettingsOpen] = useState(false);
     const [aiModalOpen, setAiModalOpen] = useState(false);
     const [importModalOpen, setImportModalOpen] = useState(false);
+    const [floatingLayersOpen, setFloatingLayersOpen] = useState(false);
     const [, setUpdateCounter] = useState(0); // Force re-render for sidebar updates
     const [selectedComponent, setSelectedComponent] = useState<any>(null);
     const [componentProps, setComponentProps] = useState<{
@@ -111,7 +113,17 @@ export default function GrapesEditor() {
     useEffect(() => {
         if (selectedComponent) {
             const styles = selectedComponent.getStyle();
-            const content = selectedComponent.components().length === 0 ? selectedComponent.get('content') : '';
+
+            // Extract text content - try multiple methods
+            let content = '';
+            if (selectedComponent.components().length === 0) {
+                // For text elements without children
+                content = selectedComponent.get('content') || '';
+            } else if (selectedComponent.is('text')) {
+                // For text type with inner content
+                const textContent = selectedComponent.getInnerHTML() || selectedComponent.toHTML() || '';
+                content = textContent.replace(/<[^>]*>/g, ''); // Strip HTML tags
+            }
 
             setComponentProps({
                 content: String(content || ''),
@@ -131,6 +143,28 @@ export default function GrapesEditor() {
             });
         }
     }, [selectedComponent]);
+
+    // Update layer manager container when floating panel toggles
+    useEffect(() => {
+        if (editorInstance && floatingLayersOpen) {
+            const layerManager = editorInstance.LayerManager;
+
+            // Wait for DOM to render
+            setTimeout(() => {
+                const container = document.querySelector('.gjs-lm-container-floating');
+                if (container) {
+                    // Force layer manager to re-render in new container
+                    const lmEl = layerManager.render() as any;
+                    container.innerHTML = '';
+                    if (lmEl?.el) {
+                        container.appendChild(lmEl.el);
+                    } else if (lmEl) {
+                        container.appendChild(lmEl);
+                    }
+                }
+            }, 100);
+        }
+    }, [floatingLayersOpen, editorInstance]);
 
     const onEditor = (editor: Editor) => {
         setEditorInstance(editor);
@@ -282,6 +316,17 @@ export default function GrapesEditor() {
                         >
                             <span className="material-symbols-outlined text-[18px]">auto_awesome</span>
                             <span className="hidden sm:inline">AI Wizard</span>
+                        </button>
+                        <button
+                            onClick={() => setFloatingLayersOpen(!floatingLayersOpen)}
+                            className={`flex items-center gap-2 px-3 py-1.5 rounded-lg transition-all text-sm font-medium ${floatingLayersOpen
+                                ? 'bg-indigo-100 text-indigo-700 border border-indigo-300'
+                                : 'bg-white text-slate-700 border border-slate-300 hover:border-indigo-400'
+                                }`}
+                            title="Toggle Floating Layers Panel"
+                        >
+                            <span className="material-symbols-outlined text-[18px]">layers</span>
+                            <span className="hidden sm:inline">Layers</span>
                         </button>
                         <button
                             onClick={() => editorInstance?.runCommand('save-db')}
@@ -766,6 +811,11 @@ export default function GrapesEditor() {
                     }
                 }}
             />
+
+            {/* Floating Layers Panel */}
+            {floatingLayersOpen && (
+                <FloatingLayersPanel onClose={() => setFloatingLayersOpen(false)} />
+            )}
         </div>
     );
 }
