@@ -264,8 +264,17 @@ export default function GrapesEditor() {
                                         ],
                                         styles: [
                                             'https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap',
-                                            'https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0',
+                                            // Material Symbols
+                                            'https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200',
+                                            'https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200',
+                                            'https://fonts.googleapis.com/css2?family=Material+Symbols+Sharp:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200',
+                                            // Material Icons (Legacy Variants)
                                             'https://fonts.googleapis.com/icon?family=Material+Icons',
+                                            'https://fonts.googleapis.com/icon?family=Material+Icons+Outlined',
+                                            'https://fonts.googleapis.com/icon?family=Material+Icons+Round',
+                                            'https://fonts.googleapis.com/icon?family=Material+Icons+Sharp',
+                                            'https://fonts.googleapis.com/icon?family=Material+Icons+Two+Tone',
+                                            // Font Awesome
                                             'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css'
                                         ]
                                     }
