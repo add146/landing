@@ -261,6 +261,11 @@ export default function GrapesEditor() {
                                     canvas: {
                                         scripts: [
                                             'https://cdn.tailwindcss.com'
+                                        ],
+                                        styles: [
+                                            'https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap',
+                                            'https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0',
+                                            'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css'
                                         ]
                                     }
                                 }}
