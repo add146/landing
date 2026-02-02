@@ -208,7 +208,10 @@ export default function GrapesEditor() {
                                     height: '100%',
                                     storageManager: false,
                                     undoManager: { trackSelection: true }, // Enable Selection tracking for better UX
-                                    selectorManager: { componentFirst: true },
+                                    selectorManager: {
+                                        componentFirst: true,
+                                        appendTo: '.gjs-clm-container'
+                                    },
                                     projectData: undefined, // Loaded manually
                                     assetManager: {
                                         upload: 'https://landing-page-api.khibroh.workers.dev/api/media/upload',
@@ -324,6 +327,9 @@ export default function GrapesEditor() {
                 <div className="flex-1 overflow-y-auto">
                     {/* Targeting GrapesJS Managers to these Containers */}
                     <div className={`${activeTab === 'style' ? 'block' : 'hidden'} h-full `}>
+                        <div className="p-4 border-b border-slate-200">
+                            <div className="gjs-clm-container mb-2"></div>  {/* Selector Manager (Classes) */}
+                        </div>
                         <div className="gjs-sm-container"></div>  {/* Style Manager mounts here */}
                     </div>
                     <div className={`${activeTab === 'content' ? 'block' : 'hidden'} h-full text-slate-600 p-4 text-sm text-center`}>
