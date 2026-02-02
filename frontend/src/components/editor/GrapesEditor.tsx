@@ -38,6 +38,24 @@ export default function GrapesEditor() {
     const [importModalOpen, setImportModalOpen] = useState(false);
     const [, setUpdateCounter] = useState(0); // Force re-render for sidebar updates
 
+    // Helper function to update styles and force re-render
+    const handleStyleChange = (property: string, value: string) => {
+        const component = editorInstance?.getSelected();
+        if (component) {
+            component.setStyle({ [property]: value });
+            setUpdateCounter((c: number) => c + 1); // Force React re-render
+        }
+    };
+
+    // Helper for text content changes
+    const handleContentChange = (value: string) => {
+        const component = editorInstance?.getSelected();
+        if (component && component.components().length === 0) {
+            component.set('content', value);
+            setUpdateCounter((c: number) => c + 1);
+        }
+    };
+
     const onEditor = (editor: Editor) => {
         setEditorInstance(editor);
         console.log('Editor loaded', editor);
@@ -498,12 +516,7 @@ export default function GrapesEditor() {
                                     <textarea
                                         className="w-full text-xs p-2 border rounded min-h-[80px]"
                                         value={editorInstance.getSelected()?.getTrait('content')?.getValue() || editorInstance.getSelected()?.components().length === 0 ? editorInstance.getSelected()?.get('content') : ''}
-                                        onChange={(e) => {
-                                            const comp = editorInstance.getSelected();
-                                            if (comp?.components().length === 0) {
-                                                comp.set('content', e.target.value);
-                                            }
-                                        }}
+                                        onChange={(e) => handleContentChange(e.target.value)}
                                         placeholder="Edit text content..."
                                     />
                                     <p className="text-[10px] text-slate-400">Edit text here or double-click element on canvas.</p>
@@ -531,16 +544,16 @@ export default function GrapesEditor() {
                                             <div className="grid grid-cols-4 gap-1">
                                                 <input type="text" placeholder="Top" className="p-1.5 border rounded text-center text-[11px]"
                                                     value={String(editorInstance.getSelected()?.getStyle()['margin-top'] || '')}
-                                                    onChange={(e) => editorInstance.getSelected()?.setStyle({ 'margin-top': e.target.value })} />
+                                                    onChange={(e) => handleStyleChange('margin-top', e.target.value)} />
                                                 <input type="text" placeholder="Right" className="p-1.5 border rounded text-center text-[11px]"
                                                     value={String(editorInstance.getSelected()?.getStyle()['margin-right'] || '')}
-                                                    onChange={(e) => editorInstance.getSelected()?.setStyle({ 'margin-right': e.target.value })} />
+                                                    onChange={(e) => handleStyleChange('margin-right', e.target.value)} />
                                                 <input type="text" placeholder="Bottom" className="p-1.5 border rounded text-center text-[11px]"
                                                     value={String(editorInstance.getSelected()?.getStyle()['margin-bottom'] || '')}
-                                                    onChange={(e) => editorInstance.getSelected()?.setStyle({ 'margin-bottom': e.target.value })} />
+                                                    onChange={(e) => handleStyleChange('margin-bottom', e.target.value)} />
                                                 <input type="text" placeholder="Left" className="p-1.5 border rounded text-center text-[11px]"
                                                     value={String(editorInstance.getSelected()?.getStyle()['margin-left'] || '')}
-                                                    onChange={(e) => editorInstance.getSelected()?.setStyle({ 'margin-left': e.target.value })} />
+                                                    onChange={(e) => handleStyleChange('margin-left', e.target.value)} />
                                             </div>
                                         </div>
 
@@ -550,16 +563,16 @@ export default function GrapesEditor() {
                                             <div className="grid grid-cols-4 gap-1">
                                                 <input type="text" placeholder="Top" className="p-1.5 border rounded text-center text-[11px]"
                                                     value={String(editorInstance.getSelected()?.getStyle()['padding-top'] || '')}
-                                                    onChange={(e) => editorInstance.getSelected()?.setStyle({ 'padding-top': e.target.value })} />
+                                                    onChange={(e) => handleStyleChange('padding-top', e.target.value)} />
                                                 <input type="text" placeholder="Right" className="p-1.5 border rounded text-center text-[11px]"
                                                     value={String(editorInstance.getSelected()?.getStyle()['padding-right'] || '')}
-                                                    onChange={(e) => editorInstance.getSelected()?.setStyle({ 'padding-right': e.target.value })} />
+                                                    onChange={(e) => handleStyleChange('padding-right', e.target.value)} />
                                                 <input type="text" placeholder="Bottom" className="p-1.5 border rounded text-center text-[11px]"
                                                     value={String(editorInstance.getSelected()?.getStyle()['padding-bottom'] || '')}
-                                                    onChange={(e) => editorInstance.getSelected()?.setStyle({ 'padding-bottom': e.target.value })} />
+                                                    onChange={(e) => handleStyleChange('padding-bottom', e.target.value)} />
                                                 <input type="text" placeholder="Left" className="p-1.5 border rounded text-center text-[11px]"
                                                     value={String(editorInstance.getSelected()?.getStyle()['padding-left'] || '')}
-                                                    onChange={(e) => editorInstance.getSelected()?.setStyle({ 'padding-left': e.target.value })} />
+                                                    onChange={(e) => handleStyleChange('padding-left', e.target.value)} />
                                             </div>
                                         </div>
 
@@ -569,13 +582,13 @@ export default function GrapesEditor() {
                                                 <label className="block text-slate-600 font-medium mb-2">Width</label>
                                                 <input type="text" placeholder="auto" className="w-full p-1.5 border rounded text-[11px]"
                                                     value={String(editorInstance.getSelected()?.getStyle()['width'] || '')}
-                                                    onChange={(e) => editorInstance.getSelected()?.setStyle({ 'width': e.target.value })} />
+                                                    onChange={(e) => handleStyleChange('width', e.target.value)} />
                                             </div>
                                             <div>
                                                 <label className="block text-slate-600 font-medium mb-2">Height</label>
                                                 <input type="text" placeholder="auto" className="w-full p-1.5 border rounded text-[11px]"
                                                     value={String(editorInstance.getSelected()?.getStyle()['height'] || '')}
-                                                    onChange={(e) => editorInstance.getSelected()?.setStyle({ 'height': e.target.value })} />
+                                                    onChange={(e) => handleStyleChange('height', e.target.value)} />
                                             </div>
                                         </div>
 
@@ -585,7 +598,7 @@ export default function GrapesEditor() {
                                                 <label className="block text-slate-600 font-medium mb-2">Position</label>
                                                 <select className="w-full p-1.5 border rounded text-[11px]"
                                                     value={String(editorInstance.getSelected()?.getStyle()['position'] || 'static')}
-                                                    onChange={(e) => editorInstance.getSelected()?.setStyle({ 'position': e.target.value })}>
+                                                    onChange={(e) => handleStyleChange('position', e.target.value)}>
                                                     <option value="static">Static</option>
                                                     <option value="relative">Relative</option>
                                                     <option value="absolute">Absolute</option>
@@ -597,7 +610,7 @@ export default function GrapesEditor() {
                                                 <label className="block text-slate-600 font-medium mb-2">Z-Index</label>
                                                 <input type="text" placeholder="0" className="w-full p-1.5 border rounded text-[11px]"
                                                     value={String(editorInstance.getSelected()?.getStyle()['z-index'] || '')}
-                                                    onChange={(e) => editorInstance.getSelected()?.setStyle({ 'z-index': e.target.value })} />
+                                                    onChange={(e) => handleStyleChange('z-index', e.target.value)} />
                                             </div>
                                         </div>
 
@@ -606,7 +619,7 @@ export default function GrapesEditor() {
                                             <label className="block text-slate-600 font-medium mb-2">Order</label>
                                             <input type="text" placeholder="0" className="w-full p-1.5 border rounded text-[11px]"
                                                 value={String(editorInstance.getSelected()?.getStyle()['order'] || '')}
-                                                onChange={(e) => editorInstance.getSelected()?.setStyle({ 'order': e.target.value })} />
+                                                onChange={(e) => handleStyleChange('order', e.target.value)} />
                                             <p className="text-[10px] text-slate-400 mt-1">Controls flex item order</p>
                                         </div>
                                     </div>
