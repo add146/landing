@@ -505,7 +505,8 @@ return (
         <div className="flex flex-col flex-1 h-full min-w-0">
 
 
-            <header className="flex items-center justify-between px-4 py-2 border-b border-slate-200 bg-white shrink-0 h-14 z-50">
+            <header className="flex items-center justify-between px-4 py-2 border-b border-slate-200 bg-red-500 text-white shrink-0 h-14 z-50">
+                <div className="absolute top-0 right-0 p-1 text-[8px] opacity-20">DEPLOYED_VERSION_CHECK</div>
                 <div className="flex items-center gap-4">
                     <button onClick={() => navigate(-1)} className="p-2 hover:bg-slate-100 rounded-lg transition-colors text-slate-500">
                         <span className="material-symbols-outlined">arrow_back</span>
