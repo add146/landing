@@ -1,15 +1,47 @@
 import { Hono } from 'hono';
 import { zValidator } from '@hono/zod-validator';
 import { z } from 'zod';
-import type { Env } from '../types';
+import type { Env, JWTPayload } from '../types';
 import { authMiddleware } from '../middleware/auth';
 import { verifyMediaOwnership, verifyWebsiteOwnership } from '../utils/ownership';
 import { generateId } from '../utils/crypto';
 
-const media = new Hono<{ Bindings: Env }>();
+// Define context type with Bindings and Variables
+type MediaContext = {
+    Bindings: Env;
+    Variables: {
+        user: JWTPayload;
+    };
+};
+
+const media = new Hono<MediaContext>();
 
 // All routes require authentication
 media.use('*', authMiddleware);
+
+// GET /api/media/serve/:key - Proxy R2 file
+media.get('/serve/:key', async (c) => {
+    const { key } = c.req.param();
+    // Cache control for performance
+    c.header('Cache-Control', 'public, max-age=31536000');
+
+    try {
+        const object = await c.env.STORAGE.get(key);
+        if (!object) {
+            return c.text('File not found', 404);
+        }
+
+        const headers = new Headers();
+        object.writeHttpMetadata(headers);
+        headers.set('etag', object.httpEtag);
+
+        return new Response(object.body, {
+            headers,
+        });
+    } catch (e) {
+        return c.text('Error retrieving file', 500);
+    }
+});
 
 // POST /api/media/upload - Upload file to R2
 media.post('/upload', async (c) => {
@@ -88,8 +120,9 @@ media.post('/upload', async (c) => {
             .bind(mediaId)
             .first();
 
-        // Construct public URL (assuming R2 public access is enabled)
-        const publicUrl = `https://pub-landing-page-assets.r2.dev/${r2Key}`;
+        // Use Proxy URL instead of direct R2
+        const workerUrl = new URL(c.req.url).origin;
+        const publicUrl = `${workerUrl}/api/media/serve/${encodeURIComponent(r2Key)}`;
 
         // Return format compatible with GrapesJS Asset Manager
         return c.json({
@@ -97,10 +130,9 @@ media.post('/upload', async (c) => {
                 src: publicUrl,
                 type: 'image',
                 name: file.name,
-                width: 0, // Optional
-                height: 0 // Optional
+                width: 0,
+                height: 0
             }],
-            // Keep original data for other uses
             media: mediaRecord
         }, 201);
     } catch (error) {
@@ -113,6 +145,7 @@ media.post('/upload', async (c) => {
 media.get('/', async (c) => {
     const user = c.get('user');
     const websiteId = c.req.query('website_id');
+    const format = c.req.query('format'); // 'grapesjs' or undefined
 
     let query = 'SELECT * FROM media WHERE user_id = ?';
     const params: any[] = [user.userId];
@@ -128,6 +161,20 @@ media.get('/', async (c) => {
         .prepare(query)
         .bind(...params)
         .all();
+
+    // Use Proxy URL
+    const workerUrl = new URL(c.req.url).origin;
+
+    if (format === 'grapesjs') {
+        const assets = results.map((m: any) => ({
+            src: `${workerUrl}/api/media/serve/${encodeURIComponent(m.r2_key)}`,
+            type: 'image',
+            name: m.filename,
+            height: 0,
+            width: 0,
+        }));
+        return c.json(assets);
+    }
 
     return c.json({ media: results });
 });
@@ -171,10 +218,9 @@ media.get('/:id/url', async (c) => {
         return c.json({ error: 'Media not found' }, 404);
     }
 
-    // For public access, we'll use R2 custom domain or similar
-    // For now, return a placeholder that includes the R2 key
-    // In production, configure R2 public bucket URL or use Cloudflare Images
-    const publicUrl = `https://pub-${c.env.STORAGE.name}.r2.dev/${mediaRecord.r2_key}`;
+    // Use Proxy URL
+    const workerUrl = new URL(c.req.url).origin;
+    const publicUrl = `${workerUrl}/api/media/serve/${encodeURIComponent(mediaRecord.r2_key)}`;
 
     return c.json({ url: publicUrl });
 });

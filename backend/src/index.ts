@@ -16,13 +16,15 @@ const app = new Hono<{ Bindings: Env }>();
 // CORS middleware
 app.use('*', cors({
     origin: (origin) => {
-        const allowedOrigins = [
-            'https://landing-bzy.pages.dev',
-            'https://build.khibroh.com',
-            'http://localhost:5173',
-            'http://localhost:3000',
-        ];
-        return allowedOrigins.includes(origin) ? origin : allowedOrigins[0];
+        // Allow localhost
+        if (origin.includes('localhost')) return origin;
+        // Allow landing-bzy.pages.dev and all its subdomains
+        if (origin.endsWith('landing-bzy.pages.dev')) return origin;
+        // Allow production domain
+        if (origin === 'https://build.khibroh.com') return origin;
+
+        // Default to production for unknown
+        return 'https://landing-bzy.pages.dev';
     },
     allowMethods: ['GET', 'POST', 'PATCH', 'DELETE', 'OPTIONS'],
     allowHeaders: ['Content-Type', 'Authorization'],

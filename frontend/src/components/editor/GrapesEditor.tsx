@@ -422,6 +422,22 @@ export default function GrapesEditor() {
                                         headers: {
                                             'Authorization': `Bearer ${localStorage.getItem('token')}`
                                         },
+                                        // Load assets from backend
+                                        assets: async () => {
+                                            try {
+                                                const token = localStorage.getItem('token');
+                                                const response = await fetch('https://landing-page-api.khibroh.workers.dev/api/media?format=grapesjs', {
+                                                    headers: {
+                                                        'Authorization': `Bearer ${token}`
+                                                    }
+                                                });
+                                                if (!response.ok) return [];
+                                                return await response.json();
+                                            } catch (e) {
+                                                console.error('Failed to load assets', e);
+                                                return [];
+                                            }
+                                        },
                                         autoAdd: true,
                                         openAssetsOnDrop: true, // Open when dropping image
                                         dropzone: true, // Enable dropzone
