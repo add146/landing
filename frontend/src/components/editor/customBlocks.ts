@@ -80,6 +80,42 @@ const myTailwindBlocks = (editor: Editor) => {
         content: { type: 'video', src: 'img/video2.webm', style: { height: '350px', width: '100%' } }
     });
 
+    bm.add('image-carousel', {
+        label: 'Image Carousel',
+        category: 'Media',
+        media: '<i class="fa fa-images"></i>',
+        content: `
+      <div class="relative w-full overflow-hidden group" data-carousel="true" data-autoplay="true" data-interval="3000">
+        <!-- Slides Container -->
+        <div class="flex transition-transform duration-500 ease-out h-64" data-carousel-track>
+          <!-- Slide 1 -->
+          <div class="w-full flex-shrink-0 bg-slate-100 flex items-center justify-center overflow-hidden relative">
+             <img src="https://placehold.co/800x400?text=Slide+1" class="w-full h-full object-cover" alt="Slide 1" />
+             <div class="absolute bottom-0 left-0 right-0 bg-black/50 text-white p-4 text-center opacity-0 group-hover:opacity-100 transition-opacity">Caption 1</div>
+          </div>
+          <!-- Slide 2 -->
+          <div class="w-full flex-shrink-0 bg-slate-100 flex items-center justify-center overflow-hidden relative">
+             <img src="https://placehold.co/800x400?text=Slide+2" class="w-full h-full object-cover" alt="Slide 2" />
+             <div class="absolute bottom-0 left-0 right-0 bg-black/50 text-white p-4 text-center opacity-0 group-hover:opacity-100 transition-opacity">Caption 2</div>
+          </div>
+          <!-- Slide 3 -->
+          <div class="w-full flex-shrink-0 bg-slate-100 flex items-center justify-center overflow-hidden relative">
+             <img src="https://placehold.co/800x400?text=Slide+3" class="w-full h-full object-cover" alt="Slide 3" />
+             <div class="absolute bottom-0 left-0 right-0 bg-black/50 text-white p-4 text-center opacity-0 group-hover:opacity-100 transition-opacity">Caption 3</div>
+          </div>
+        </div>
+        
+        <!-- Controls -->
+        <button class="absolute left-4 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white text-slate-800 p-2 rounded-full shadow-lg transition-all opacity-0 group-hover:opacity-100" data-carousel-prev>
+          <i class="fa fa-chevron-left"></i>
+        </button>
+        <button class="absolute right-4 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white text-slate-800 p-2 rounded-full shadow-lg transition-all opacity-0 group-hover:opacity-100" data-carousel-next>
+          <i class="fa fa-chevron-right"></i>
+        </button>
+      </div>
+    `
+    });
+
     bm.add('card', {
         label: 'Card',
         category: 'Components',
